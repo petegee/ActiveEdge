@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ActiveEdge.Database;
 using ActiveEdge.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
