@@ -1,17 +1,17 @@
-﻿@model IEnumerable<ActiveEdge.Models.Customer>
+﻿@model IEnumerable<ActiveEdge.Models.Client>
 
 @{
-  ViewBag.Title = "Customers";
+  ViewBag.Title = "Registerd Clients";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-sm-4">
-    <h2>Customers</h2>
-    <ol class="breadcrumb">
+    <h2>Registerd Clients</h2>
+    @*<ol class="breadcrumb">
       <li class="active">
-        <strong>Customer</strong>
+        <strong>Registered Clients</strong>
       </li>
-    </ol>
+    </ol>*@
   </div>
 </div>
 
@@ -21,7 +21,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>List of Customers</h5>
+          <h5>List of Clients</h5>
           <div class="ibox-tools">
             @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-xs" })
           </div>

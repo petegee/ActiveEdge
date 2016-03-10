@@ -10,9 +10,9 @@ namespace ActiveEdge
       {
         //cfg.ConstructServicesUsing(ObjectFactory.GetInstance);
         
-        cfg.CreateMap<Domain.Customer, Models.Customer>();
+        cfg.CreateMap<Domain.Client, Models.Client>();
 
-        cfg.CreateMap<Models.Customer, Domain.Customer>();
+        cfg.CreateMap<Models.Client, Domain.Client>();
       });
 
       return configuration;

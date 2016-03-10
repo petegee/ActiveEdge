@@ -40,7 +40,8 @@ namespace ActiveEdge
       bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",
                 "~/Content/animate.css",
-                "~/Content/style.css"));
+                "~/Content/style.css", 
+                "~/Content/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"));
 
       // Font Awesome icons
       bundles.Add(new StyleBundle("~/font-awesome/css").Include(

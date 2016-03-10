@@ -8,7 +8,7 @@ namespace ActiveEdge.Database
 {
   public interface IApplicationDbContext: IDisposable
   {
-    System.Data.Entity.DbSet<Domain.Customer> Customers { get; set; }
+    DbSet<Domain.Client> Clients { get; set; }
 
     int SaveChanges();
 
@@ -29,7 +29,7 @@ namespace ActiveEdge.Database
      
     }
 
-    public System.Data.Entity.DbSet<Domain.Customer> Customers { get; set; }
+    public DbSet<Domain.Client> Clients { get; set; }
 
     /// <summary>
     /// Maps table names, and sets up relationships between the various user entities
@@ -37,7 +37,7 @@ namespace ActiveEdge.Database
     /// <param name="modelBuilder"/>
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
-      modelBuilder.Entity<Domain.Customer>().ToTable("Customer");
+     // modelBuilder.Entity<Domain.Client>().ToTable("Customer");
       base.OnModelCreating(modelBuilder);
     }
   }

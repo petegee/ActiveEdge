@@ -4,12 +4,11 @@ using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Database;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Domain;
 
 namespace ActiveEdge.Controllers
 {
-  public class CustomerController : Controller
+  public class ClientController : Controller
   {
     private readonly IApplicationDbContext _database;
     private readonly IMapper _mapper;
@@ -18,7 +17,7 @@ namespace ActiveEdge.Controllers
     /// <summary>
     ///   Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
     /// </summary>
-    public CustomerController(IApplicationDbContext database, IMapper mapper, MapperConfiguration mapperConfiguration)
+    public ClientController(IApplicationDbContext database, IMapper mapper, MapperConfiguration mapperConfiguration)
     {
       _database = database;
       _mapper = mapper;
@@ -29,7 +28,7 @@ namespace ActiveEdge.Controllers
     // GET: /Customer/
     public ActionResult Index()
     {
-      return View(_database.Customers.ProjectToList<Models.Customer>(_mapperConfiguration));
+      return View(_database.Clients.ProjectToList<Models.Client>(_mapperConfiguration));
     }
 
     // GET: /Customer/Details/5
@@ -39,7 +38,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var customer = _database.Customers.Where(c => c.Id == id.Value).ProjectToSingle<Models.Customer>(_mapperConfiguration);
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Models.Client>(_mapperConfiguration);
       if (customer == null)
       {
         return HttpNotFound();
@@ -58,18 +57,18 @@ namespace ActiveEdge.Controllers
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create([Bind(Exclude = "Id")] Models.Customer customer)
+    public ActionResult Create([Bind(Exclude = "Id")] Models.Client client)
     {
       if (ModelState.IsValid)
       {
-        var customerDomain = _mapper.Map<Models.Customer, Customer>(customer);
+        var customerDomain = _mapper.Map<Models.Client, Client>(client);
 
-        _database.Customers.Add(customerDomain);
+        _database.Clients.Add(customerDomain);
         _database.SaveChanges();
         return RedirectToAction("Index");
       }
 
-      return View(customer);
+      return View(client);
     }
 
     // GET: /Customer/Edit/5
@@ -79,7 +78,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var customer = _database.Customers.Where(c => c.Id == id.Value).ProjectToSingle<Models.Customer>(_mapperConfiguration); ;
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Models.Client>(_mapperConfiguration); 
       if (customer == null)
       {
         return HttpNotFound();
@@ -92,16 +91,16 @@ namespace ActiveEdge.Controllers
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Edit(Models.Customer customer)
+    public ActionResult Edit(Models.Client client)
     {
       if (ModelState.IsValid)
       {
-        var customerDomain = _mapper.Map<Models.Customer, Customer>(customer);
+        var customerDomain = _mapper.Map<Models.Client, Client>(client);
         _database.Entry(customerDomain).State = EntityState.Modified;
         _database.SaveChanges();
         return RedirectToAction("Index");
       }
-      return View(customer);
+      return View(client);
     }
 
     // GET: /Customer/Delete/5
@@ -111,7 +110,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var customer = _database.Customers.Where(c => c.Id == id.Value).ProjectToSingle<Models.Customer>(_mapperConfiguration); ;
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Models.Client>(_mapperConfiguration); 
       if (customer == null)
       {
         return HttpNotFound();
@@ -124,8 +123,8 @@ namespace ActiveEdge.Controllers
     [ValidateAntiForgeryToken]
     public ActionResult DeleteConfirmed(int id)
     {
-      var customer = _database.Customers.Find(id);
-      _database.Customers.Remove(customer);
+      var customer = _database.Clients.Find(id);
+      _database.Clients.Remove(customer);
       _database.SaveChanges();
       return RedirectToAction("Index");
     }

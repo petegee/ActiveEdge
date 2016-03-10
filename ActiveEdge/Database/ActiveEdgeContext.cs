@@ -30,7 +30,7 @@ namespace ActiveEdge.Database
     {
     }
 
-    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Client> Customers { get; set; }
 
     /// <summary>
     /// This method is called when the model for a derived context has been initialized, but
