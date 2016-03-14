@@ -49,7 +49,7 @@ namespace ActiveEdge.Controllers
     // GET: /Customer/Create
     public ActionResult Create()
     {
-      return View();
+      return View(new Models.Client());
     }
 
     // POST: /Customer/Create

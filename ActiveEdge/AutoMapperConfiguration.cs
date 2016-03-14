@@ -12,7 +12,10 @@ namespace ActiveEdge
         
         cfg.CreateMap<Domain.Client, Models.Client>();
 
-        cfg.CreateMap<Models.Client, Domain.Client>();
+
+        cfg.CreateMap<Models.Client, Domain.Client>()
+          .ForMember(dst => dst.ContraIndications, options => options.MapFrom(src => src));
+        cfg.CreateMap<Models.Client, Domain.ContraIndications>();
       });
 
       return configuration;

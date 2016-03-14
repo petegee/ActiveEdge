@@ -40,8 +40,20 @@ namespace ActiveEdge
       bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",
                 "~/Content/animate.css",
-                "~/Content/style.css", 
-                "~/Content/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"));
+                "~/Content/style.css",
+                "~/Content/style_override.css"));
+
+      // iCheck css styles
+      bundles.Add(new StyleBundle("~/Content/plugins/iCheck/iCheckStyles").Include(
+                "~/Content/plugins/iCheck/custom.css"));
+
+      // iCheck
+      bundles.Add(new ScriptBundle("~/plugins/iCheck").Include(
+                "~/Scripts/plugins/iCheck/icheck.min.js"));
+
+
+      bundles.Add(new StyleBundle("~/Content/awesomeCheckbox").Include(
+        "~/Content/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"));
 
       // Font Awesome icons
       bundles.Add(new StyleBundle("~/font-awesome/css").Include(
