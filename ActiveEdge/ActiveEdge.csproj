@@ -385,6 +385,7 @@
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\iCheck.cshtml" />
+    <Content Include="Views\Client\EditorTemplates\Client.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

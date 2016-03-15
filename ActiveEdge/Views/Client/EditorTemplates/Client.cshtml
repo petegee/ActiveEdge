@@ -1,0 +1,260 @@
+﻿@model ActiveEdge.Models.Client
+
+  <div class="ibox-heading"><h5>Personal Information</h5></div>
+
+  @Html.ValidationSummary(true)
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.FirstName)
+      @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+  </div>
+
+  <div class="form-group ">
+    @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.LastName)
+      @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.DateOfBirth, new { @class = "control-label col-md-2" })
+    <div class="col-md-10 ">
+      <div class="input-group date">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        @Html.EditorFor(model => model.DateOfBirth)
+        @Html.ValidationMessageFor(model => model.DateOfBirth)
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EnumDropDownListFor(model => model.Gender, new { @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.Gender)
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.Email)
+      @Html.ValidationMessageFor(model => model.Email)
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.ContactNumber, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.ContactNumber)
+      @Html.ValidationMessageFor(model => model.ContactNumber)
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.AddressLine1, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.AddressLine1)
+      @Html.ValidationMessageFor(model => model.AddressLine1)
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.AddressLine2, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.AddressLine2)
+      @Html.ValidationMessageFor(model => model.AddressLine2)
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.Suburb, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.Suburb)
+      @Html.ValidationMessageFor(model => model.Suburb)
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.City, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.City)
+      @Html.ValidationMessageFor(model => model.City)
+    </div>
+  </div>
+  <div class="ibox-heading"><h5>History</h5></div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.ExcerciseFrequency, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EnumDropDownListFor(model => model.ExcerciseFrequency, new { @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.ExcerciseFrequency)
+    </div>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.IsSmoker, new { @class = "control-label col-md-2" })
+    <div class="col-md-10 ">
+      <div class="checkbox i-checks">
+        <label class="no-padding">
+          @Html.CheckBoxFor(m => m.IsSmoker, new { @class = "no-padding" })
+        </label>
+        @Html.ValidationMessageFor(model => model.IsSmoker)
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.CurrentMedications, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.CurrentMedications)
+      @Html.ValidationMessageFor(model => model.CurrentMedications)
+    </div>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.PreviousAilments, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.PreviousAilments)
+      @Html.ValidationMessageFor(model => model.PreviousAilments)
+    </div>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.GeneralPractionerName, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.GeneralPractionerName)
+      @Html.ValidationMessageFor(model => model.GeneralPractionerName)
+    </div>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.MedicalClearance, new { @class = "control-label col-md-2" })
+    <div class="col-md-10 ">
+      <div class="checkbox i-checks">
+        <label class="no-padding">
+          @Html.CheckBoxFor(m => m.MedicalClearance)
+        </label>
+        @Html.ValidationMessageFor(model => model.MedicalClearance)
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.HasHadPreviousTherapy, new { @class = "control-label col-md-2" })
+    <div class="col-md-10 ">
+      <div class="checkbox i-checks">
+        <label class="no-padding">
+          @Html.CheckBoxFor(m => m.HasHadPreviousTherapy)
+        </label>
+        @Html.ValidationMessageFor(model => model.HasHadPreviousTherapy)
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.TouchPreference, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EnumDropDownListFor(model => model.TouchPreference, new { @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.TouchPreference)
+    </div>
+  </div>
+  <div class="ibox-heading"><h5>Personal Information</h5></div>
+  <div class="form-group">
+    <label class="control-label col-md-2">Conditions</label>
+    <div class="col-md-2">
+      @Html.EditorFor(client => client.ContraIndicationsArteriosclerosis)
+
+
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsAsthma)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsCancer)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsColdOrFlu)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsContactLenses)
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsCutsBurnsBruises)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsDepression)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsDiabetes)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsDizziness)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsEpilepsy)
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsHeadache)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsHeartDisease)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsHemophilia)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsHernia)
+      </div>
+      <div class="checkbox">
+        @Html.EditorFor(client => client.ContraIndicationsHighBloodPressure)
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsImflammation)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsIrritatedSkinRash)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsIsPregnant)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsLowBloodPressure)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsIsPregnant)
+      </div>
+      <div class="checkbox i-checks ">
+        @Html.EditorFor(client => client.ContraIndicationsStomachUlcers)
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsMusculoskletalProblems)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsPinsPacemaker)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsSeverePain)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsSunburn)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsSleepDisturbance)
+      </div>
+      <div class="checkbox ">
+        @Html.EditorFor(client => client.ContraIndicationsVaricoseVeins)
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  
+
+
