@@ -45,10 +45,10 @@ namespace ActiveEdge.Models
     [UIHint("iCheck")]
     public bool IsSmoker { get; set; }
 
-    [DisplayName("What medications are you currently using?")]
+    [DisplayName("Current medications?")]
     public string CurrentMedications { get; set; }
 
-    [DisplayName("Previous complaints/surgeries/medications")]
+    [DisplayName("Medical History")]
     public string PreviousAilments { get; set; }
 
     [DisplayName("GP/Health Practicioner Name?")]
