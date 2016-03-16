@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace ActiveEdge.Database
 {
-  public class MySqlInitializer : IDatabaseInitializer<ApplicationDbContext>
+  public class MySqlInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
   {
-    public void InitializeDatabase(ApplicationDbContext context)
+    public override void InitializeDatabase(ApplicationDbContext context)
     {
       if (!context.Database.Exists())
       {

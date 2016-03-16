@@ -19,7 +19,7 @@ namespace ActiveEdge.Database
   {
     static ApplicationDbContext()
     {
-      System.Data.Entity.Database.SetInitializer(new MySqlInitializer());
+      //System.Data.Entity.Database.SetInitializer(new MySqlInitializer());
      // System.Data.Entity.Database.SetInitializer(new ActiveEdgeInitializer());
     }
 
