@@ -62,6 +62,7 @@ namespace ActiveEdge.Models
     [UIHint("iCheck")]
     public bool HasHadPreviousTherapy { get; set; }
 
+    [DisplayName("Touch Preference")]
     public TouchPreference TouchPreference { get; set; }
     //public ContraIndications ContraIndications { get; set; }
 

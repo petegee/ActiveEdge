@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ActiveEdge.Models.Client>
 
 @{
-  ViewBag.Title = "Registerd Clients";
+  ViewBag.Title = "Registered Clients";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -43,6 +43,9 @@
                 @Html.DisplayNameFor(model => model.DateOfBirth)
               </th>
               <th>
+                @Html.DisplayNameFor(model => model.Gender)
+              </th>
+              <th>
                 @Html.DisplayNameFor(model => model.ContactNumber)
               </th>
               <th></th>
@@ -64,6 +67,9 @@
                   @Html.DisplayFor(modelItem => item.DateOfBirth)
                 </td>
                 <td>
+                  @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
                   @Html.DisplayFor(modelItem => item.ContactNumber)
                 </td>
                 <td>
@@ -81,3 +87,26 @@
     </div>
   </div>
 </div>
+
+@section scripts {
+  @Scripts.Render("~/plugins/iCheck")
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+      });
+
+    });
+  </script>
+}
+
+@section styles
+{
+ 
+  @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+ 
+
+}

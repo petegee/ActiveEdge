@@ -1,66 +1,353 @@
 ﻿@model ActiveEdge.Models.Client
 
 @{
-    ViewBag.Title = "Details";
+  ViewBag.Title = "Details";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Details</h2>
-        <ol class="breadcrumb">
-            <li>
-                @Html.ActionLink("List", "Index")
-            </li>
-            <li class="active">
-                <strong>Details</strong>
-            </li>
-        </ol>
-    </div>
+  <div class="col-sm-4">
+    <h2>Details</h2>
+    <ol class="breadcrumb">
+      <li>
+        @Html.ActionLink("List", "Index")
+      </li>
+      <li class="active">
+        <strong>Details</strong>
+      </li>
+    </ol>
+  </div>
 </div>
 
 
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Client Details</h5>
-                </div>
-                <div class="ibox-content">
-
-
-				    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-    </dl>
-
-
-	    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary"})
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white"})
-
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Client Details</h5>
         </div>
+        <div class="ibox-content">
+          <dl class="dl-horizontal">
+            <dt>
+              @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.DateOfBirth)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.Gender)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.ContactNumber)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.ContactNumber)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.AddressLine1)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.AddressLine1)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.AddressLine2)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.AddressLine2)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.Suburb)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.Suburb)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.City)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.City)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.ExcerciseFrequency)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.ExcerciseFrequency)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.IsSmoker)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.IsSmoker)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.CurrentMedications)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.CurrentMedications)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.PreviousAilments)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.PreviousAilments)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.GeneralPractionerName)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.GeneralPractionerName)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.MedicalClearance)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.MedicalClearance)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.HasHadPreviousTherapy)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.HasHadPreviousTherapy)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.TouchPreference)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.TouchPreference)
+            </dd>
+          </dl>
+          <div class="col-lg-3">
+            <dl class="dl-horizontal">
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsArteriosclerosis)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsArteriosclerosis)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsAsthma)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsAsthma)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsCancer)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsCancer)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsColdOrFlu)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsColdOrFlu)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsContactLenses)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsContactLenses)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsCutsBurnsBruises)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsCutsBurnsBruises)
+              </dd>
+            </dl>
+          </div>
+          <div class="col-lg-3">
+            <dl class="dl-horizontal">
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsDepression)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsDepression)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsDiabetes)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsDiabetes)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsDizziness)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsDizziness)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsEpilepsy)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsEpilepsy)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsHeadache)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsHeadache)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsHeartDisease)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsHeartDisease)
+              </dd>
+            </dl>
+          </div>
+          <div class="col-lg-3">
+            <dl class="dl-horizontal">
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsHemophilia)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsHemophilia)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsHernia)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsHernia)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsHighBloodPressure)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsHighBloodPressure)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsImflammation)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsImflammation)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsIrritatedSkinRash)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsIrritatedSkinRash)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsIsPregnant)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsIsPregnant)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsLowBloodPressure)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsLowBloodPressure)
+              </dd>
+            </dl>
+          </div>
+          <div class="col-lg-3">
+            <dl class="dl-horizontal">
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsStomachUlcers)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsStomachUlcers)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsMusculoskletalProblems)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsMusculoskletalProblems)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsPinsPacemaker)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsPinsPacemaker)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsSeverePain)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsSeverePain)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsSunburn)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsSunburn)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsSleepDisturbance)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsSleepDisturbance)
+              </dd>
+              <dt>
+                @Html.DisplayNameFor(model => model.ContraIndicationsVaricoseVeins)
+              </dt>
+              <dd>
+                @Html.DisplayFor(model => model.ContraIndicationsVaricoseVeins)
+              </dd>
+              
+              
+            </dl>
+          </div>
+
+
+          @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+          @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white" })
+
+        </div>
+      </div>
     </div>
- </div>
+  </div>
+</div>
+@section scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render("~/plugins/dataPicker")
+  @Scripts.Render("~/bundles/customers")
+  @Scripts.Render("~/plugins/iCheck")
 
+  <script type="text/javascript">
+    $(document).ready(function () {
 
+      $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+      });
+
+    });
+  </script>
+}
+
+@section styles
+{
+  @Styles.Render("~/plugins/dataPickerStyles")
+  @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+  @*@Styles.Render("~/Content/awesomeCheckbox")*@
+
+}
 
 
 
