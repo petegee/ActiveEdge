@@ -15,6 +15,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using ActiveEdge.Infrastructure.Mapping;
 using AutoMapper;
 using StructureMap;
 

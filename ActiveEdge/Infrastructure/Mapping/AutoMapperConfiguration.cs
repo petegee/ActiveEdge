@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace ActiveEdge
+namespace ActiveEdge.Infrastructure.Mapping
 {
   public static class AutoMapperConfiguration
   {
@@ -12,10 +12,12 @@ namespace ActiveEdge
         
         cfg.CreateMap<Domain.Client, Models.Client>();
 
+        cfg.CreateMap<Models.Client, Domain.ContraIndications>();
 
         cfg.CreateMap<Models.Client, Domain.Client>()
-          .ForMember(dst => dst.ContraIndications, options => options.MapFrom(src => src));
-        cfg.CreateMap<Models.Client, Domain.ContraIndications>();
+          .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
+
+        
       });
 
       return configuration;
