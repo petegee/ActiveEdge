@@ -8,3 +8,7 @@ dt,
 dd {
   line-height:2.5;
 }
+/* Wizard */
+.wizard-big.wizard > .content {
+  min-height: 815px !important;
+}

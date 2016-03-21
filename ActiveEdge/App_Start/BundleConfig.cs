@@ -67,6 +67,17 @@ namespace ActiveEdge
       bundles.Add(new ScriptBundle("~/plugins/dataPicker").Include(
                 "~/Scripts/plugins/datapicker/bootstrap-datepicker.js"));
 
+      // wizardSteps styles
+      bundles.Add(new StyleBundle("~/plugins/wizardStepsStyles").Include(
+                "~/Content/plugins/steps/jquery.steps.css"));
+
+      // wizardSteps 
+      bundles.Add(new ScriptBundle("~/plugins/wizardSteps").Include(
+                "~/Scripts/plugins/steps/jquery.steps.min.js"));
+
+      // validate 
+      bundles.Add(new ScriptBundle("~/plugins/validate").Include(
+                "~/Scripts/plugins/validate/jquery.validate.min.js"));
     }
 
     private static void CustomerScripts(BundleCollection bundles)
