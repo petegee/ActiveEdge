@@ -1,43 +1,19 @@
 ﻿using System;
 
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
-  public enum TouchPreference
+  public class TermsAndConditions
   {
-    Light,
-    Heavy,
-    Deep,
-  }
-  public enum ExcerciseFrequency
-  {
-
-    Never,
-    [Display(Name = "Once A Week")]
-    OnceAWeek,
-    [Display(Name = "Twice A Week")]
-    TwiceAWeek,
-    [Display(Name = "Three Times A Week")]
-    ThreeTimesAWeek,
-    [Display(Name = "Four Times A Week")]
-    FourTimesAWeek,
-    [Display(Name = "Five Times A Week")]
-    FiveTimesAWeek,
-    [Display(Name = "Six Times A Week")]
-    SixTimesAWeek,
-    [Display(Name = "Seven Times A Week")]
-    SevenTimesAWeek,
-    [Display(Name = "Seven+ A Week")]
-    SevenPlusTimesAWeek
-  }
-
-  public class ExerciseType
-  {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public virtual ICollection<Client> Clients { get; set; }
+    public bool Condition1 { get; set; }
+    public bool Condition2 { get; set; }
+    public bool Condition3 { get; set; }
+    public bool Condition4 { get; set; }
+    public bool Condition5 { get; set; }
+    public bool Condition6 { get; set; }
+    public bool Condition7 { get; set; }
+    public bool Condition8 { get; set; }
   }
 
   public class Client
@@ -63,5 +39,10 @@ namespace Domain
     public bool HasHadPreviousTherapy { get; set; }
     public TouchPreference TouchPreference { get; set; }
     public ContraIndications ContraIndications { get; set; }
+    public int CurrentStressLevels { get; set; }
+    public int CurrentPainOrTensionLevels { get; set; }
+    public string Difficuties { get; set; }
+    public string AreasNotToBeMassaged { get; set; }
+    public TermsAndConditions TermsAndConditions { get; set; }
   }
 }

@@ -10,5 +10,5 @@ dd {
 }
 /* Wizard */
 .wizard-big.wizard > .content {
-  min-height: 815px !important;
+  min-height: 500px !important;
 }

@@ -169,6 +169,51 @@ namespace ActiveEdge.Models
     [DisplayName("Heart Disease")]
     [UIHint("iCheck")]
     public bool ContraIndicationsHeartDisease { get; set; }
-    
+
+    [DisplayName("Current Stress Levels")]
+    [Range(0, 100)]
+    public int CurrentStressLevels { get; set; }
+
+    [DisplayName("Current Pain/Tension Levels")]
+    [Range(0, 100)]
+    public int CurrentPainOrTensionLevels { get; set; }
+
+    [DisplayName("Do you have any difficulty laying on your front / back / side? How can we make you comfortable")]
+    public string Difficulties { get; set; }
+
+    [DisplayName("Are there any areas that you would not like massaged? (E.g feet, head)")]
+    public string AreasNotToBeMassaged { get; set; }
+
+    [DisplayName("I understand that I am booked in for a relaxation / sports massage and I am not here for treatment to injury.")]
+    [UIHint("iCheck")]
+    public bool TermsAndConditionsConditions1 { get; set; }
+
+    [DisplayName("I understand that my feedback is encouraged not only after the massage but also throughout so you can get the most out of your massage.")]
+    [UIHint("iCheck")]
+    public bool TermsAndConditionsConditions2 { get; set; }
+
+    [DisplayName("I understand payment must be made at the time of appointment if not beforehand.")]
+    [UIHint("iCheck")]
+    public bool TermsAndConditionsConditions3 { get; set; }
+
+    [DisplayName("I understand the Active Edge late arrival and cancellation policy (less than 24 hours notice or booking changes may be subject to a cancellation fee.Massage session will not be extended due to late arrival).")]
+    [UIHint("iCheck")]
+    public bool TermsAndConditionsConditions4 { get; set; }
+
+    [DisplayName("I understand that massage therapy is designed to be a health aid and does not take place of primary care.")]
+    [UIHint("iCheck")]
+    public bool TermsAndConditionsConditions5 { get; set; }
+
+    [DisplayName("I understand that I must contact Active Edge and consult my health practitioner if I have medical conditions that become aggravated or if I have severe ongoing effects after the massage.")]
+    [UIHint("iCheck")]
+    public bool TermsAndConditionsConditions6 { get; set; }
+
+    [DisplayName("I am aware that I may experience mild discomfort, headaches, or tiredness after the massage. This is a normal response to massage.Post massage recommendations are to increase water intake and avoid strenuous exercise for 12 hours.")]
+    [UIHint("iCheck")]
+    public bool TermsAndConditionsConditions7 { get; set; }
+
+    [DisplayName("I understand that each massage session will include time for consultation and assessment so we can appreciate your condition to give you an effective massage.")]
+    [UIHint("iCheck")]
+    public bool TermsAndConditionsConditions8 { get; set; }
   }
 }

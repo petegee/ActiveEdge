@@ -159,22 +159,22 @@
   <div class="form-group">
     <label class="control-label col-md-2">Conditions</label>
     <div class="col-md-2">
-      @Html.EditorFor(client => client.ContraIndicationsArteriosclerosis)
-
-
       <div class="checkbox">
-        @Html.EditorFor(client => client.ContraIndicationsAsthma)
+        @Html.EditorFor(client => client.ContraIndicationsArteriosclerosis)
+        </div>
+        <div class="checkbox">
+          @Html.EditorFor(client => client.ContraIndicationsAsthma)
+        </div>
+        <div class="checkbox">
+          @Html.EditorFor(client => client.ContraIndicationsCancer)
+        </div>
+        <div class="checkbox">
+          @Html.EditorFor(client => client.ContraIndicationsColdOrFlu)
+        </div>
+        <div class="checkbox">
+          @Html.EditorFor(client => client.ContraIndicationsContactLenses)
+        </div>
       </div>
-      <div class="checkbox">
-        @Html.EditorFor(client => client.ContraIndicationsCancer)
-      </div>
-      <div class="checkbox">
-        @Html.EditorFor(client => client.ContraIndicationsColdOrFlu)
-      </div>
-      <div class="checkbox">
-        @Html.EditorFor(client => client.ContraIndicationsContactLenses)
-      </div>
-    </div>
     <div class="col-md-2">
       <div class="checkbox ">
         @Html.EditorFor(client => client.ContraIndicationsCutsBurnsBruises)

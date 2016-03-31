@@ -29,5 +29,7 @@ namespace Domain
     public bool StomachUlcers { get; set; }
     public bool PinsPacemaker { get; set; }
     public bool HeartDisease { get; set; }
+
+
   }
 }
