@@ -9,6 +9,19 @@ dd {
   line-height:2.5;
 }
 /* Wizard */
-.wizard-big.wizard > .content {
+/*.wizard-big.wizard > .content {
   min-height: 500px !important;
+  display:block;
+  min-height:35em;
+  overflow-y: auto;
+  position:relative
+}*/
+.wizard .content {
+    min-height: 100px !important;
+}
+.wizard .content > .body {
+    width: 100% !important;
+    height: auto !important;
+    padding: 15px !important;
+    position: relative !important;
 }

@@ -45,7 +45,6 @@
               <div class="row">
                 <div class="col-lg-5">
                   @Html.FormGroupEditorFor(model => model.FirstName)
-
                 </div>
                 <div class="col-lg-5">
                   @Html.FormGroupEditorFor(model => model.LastName)
@@ -83,13 +82,13 @@
                   @Html.FormGroupEditorFor(model => model.City)
                 </div>
               </div>
-                <div class="col-lg-4">
-                  <div class="text-center">
-                    <div style="margin-top: 20px">
-                      <i class="fa fa-sign-in" style="color: #e5e5e5; font-size: 180px;"></i>
-                    </div>
+              <div class="col-lg-4">
+                <div class="text-center">
+                  <div style="margin-top: 20px">
+                    <i class="fa fa-sign-in" style="color: #e5e5e5; font-size: 180px;"></i>
                   </div>
                 </div>
+              </div>
               @*</div>*@
 
             </fieldset>
@@ -97,17 +96,35 @@
             <fieldset>
               <h2>History</h2>
               <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-5">
                   @Html.FormGroupEnumDropDownListFor(model => model.ExcerciseFrequency)
-                  @Html.FormGroupCheckBoxFor(m => m.IsSmoker)
-                  @Html.FormGroupEditorFor(model => model.CurrentMedications)
-                  @Html.FormGroupEditorFor(model => model.PreviousAilments)
-                  @Html.FormGroupEditorFor(model => model.GeneralPractionerName)
-                  @Html.FormGroupCheckBoxFor(m => m.MedicalClearance)
-                  @Html.FormGroupCheckBoxFor(m => m.HasHadPreviousTherapy)
+                </div>
+                <div class="col-lg-5">
                   @Html.FormGroupEnumDropDownListFor(model => model.TouchPreference)
                 </div>
               </div>
+
+              <div class="row">
+                <div class="col-lg-5">
+                  @Html.FormGroupEditorFor(model => model.CurrentMedications)
+                </div>
+                <div class="col-lg-5">
+                  @Html.FormGroupEditorFor(model => model.PreviousAilments)
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  @Html.FormGroupEditorFor(model => model.GeneralPractionerName)
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  @Html.FormGroupCheckBoxFor(m => m.IsSmoker)
+                  @Html.FormGroupCheckBoxFor(m => m.MedicalClearance)
+                  @Html.FormGroupCheckBoxFor(m => m.HasHadPreviousTherapy)
+                </div>
+              </div>
+
             </fieldset>
             <h1>Medical Conditions</h1>
             <fieldset>
@@ -210,13 +227,13 @@
   @Scripts.Render("~/plugins/nouislider")
   <script type="text/javascript">
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
 
       $("#wizard").steps();
       $("#form").steps({
         bodyTag: "fieldset",
-        onStepChanging: function(event, currentIndex, newIndex) {
+        onStepChanging: function (event, currentIndex, newIndex) {
           // Always allow going backward even if the current step contains invalid fields!
           if (currentIndex > newIndex) {
             return true;
@@ -242,7 +259,7 @@
           // Start validation; Prevent going forward if false
           return form.valid();
         },
-        onStepChanged: function(event, currentIndex, priorIndex) {
+        onStepChanged: function (event, currentIndex, priorIndex) {
 
           $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
@@ -259,7 +276,7 @@
           //  $(this).steps("previous");
           //}
         },
-        onFinishing: function(event, currentIndex) {
+        onFinishing: function (event, currentIndex) {
           var form = $(this);
 
           // Disable validation on fields that are disabled.
@@ -269,14 +286,14 @@
           // Start validation; Prevent form submission if false
           return form.valid();
         },
-        onFinished: function(event, currentIndex) {
+        onFinished: function (event, currentIndex) {
           var form = $(this);
 
           // Submit form input
           form.submit();
         }
       }).validate({
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
           element.before(error);
         },
         rules: {
@@ -296,7 +313,7 @@
           'min': 0,
           'max': 100
         }
-      }).change(function(event, value) {
+      }).change(function (event, value) {
         $("#CurrentStressLevels").val(value);
       });
 
@@ -309,7 +326,7 @@
           'min': 0,
           'max': 100
         }
-      }).change(function(event, value) {
+      }).change(function (event, value) {
         $("#CurrentPainOrTensionLevels").val(value);
       });
 
