@@ -32,54 +32,55 @@
         </div>
         <div class="ibox-content">
           <h2>
-            Validation Wizard Form
+            Client Intake Form
           </h2>
           <p>
-            This example show how to use Steps with jQuery Validation plugin.
+            New client registration
           </p>
 
-          <form id="form" action="#" class="wizard-big">
+          @using (Html.BeginForm("Intake", "Client", FormMethod.Post, new Dictionary<string, object>() { {"id", "form"}, { "class", "wizard-big" } }))
+          {
             <h1>Personal Information</h1>
             <fieldset>
               <h2>Personal Information</h2>
               <div class="row">
                 <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.FirstName)
+                  @Html.EditorFor(model => model.FirstName, "FormGroupTextBox")
                 </div>
                 <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.LastName)
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.DateOfBirth)
-                </div>
-                <div class="col-lg-5">
-                  @Html.FormGroupEnumDropDownListFor(model => model.Gender)
+                  @Html.EditorFor(model => model.LastName, "FormGroupTextBox")
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.Email)
+                  @Html.EditorFor(model => model.DateOfBirth, "FormGroupDateTime")
                 </div>
                 <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.ContactNumber)
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.AddressLine1)
-                </div>
-                <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.AddressLine2)
+                  @Html.EditorFor(model => model.Gender, "FormGroupEnumDropDownList")
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.Suburb)
+                  @Html.EditorFor(model => model.Email, "FormGroupTextBox")
                 </div>
                 <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.City)
+                  @Html.EditorFor(model => model.ContactNumber, "FormGroupTextBox")
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  @Html.EditorFor(model => model.AddressLine1, "FormGroupTextBox")
+                </div>
+                <div class="col-lg-5">
+                  @Html.EditorFor(model => model.AddressLine2, "FormGroupTextBox")
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  @Html.EditorFor(model => model.Suburb, "FormGroupTextBox")
+                </div>
+                <div class="col-lg-5">
+                  @Html.EditorFor(model => model.City, "FormGroupTextBox")
                 </div>
               </div>
               <div class="col-lg-4">
@@ -97,31 +98,31 @@
               <h2>History</h2>
               <div class="row">
                 <div class="col-lg-5">
-                  @Html.FormGroupEnumDropDownListFor(model => model.ExcerciseFrequency)
+                  @Html.EditorFor(model => model.ExcerciseFrequency, "FormGroupEnumDropDownList")
                 </div>
                 <div class="col-lg-5">
-                  @Html.FormGroupEnumDropDownListFor(model => model.TouchPreference)
+                  @Html.EditorFor(model => model.TouchPreference, "FormGroupEnumDropDownList")
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.CurrentMedications)
+                  @Html.EditorFor(model => model.CurrentMedications, "FormGroupTextBox")
                 </div>
                 <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.PreviousAilments)
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-5">
-                  @Html.FormGroupEditorFor(model => model.GeneralPractionerName)
+                  @Html.EditorFor(model => model.PreviousAilments, "FormGroupTextBox")
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-5">
-                  @Html.FormGroupCheckBoxFor(m => m.IsSmoker)
-                  @Html.FormGroupCheckBoxFor(m => m.MedicalClearance)
-                  @Html.FormGroupCheckBoxFor(m => m.HasHadPreviousTherapy)
+                  @Html.EditorFor(model => model.GeneralPractionerName, "FormGroupTextBox")
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  @Html.EditorFor(m => m.IsSmoker, "FormGroupCheckBox")
+                  @Html.EditorFor(m => m.MedicalClearance, "FormGroupCheckBox")
+                  @Html.EditorFor(m => m.HasHadPreviousTherapy, "FormGroupCheckBox")
                 </div>
               </div>
 
@@ -185,8 +186,8 @@
               </div>
               <div class="row">
                 <div class="col-lg-8">
-                  @Html.FormGroupEditorFor(model => model.Difficulties)
-                  @Html.FormGroupEditorFor(model => model.AreasNotToBeMassaged)
+                  @Html.EditorFor(model => model.Difficulties, "FormGroupTextBox")
+                  @Html.EditorFor(model => model.AreasNotToBeMassaged, "FormGroupTextBox")
                 </div>
               </div>
             </fieldset>
@@ -195,18 +196,18 @@
               <h2>Terms and Conditions</h2>
               <div class="row">
                 <div class="col-lg-12">
-                  @Html.FormGroupCheckBoxFor(model => model.TermsAndConditionsConditions1)
-                  @Html.FormGroupCheckBoxFor(model => model.TermsAndConditionsConditions2)
-                  @Html.FormGroupCheckBoxFor(model => model.TermsAndConditionsConditions3)
-                  @Html.FormGroupCheckBoxFor(model => model.TermsAndConditionsConditions4)
-                  @Html.FormGroupCheckBoxFor(model => model.TermsAndConditionsConditions5)
-                  @Html.FormGroupCheckBoxFor(model => model.TermsAndConditionsConditions6)
-                  @Html.FormGroupCheckBoxFor(model => model.TermsAndConditionsConditions7)
-                  @Html.FormGroupCheckBoxFor(model => model.TermsAndConditionsConditions8)
+                  @Html.EditorFor(model => model.TermsAndConditionsConditions1, "FormGroupCheckBox")
+                  @Html.EditorFor(model => model.TermsAndConditionsConditions2, "FormGroupCheckBox")
+                  @Html.EditorFor(model => model.TermsAndConditionsConditions3, "FormGroupCheckBox")
+                  @Html.EditorFor(model => model.TermsAndConditionsConditions4, "FormGroupCheckBox")
+                  @Html.EditorFor(model => model.TermsAndConditionsConditions5, "FormGroupCheckBox")
+                  @Html.EditorFor(model => model.TermsAndConditionsConditions6, "FormGroupCheckBox")
+                  @Html.EditorFor(model => model.TermsAndConditionsConditions7, "FormGroupCheckBox")
+                  @Html.EditorFor(model => model.TermsAndConditionsConditions8, "FormGroupCheckBox")
                 </div>
               </div>
             </fieldset>
-          </form>
+          }
         </div>
       </div>
     </div>
@@ -222,116 +223,14 @@
 
 @section Scripts {
   @Scripts.Render("~/plugins/wizardSteps")
+  @Scripts.Render("~/plugins/dataPicker")
   @Scripts.Render("~/plugins/iCheck")
   @Scripts.Render("~/plugins/validate")
   @Scripts.Render("~/plugins/nouislider")
+  @Scripts.Render("~/Scripts/Customer/Create.js")
   <script type="text/javascript">
 
-    $(document).ready(function () {
 
-
-      $("#wizard").steps();
-      $("#form").steps({
-        bodyTag: "fieldset",
-        onStepChanging: function (event, currentIndex, newIndex) {
-          // Always allow going backward even if the current step contains invalid fields!
-          if (currentIndex > newIndex) {
-            return true;
-          }
-
-          ////// Forbid suppressing "Warning" step if the user is to young
-          //if (newIndex === 3 && Number($("#age").val()) < 18) {
-          //  return false;
-          //}
-
-          var form = $(this);
-
-          // Clean up if user went backward before
-          if (currentIndex < newIndex) {
-            // To remove error styles
-            $(".body:eq(" + newIndex + ") label.error", form).remove();
-            $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
-          }
-
-          // Disable validation on fields that are disabled or hidden.
-          form.validate().settings.ignore = ":disabled,:hidden";
-
-          // Start validation; Prevent going forward if false
-          return form.valid();
-        },
-        onStepChanged: function (event, currentIndex, priorIndex) {
-
-          $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-          });
-
-          // Suppress (skip) "Warning" step if the user is old enough.
-          //if (currentIndex === 2 && Number($("#age").val()) >= 18) {
-          //  $(this).steps("next");
-          //}
-
-          //// Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
-          //if (currentIndex === 2 && priorIndex === 3) {
-          //  $(this).steps("previous");
-          //}
-        },
-        onFinishing: function (event, currentIndex) {
-          var form = $(this);
-
-          // Disable validation on fields that are disabled.
-          // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
-          form.validate().settings.ignore = ":disabled";
-
-          // Start validation; Prevent form submission if false
-          return form.valid();
-        },
-        onFinished: function (event, currentIndex) {
-          var form = $(this);
-
-          // Submit form input
-          form.submit();
-        }
-      }).validate({
-        errorPlacement: function (error, element) {
-          element.before(error);
-        },
-        rules: {
-          confirm: {
-            equalTo: "#password"
-          }
-        }
-      });
-
-
-      $("#currentStressLevelsSlider").noUiSlider({
-        start: 40,
-        behaviour: 'tap',
-        connect: 'lower',
-        step: 1,
-        range: {
-          'min': 0,
-          'max': 100
-        }
-      }).change(function (event, value) {
-        $("#CurrentStressLevels").val(value);
-      });
-
-      $("#currentPainOrTensionLevelsSlider").noUiSlider({
-        start: 40,
-        behaviour: 'tap',
-        connect: 'lower',
-        step: 1,
-        range: {
-          'min': 0,
-          'max': 100
-        }
-      }).change(function (event, value) {
-        $("#CurrentPainOrTensionLevels").val(value);
-      });
-
-
-    });
 
 
   </script>

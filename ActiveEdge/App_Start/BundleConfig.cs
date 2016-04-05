@@ -79,6 +79,9 @@ namespace ActiveEdge
       bundles.Add(new ScriptBundle("~/plugins/validate").Include(
                 "~/Scripts/plugins/validate/jquery.validate.min.js"));
 
+      bundles.Add(new ScriptBundle("~/validateUnobtrusive").Include(
+                "~/Scripts/jquery.validate.unobtrusive.min.js", "~/Scripts/jquery.validate.min.js"));
+
       // nouislider
       bundles.Add(new ScriptBundle("~/plugins/nouislider").Include("~/Scripts/plugins/nouslider/jquery.nouislider.min.js"));
       bundles.Add(new StyleBundle("~/plugins/nouisliderStyles").Include("~/Content/plugins/nouslider/jquery.nouislider.css"));

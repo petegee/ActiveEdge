@@ -1,0 +1,9 @@
+﻿@model Enum
+
+<div class="form-group">
+  @Html.LabelFor(model => model)
+  @(ViewData.ModelMetadata.IsRequired ? Html.EnumDropDownListFor(model => model, "Please Select", new Dictionary<string, object> { { "class", "form-control required" } }) 
+    : @Html.EnumDropDownListFor(model => model, "Please Select", new Dictionary<string, object> { { "class", "form-control" } }))
+</div>
+
+

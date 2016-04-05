@@ -235,7 +235,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
-    <Compile Include="Helpers\HtmlBuilder.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
@@ -396,7 +395,11 @@
     <Content Include="Views\Shared\EditorTemplates\iCheck.cshtml" />
     <Content Include="Views\Client\EditorTemplates\Client.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\iCheck.cshtml" />
-    <Content Include="Views\Client\Create2.cshtml" />
+    <Content Include="Views\Client\Intake.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FormGroupTextBox.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FormGroupEnumDropDownList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FormGroupCheckBox.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FormGroupDateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

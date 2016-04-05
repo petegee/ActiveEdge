@@ -49,7 +49,7 @@ namespace ActiveEdge.Controllers
     }
 
     // GET: /Client/Create
-    public ActionResult Create2()
+    public ActionResult Intake()
     {
       return View(new Client());
     }

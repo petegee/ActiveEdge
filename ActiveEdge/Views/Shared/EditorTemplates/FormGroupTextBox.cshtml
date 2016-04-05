@@ -1,0 +1,10 @@
+﻿@model string
+
+<div class="form-group">
+  @Html.LabelFor(model => model)
+  @(ViewData.ModelMetadata.IsRequired ? Html.TextBoxFor(model => model, new {@class = "form-control required"}) : Html.TextBoxFor(model => model, new {@class = "form-control"}))
+</div>
+
+
+
+

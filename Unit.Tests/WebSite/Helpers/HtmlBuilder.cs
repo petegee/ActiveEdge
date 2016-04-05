@@ -22,9 +22,9 @@ namespace Unit.Tests.WebSite.Helpers
       vc.HttpContext.Items.Add(Guid.NewGuid(), "foo");
       HtmlHelper<ActiveEdge.Models.Client> html = new HtmlHelper<Client>(vc, new FakeViewDataContainer());
 
-      var htmlString = html.FormGroupCheckBoxFor(client => client.IsSmoker);
+      //var htmlString = html.FormGroupCheckBoxFor(client => client.IsSmoker);
 
-      Console.WriteLine(htmlString);
+      //Coknsole.WriteLine(htmlString);
     }
   }
 

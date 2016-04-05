@@ -10,36 +10,46 @@ namespace ActiveEdge.Models
     public int Id { get; set; }
 
     [DisplayName("First Name")]
+    [Required]
     public string FirstName { get; set; }
 
     [DisplayName("Last Name")]
+    [Required]
     public string LastName { get; set; }
 
     [DisplayName("Date Of Birth")]
+    [Required]
     public DateTime? DateOfBirth { get; set; }
 
     [DisplayName("Email")]
+    [Required]
     public string Email { get; set; }
 
     [DisplayName("Contact")]
+    [Required]
     public string ContactNumber { get; set; }
 
     [DisplayName("Address Line 1")]
+    [Required]
     public string AddressLine1 { get; set; }
 
     [DisplayName("Address Line 2")]
     public string AddressLine2 { get; set; }
 
     [DisplayName("Suburb")]
+    [Required]
     public string Suburb { get; set; }
 
     [DisplayName("City")]
+    [Required]
     public string City { get; set; }
     
-    public Gender Gender { get; set; }
+    [Required]
+    public Gender? Gender { get; set; }
 
     [DisplayName("Excercise Frequency")]
-    public ExcerciseFrequency ExcerciseFrequency { get; set; }
+    [Required]
+    public ExcerciseFrequency? ExcerciseFrequency { get; set; }
 
     [DisplayName("Do you smoke?")]
     [UIHint("iCheck")]
@@ -63,8 +73,8 @@ namespace ActiveEdge.Models
     public bool HasHadPreviousTherapy { get; set; }
 
     [DisplayName("Touch Preference")]
-    public TouchPreference TouchPreference { get; set; }
-    //public ContraIndications ContraIndications { get; set; }
+    [Required]
+    public TouchPreference? TouchPreference { get; set; }
 
     [DisplayName("Sunburn")]
     [UIHint("iCheck")]
