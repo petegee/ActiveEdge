@@ -8,16 +8,17 @@ namespace ActiveEdge.Infrastructure.Mapping
     {
       var configuration =  new MapperConfiguration(cfg =>
       {
-        //cfg.ConstructServicesUsing(ObjectFactory.GetInstance);
-        
         cfg.CreateMap<Domain.Client, Models.Client>();
 
         cfg.CreateMap<Models.Client, Domain.ContraIndications>();
+        cfg.CreateMap<Models.Client, Domain.TermsAndConditions>();
 
         cfg.CreateMap<Models.Client, Domain.Client>()
           .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
 
-        
+        cfg.CreateMap<Models.Client, Domain.Client>()
+          .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
+
       });
 
       return configuration;

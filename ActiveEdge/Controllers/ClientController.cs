@@ -49,10 +49,25 @@ namespace ActiveEdge.Controllers
     }
 
     // GET: /Client/Create
+    [HttpGet]
     public ActionResult Intake()
     {
       return View(new Client());
     }
+
+    // POST: /Client/Create
+    [HttpPost]
+    public ActionResult Intake(Client model) 
+    {
+      if (!ModelState.IsValid) return View(model);
+
+      var customerDomain = _mapper.Map<Client, Domain.Client>(model);
+
+      _database.Clients.Add(customerDomain);
+      _database.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
 
     // GET: /Client/Create
     public ActionResult Create()

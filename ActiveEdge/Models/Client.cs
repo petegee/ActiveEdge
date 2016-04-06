@@ -19,6 +19,7 @@ namespace ActiveEdge.Models
 
     [DisplayName("Date Of Birth")]
     [Required]
+    [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
     public DateTime? DateOfBirth { get; set; }
 
     [DisplayName("Email")]
@@ -218,7 +219,7 @@ namespace ActiveEdge.Models
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions6 { get; set; }
 
-    [DisplayName("I am aware that I may experience mild discomfort, headaches, or tiredness after the massage. This is a normal response to massage.Post massage recommendations are to increase water intake and avoid strenuous exercise for 12 hours.")]
+    [DisplayName("I am aware that I may experience mild discomfort, headaches, or tiredness after the massage. This is a normal response to massage. Post massage recommendations are to increase water intake and avoid strenuous exercise for 12 hours.")]
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions7 { get; set; }
 
