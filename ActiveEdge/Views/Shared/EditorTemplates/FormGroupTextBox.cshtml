@@ -1,10 +1,11 @@
 ﻿@model string
-
 <div class="form-group">
+  @{ var isFieldRequired = ViewData.ModelMetadata.IsRequired; }
+
   @Html.LabelFor(model => model)
-  @(ViewData.ModelMetadata.IsRequired ? Html.TextBoxFor(model => model, new {@class = "form-control required"}) : Html.TextBoxFor(model => model, new {@class = "form-control"}))
+  @if (isFieldRequired)
+  {
+    <span>*</span>
+  }
+  @(isFieldRequired ? Html.TextBoxFor(model => model, new {@class = "form-control required"}) : Html.TextBoxFor(model => model, new {@class = "form-control"}))
 </div>
-
-
-
-

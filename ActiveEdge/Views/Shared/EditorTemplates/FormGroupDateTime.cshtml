@@ -1,9 +1,12 @@
 ﻿@model DateTime?
 <div class="form-group">
+  @{ var isFieldRequired = ViewData.ModelMetadata.IsRequired; }
   @Html.LabelFor(model => model)
+  @if (isFieldRequired)
+  {
+    <span>*</span>
+  }
   <div class="input-group date">
-    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model, new { @class = "form-control" })
+    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model, new {@class = "form-control"})
   </div>
 </div>
-
-
