@@ -1,5 +1,4 @@
-﻿@using ActiveEdge.Helpers
-@model ActiveEdge.Models.Client
+﻿@model ActiveEdge.Models.Client
 
 @{
   ViewBag.Title = "Create2";
@@ -17,8 +16,9 @@
             New client registration
           </p>
           @Html.ValidationSummary()
-          @using (Html.BeginForm("Create", "Client", FormMethod.Post, new Dictionary<string, object>() { {"id", "form"}, { "class", "wizard-big" } }))
+          @using (Html.BeginForm("Create", "Client", FormMethod.Post, new Dictionary<string, object> { {"id", "form"}, { "class", "wizard-big" } }))
           {
+            @Html.AntiForgeryToken()
             <h1>Personal Information</h1>
             <fieldset>
               <h2>Personal Information</h2>
@@ -207,10 +207,5 @@
   @Scripts.Render("~/plugins/validate")
   @Scripts.Render("~/plugins/nouislider")
   @Scripts.Render("~/Scripts/Customer/Create.js")
-  <script type="text/javascript">
 
-
-
-
-  </script>
 }

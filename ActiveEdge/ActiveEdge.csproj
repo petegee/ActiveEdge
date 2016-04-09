@@ -234,6 +234,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Controllers\SoapNotesController.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Database\ApplicationDbContext.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SoapModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -400,6 +402,11 @@
     <Content Include="Views\Shared\EditorTemplates\FormGroupEnumDropDownList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FormGroupCheckBox.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FormGroupDateTime.cshtml" />
+    <Content Include="Views\SoapNotes\Create.cshtml" />
+    <Content Include="Views\SoapNotes\Delete.cshtml" />
+    <Content Include="Views\SoapNotes\Details.cshtml" />
+    <Content Include="Views\SoapNotes\Edit.cshtml" />
+    <Content Include="Views\SoapNotes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

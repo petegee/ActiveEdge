@@ -2,7 +2,7 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
   <div class="sidebar-collapse">
     <ul class="nav" id="side-menu">
-      <li class="nav-header">
+      @*<li class="nav-header">
         <div class="dropdown profile-element">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear">
@@ -18,13 +18,20 @@
         <div class="logo-element">
           Active Edge
         </div>
-      </li>
+      </li>*@
 
       <li class="@Html.IsSelected(controller: "Client")">
-        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label" data-i18n="nav.forms">Clients</span><span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Forms", cssClass: "in")">
+        <a href="#"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.forms">Clients</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Clients", cssClass: "in")">
           <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Client")">All Clients</a></li>
           <li class="@Html.IsSelected(action: "Create")"><a href="@Url.Action("Create", "Client")">Intake Form</a></li>
+        </ul>
+      </li>
+      <li class="@Html.IsSelected(controller: "SoapNotes")">
+        <a href="#"><i class="fa fa-medkit"></i> <span class="nav-label" data-i18n="nav.forms">Sessions</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "SoapNotes", cssClass: "in")">
+          <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "SoapNotes")">All Sessions</a></li>
+          <li class="@Html.IsSelected(action: "Create")"><a href="@Url.Action("Create", "SoapNotes")">Create</a></li>
         </ul>
       </li>
     </ul>

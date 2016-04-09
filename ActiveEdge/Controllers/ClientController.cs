@@ -59,12 +59,13 @@ namespace ActiveEdge.Controllers
     [ValidateAntiForgeryToken]
     public ActionResult Create([Bind(Exclude = "Id")] Client client)
     {
-      if (!ModelState.IsValid) return View(client);
+      if (!ModelState.IsValid) return View("Intake", client);
 
       var customerDomain = _mapper.Map<Client, Domain.Client>(client);
 
       _database.Clients.Add(customerDomain);
       _database.SaveChanges();
+
       return RedirectToAction("Index");
     }
 

@@ -19,7 +19,7 @@ namespace ActiveEdge.Models
 
     [DisplayName("Date Of Birth")]
     [Required]
-    [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+    [DisplayFormat(DataFormatString = "dd/{0:MM/yyyy}")]
     public DateTime? DateOfBirth { get; set; }
 
     [DisplayName("Email")]

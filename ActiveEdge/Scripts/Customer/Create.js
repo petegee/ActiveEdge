@@ -104,9 +104,11 @@
 
     $('.input-group.date').datepicker({
       todayBtn: "linked",
-      keyboardNavigation: false,
+      keyboardNavigation: true,
+      endDate: "0d",
+      format : "dd/mm/yyyy",
       forceParse: false,
-      calendarWeeks: true,
+      calendarWeeks: false,
       autoclose: true
     });
   });

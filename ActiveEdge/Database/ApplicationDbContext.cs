@@ -9,6 +9,7 @@ namespace ActiveEdge.Database
   public interface IApplicationDbContext: IDisposable
   {
     DbSet<Domain.Client> Clients { get; set; }
+    System.Data.Entity.DbSet<ActiveEdge.Models.SoapNoteModel> SoapNoteModels { get; set; }
 
     int SaveChanges();
 
@@ -40,5 +41,7 @@ namespace ActiveEdge.Database
      // modelBuilder.Entity<Domain.Client>().ToTable("Customer");
       base.OnModelCreating(modelBuilder);
     }
+
+    public System.Data.Entity.DbSet<ActiveEdge.Models.SoapNoteModel> SoapNoteModels { get; set; }
   }
 }
