@@ -8,6 +8,8 @@ dt,
 dd {
   line-height:2.5;
 }
+.dl-horizontal dt { white-space: normal; }
+
 /* Wizard */
 /*.wizard-big.wizard > .content {
   min-height: 500px !important;

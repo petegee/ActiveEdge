@@ -6,8 +6,6 @@ using ActiveEdge.Database;
 using ActiveEdge.Models;
 using AutoMapper;
 
-
-
 namespace ActiveEdge.Controllers
 {
   public class ClientController : Controller
@@ -47,32 +45,11 @@ namespace ActiveEdge.Controllers
       }
       return View(customer);
     }
-
-    // GET: /Client/Create
-    [HttpGet]
-    public ActionResult Intake()
-    {
-      return View(new Client());
-    }
-
-    // POST: /Client/Create
-    [HttpPost]
-    public ActionResult Intake(Client model) 
-    {
-      if (!ModelState.IsValid) return View(model);
-
-      var customerDomain = _mapper.Map<Client, Domain.Client>(model);
-
-      _database.Clients.Add(customerDomain);
-      _database.SaveChanges();
-      return RedirectToAction("Index");
-    }
-
-
+    
     // GET: /Client/Create
     public ActionResult Create()
     {
-      return View(new Client());
+      return View("Intake", new Client());
     }
 
     // POST: /Client/Create
@@ -82,16 +59,13 @@ namespace ActiveEdge.Controllers
     [ValidateAntiForgeryToken]
     public ActionResult Create([Bind(Exclude = "Id")] Client client)
     {
-      if (ModelState.IsValid)
-      {
-        var customerDomain = _mapper.Map<Client, Domain.Client>(client);
+      if (!ModelState.IsValid) return View(client);
 
-        _database.Clients.Add(customerDomain);
-        _database.SaveChanges();
-        return RedirectToAction("Index");
-      }
+      var customerDomain = _mapper.Map<Client, Domain.Client>(client);
 
-      return View(client);
+      _database.Clients.Add(customerDomain);
+      _database.SaveChanges();
+      return RedirectToAction("Index");
     }
 
     // GET: /Client/Edit/5
@@ -101,7 +75,13 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Client>(_mapperConfiguration); 
+
+      if (_database.Clients.Any() == false)
+      {
+        return HttpNotFound();
+      }
+
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Client>(_mapperConfiguration);
       if (customer == null)
       {
         return HttpNotFound();
@@ -133,7 +113,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Client>(_mapperConfiguration); 
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Client>(_mapperConfiguration);
       if (customer == null)
       {
         return HttpNotFound();

@@ -17,7 +17,7 @@
             New client registration
           </p>
           @Html.ValidationSummary()
-          @using (Html.BeginForm("Intake", "Client", FormMethod.Post, new Dictionary<string, object>() { {"id", "form"}, { "class", "wizard-big" } }))
+          @using (Html.BeginForm("Create", "Client", FormMethod.Post, new Dictionary<string, object>() { {"id", "form"}, { "class", "wizard-big" } }))
           {
             <h1>Personal Information</h1>
             <fieldset>
