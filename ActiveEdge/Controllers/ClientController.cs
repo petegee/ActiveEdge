@@ -4,7 +4,9 @@ using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Database;
 using ActiveEdge.Models;
+using ActiveEdge.Models.Clients.Command;
 using AutoMapper;
+using MediatR;
 
 namespace ActiveEdge.Controllers
 {
@@ -13,15 +15,17 @@ namespace ActiveEdge.Controllers
     private readonly IApplicationDbContext _database;
     private readonly IMapper _mapper;
     private readonly MapperConfiguration _mapperConfiguration;
+    private readonly IMediator _mediator;
 
     /// <summary>
     ///   Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
     /// </summary>
-    public ClientController(IApplicationDbContext database, IMapper mapper, MapperConfiguration mapperConfiguration)
+    public ClientController(IApplicationDbContext database, IMapper mapper, MapperConfiguration mapperConfiguration, IMediator mediator)
     {
       _database = database;
       _mapper = mapper;
       _mapperConfiguration = mapperConfiguration;
+      _mediator = mediator;
     }
 
 
@@ -49,7 +53,7 @@ namespace ActiveEdge.Controllers
     // GET: /Client/Create
     public ActionResult Create()
     {
-      return View("Intake", new Client());
+      return View("Intake", new RegisterNewClient());
     }
 
     // POST: /Client/Create
@@ -57,14 +61,11 @@ namespace ActiveEdge.Controllers
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create([Bind(Exclude = "Id")] Client client)
+    public ActionResult Create([Bind(Exclude = "Id")] RegisterNewClient client)
     {
       if (!ModelState.IsValid) return View("Intake", client);
 
-      var customerDomain = _mapper.Map<Client, Domain.Client>(client);
-
-      _database.Clients.Add(customerDomain);
-      _database.SaveChanges();
+      _mediator.Publish(client);
 
       return RedirectToAction("Index");
     }

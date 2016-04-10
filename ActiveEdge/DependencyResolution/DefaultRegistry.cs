@@ -17,11 +17,11 @@
 
 using ActiveEdge.Infrastructure.Mapping;
 using AutoMapper;
+using MediatR;
 using StructureMap;
 
 namespace ActiveEdge.DependencyResolution
 {
-  using StructureMap.Configuration.DSL;
   using StructureMap.Graph;
 
   public class DefaultRegistry : Registry
@@ -36,12 +36,18 @@ namespace ActiveEdge.DependencyResolution
             scan.TheCallingAssembly();
             scan.WithDefaultConventions();
             scan.With(new ControllerConvention());
+            scan.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
+            scan.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>));
+            scan.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
+            scan.ConnectImplementationsToTypesClosing(typeof(IAsyncNotificationHandler<>));
 
-            
+
           });
       For<MapperConfiguration>().Use(AutoMapperConfiguration.Create());
       For<IMapper>().Use(ctx => ctx.GetInstance<MapperConfiguration>().CreateMapper(ctx.GetInstance));
-
+      For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
+      For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+      For<IMediator>().Use<Mediator>();
     }
 
     #endregion

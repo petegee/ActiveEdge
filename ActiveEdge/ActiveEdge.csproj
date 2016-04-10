@@ -238,6 +238,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="CommandHandlers\RegisterNewClientHandler.cs" />
     <Compile Include="Controllers\SoapNotesController.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
@@ -261,6 +262,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Database\ApplicationDbContext.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Clients\Command\RegisterNewClient.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SoapModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -421,6 +423,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Clients\Query\" />
+    <Folder Include="QueryHandlers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

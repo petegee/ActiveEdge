@@ -1,3 +1,4 @@
+using ActiveEdge.Models.Clients.Command;
 using AutoMapper;
 
 namespace ActiveEdge.Infrastructure.Mapping
@@ -10,13 +11,13 @@ namespace ActiveEdge.Infrastructure.Mapping
       {
         cfg.CreateMap<Domain.Client, Models.Client>();
 
-        cfg.CreateMap<Models.Client, Domain.ContraIndications>();
-        cfg.CreateMap<Models.Client, Domain.TermsAndConditions>();
+        cfg.CreateMap<RegisterNewClient, Domain.ContraIndications>();
+        cfg.CreateMap<RegisterNewClient, Domain.TermsAndConditions>();
 
-        cfg.CreateMap<Models.Client, Domain.Client>()
+        cfg.CreateMap<RegisterNewClient, Domain.Client>()
           .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
 
-        cfg.CreateMap<Models.Client, Domain.Client>()
+        cfg.CreateMap<RegisterNewClient, Domain.Client>()
           .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
 
       });
