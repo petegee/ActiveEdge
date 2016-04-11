@@ -259,6 +259,11 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutomapperExtensions.cs" />
+    <Compile Include="Migrations\201604110905321_migration1.cs" />
+    <Compile Include="Migrations\201604110905321_migration1.Designer.cs">
+      <DependentUpon>201604110905321_migration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Database\ApplicationDbContext.cs" />
     <Compile Include="Models\Client.cs" />
@@ -437,6 +442,11 @@
       <Project>{e38ff7bd-3792-4e9e-8bf9-2e6d86a730a4}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604110905321_migration1.resx">
+      <DependentUpon>201604110905321_migration1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

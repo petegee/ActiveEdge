@@ -20,14 +20,15 @@ namespace ActiveEdge.Database
   {
     static ApplicationDbContext()
     {
+      System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
       //System.Data.Entity.Database.SetInitializer(new MySqlInitializer());
-     // System.Data.Entity.Database.SetInitializer(new ActiveEdgeInitializer());
+      // System.Data.Entity.Database.SetInitializer(new ActiveEdgeInitializer());
     }
 
     public ApplicationDbContext()
       : base("DefaultConnection")
     {
-     
+      
     }
 
     public DbSet<Domain.Client> Clients { get; set; }

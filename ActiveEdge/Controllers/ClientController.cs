@@ -42,11 +42,13 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Client>(_mapperConfiguration);
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingleOrDefault<Client>(_mapperConfiguration);
+
       if (customer == null)
       {
         return HttpNotFound();
       }
+
       return View(customer);
     }
     
@@ -77,13 +79,9 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
+      
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingleOrDefault<Client>(_mapperConfiguration);
 
-      if (_database.Clients.Any() == false)
-      {
-        return HttpNotFound();
-      }
-
-      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Client>(_mapperConfiguration);
       if (customer == null)
       {
         return HttpNotFound();
