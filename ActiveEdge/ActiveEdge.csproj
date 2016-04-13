@@ -245,7 +245,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Database\ActiveEdgeContext.cs" />
     <Compile Include="Database\MySqlConfiguration.cs" />
     <Compile Include="Database\MySqlHistoryContext.cs" />
     <Compile Include="Database\MySqlInitializer.cs" />

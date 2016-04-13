@@ -11,7 +11,8 @@ using ActiveEdge.Models;
 
 namespace ActiveEdge.Controllers
 {
-    public class SoapNotesController : Controller
+  [Authorize]
+  public class SoapNotesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

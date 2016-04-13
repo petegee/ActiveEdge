@@ -2,10 +2,37 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using ActiveEdge.Models;
+using Domain;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MySql.Data.Entity;
 
 namespace ActiveEdge.Database
 {
+  public class DatabaseInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+  {
+    /// <summary>
+    /// A method that should be overridden to actually add data to the context for seeding.
+    ///             The default implementation does nothing.
+    /// </summary>
+    /// <param name="context">The context to seed. </param>
+    protected override void Seed(ApplicationDbContext context)
+    {
+      context.Clients.Add(new Domain.Client
+      {
+        FirstName = "Stuart",
+        LastName = "Clark",
+        DateOfBirth = new DateTime(1976, 10, 6),
+        AddressLine1 = "12 Wattle Grove",
+        Suburb = "Maungaraki",
+        City = "Lower Hutt",
+        ContactNumber = "021509357",
+        Email = "sjclark76@gmail.com",
+        ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
+
+      });
+      base.Seed(context);
+    }
+  }
   public interface IApplicationDbContext: IDisposable
   {
     DbSet<Domain.Client> Clients { get; set; }
@@ -16,11 +43,13 @@ namespace ActiveEdge.Database
     DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
   }
 
+  [DbConfigurationType(typeof(MySqlEFConfiguration))]
   public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
   {
     static ApplicationDbContext()
     {
-      System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
+      System.Data.Entity.Database.SetInitializer(new DatabaseInitializer());
+      //System.Data.Entity.Database.SetInitializer(new  MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
       //System.Data.Entity.Database.SetInitializer(new MySqlInitializer());
       // System.Data.Entity.Database.SetInitializer(new ActiveEdgeInitializer());
     }

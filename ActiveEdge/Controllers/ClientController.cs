@@ -10,6 +10,7 @@ using MediatR;
 
 namespace ActiveEdge.Controllers
 {
+  [Authorize]
   public class ClientController : Controller
   {
     private readonly IApplicationDbContext _database;
