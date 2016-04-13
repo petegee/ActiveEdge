@@ -30,6 +30,7 @@ namespace ActiveEdge.Database
         ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
 
       });
+      context.SaveChanges();
       base.Seed(context);
     }
   }

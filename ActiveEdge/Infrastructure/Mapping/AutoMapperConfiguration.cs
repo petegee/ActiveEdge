@@ -20,6 +20,8 @@ namespace ActiveEdge.Infrastructure.Mapping
         cfg.CreateMap<RegisterNewClient, Domain.Client>()
           .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
 
+        cfg.CreateMap<Domain.Client, Models.WebApi.Search.Client>()
+          .ForMember(dst => dst.FullName, opt => opt.MapFrom(src => src.FirstName));
       });
 
       return configuration;
