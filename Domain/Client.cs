@@ -1,26 +1,19 @@
 ﻿using System;
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using DelegateDecompiler;
 
 namespace Domain
 {
-  public class TermsAndConditions
-  {
-    public bool Condition1 { get; set; }
-    public bool Condition2 { get; set; }
-    public bool Condition3 { get; set; }
-    public bool Condition4 { get; set; }
-    public bool Condition5 { get; set; }
-    public bool Condition6 { get; set; }
-    public bool Condition7 { get; set; }
-    public bool Condition8 { get; set; }
-  }
-
   public class Client
   {
     public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    [Computed, NotMapped]
+    public string FullName => FirstName + " " + LastName;
+
     public Gender Gender { get; set; }
     public DateTime? DateOfBirth { get; set; }
     public string Email { get; set; }

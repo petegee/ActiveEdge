@@ -1,12 +1,14 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Database;
-using ActiveEdge.Models;
 using ActiveEdge.Models.Clients.Command;
 using AutoMapper;
+using Domain;
 using MediatR;
+using Client = ActiveEdge.Models.Client;
 
 namespace ActiveEdge.Controllers
 {

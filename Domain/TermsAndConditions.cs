@@ -1,4 +1,4 @@
-namespace Domain
+﻿namespace Domain
 {
   public class TermsAndConditions
   {
@@ -11,4 +11,5 @@ namespace Domain
     public bool Condition7 { get; set; }
     public bool Condition8 { get; set; }
   }
+ 
 }
