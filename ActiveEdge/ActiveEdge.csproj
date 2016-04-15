@@ -254,6 +254,7 @@
     <Compile Include="CommandHandlers\RegisterNewClientHandler.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\SoapNotesController.cs" />
+    <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
@@ -392,6 +393,7 @@
     <Content Include="Scripts\plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Scripts\plugins\steps\jquery.steps.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
+    <Content Include="Scripts\site\SoapNotes\create.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />

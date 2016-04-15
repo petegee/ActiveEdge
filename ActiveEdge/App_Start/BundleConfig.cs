@@ -9,6 +9,7 @@ namespace ActiveEdge
     {
       CustomerScripts(bundles);
 
+      SoapNoteScripts(bundles);
 
       // Vendor scripts
       bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -85,6 +86,20 @@ namespace ActiveEdge
       // nouislider
       bundles.Add(new ScriptBundle("~/plugins/nouislider").Include("~/Scripts/plugins/nouslider/jquery.nouislider.min.js"));
       bundles.Add(new StyleBundle("~/plugins/nouisliderStyles").Include("~/Content/plugins/nouslider/jquery.nouislider.css"));
+
+      TypeAhead(bundles);
+    }
+
+    private static void TypeAhead(BundleCollection bundles)
+    {
+      bundles.Add(new ScriptBundle("~/bundles/typeahead")
+        .Include("~/Scripts/typeahead.bundle.min.js", "~/Scripts/bloodhound.min.js"));
+    }
+
+    private static void SoapNoteScripts(BundleCollection bundles)
+    {
+      bundles.Add(new ScriptBundle("~/bundles/soapnotes").Include(
+                    "~/Scripts/site/soapnotes/Create.js"));
     }
 
     private static void CustomerScripts(BundleCollection bundles)

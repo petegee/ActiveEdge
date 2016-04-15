@@ -20,8 +20,8 @@ namespace ActiveEdge.WebApi
       _mapperConfiguration = mapperConfiguration;
     }
 
-    [Route("clients/{fullname}")]
     [HttpGet]
+    [Route("clients/{fullname}")]
     public IEnumerable<Client> Clients(string fullName)
     {
       return _dbContext.Clients.Where(client => client.FullName.ToLower().StartsWith(fullName.ToLower()))
