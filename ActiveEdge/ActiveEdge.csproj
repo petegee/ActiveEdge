@@ -294,6 +294,9 @@
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\ms-icon-70x70.png" />
     <Content Include="Content\patterns\congruent_pentagon.png" />
     <Content Include="Content\patterns\header-profile-skin-1.png" />
     <Content Include="Content\patterns\header-profile-skin-2.png" />
@@ -315,6 +318,7 @@
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -368,6 +372,10 @@
     <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\ActiveEdge - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ActiveEdge.Test.pubxml" />
     <None Include="Properties\PublishProfiles\HostDemo.pubxml" />
@@ -393,7 +401,14 @@
     <Content Include="Scripts\plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Scripts\plugins\steps\jquery.steps.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
+    <Content Include="Scripts\site\activeedge.js" />
     <Content Include="Scripts\site\SoapNotes\create.js" />
+    <Content Include="Scripts\summernote\plugin\summernote-ext-hello.js" />
+    <Content Include="Scripts\summernote\plugin\summernote-ext-hint.js" />
+    <Content Include="Scripts\summernote\plugin\summernote-ext-video.js" />
+    <Content Include="Scripts\summernote\summernote.css" />
+    <Content Include="Scripts\summernote\summernote.js" />
+    <Content Include="Scripts\summernote\summernote.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
@@ -443,6 +458,7 @@
     <Content Include="Views\SoapNotes\Details.cshtml" />
     <Content Include="Views\SoapNotes\Edit.cshtml" />
     <Content Include="Views\SoapNotes\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Summernote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

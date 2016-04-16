@@ -2,13 +2,29 @@
 
 namespace ActiveEdge
 {
+  public static class Bundles
+  {
+    public static class Css
+    {
+      public const string Summernote = "~/bundles/summernotestyles";
+    }
+
+    public static class Scripts
+    {
+      public const string ActiveEdge = "~/bundles/activeedge";
+      public const string Summernote = "~/bundles/summernote";
+    }
+  }
   public class BundleConfig
   {
+    
+    private static BundleCollection _bundles;
 
     public static void RegisterBundles(BundleCollection bundles)
     {
+      _bundles = bundles;
+      RegisterScripts(Bundles.Scripts.ActiveEdge, "~/Scripts/site/activeedge.js");
       CustomerScripts(bundles);
-
       SoapNoteScripts(bundles);
 
       // Vendor scripts
@@ -88,6 +104,14 @@ namespace ActiveEdge
       bundles.Add(new StyleBundle("~/plugins/nouisliderStyles").Include("~/Content/plugins/nouslider/jquery.nouislider.css"));
 
       TypeAhead(bundles);
+
+      SummerNote();
+    }
+
+    private static void SummerNote()
+    {
+      RegisterScripts(Bundles.Scripts.Summernote, "~/Scripts/summernote/summernote.min.js");
+      RegisterCss(Bundles.Css.Summernote, "~/Scripts/summernote/summernote.css");
     }
 
     private static void TypeAhead(BundleCollection bundles)
@@ -106,6 +130,16 @@ namespace ActiveEdge
     {
       bundles.Add(new ScriptBundle("~/bundles/customers").Include(
                    "~/Scripts/Customer/Create.js"));
+    }
+
+    private static void RegisterCss(string virtualPath, params string[] includes)
+    {
+      _bundles.Add(new StyleBundle(virtualPath).Include(string.Join(",", includes)));
+    }
+
+    private static void RegisterScripts(string virtualPath, params string[] includes)
+    {
+      _bundles.Add(new ScriptBundle(virtualPath).Include(string.Join(",", includes)));
     }
   }
 }

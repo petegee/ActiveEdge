@@ -30,8 +30,21 @@ namespace ActiveEdge.Models
     public string PressureScaleRequired { get; set; }
 
     [DisplayName("Session Plan")]
-    [UIHint("BigText")]
+    [UIHint("Summernote")]
     public string SessionPlan { get; set; }
+
+    [DisplayName("Position / area/ muscle")]
+    [UIHint("Summernote")]
+    public string SessionNotesPosition { get; set; }
+
+    [DisplayName("Techniques")]
+    [UIHint("Summernote")]
+    public string SessionNotesTechniques { get; set; }
+
+    [DisplayName("Findings")]
+    [UIHint("Summernote")]
+    public string SessionNotesFindings { get; set; }
+
 
     public List<SessionNoteModel> SessionNotes { get; set; }
   }

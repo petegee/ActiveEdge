@@ -104,7 +104,7 @@
                   @Html.ValidationMessageFor(model => model.PressureScaleRequired)
                 </div>
               </div>
-
+              <div class="hr-line-dashed"></div>
               <div class="form-group">
                 @Html.LabelFor(model => model.SessionPlan, new {@class = "control-label col-md-2"})
                 <div class="col-md-6">
@@ -112,7 +112,30 @@
                   @Html.ValidationMessageFor(model => model.SessionPlan)
                 </div>
               </div>
-
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.SessionNotesPosition, new {@class = "control-label col-md-2"})
+                <div class="col-md-6">
+                  @Html.EditorFor(model => model.SessionNotesPosition)
+                  @Html.ValidationMessageFor(model => model.SessionNotesPosition)
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.SessionNotesTechniques, new {@class = "control-label col-md-2"})
+                <div class="col-md-6">
+                  @Html.EditorFor(model => model.SessionNotesTechniques)
+                  @Html.ValidationMessageFor(model => model.SessionNotesTechniques)
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.SessionNotesFindings, new {@class = "control-label col-md-2"})
+                <div class="col-md-6">
+                  @Html.EditorFor(model => model.SessionNotesFindings)
+                  @Html.ValidationMessageFor(model => model.SessionNotesFindings)
+                </div>
+              </div>
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                   <input type="submit" value="Create" class="btn btn-primary"/>
@@ -132,27 +155,31 @@
 @section scripts {
   @Scripts.Render("~/bundles/jqueryval")
   @Scripts.Render("~/bundles/typeahead")
+  @Scripts.Render(Bundles.Scripts.ActiveEdge)
   @Scripts.Render("~/bundles/soapnotes")
 
   @Scripts.Render("~/plugins/dataPicker")
-
+  @Scripts.Render(Bundles.Scripts.Summernote)
   @*@Scripts.Render("~/plugins/iCheck")*@
 
-  @*<script type="text/javascript">
-    $(document).ready(function() {
+  <script type="text/javascript">
 
-      $('.i-checks').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass: 'iradio_square-green',
-      });
+    //$(document).ready(function() {
 
-    });
-  </script>*@
+    //  $('.i-checks').iCheck({
+    //    checkboxClass: 'icheckbox_square-green',
+    //    radioClass: 'iradio_square-green',
+    //  });
+
+    //});
+
+  
+  </script>
 }
 
 @section styles
 {
-
+  @Styles.Render(Bundles.Css.Summernote)
   @Styles.Render("~/plugins/dataPickerStyles")
   @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
 

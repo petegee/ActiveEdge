@@ -1,6 +1,5 @@
 ﻿$(document).ready(function() {
-  
-
+ 
   $('#date').datepicker({
     todayBtn: "linked",
     keyboardNavigation: true,

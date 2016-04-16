@@ -1,5 +1,12 @@
 ﻿body {
 }
+
+.logo-element {
+  background-image: url(ms-icon-70x70.png);
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+}
 .no-top-margin {
   margin-top: 0 !important;
 }
