@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using ActiveEdge.Infrastructure;
 using Domain;
 
 namespace ActiveEdge.Models
@@ -19,7 +20,7 @@ namespace ActiveEdge.Models
 
     [DisplayName("Date Of Birth")]
     [Required]
-    [DisplayFormat(DataFormatString = "dd/{0:MM/yyyy}")]
+    [DisplayFormat(DataFormatString = Constants.DateFormat)]
     public DateTime? DateOfBirth { get; set; }
 
     [DisplayName("Email")]

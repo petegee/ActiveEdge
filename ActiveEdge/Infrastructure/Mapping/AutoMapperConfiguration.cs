@@ -1,5 +1,7 @@
+using ActiveEdge.Models;
 using ActiveEdge.Models.Clients.Command;
 using AutoMapper;
+using Domain;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
@@ -9,6 +11,9 @@ namespace ActiveEdge.Infrastructure.Mapping
     {
       var configuration =  new MapperConfiguration(cfg =>
       {
+        cfg.CreateMap<SoapNoteModel, SoapNote>();
+        cfg.CreateMap<SoapNote, SoapNoteModel>();
+
         cfg.CreateMap<Domain.Client, Models.Client>();
 
         cfg.CreateMap<RegisterNewClient, Domain.ContraIndications>();

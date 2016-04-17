@@ -1,4 +1,4 @@
 ﻿@model string
 
 @Html.HiddenFor(s => s)
-<div class="summernote" for="@ModelMetadata.FromLambdaExpression(m => m, ViewData).PropertyName"></div>
+<div class="summernote" for="@ModelMetadata.FromLambdaExpression(m => m, ViewData).PropertyName">@Html.Raw(HttpUtility.HtmlDecode(Model))</div>

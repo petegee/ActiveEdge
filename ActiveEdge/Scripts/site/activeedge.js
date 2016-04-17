@@ -1,5 +1,15 @@
 ﻿$(document).ready(function() {
 
+  $('.date').datepicker({
+    todayBtn: "linked",
+    keyboardNavigation: true,
+    endDate: "0d",
+    format: "dd/mm/yyyy",
+    forceParse: true,
+    calendarWeeks: false,
+    autoclose: true
+  });
+
   function htmlEncode(value) {
     //create a in-memory div, set it's inner text(which jQuery automatically encodes)
     //then grab the encoded contents back out.  The div never exists on the page.

@@ -257,6 +257,7 @@
     <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
+    <Compile Include="Infrastructure\Contstants.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
@@ -274,17 +275,12 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutomapperExtensions.cs" />
-    <Compile Include="Migrations\201604110905321_migration1.cs" />
-    <Compile Include="Migrations\201604110905321_migration1.Designer.cs">
-      <DependentUpon>201604110905321_migration1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Database\ApplicationDbContext.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Clients\Command\RegisterNewClient.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\SoapModel.cs" />
+    <Compile Include="Models\SoapNoteModel.cs" />
     <Compile Include="Models\WebApi\Search\Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -459,11 +455,14 @@
     <Content Include="Views\SoapNotes\Edit.cshtml" />
     <Content Include="Views\SoapNotes\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Summernote.cshtml" />
+    <Content Include="Views\SoapNotes\EditorTemplates\SoapNoteModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Summernote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Clients\Query\" />
     <Folder Include="QueryHandlers\" />
+    <Folder Include="Views\SoapNotes\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -476,11 +475,6 @@
       <Project>{e38ff7bd-3792-4e9e-8bf9-2e6d86a730a4}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604110905321_migration1.resx">
-      <DependentUpon>201604110905321_migration1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

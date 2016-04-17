@@ -5,18 +5,33 @@ using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Database;
 using ActiveEdge.Models;
+using AutoMapper;
+using Domain;
 
 namespace ActiveEdge.Controllers
 {
   [Authorize]
   public class SoapNotesController : Controller
   {
-    private readonly ApplicationDbContext db = new ApplicationDbContext();
+
+    private IApplicationDbContext _db;
+    private readonly IMapper _mapper;
+    private readonly MapperConfiguration _mapperConfiguration;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller"/> class.
+    /// </summary>
+    public SoapNotesController(IApplicationDbContext applicationDbContext,IMapper mapper, MapperConfiguration mapperConfiguration)
+    {
+      _db = applicationDbContext;
+      _mapper = mapper;
+      _mapperConfiguration = mapperConfiguration;
+    }
 
     // GET: /SoapNotes/
     public ActionResult Index()
     {
-      return View(db.SoapNoteModels.ToList());
+      return View(_db.SoapNotes.ProjectToList<SoapNoteModel>(_mapperConfiguration));
     }
 
     // GET: /SoapNotes/Details/5
@@ -26,7 +41,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = db.SoapNoteModels.Find(id);
+      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SoapNoteModel>(_mapperConfiguration);
       if (soapNoteModel == null)
       {
         return HttpNotFound();
@@ -48,15 +63,13 @@ namespace ActiveEdge.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Create(
-      [Bind(
-        Include =
-          "Id,Date,ClientId,ClientName,Feedback,GoalOrExpectations,ContributingFactorsToCondition,PreMassagePalpatation,PressureScaleRequired,SessionPlan"
-        )] SoapNoteModel soapNoteModel)
+      [Bind(Exclude = "Id")] SoapNoteModel soapNoteModel)
     {
       if (ModelState.IsValid)
       {
-        db.SoapNoteModels.Add(soapNoteModel);
-        db.SaveChanges();
+        var domainModel = _mapper.Map<SoapNoteModel, SoapNote>(soapNoteModel);
+        _db.SoapNotes.Add(domainModel);
+        _db.SaveChanges();
         return RedirectToAction("Index");
       }
 
@@ -70,7 +83,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = db.SoapNoteModels.Find(id);
+      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SoapNoteModel>(_mapperConfiguration);
       if (soapNoteModel == null)
       {
         return HttpNotFound();
@@ -91,8 +104,10 @@ namespace ActiveEdge.Controllers
     {
       if (ModelState.IsValid)
       {
-        db.Entry(soapNoteModel).State = EntityState.Modified;
-        db.SaveChanges();
+        var domainModel = _mapper.Map<SoapNoteModel, SoapNote>(soapNoteModel);
+
+        _db.Entry(domainModel).State = EntityState.Modified;
+        _db.SaveChanges();
         return RedirectToAction("Index");
       }
       return View(soapNoteModel);
@@ -105,7 +120,9 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = db.SoapNoteModels.Find(id);
+      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SoapNoteModel>(_mapperConfiguration);
+
+     
       if (soapNoteModel == null)
       {
         return HttpNotFound();
@@ -118,19 +135,11 @@ namespace ActiveEdge.Controllers
     [ValidateAntiForgeryToken]
     public ActionResult DeleteConfirmed(int id)
     {
-      var soapNoteModel = db.SoapNoteModels.Find(id);
-      db.SoapNoteModels.Remove(soapNoteModel);
-      db.SaveChanges();
+      var soapNoteModel = _db.SoapNotes.Find(id);
+      _db.SoapNotes.Remove(soapNoteModel);
+      _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing)
-      {
-        db.Dispose();
-      }
-      base.Dispose(disposing);
-    }
+    
   }
 }

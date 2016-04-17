@@ -2,6 +2,7 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using ActiveEdge.Models;
+using Domain;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.Entity;
 
@@ -10,7 +11,7 @@ namespace ActiveEdge.Database
   public interface IApplicationDbContext: IDisposable
   {
     DbSet<Domain.Client> Clients { get; set; }
-    System.Data.Entity.DbSet<ActiveEdge.Models.SoapNoteModel> SoapNoteModels { get; set; }
+    System.Data.Entity.DbSet<SoapNote> SoapNotes { get; set; }
 
     int SaveChanges();
 
@@ -38,6 +39,6 @@ namespace ActiveEdge.Database
       base.OnModelCreating(modelBuilder);
     }
 
-    public System.Data.Entity.DbSet<ActiveEdge.Models.SoapNoteModel> SoapNoteModels { get; set; }
+    public System.Data.Entity.DbSet<SoapNote> SoapNotes { get; set; }
   }
 }

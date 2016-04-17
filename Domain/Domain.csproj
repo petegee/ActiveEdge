@@ -51,6 +51,7 @@
     <Compile Include="ExerciseType.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoapNote.cs" />
     <Compile Include="TermsAndConditions.cs" />
     <Compile Include="TouchPreference.cs" />
   </ItemGroup>

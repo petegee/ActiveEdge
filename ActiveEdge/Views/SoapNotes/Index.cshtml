@@ -35,29 +35,9 @@
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ClientId)
+            @Html.DisplayNameFor(model => model.ClientFullName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Feedback)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoalOrExpectations)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContributingFactorsToCondition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PreMassagePalpatation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PressureScaleRequired)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SessionPlan)
-        </th>
+       
         <th></th>
     </tr>
 
@@ -67,28 +47,7 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ClientId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Feedback)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GoalOrExpectations)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContributingFactorsToCondition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PreMassagePalpatation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PressureScaleRequired)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SessionPlan)
+            @Html.DisplayFor(modelItem => item.ClientFullName)
         </td>
         <td>
 			@Html.ActionLink("Details", "Details", new { id=item.Id }, new { @class = "btn btn-primary btn-sm"})

@@ -13,6 +13,29 @@ namespace ActiveEdge.Database
     /// <param name="context">The context to seed. </param>
     protected override void Seed(ApplicationDbContext context)
     {
+      AddClients(context);
+      AddSessions(context);
+    }
+
+    private static void AddSessions(ApplicationDbContext context)
+    {
+      context.SoapNotes.Add(new SoapNote
+      {
+        Date = DateTime.Today.Date,
+        ClientId = 1,
+        Feedback = "It was absolutely fantastic",
+        GoalOrExpectations = "get fitter & stronger",
+        ContributingFactorsToCondition = "training like a beast",
+        SessionPlan = "Go hard or go home",
+        SessionNotesFindings = "this guy is beast",
+        SessionNotesPosition = "&lt;p&gt;everything&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/p&gt;",
+        SessionNotesTechniques = "everywhere",
+        PreMassagePalpatation = "nope",
+      });
+    }
+
+    private static void AddClients(ApplicationDbContext context)
+    {
       context.Clients.Add(new Client
       {
         FirstName = "Stuart",

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,12 +7,17 @@ namespace ActiveEdge.Models
   public class SoapNoteModel
   {
     public int Id { get; set; }
+
+    [Required]
+    [DisplayFormat(DataFormatString = "{0:d/MM/yyyy}")]
     public DateTime Date { get; set; }
+
     public int ClientId { get; set; }
 
+    [Required]
     [DisplayName("Client Name")]
-    public string ClientName { get; set; }
-
+    public string ClientFullName { get; set; }
+    
     [DisplayName("Feedback From Last Session")]
     public string Feedback { get; set; }
 
@@ -44,16 +48,5 @@ namespace ActiveEdge.Models
     [DisplayName("Findings")]
     [UIHint("Summernote")]
     public string SessionNotesFindings { get; set; }
-
-
-    public List<SessionNoteModel> SessionNotes { get; set; }
-  }
-
-  public class SessionNoteModel
-  {
-    public int Id { get; set; }
-    public string PositionAreaMuscle { get; set; }
-    public string Techniques { get; set; }
-    public string Findings { get; set; }
   }
 }
