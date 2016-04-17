@@ -457,12 +457,12 @@
     <Content Include="Views\Shared\EditorTemplates\Summernote.cshtml" />
     <Content Include="Views\SoapNotes\EditorTemplates\SoapNoteModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Summernote.cshtml" />
+    <Content Include="Views\SoapNotes\DisplayTemplates\SoapNoteModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Clients\Query\" />
     <Folder Include="QueryHandlers\" />
-    <Folder Include="Views\SoapNotes\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,7 +1,7 @@
 ﻿@model ActiveEdge.Models.Client
 
 @{
-  ViewBag.Title = "Create";
+  ViewBag.Title = "New Client";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -12,17 +12,16 @@
         @Html.ActionLink("List", "Index")
       </li>
       <li class="active">
-        <strong>Create</strong>
+        <strong>New Client</strong>
       </li>
     </ol>
   </div>
   <div class="col-sm-8">
     <div class="title-action">
-      @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+      @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
     </div>
   </div>
 </div>
-
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -43,29 +42,20 @@
 
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                  <input type="submit" value="Create" class="btn btn-primary" />
-                  @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white" })
+                  <input type="submit" value="Create" class="btn btn-primary"/>
+                  @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
                 </div>
               </div>
 
             </div>
 
 
-
           </div>
-
-
-
-
-
-
-
         }
       </div>
     </div>
   </div>
 </div>
-
 
 
 @section scripts {
@@ -75,7 +65,7 @@
   @Scripts.Render("~/plugins/iCheck")
 
   <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
 
       $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
