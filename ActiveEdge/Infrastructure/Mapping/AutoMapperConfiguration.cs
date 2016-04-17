@@ -11,8 +11,8 @@ namespace ActiveEdge.Infrastructure.Mapping
     {
       var configuration =  new MapperConfiguration(cfg =>
       {
-        cfg.CreateMap<SoapNoteModel, SoapNote>();
-        cfg.CreateMap<SoapNote, SoapNoteModel>();
+        cfg.CreateMap<SessionModel, Session>();
+        cfg.CreateMap<Session, SessionModel>();
 
         cfg.CreateMap<Domain.Client, Models.Client>();
 

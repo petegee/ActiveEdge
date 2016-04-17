@@ -253,7 +253,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommandHandlers\RegisterNewClientHandler.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Controllers\SoapNotesController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
@@ -280,7 +280,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Clients\Command\RegisterNewClient.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\SoapNoteModel.cs" />
+    <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\WebApi\Search\Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -449,15 +449,15 @@
     <Content Include="Views\Shared\EditorTemplates\FormGroupEnumDropDownList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FormGroupCheckBox.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FormGroupDateTime.cshtml" />
-    <Content Include="Views\SoapNotes\Create.cshtml" />
-    <Content Include="Views\SoapNotes\Delete.cshtml" />
-    <Content Include="Views\SoapNotes\Details.cshtml" />
-    <Content Include="Views\SoapNotes\Edit.cshtml" />
-    <Content Include="Views\SoapNotes\Index.cshtml" />
+    <Content Include="Views\Session\Create.cshtml" />
+    <Content Include="Views\Session\Delete.cshtml" />
+    <Content Include="Views\Session\Details.cshtml" />
+    <Content Include="Views\Session\Edit.cshtml" />
+    <Content Include="Views\Session\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Summernote.cshtml" />
-    <Content Include="Views\SoapNotes\EditorTemplates\SoapNoteModel.cshtml" />
+    <Content Include="Views\Session\EditorTemplates\SessionModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Summernote.cshtml" />
-    <Content Include="Views\SoapNotes\DisplayTemplates\SoapNoteModel.cshtml" />
+    <Content Include="Views\Session\DisplayTemplates\SoapNoteModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-  public class SoapNote
+  public class Session
   {
     public int Id { get; set; }
 
@@ -23,8 +23,6 @@ namespace Domain
     public string ContributingFactorsToCondition { get; set; }
 
     public string PreMassagePalpatation { get; set; }
-
-    public string PressureScaleRequired { get; set; }
 
     public string SessionPlan { get; set; }
 

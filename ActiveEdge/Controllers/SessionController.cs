@@ -11,17 +11,17 @@ using Domain;
 namespace ActiveEdge.Controllers
 {
   [Authorize]
-  public class SoapNotesController : Controller
+  public class SessionController : Controller
   {
 
-    private IApplicationDbContext _db;
+    private readonly IApplicationDbContext _db;
     private readonly IMapper _mapper;
     private readonly MapperConfiguration _mapperConfiguration;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller"/> class.
     /// </summary>
-    public SoapNotesController(IApplicationDbContext applicationDbContext,IMapper mapper, MapperConfiguration mapperConfiguration)
+    public SessionController(IApplicationDbContext applicationDbContext,IMapper mapper, MapperConfiguration mapperConfiguration)
     {
       _db = applicationDbContext;
       _mapper = mapper;
@@ -31,7 +31,7 @@ namespace ActiveEdge.Controllers
     // GET: /SoapNotes/
     public ActionResult Index()
     {
-      return View(_db.SoapNotes.ProjectToList<SoapNoteModel>(_mapperConfiguration));
+      return View(_db.SoapNotes.ProjectToList<SessionModel>(_mapperConfiguration));
     }
 
     // GET: /SoapNotes/Details/5
@@ -41,7 +41,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SoapNoteModel>(_mapperConfiguration);
+      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
       if (soapNoteModel == null)
       {
         return HttpNotFound();
@@ -52,7 +52,7 @@ namespace ActiveEdge.Controllers
     // GET: /SoapNotes/Create
     public ActionResult Create()
     {
-      var model = new SoapNoteModel {Date = DateTime.Now};
+      var model = new SessionModel {Date = DateTime.Now};
 
       return View(model);
     }
@@ -63,17 +63,17 @@ namespace ActiveEdge.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Create(
-      [Bind(Exclude = "Id")] SoapNoteModel soapNoteModel)
+      [Bind(Exclude = "Id")] SessionModel sessionModel)
     {
       if (ModelState.IsValid)
       {
-        var domainModel = _mapper.Map<SoapNoteModel, SoapNote>(soapNoteModel);
+        var domainModel = _mapper.Map<SessionModel, Session>(sessionModel);
         _db.SoapNotes.Add(domainModel);
         _db.SaveChanges();
         return RedirectToAction("Index");
       }
 
-      return View(soapNoteModel);
+      return View(sessionModel);
     }
 
     // GET: /SoapNotes/Edit/5
@@ -83,7 +83,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SoapNoteModel>(_mapperConfiguration);
+      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
       if (soapNoteModel == null)
       {
         return HttpNotFound();
@@ -100,17 +100,17 @@ namespace ActiveEdge.Controllers
       [Bind(
         Include =
           "Id,Date,ClientId,ClientName,Feedback,GoalOrExpectations,ContributingFactorsToCondition,PreMassagePalpatation,PressureScaleRequired,SessionPlan"
-        )] SoapNoteModel soapNoteModel)
+        )] SessionModel sessionModel)
     {
       if (ModelState.IsValid)
       {
-        var domainModel = _mapper.Map<SoapNoteModel, SoapNote>(soapNoteModel);
+        var domainModel = _mapper.Map<SessionModel, Session>(sessionModel);
 
         _db.Entry(domainModel).State = EntityState.Modified;
         _db.SaveChanges();
         return RedirectToAction("Index");
       }
-      return View(soapNoteModel);
+      return View(sessionModel);
     }
 
     // GET: /SoapNotes/Delete/5
@@ -120,7 +120,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SoapNoteModel>(_mapperConfiguration);
+      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
 
      
       if (soapNoteModel == null)

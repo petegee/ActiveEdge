@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ActiveEdge.Models
 {
-  public class SoapNoteModel
+  public class SessionModel
   {
     public int Id { get; set; }
 
@@ -29,9 +29,6 @@ namespace ActiveEdge.Models
 
     [DisplayName("Pre-Massage Palpatation")]
     public string PreMassagePalpatation { get; set; }
-
-    [DisplayName("Pressure Scale Required")]
-    public string PressureScaleRequired { get; set; }
 
     [DisplayName("Session Plan")]
     [UIHint("Summernote")]

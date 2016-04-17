@@ -19,7 +19,7 @@ namespace ActiveEdge.Database
 
     private static void AddSessions(ApplicationDbContext context)
     {
-      context.SoapNotes.Add(new SoapNote
+      context.SoapNotes.Add(new Session
       {
         Date = DateTime.Today.Date,
         ClientId = 1,
