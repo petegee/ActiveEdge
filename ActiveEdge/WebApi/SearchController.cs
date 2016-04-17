@@ -37,5 +37,14 @@ namespace ActiveEdge.WebApi
         .Select(client => new SearchResult {DisplayValue = client.Suburb})
         .Distinct();
     }
+
+    [HttpGet]
+    [Route("cities/{name}")]
+    public IEnumerable<SearchResult> Cities(string name)
+    {
+      return _dbContext.Clients.Where(client => client.City.ToLower().StartsWith(name.ToLower()))
+        .Select(client => new SearchResult { DisplayValue = client.City })
+        .Distinct();
+    }
   }
 }
