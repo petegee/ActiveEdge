@@ -61,18 +61,21 @@
 @section scripts {
   @Scripts.Render("~/bundles/jqueryval")
   @Scripts.Render("~/plugins/dataPicker")
-  @Scripts.Render("~/bundles/customers")
+  @Scripts.Render(Bundles.Scripts.ActiveEdge)
+  @Scripts.Render(Bundles.Scripts.Client)
   @Scripts.Render("~/plugins/iCheck")
 
   <script type="text/javascript">
-    $(document).ready(function() {
+    $(document)
+      .ready(function() {
 
-      $('.i-checks').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass: 'iradio_square-green',
+        $('.i-checks')
+          .iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+          });
+
       });
-
-    });
   </script>
 }
 

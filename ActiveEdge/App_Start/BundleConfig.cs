@@ -12,7 +12,7 @@ namespace ActiveEdge
     public static class Scripts
     {
       public const string ActiveEdge = "~/bundles/activeedge";
-      public const string Summernote = "~/bundles/summernote";
+      public const string Client = "~/bundles/client";
     }
   }
   public class BundleConfig
@@ -23,8 +23,10 @@ namespace ActiveEdge
     public static void RegisterBundles(BundleCollection bundles)
     {
       _bundles = bundles;
-      RegisterScripts(Bundles.Scripts.ActiveEdge, "~/Scripts/site/activeedge.js");
+      RegisterScripts(Bundles.Scripts.ActiveEdge, "~/Scripts/site/activeedge.js", "~/Scripts/typeahead.bundle.min.js", "~/Scripts/bloodhound.min.js", "~/Scripts/summernote/summernote.min.js");
+
       CustomerScripts(bundles);
+
       SoapNoteScripts(bundles);
 
       // Vendor scripts
@@ -103,22 +105,17 @@ namespace ActiveEdge
       bundles.Add(new ScriptBundle("~/plugins/nouislider").Include("~/Scripts/plugins/nouslider/jquery.nouislider.min.js"));
       bundles.Add(new StyleBundle("~/plugins/nouisliderStyles").Include("~/Content/plugins/nouslider/jquery.nouislider.css"));
 
-      TypeAhead(bundles);
+    
 
       SummerNote();
     }
 
     private static void SummerNote()
     {
-      RegisterScripts(Bundles.Scripts.Summernote, "~/Scripts/summernote/summernote.min.js");
       RegisterCss(Bundles.Css.Summernote, "~/Scripts/summernote/summernote.css");
     }
 
-    private static void TypeAhead(BundleCollection bundles)
-    {
-      bundles.Add(new ScriptBundle("~/bundles/typeahead")
-        .Include("~/Scripts/typeahead.bundle.min.js", "~/Scripts/bloodhound.min.js"));
-    }
+    
 
     private static void SoapNoteScripts(BundleCollection bundles)
     {
@@ -128,18 +125,19 @@ namespace ActiveEdge
 
     private static void CustomerScripts(BundleCollection bundles)
     {
-      bundles.Add(new ScriptBundle("~/bundles/customers").Include(
-                   "~/Scripts/Customer/Create.js"));
+      bundles.Add(new ScriptBundle(Bundles.Scripts.Client).Include(
+                   "~/Scripts/site/client/Create.js"));
     }
 
     private static void RegisterCss(string virtualPath, params string[] includes)
     {
-      _bundles.Add(new StyleBundle(virtualPath).Include(string.Join(",", includes)));
+      _bundles.Add(new StyleBundle(virtualPath).Include(includes));
     }
 
     private static void RegisterScripts(string virtualPath, params string[] includes)
     {
-      _bundles.Add(new ScriptBundle(virtualPath).Include(string.Join(",", includes)));
+      //var includesString = string.Join(",", includes);
+      _bundles.Add(new ScriptBundle(virtualPath).Include(includes));
     }
   }
 }

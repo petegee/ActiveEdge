@@ -201,11 +201,13 @@
 }
 
 @section Scripts {
+@Scripts.Render(Bundles.Scripts.ActiveEdge)
   @Scripts.Render("~/plugins/wizardSteps")
   @Scripts.Render("~/plugins/dataPicker")
   @Scripts.Render("~/plugins/iCheck")
   @Scripts.Render("~/plugins/validate")
   @Scripts.Render("~/plugins/nouislider")
-  @Scripts.Render("~/Scripts/Customer/Create.js")
+ 
+  @Scripts.Render(Bundles.Scripts.Client)
 
 }

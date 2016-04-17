@@ -102,6 +102,9 @@
       $("#CurrentPainOrTensionLevels").val(value);
     });
 
-  
+    $("#Suburb")
+      .activeEdgeTypeahead('../api/search/suburbs/');
+
+
   });
 

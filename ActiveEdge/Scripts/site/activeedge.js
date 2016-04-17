@@ -10,15 +10,7 @@
     autoclose: true
   });
 
-  function htmlEncode(value) {
-    //create a in-memory div, set it's inner text(which jQuery automatically encodes)
-    //then grab the encoded contents back out.  The div never exists on the page.
-    return $("<div/>").text(value).html();
-  }
 
-  function htmlDecode(value) {
-    return $("<div/>").html(value).text();
-  }
 
   $(".summernote").summernote({
     //toolbar: [
@@ -38,3 +30,49 @@
     });
 
 });
+
+$.fn.activeEdgeTypeahead = function (url) {
+  
+  var results = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    //prefetch: '../data/films/post_1960.json',
+    remote: {
+      url:  url + '%QUERY',
+      wildcard: '%QUERY'
+    }
+  });
+
+
+ var typeahead = $(this)
+    .typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'search-results',
+      display: 'DisplayValue',
+      source: results,
+      templates: {
+        empty: [
+          '<div class="empty-message">',
+          'no results found',
+          '</div>'
+        ].join('\n')
+      }
+    });
+
+  return typeahead;
+};
+
+
+function htmlEncode(value) {
+  //create a in-memory div, set it's inner text(which jQuery automatically encodes)
+  //then grab the encoded contents back out.  The div never exists on the page.
+  return $("<div/>").text(value).html();
+}
+
+function htmlDecode(value) {
+  return $("<div/>").html(value).text();
+}
