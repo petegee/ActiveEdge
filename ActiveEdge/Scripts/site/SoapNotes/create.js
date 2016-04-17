@@ -18,7 +18,7 @@
     minLength: 1
   }, {
     name: 'best-pictures',
-    display: 'FullName',
+    display: 'DisplayValue',
     source: clients,
     templates: {
       empty: [

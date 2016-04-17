@@ -22,11 +22,20 @@ namespace ActiveEdge.WebApi
 
     [HttpGet]
     [Route("clients/{fullname}")]
-    public IEnumerable<Client> Clients(string fullName)
+    public IEnumerable<SearchResult> Clients(string fullName)
     {
       return _dbContext.Clients.Where(client => client.FullName.ToLower().StartsWith(fullName.ToLower()))
         .Decompile()
-        .ProjectToList<Client>(_mapperConfiguration);
+        .ProjectToList<SearchResult>(_mapperConfiguration);
+    }
+
+    [HttpGet]
+    [Route("suburbs/{name}")]
+    public IEnumerable<SearchResult> Suburbs(string name)
+    {
+      return _dbContext.Clients.Where(client => client.Suburb.ToLower().StartsWith(name.ToLower()))
+        .Select(client => new SearchResult {DisplayValue = client.Suburb})
+        .Distinct();
     }
   }
 }

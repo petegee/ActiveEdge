@@ -1,7 +1,9 @@
 using ActiveEdge.Models;
 using ActiveEdge.Models.Clients.Command;
+using ActiveEdge.Models.WebApi.Search;
 using AutoMapper;
 using Domain;
+using Client = Domain.Client;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
@@ -9,24 +11,24 @@ namespace ActiveEdge.Infrastructure.Mapping
   {
     public static MapperConfiguration Create()
     {
-      var configuration =  new MapperConfiguration(cfg =>
+      var configuration = new MapperConfiguration(cfg =>
       {
         cfg.CreateMap<SessionModel, Session>();
         cfg.CreateMap<Session, SessionModel>();
 
-        cfg.CreateMap<Domain.Client, Models.Client>();
+        cfg.CreateMap<Client, Models.Client>();
 
-        cfg.CreateMap<RegisterNewClient, Domain.ContraIndications>();
-        cfg.CreateMap<RegisterNewClient, Domain.TermsAndConditions>();
+        cfg.CreateMap<RegisterNewClient, ContraIndications>();
+        cfg.CreateMap<RegisterNewClient, TermsAndConditions>();
 
-        cfg.CreateMap<RegisterNewClient, Domain.Client>()
+        cfg.CreateMap<RegisterNewClient, Client>()
           .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
 
-        cfg.CreateMap<RegisterNewClient, Domain.Client>()
+        cfg.CreateMap<RegisterNewClient, Client>()
           .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
 
-        cfg.CreateMap<Domain.Client, Models.WebApi.Search.Client>();
-
+        cfg.CreateMap<Client, SearchResult>()
+          .ForMember(result => result.DisplayValue, options => options.MapFrom(client => client.FullName));
       });
 
       return configuration;

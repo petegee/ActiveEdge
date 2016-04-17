@@ -102,22 +102,6 @@
       $("#CurrentPainOrTensionLevels").val(value);
     });
 
-    //$('.input-group.date').datepicker({
-    //  todayBtn: "linked",
-    //  keyboardNavigation: true,
-    //  endDate: "0d",
-    //  format : "dd/mm/yyyy",
-    //  forceParse: false,
-    //  calendarWeeks: false,
-    //  autoclose: true
-    //});
+  
   });
 
-//alert("hello");
-  //$('.input-group.date').datepicker({
-  //  todayBtn: "linked",
-  //  keyboardNavigation: false,
-  //  forceParse: false,
-  //  calendarWeeks: true,
-  //  autoclose: true
-  //});

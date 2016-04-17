@@ -281,7 +281,7 @@
     <Compile Include="Models\Clients\Command\RegisterNewClient.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SessionModel.cs" />
-    <Compile Include="Models\WebApi\Search\Client.cs" />
+    <Compile Include="Models\WebApi\Search\SearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WebApi\SearchController.cs" />
@@ -457,7 +457,7 @@
     <Content Include="Views\Shared\EditorTemplates\Summernote.cshtml" />
     <Content Include="Views\Session\EditorTemplates\SessionModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Summernote.cshtml" />
-    <Content Include="Views\Session\DisplayTemplates\SoapNoteModel.cshtml" />
+    <Content Include="Views\Session\DisplayTemplates\SessionModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
