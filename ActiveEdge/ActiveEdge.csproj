@@ -458,6 +458,7 @@
     <Content Include="Views\Session\EditorTemplates\SessionModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Summernote.cshtml" />
     <Content Include="Views\Session\DisplayTemplates\SessionModel.cshtml" />
+    <Content Include="Views\Shared\_AngularLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
