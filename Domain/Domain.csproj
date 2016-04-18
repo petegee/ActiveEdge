@@ -45,11 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Clinic.cs" />
     <Compile Include="ContraIndications.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="ExcerciseFrequency.cs" />
     <Compile Include="ExerciseType.cs" />
     <Compile Include="Gender.cs" />
+    <Compile Include="Organisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="TermsAndConditions.cs" />
