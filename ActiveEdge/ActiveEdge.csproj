@@ -290,6 +290,7 @@
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\clientintake-800x625.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\ms-icon-70x70.png" />
@@ -399,6 +400,7 @@
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\site\activeedge.js" />
     <Content Include="Scripts\site\SoapNotes\create.js" />
+    <Content Include="Scripts\site\SoapNotes\drawing.js" />
     <Content Include="Scripts\summernote\plugin\summernote-ext-hello.js" />
     <Content Include="Scripts\summernote\plugin\summernote-ext-hint.js" />
     <Content Include="Scripts\summernote\plugin\summernote-ext-video.js" />
@@ -459,6 +461,8 @@
     <Content Include="Views\Shared\DisplayTemplates\Summernote.cshtml" />
     <Content Include="Views\Session\DisplayTemplates\SessionModel.cshtml" />
     <Content Include="Views\Shared\_AngularLayout.cshtml" />
+    <Content Include="Views\Session\Drawing.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StandardFormTextBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

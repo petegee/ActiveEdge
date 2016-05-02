@@ -1,0 +1,31 @@
+﻿
+@{
+  ViewBag.Title = "Drawing";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Drawing</h2>
+
+<div class="row">
+  <div class="col-lg-10">
+    <div id="canvasDiv" style="background-image: url('../../Content/clientintake-800x625.png');  background-repeat: no-repeat; background-size: contain; "></div>
+    <input id="hiddenClicks" type="hidden" value="[{x:169,y:202},{x:655,y:153},{x:599,y:303},{x:213,y:177},{x:142,y:180}]" />
+  
+  </div>
+  
+</div>
+
+@section Scripts{
+  <script src="~/Scripts/site/SoapNotes/drawing.js"></script>
+  <script type="text/javascript">
+
+    $(document)
+      .ready(function () {
+
+        $("#canvasDiv").drawingCanvas();
+        
+      });
+
+
+    
+  </script>
+}

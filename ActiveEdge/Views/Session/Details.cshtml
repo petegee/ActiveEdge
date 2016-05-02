@@ -30,7 +30,7 @@
         <div class="ibox-content">
 
 
-         @Html.DisplayForModel()
+          @Html.DisplayForModel()
 
 
           @Html.ActionLink("Edit", "Edit", new {id = Model.Id}, new {@class = "btn btn-primary"})
@@ -41,3 +41,20 @@
     </div>
   </div>
 </div>
+@section scripts
+{
+  <script src="~/Scripts/site/SoapNotes/drawing.js"></script>
+<script type="text/javascript">
+
+    $(document)
+      .ready(function () {
+
+        $("#canvasDiv").drawingCanvas();
+
+      });
+
+
+
+</script>
+
+}

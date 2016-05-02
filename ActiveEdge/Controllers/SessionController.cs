@@ -28,6 +28,11 @@ namespace ActiveEdge.Controllers
       _mapperConfiguration = mapperConfiguration;
     }
 
+    public ActionResult Drawing()
+    {
+      return View();
+    }
+
     // GET: /SoapNotes/
     public ActionResult Index()
     {

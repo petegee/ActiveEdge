@@ -39,6 +39,14 @@
   <dd>
     @Html.DisplayFor(model => model.GoalOrExpectations)
   </dd>
+  <dt>
+    @Html.DisplayNameFor(model => model.AreasOfDiscomfort)
+  </dt>
+
+  <dd>
+    @Html.HiddenFor(model => model.AreasOfDiscomfort)
+    <div id="canvasDiv" style="background-image: url('../../Content/clientintake-800x625.png'); background-repeat: no-repeat; background-size: contain;"></div>
+  </dd>
 
   <dt>
     @Html.DisplayNameFor(model => model.ContributingFactorsToCondition)

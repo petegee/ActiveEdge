@@ -24,6 +24,9 @@ namespace ActiveEdge.Models
     [DisplayName("Goal Or Expectations")]
     public string GoalOrExpectations { get; set; }
 
+    [DisplayName("Areas of Discomfort")]
+    public string AreasOfDiscomfort { get; set; }
+
     [DisplayName("Contributing Factors To Condition")]
     public string ContributingFactorsToCondition { get; set; }
 

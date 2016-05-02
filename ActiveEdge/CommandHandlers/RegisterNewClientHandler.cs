@@ -10,7 +10,7 @@ namespace ActiveEdge.CommandHandlers
     private readonly IApplicationDbContext _database;
     private readonly IMapper _mapper;
 
-    public RegisterNewClientHandler(IApplicationDbContext database, IMapper mapper, MapperConfiguration mapperConfiguration)
+    public RegisterNewClientHandler(IApplicationDbContext database, IMapper mapper)
     {
       _database = database;
       _mapper = mapper;

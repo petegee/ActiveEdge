@@ -20,6 +20,8 @@ namespace Domain
 
     public string GoalOrExpectations { get; set; }
 
+    public string AreasOfDiscomfort { get; set; }
+
     public string ContributingFactorsToCondition { get; set; }
 
     public string PreMassagePalpatation { get; set; }
