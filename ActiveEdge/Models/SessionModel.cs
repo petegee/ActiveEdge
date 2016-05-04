@@ -13,8 +13,7 @@ namespace ActiveEdge.Models
     public DateTime Date { get; set; }
 
     public int ClientId { get; set; }
-
-    [Required]
+    
     [DisplayName("Client Name")]
     public string ClientFullName { get; set; }
     

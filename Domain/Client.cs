@@ -37,5 +37,6 @@ namespace Domain
     public string Difficuties { get; set; }
     public string AreasNotToBeMassaged { get; set; }
     public TermsAndConditions TermsAndConditions { get; set; }
+    public virtual ICollection<Session> Sessions { get; set; }
   }
 }

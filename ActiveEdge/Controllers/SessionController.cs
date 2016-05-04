@@ -33,28 +33,28 @@ namespace ActiveEdge.Controllers
       return View();
     }
 
-    // GET: /SoapNotes/
+    // GET: /Sessions/
     public ActionResult Index()
     {
-      return View(_db.SoapNotes.ProjectToList<SessionModel>(_mapperConfiguration));
+      return View(_db.Sessions.ProjectToList<SessionModel>(_mapperConfiguration));
     }
 
-    // GET: /SoapNotes/Details/5
+    // GET: /Sessions/Details/5
     public ActionResult Details(int? id)
     {
       if (id == null)
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
-      if (soapNoteModel == null)
+      var sessionModel = _db.Sessions.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
+      if (sessionModel == null)
       {
         return HttpNotFound();
       }
-      return View(soapNoteModel);
+      return View(sessionModel);
     }
 
-    // GET: /SoapNotes/Create
+    // GET: /Sessions/Create
     public ActionResult Create()
     {
       var model = new SessionModel {Date = DateTime.Now};
@@ -62,7 +62,7 @@ namespace ActiveEdge.Controllers
       return View(model);
     }
 
-    // POST: /SoapNotes/Create
+    // POST: /Sessions/Create
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
@@ -70,33 +70,44 @@ namespace ActiveEdge.Controllers
     public ActionResult Create(
       [Bind(Exclude = "Id")] SessionModel sessionModel)
     {
-      if (ModelState.IsValid)
-      {
-        var domainModel = _mapper.Map<SessionModel, Session>(sessionModel);
-        _db.SoapNotes.Add(domainModel);
-        _db.SaveChanges();
-        return RedirectToAction("Index");
-      }
+      if (!ModelState.IsValid) return View(sessionModel);
 
+      var domainModel = _mapper.Map<SessionModel, Session>(sessionModel);
+      _db.Sessions.Add(domainModel);
+      _db.SaveChanges();
+
+      return RedirectToAction("Plan", new {id = domainModel.Id});
+    }
+
+    // GET: /Session/Plan
+    [HttpGet]
+    public ActionResult Plan(int id)
+    {
+      var sessionModel = _db.Sessions.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
+
+      if (sessionModel == null)
+      {
+        return HttpNotFound();
+      }
       return View(sessionModel);
     }
 
-    // GET: /SoapNotes/Edit/5
+    // GET: /Sessions/Edit/5
     public ActionResult Edit(int? id)
     {
       if (id == null)
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
-      if (soapNoteModel == null)
+      var sessionModel = _db.Sessions.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
+      if (sessionModel == null)
       {
         return HttpNotFound();
       }
-      return View(soapNoteModel);
+      return View(sessionModel);
     }
 
-    // POST: /SoapNotes/Edit/5
+    // POST: /Sessions/Edit/5
     // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
@@ -109,6 +120,7 @@ namespace ActiveEdge.Controllers
     {
       if (ModelState.IsValid)
       {
+        
         var domainModel = _mapper.Map<SessionModel, Session>(sessionModel);
 
         _db.Entry(domainModel).State = EntityState.Modified;
@@ -118,30 +130,30 @@ namespace ActiveEdge.Controllers
       return View(sessionModel);
     }
 
-    // GET: /SoapNotes/Delete/5
+    // GET: /Sessions/Delete/5
     public ActionResult Delete(int? id)
     {
       if (id == null)
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var soapNoteModel = _db.SoapNotes.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
+      var sessionModel = _db.Sessions.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
 
      
-      if (soapNoteModel == null)
+      if (sessionModel == null)
       {
         return HttpNotFound();
       }
-      return View(soapNoteModel);
+      return View(sessionModel);
     }
 
-    // POST: /SoapNotes/Delete/5
+    // POST: /Sessions/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public ActionResult DeleteConfirmed(int id)
     {
-      var soapNoteModel = _db.SoapNotes.Find(id);
-      _db.SoapNotes.Remove(soapNoteModel);
+      var sessionModel = _db.Sessions.Find(id);
+      _db.Sessions.Remove(sessionModel);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

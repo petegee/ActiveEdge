@@ -463,6 +463,7 @@
     <Content Include="Views\Shared\_AngularLayout.cshtml" />
     <Content Include="Views\Session\Drawing.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StandardFormTextBox.cshtml" />
+    <Content Include="Views\Session\Plan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
