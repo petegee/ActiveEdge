@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using ActiveEdge.App_Start;
 using ActiveEdge.DependencyResolution;
+using ActiveEdge.Infrastructure.MVC;
 using StructureMap;
 using IDependencyResolver = System.Web.Mvc.IDependencyResolver;
 
@@ -29,6 +30,8 @@ namespace ActiveEdge
 
       var container = StructuremapMvc.StructureMapDependencyScope.Container;
       config.DependencyResolver = new StructureMapDependencyResolver(container);
+
+      ModelMetadataProviders.Current = new MetadataProvider();
     }
   }
 }
