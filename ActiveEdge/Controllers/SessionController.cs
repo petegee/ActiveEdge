@@ -111,11 +111,7 @@ namespace ActiveEdge.Controllers
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Edit(
-      [Bind(
-        Include =
-          "Id,Date,ClientId,ClientName,Feedback,GoalOrExpectations,ContributingFactorsToCondition,PreMassagePalpatation,PressureScaleRequired,SessionPlan"
-        )] SessionModel sessionModel)
+    public ActionResult Edit(SessionModel sessionModel)
     {
       if (ModelState.IsValid)
       {
