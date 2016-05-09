@@ -6,7 +6,7 @@
   @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
   <div class="col-md-6">
     <div class="input-group date">
-      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model.Date, "{0:d/mm/yyyy}", new Dictionary<string, object>() { { "class", "form-control date" } })
+      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model.Date, new Dictionary<string, object> { { "class", "form-control date" } })
     </div>
 
     @Html.ValidationMessageFor(model => model.Date)

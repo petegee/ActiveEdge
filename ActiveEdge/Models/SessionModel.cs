@@ -9,8 +9,9 @@ namespace ActiveEdge.Models
     public int Id { get; set; }
 
     [Required]
-    [DisplayFormat(DataFormatString = "{0:d/MM/yyyy}")]
-    public DateTime Date { get; set; }
+    //[DisplayFormat(DataFormatString = "{0:d/MM/yyyy}")]
+    [DataType(DataType.Date)]
+    public DateTime? Date { get; set; }
 
     public int ClientId { get; set; }
     

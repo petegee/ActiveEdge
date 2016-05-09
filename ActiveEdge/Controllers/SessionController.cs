@@ -57,8 +57,7 @@ namespace ActiveEdge.Controllers
     // GET: /Sessions/Create
     public ActionResult Create()
     {
-      var model = new SessionModel {Date = DateTime.Now};
-
+      var model = new SessionModel {Date = DateTime.Now.Date};
       return View(model);
     }
 

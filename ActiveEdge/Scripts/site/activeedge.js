@@ -2,10 +2,11 @@
 
   $('.date').datepicker({
     todayBtn: "linked",
+    todayHighlight: true,
     keyboardNavigation: true,
     endDate: "0d",
     format: "dd/mm/yyyy",
-    forceParse: true,
+    forceParse: false,
     calendarWeeks: false,
     autoclose: true
   });
