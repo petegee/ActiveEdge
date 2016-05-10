@@ -17,7 +17,6 @@ namespace ActiveEdge
     public static class Scripts
     {
       public const string ActiveEdge = "~/bundles/scripts/activeedge";
-      public const string Client = "~/bundles/scripts/client";
       public const string Jquery = "~/bundles/scripts/jquery";
       public const string JqueryValidation = "~/bundles/scripts/jqueryval";
       public const string Bootstrap = "~/bundles/scripts/bootstrap";
@@ -34,6 +33,11 @@ namespace ActiveEdge
         public const string CreateOrEdit = "~/bundles/scripts/session/createoredit";
         public const string Details = "~/bundles/scripts/session/details";
       }
+
+      public static class Client
+      {
+        public const string Create = "~/bundles/scripts/client/create";
+      }
     }
   }
   public class BundleConfig
@@ -46,8 +50,8 @@ namespace ActiveEdge
       _bundles = bundles;
 
       RegisterScripts(Bundles.Scripts.ActiveEdge, "~/Scripts/site/activeedge.js", "~/Scripts/typeahead.bundle.min.js", "~/Scripts/bloodhound.min.js", "~/Scripts/summernote/summernote.min.js");
-
-      CustomerScripts(bundles);
+      RegisterScripts(Bundles.Scripts.Client.Create, "~/Scripts/site/client/Create.js");
+      
 
       RegisterScripts(Bundles.Scripts.Session.CreateOrEdit, "~/Scripts/site/session/createoredit.js", "~/Scripts/site/session/drawing.js");
       RegisterScripts(Bundles.Scripts.Session.Details, "~/Scripts/site/session/details.js", "~/Scripts/site/session/drawing.js");
@@ -128,13 +132,6 @@ namespace ActiveEdge
     
 
     
-
-    private static void CustomerScripts(BundleCollection bundles)
-    {
-      bundles.Add(new ScriptBundle(Bundles.Scripts.Client).Include(
-                   "~/Scripts/site/client/Create.js"));
-    }
-
     private static void RegisterCss(string virtualPath, params string[] includes)
     {
       _bundles.Add(new StyleBundle(virtualPath).Include(includes));
