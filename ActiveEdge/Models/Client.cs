@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using ActiveEdge.Infrastructure;
 using Domain;
 
 namespace ActiveEdge.Models
@@ -27,7 +26,7 @@ namespace ActiveEdge.Models
     [Required]
     public string Email { get; set; }
 
-    [DisplayName("Contact")]
+    [DisplayName("Contact Number")]
     [Required]
     public string ContactNumber { get; set; }
 
@@ -45,7 +44,7 @@ namespace ActiveEdge.Models
     [DisplayName("City")]
     [Required]
     public string City { get; set; }
-    
+
     [Required]
     public Gender? Gender { get; set; }
 
@@ -169,7 +168,7 @@ namespace ActiveEdge.Models
     [DisplayName("Cold or Flu")]
     [UIHint("iCheck")]
     public bool ContraIndicationsColdOrFlu { get; set; }
-    
+
     [DisplayName("Stomach Ulcers")]
     [UIHint("iCheck")]
     public bool ContraIndicationsStomachUlcers { get; set; }
@@ -196,11 +195,14 @@ namespace ActiveEdge.Models
     [DisplayName("Are there any areas that you would not like massaged? (E.g feet, head)")]
     public string AreasNotToBeMassaged { get; set; }
 
-    [DisplayName("I understand that I am booked in for a relaxation / sports massage and I am not here for treatment to injury.")]
+    [DisplayName(
+      "I understand that I am booked in for a relaxation / sports massage and I am not here for treatment to injury.")]
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions1 { get; set; }
 
-    [DisplayName("I understand that my feedback is encouraged not only after the massage but also throughout so you can get the most out of your massage.")]
+    [DisplayName(
+      "I understand that my feedback is encouraged not only after the massage but also throughout so you can get the most out of your massage."
+      )]
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions2 { get; set; }
 
@@ -208,23 +210,32 @@ namespace ActiveEdge.Models
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions3 { get; set; }
 
-    [DisplayName("I understand the Active Edge late arrival and cancellation policy (less than 24 hours notice or booking changes may be subject to a cancellation fee.Massage session will not be extended due to late arrival).")]
+    [DisplayName(
+      "I understand the Active Edge late arrival and cancellation policy (less than 24 hours notice or booking changes may be subject to a cancellation fee.Massage session will not be extended due to late arrival)."
+      )]
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions4 { get; set; }
 
-    [DisplayName("I understand that massage therapy is designed to be a health aid and does not take place of primary care.")]
+    [DisplayName(
+      "I understand that massage therapy is designed to be a health aid and does not take place of primary care.")]
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions5 { get; set; }
 
-    [DisplayName("I understand that I must contact Active Edge and consult my health practitioner if I have medical conditions that become aggravated or if I have severe ongoing effects after the massage.")]
+    [DisplayName(
+      "I understand that I must contact Active Edge and consult my health practitioner if I have medical conditions that become aggravated or if I have severe ongoing effects after the massage."
+      )]
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions6 { get; set; }
 
-    [DisplayName("I am aware that I may experience mild discomfort, headaches, or tiredness after the massage. This is a normal response to massage. Post massage recommendations are to increase water intake and avoid strenuous exercise for 12 hours.")]
+    [DisplayName(
+      "I am aware that I may experience mild discomfort, headaches, or tiredness after the massage. This is a normal response to massage. Post massage recommendations are to increase water intake and avoid strenuous exercise for 12 hours."
+      )]
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions7 { get; set; }
 
-    [DisplayName("I understand that each massage session will include time for consultation and assessment so we can appreciate your condition to give you an effective massage.")]
+    [DisplayName(
+      "I understand that each massage session will include time for consultation and assessment so we can appreciate your condition to give you an effective massage."
+      )]
     [UIHint("iCheck")]
     public bool TermsAndConditionsConditions8 { get; set; }
   }
