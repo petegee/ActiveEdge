@@ -8,6 +8,10 @@ namespace ActiveEdge
     {
       public const string Summernote = "~/bundles/summernotestyles";
       public const string DatePicker = "~/bundles/styles/datepicker";
+      public const string ICheck = "~/bundles/styles/icheck";
+      public const string WizardSteps = "~/bundles/styles/wizardSteps";
+      public const string NoUiSlider = "~/bundles/styles/nouislider";
+
     }
 
     public static class Scripts
@@ -22,7 +26,9 @@ namespace ActiveEdge
       public const string MetsiMenu = "~/bundles/scripts/metsimenu";
       public const string SlimScroll = "~/bundles/scripts/slimscroll";
       public const string Pace = "~/bundles/scripts/pace";
-
+      public const string ICheck = "~/bundles/scripts/icheck";
+      public const string WizardSteps = "~/bundles/scripts/wizardSteps";
+      public const string NoUiSlider = "~/bundles/scripts/nouislider";
       public static class Session
       {
         public const string CreateOrEdit = "~/bundles/scripts/session/createoredit";
@@ -55,12 +61,22 @@ namespace ActiveEdge
       RegisterScripts(Bundles.Scripts.MetsiMenu, "~/Scripts/plugins/metisMenu/metisMenu.min.js");
       RegisterScripts(Bundles.Scripts.SlimScroll, "~/Scripts/plugins/slimScroll/jquery.slimscroll.min.js");
       RegisterScripts(Bundles.Scripts.Pace, "~/Scripts/plugins/pace/pace.min.js");
+      RegisterScripts(Bundles.Scripts.ICheck, "~/Scripts/plugins/iCheck/icheck.min.js", "~/Scripts/site/icheckwireup.js");
+      RegisterScripts(Bundles.Scripts.WizardSteps, "~/Scripts/plugins/steps/jquery.steps.min.js");
+      RegisterScripts(Bundles.Scripts.NoUiSlider, "~/Scripts/plugins/nouslider/jquery.nouislider.min.js");
 
 
+
+
+
+      // *****************************************************************************************************************************
+      // CSS
+      //******************************************************************************************************************************
       RegisterCss(Bundles.Css.DatePicker, "~/Content/plugins/datapicker/datepicker3.css");
+      RegisterCss(Bundles.Css.ICheck, "~/Content/plugins/iCheck/custom.css");
+      RegisterCss(Bundles.Css.WizardSteps, "~/Content/plugins/steps/jquery.steps.css");
+      RegisterCss(Bundles.Css.NoUiSlider, "~/Content/plugins/nouslider/jquery.nouislider.css");
 
-     
-     
       // CSS style (bootstrap/inspinia)
       bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",
@@ -68,13 +84,7 @@ namespace ActiveEdge
                 "~/Content/style.css",
                 "~/Content/style_override.css"));
 
-      // iCheck css styles
-      bundles.Add(new StyleBundle("~/Content/plugins/iCheck/iCheckStyles").Include(
-                "~/Content/plugins/iCheck/custom.css"));
-
-      // iCheck
-      bundles.Add(new ScriptBundle("~/plugins/iCheck").Include(
-                "~/Scripts/plugins/iCheck/icheck.min.js"));
+     
 
 
       bundles.Add(new StyleBundle("~/Content/awesomeCheckbox").Include(
@@ -91,13 +101,9 @@ namespace ActiveEdge
       // dataPicker 
      
       // wizardSteps styles
-      bundles.Add(new StyleBundle("~/plugins/wizardStepsStyles").Include(
-                "~/Content/plugins/steps/jquery.steps.css"));
-
+      
       // wizardSteps 
-      bundles.Add(new ScriptBundle("~/plugins/wizardSteps").Include(
-                "~/Scripts/plugins/steps/jquery.steps.min.js"));
-
+     
       //// validate 
       //bundles.Add(new ScriptBundle("~/plugins/validate").Include(
       //          "~/Scripts/plugins/validate/jquery.validate.min.js"));
@@ -106,8 +112,8 @@ namespace ActiveEdge
                 "~/Scripts/jquery.validate.unobtrusive.min.js", "~/Scripts/jquery.validate.min.js"));
 
       // nouislider
-      bundles.Add(new ScriptBundle("~/plugins/nouislider").Include("~/Scripts/plugins/nouslider/jquery.nouislider.min.js"));
-      bundles.Add(new StyleBundle("~/plugins/nouisliderStyles").Include("~/Content/plugins/nouslider/jquery.nouislider.css"));
+      
+      
 
     
 

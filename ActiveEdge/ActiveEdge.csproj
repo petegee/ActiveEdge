@@ -401,6 +401,7 @@
     <Content Include="Scripts\plugins\steps\jquery.steps.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\site\activeedge.js" />
+    <Content Include="Scripts\site\icheckwireup.js" />
     <Content Include="Scripts\site\Session\createoredit.js" />
     <Content Include="Scripts\site\Session\details.js" />
     <Content Include="Scripts\site\Session\drawing.js" />

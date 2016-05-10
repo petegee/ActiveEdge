@@ -59,30 +59,16 @@
 
 
 @section scripts {
-  @Scripts.Render("~/bundles/jqueryval")
-  @Scripts.Render("~/plugins/dataPicker")
+  @Scripts.Render(Bundles.Scripts.JqueryValidation)
+  @Scripts.Render(Bundles.Scripts.DatePicker)
   @Scripts.Render(Bundles.Scripts.ActiveEdge)
   @Scripts.Render(Bundles.Scripts.Client)
-  @Scripts.Render("~/plugins/iCheck")
-
-  <script type="text/javascript">
-    $(document)
-      .ready(function() {
-
-        $('.i-checks')
-          .iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-          });
-
-      });
-  </script>
+  @Scripts.Render(Bundles.Scripts.ICheck)
 }
 
 @section styles
 {
-  @Styles.Render("~/plugins/dataPickerStyles")
-  @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
-  @*@Styles.Render("~/Content/awesomeCheckbox")*@
+  @Styles.Render(Bundles.Css.DatePicker)
+  @Styles.Render(Bundles.Css.ICheck)
 
 }

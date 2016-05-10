@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox">
-     
+
         <div class="ibox-content">
           <h2>
             Client Intake Form
@@ -16,7 +16,7 @@
             New client registration
           </p>
           @Html.ValidationSummary()
-          @using (Html.BeginForm("Create", "Client", FormMethod.Post, new Dictionary<string, object> { {"id", "form"}, { "class", "wizard-big" } }))
+          @using (Html.BeginForm("Create", "Client", FormMethod.Post, new Dictionary<string, object> {{"id", "form"}, {"class", "wizard-big"}}))
           {
             @Html.AntiForgeryToken()
             <h1>Personal Information</h1>
@@ -195,19 +195,18 @@
 </div>
 
 @section Styles {
-  @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
-  @Styles.Render("~/plugins/wizardStepsStyles")
-  @Styles.Render("~/plugins/nouisliderStyles")
+  @Styles.Render(Bundles.Css.ICheck)
+  @Styles.Render(Bundles.Css.WizardSteps)
+  @Styles.Render(Bundles.Css.NoUiSlider)
 }
 
 @section Scripts {
-@Scripts.Render(Bundles.Scripts.ActiveEdge)
-  @Scripts.Render("~/plugins/wizardSteps")
-  @Scripts.Render("~/plugins/dataPicker")
-  @Scripts.Render("~/plugins/iCheck")
-  @Scripts.Render("~/plugins/validate")
-  @Scripts.Render("~/plugins/nouislider")
- 
+  @Scripts.Render(Bundles.Scripts.ActiveEdge)
+  @Scripts.Render(Bundles.Scripts.WizardSteps)
+  @Scripts.Render(Bundles.Scripts.DatePicker)
+  @Scripts.Render(Bundles.Scripts.ICheck)
+  @Scripts.Render(Bundles.Scripts.JqueryValidation)
+  @Scripts.Render(Bundles.Scripts.NoUiSlider)
   @Scripts.Render(Bundles.Scripts.Client)
 
 }
