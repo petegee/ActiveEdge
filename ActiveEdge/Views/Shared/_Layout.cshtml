@@ -37,12 +37,12 @@
     </div>
     <!-- End wrapper-->
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/plugins/metsiMenu")
-    @Scripts.Render("~/plugins/pace")
-    @Scripts.Render("~/plugins/slimScroll")
-    @Scripts.Render("~/bundles/inspinia")
+    @Scripts.Render(Bundles.Scripts.Jquery)
+    @Scripts.Render(Bundles.Scripts.Bootstrap)
+    @Scripts.Render(Bundles.Scripts.MetsiMenu)
+    @Scripts.Render(Bundles.Scripts.Pace)
+    @Scripts.Render(Bundles.Scripts.SlimScroll)
+    @Scripts.Render(Bundles.Scripts.Inspinia)
     @RenderSection("scripts", required: false)
 </body>
 </html>

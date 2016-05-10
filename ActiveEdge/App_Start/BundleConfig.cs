@@ -7,12 +7,27 @@ namespace ActiveEdge
     public static class Css
     {
       public const string Summernote = "~/bundles/summernotestyles";
+      public const string DatePicker = "~/bundles/styles/datepicker";
     }
 
     public static class Scripts
     {
-      public const string ActiveEdge = "~/bundles/activeedge";
-      public const string Client = "~/bundles/client";
+      public const string ActiveEdge = "~/bundles/scripts/activeedge";
+      public const string Client = "~/bundles/scripts/client";
+      public const string Jquery = "~/bundles/scripts/jquery";
+      public const string JqueryValidation = "~/bundles/scripts/jqueryval";
+      public const string Bootstrap = "~/bundles/scripts/bootstrap";
+      public const string Inspinia = "~/bundles/scripts/inspinia";
+      public const string DatePicker = "~/bundles/scripts/dataPicker";
+      public const string MetsiMenu = "~/bundles/scripts/metsimenu";
+      public const string SlimScroll = "~/bundles/scripts/slimscroll";
+      public const string Pace = "~/bundles/scripts/pace";
+
+      public static class Session
+      {
+        public const string CreateOrEdit = "~/bundles/scripts/session/createoredit";
+        public const string Details = "~/bundles/scripts/session/details";
+      }
     }
   }
   public class BundleConfig
@@ -23,38 +38,29 @@ namespace ActiveEdge
     public static void RegisterBundles(BundleCollection bundles)
     {
       _bundles = bundles;
+
       RegisterScripts(Bundles.Scripts.ActiveEdge, "~/Scripts/site/activeedge.js", "~/Scripts/typeahead.bundle.min.js", "~/Scripts/bloodhound.min.js", "~/Scripts/summernote/summernote.min.js");
 
       CustomerScripts(bundles);
 
-      SoapNoteScripts(bundles);
-
+      RegisterScripts(Bundles.Scripts.Session.CreateOrEdit, "~/Scripts/site/session/createoredit.js", "~/Scripts/site/session/drawing.js");
+      RegisterScripts(Bundles.Scripts.Session.Details, "~/Scripts/site/session/details.js", "~/Scripts/site/session/drawing.js");
+      
       // Vendor scripts
-      bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                  "~/Scripts/jquery-2.1.1.min.js"));
+      RegisterScripts(Bundles.Scripts.Jquery, "~/Scripts/jquery-2.1.1.min.js");
+      RegisterScripts(Bundles.Scripts.JqueryValidation,"~/Scripts/jquery.validate.min.js");
+      RegisterScripts(Bundles.Scripts.Bootstrap, "~/Scripts/bootstrap.min.js");
+      RegisterScripts(Bundles.Scripts.Inspinia, "~/Scripts/app/inspinia.js");
+      RegisterScripts(Bundles.Scripts.DatePicker, "~/Scripts/plugins/datapicker/bootstrap-datepicker.js");
+      RegisterScripts(Bundles.Scripts.MetsiMenu, "~/Scripts/plugins/metisMenu/metisMenu.min.js");
+      RegisterScripts(Bundles.Scripts.SlimScroll, "~/Scripts/plugins/slimScroll/jquery.slimscroll.min.js");
+      RegisterScripts(Bundles.Scripts.Pace, "~/Scripts/plugins/pace/pace.min.js");
 
-      // jQuery Validation
-      bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-      "~/Scripts/jquery.validate.min.js"));
 
-      bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.min.js"));
+      RegisterCss(Bundles.Css.DatePicker, "~/Content/plugins/datapicker/datepicker3.css");
 
-      // Inspinia script
-      bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
-                "~/Scripts/app/inspinia.js"));
-
-      // SlimScroll
-      bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
-                "~/Scripts/plugins/slimScroll/jquery.slimscroll.min.js"));
-
-      // jQuery plugins
-      bundles.Add(new ScriptBundle("~/plugins/metsiMenu").Include(
-                "~/Scripts/plugins/metisMenu/metisMenu.min.js"));
-
-      bundles.Add(new ScriptBundle("~/plugins/pace").Include(
-                "~/Scripts/plugins/pace/pace.min.js"));
-
+     
+     
       // CSS style (bootstrap/inspinia)
       bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",
@@ -78,14 +84,12 @@ namespace ActiveEdge
       bundles.Add(new StyleBundle("~/font-awesome/css").Include(
                 "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
 
-      // dataPicker styles
-      bundles.Add(new StyleBundle("~/plugins/dataPickerStyles").Include(
-                "~/Content/plugins/datapicker/datepicker3.css"));
+      //// dataPicker styles
+      //bundles.Add(new StyleBundle("~/plugins/dataPickerStyles").Include(
+      //          "~/Content/plugins/datapicker/datepicker3.css"));
 
       // dataPicker 
-      bundles.Add(new ScriptBundle("~/plugins/dataPicker").Include(
-                "~/Scripts/plugins/datapicker/bootstrap-datepicker.js"));
-
+     
       // wizardSteps styles
       bundles.Add(new StyleBundle("~/plugins/wizardStepsStyles").Include(
                 "~/Content/plugins/steps/jquery.steps.css"));
@@ -94,9 +98,9 @@ namespace ActiveEdge
       bundles.Add(new ScriptBundle("~/plugins/wizardSteps").Include(
                 "~/Scripts/plugins/steps/jquery.steps.min.js"));
 
-      // validate 
-      bundles.Add(new ScriptBundle("~/plugins/validate").Include(
-                "~/Scripts/plugins/validate/jquery.validate.min.js"));
+      //// validate 
+      //bundles.Add(new ScriptBundle("~/plugins/validate").Include(
+      //          "~/Scripts/plugins/validate/jquery.validate.min.js"));
 
       bundles.Add(new ScriptBundle("~/validateUnobtrusive").Include(
                 "~/Scripts/jquery.validate.unobtrusive.min.js", "~/Scripts/jquery.validate.min.js"));
@@ -117,11 +121,7 @@ namespace ActiveEdge
 
     
 
-    private static void SoapNoteScripts(BundleCollection bundles)
-    {
-      bundles.Add(new ScriptBundle("~/bundles/soapnotes").Include(
-                    "~/Scripts/site/soapnotes/Create.js"));
-    }
+    
 
     private static void CustomerScripts(BundleCollection bundles)
     {

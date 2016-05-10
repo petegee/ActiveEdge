@@ -43,18 +43,5 @@
 </div>
 @section scripts
 {
-  <script src="~/Scripts/site/SoapNotes/drawing.js"></script>
-<script type="text/javascript">
-
-    $(document)
-      .ready(function () {
-
-        $("#canvasDiv").readOnlyDrawingCanvas();
-
-      });
-
-
-
-</script>
-
+  @Scripts.Render(Bundles.Scripts.Session.Details)
 }

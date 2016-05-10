@@ -50,24 +50,10 @@
                   @Html.ValidationMessageFor(model => model.Date)
                 </div>
               </div>
-              @*<div class="form-group">
-                @Html.HiddenFor(m => m.ClientId)
-                @Html.LabelFor(model => model.ClientFullName, new {@class = "control-label col-md-2"})
-                <div class="col-md-6">
-                  @Html.EditorFor(model => model.ClientFullName)
-                  @Html.ValidationMessageFor(model => model.ClientFullName)
-                </div>
-              </div>*@
+
               @Html.HiddenFor(model => model.ClientId)
               @Html.EditorFor(model => model.ClientFullName, "StandardFormTextBox")
               @Html.EditorFor(model => model.Feedback, "StandardFormTextBox")
-              @*<div class="form-group">
-                @Html.LabelFor(model => model.Feedback, new {@class = "control-label col-md-2"})
-                <div class="col-md-6">
-                  @Html.EditorFor(model => model.Feedback)
-                  @Html.ValidationMessageFor(model => model.Feedback)
-                </div>
-              </div>*@
 
               <div class="form-group">
                 @Html.LabelFor(model => model.GoalOrExpectations, new {@class = "control-label col-md-2"})
@@ -80,15 +66,15 @@
               <div class="form-group">
                 @Html.LabelFor(model => model.AreasOfDiscomfort, new {@class = "control-label col-md-2"})
                 <div class="col-md-6">
-                  <div id="canvasDiv" style="background-image: url('../../Content/clientintake-800x625.png'); background-repeat: no-repeat; background-size: contain;"></div>
+                  <div id="canvasDiv" class="areas-of-discomfort"></div>
                   @Html.HiddenFor(model => model.AreasOfDiscomfort)
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                  <input type="submit" value="Create" class="btn btn-primary" />
-                  @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white" })
+                  <input type="submit" value="Create" class="btn btn-primary"/>
+                  @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
                 </div>
               </div>
 
@@ -103,28 +89,15 @@
 
 
 @section scripts {
-  @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render(Bundles.Scripts.JqueryValidation)
   @Scripts.Render(Bundles.Scripts.ActiveEdge)
-  @Scripts.Render("~/bundles/soapnotes")
-@Scripts.Render("~/plugins/validate")
-  @Scripts.Render("~/plugins/dataPicker")
-<script src="~/Scripts/site/SoapNotes/drawing.js"></script>
-<script type="text/javascript">
-
-    $(document)
-      .ready(function () {
-
-        $("#canvasDiv").drawingCanvas();
-
-      });
-
-
-
-</script>
+  @Scripts.Render(Bundles.Scripts.Session.CreateOrEdit)
+  @Scripts.Render(Bundles.Scripts.DatePicker)
+  
 }
 
 @section styles
 {
   @Styles.Render(Bundles.Css.Summernote)
-  @Styles.Render("~/plugins/dataPickerStyles")
+  @Styles.Render(Bundles.Css.DatePicker)
 }

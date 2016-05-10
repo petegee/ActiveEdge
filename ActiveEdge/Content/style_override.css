@@ -76,3 +76,9 @@ dd {
 .tt-suggestion p {
   margin: 0;
 }
+
+.areas-of-discomfort {
+  background-image: url('../Content/clientintake-800x625.png'); 
+  background-repeat: no-repeat; 
+  background-size: contain;
+}

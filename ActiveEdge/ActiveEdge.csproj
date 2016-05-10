@@ -401,8 +401,9 @@
     <Content Include="Scripts\plugins\steps\jquery.steps.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\site\activeedge.js" />
-    <Content Include="Scripts\site\SoapNotes\create.js" />
-    <Content Include="Scripts\site\SoapNotes\drawing.js" />
+    <Content Include="Scripts\site\Session\createoredit.js" />
+    <Content Include="Scripts\site\Session\details.js" />
+    <Content Include="Scripts\site\Session\drawing.js" />
     <Content Include="Scripts\summernote\plugin\summernote-ext-hello.js" />
     <Content Include="Scripts\summernote\plugin\summernote-ext-hint.js" />
     <Content Include="Scripts\summernote\plugin\summernote-ext-video.js" />
