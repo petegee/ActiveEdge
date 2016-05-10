@@ -20,7 +20,7 @@ namespace ActiveEdge.Models
 
     [DisplayName("Date Of Birth")]
     [Required]
-    [DisplayFormat(DataFormatString = Constants.DateFormat)]
+    [DataType(DataType.Date)]
     public DateTime? DateOfBirth { get; set; }
 
     [DisplayName("Email")]

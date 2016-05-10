@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -25,6 +21,8 @@ namespace Domain
     public string ContributingFactorsToCondition { get; set; }
 
     public string PreMassagePalpatation { get; set; }
+
+    public string Hypothesis { get; set; }
 
     public string SessionPlan { get; set; }
 

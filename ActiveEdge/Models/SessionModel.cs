@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using ActiveEdge.Infrastructure;
 using ActiveEdge.Infrastructure.MVC;
 
 namespace ActiveEdge.Models
@@ -32,14 +31,17 @@ namespace ActiveEdge.Models
     [DisplayName("Contributing Factors To Condition")]
     public string ContributingFactorsToCondition { get; set; }
 
-    [DisplayName("Pre-Massage Palpatation")]
-    public string PreMassagePalpatation { get; set; }
+    [DisplayName("Hypothesis")]
+    public string Hypothesis { get; set; }
+
+    [DisplayName("Pre-Massage Palpation")]
+    public string PreMassagePalpation { get; set; }
 
     [DisplayName("Session Plan")]
     [UIHint("Summernote")]
     public string SessionPlan { get; set; }
 
-    [DisplayName("Position / area/ muscle")]
+    [DisplayName("Treatment")]
     [UIHint("Summernote")]
     public string SessionNotesPosition { get; set; }
 

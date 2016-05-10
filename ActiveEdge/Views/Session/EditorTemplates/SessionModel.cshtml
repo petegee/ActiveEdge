@@ -52,10 +52,18 @@
 </div>
 
 <div class="form-group">
-  @Html.LabelFor(model => model.PreMassagePalpatation, new { @class = "control-label col-md-2" })
+  @Html.LabelFor(model => model.PreMassagePalpation, new { @class = "control-label col-md-2" })
   <div class="col-md-6">
-    @Html.EditorFor(model => model.PreMassagePalpatation)
-    @Html.ValidationMessageFor(model => model.PreMassagePalpatation)
+    @Html.EditorFor(model => model.PreMassagePalpation)
+    @Html.ValidationMessageFor(model => model.PreMassagePalpation)
+  </div>
+</div>
+
+<div class="form-group">
+  @Html.LabelFor(model => model.Hypothesis, new { @class = "control-label col-md-2" })
+  <div class="col-md-6">
+    @Html.EditorFor(model => model.Hypothesis)
+    @Html.ValidationMessageFor(model => model.Hypothesis)
   </div>
 </div>
 

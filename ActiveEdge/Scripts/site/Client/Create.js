@@ -2,7 +2,7 @@
   $(document).ready(function () {
 
 
-    $("#wizard").steps();
+
     $("#form").steps({
       bodyTag: "fieldset",
       onStepChanging: function (event, currentIndex, newIndex) {
@@ -33,7 +33,7 @@
       },
       onStepChanged: function (event, currentIndex, priorIndex) {
 
-        $('.i-checks').iCheck({
+       $('.i-checks').iCheck({
           checkboxClass: 'icheckbox_square-green',
           radioClass: 'iradio_square-green',
         });
@@ -101,6 +101,18 @@
     }).change(function (event, value) {
       $("#CurrentPainOrTensionLevels").val(value);
     });
+
+    $('.date').datepicker({
+      todayBtn: "linked",
+      todayHighlight: true,
+      keyboardNavigation: true,
+      endDate: "0d",
+      format: "dd/mm/yyyy",
+      forceParse: false,
+      calendarWeeks: false,
+      autoclose: true
+    });
+
 
     //$("#Suburb")
     //  .activeEdgeTypeahead('../api/search/suburbs/');
