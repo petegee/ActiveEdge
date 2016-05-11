@@ -5,7 +5,7 @@ using Domain;
 
 namespace ActiveEdge.Models
 {
-  public class Client
+  public class ClientModel
   {
     public int Id { get; set; }
 

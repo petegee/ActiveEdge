@@ -20,7 +20,7 @@ namespace Unit.Tests.WebSite.Helpers
       var vc = new ViewContext();
       vc.HttpContext = new FakeHttpContext();
       vc.HttpContext.Items.Add(Guid.NewGuid(), "foo");
-      HtmlHelper<ActiveEdge.Models.Client> html = new HtmlHelper<Client>(vc, new FakeViewDataContainer());
+      HtmlHelper<ActiveEdge.Models.ClientModel> html = new HtmlHelper<ClientModel>(vc, new FakeViewDataContainer());
 
       //var htmlString = html.FormGroupCheckBoxFor(client => client.IsSmoker);
 

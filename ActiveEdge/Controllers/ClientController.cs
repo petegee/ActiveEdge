@@ -4,11 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Database;
+using ActiveEdge.Models;
 using ActiveEdge.Models.Clients.Command;
 using AutoMapper;
 using Domain;
 using MediatR;
-using Client = ActiveEdge.Models.Client;
 
 namespace ActiveEdge.Controllers
 {
@@ -35,7 +35,7 @@ namespace ActiveEdge.Controllers
     // GET: /Client/
     public ActionResult Index()
     {
-      return View(_database.Clients.ProjectToList<Client>(_mapperConfiguration));
+      return View(_database.Clients.ProjectToList<ClientModel>(_mapperConfiguration));
     }
 
     // GET: /Client/Details/5
@@ -45,7 +45,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingleOrDefault<Client>(_mapperConfiguration);
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
 
       if (customer == null)
       {
@@ -83,7 +83,7 @@ namespace ActiveEdge.Controllers
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
       
-      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingleOrDefault<Client>(_mapperConfiguration);
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
 
       if (customer == null)
       {
@@ -97,16 +97,16 @@ namespace ActiveEdge.Controllers
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Edit(Client client)
+    public ActionResult Edit(ClientModel clientModel)
     {
       if (ModelState.IsValid)
       {
-        var customerDomain = _mapper.Map<Client, Domain.Client>(client);
+        var customerDomain = _mapper.Map<ClientModel, Domain.Client>(clientModel);
         _database.Entry(customerDomain).State = EntityState.Modified;
         _database.SaveChanges();
         return RedirectToAction("Index");
       }
-      return View(client);
+      return View(clientModel);
     }
 
     // GET: /Client/Delete/5
@@ -116,7 +116,7 @@ namespace ActiveEdge.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<Client>(_mapperConfiguration);
+      var customer = _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<ClientModel>(_mapperConfiguration);
       if (customer == null)
       {
         return HttpNotFound();

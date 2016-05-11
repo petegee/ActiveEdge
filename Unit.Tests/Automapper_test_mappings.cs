@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ActiveEdge;
-using ActiveEdge.Infrastructure.Mapping;
+﻿using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Models;
 using AutoMapper;
 using Shouldly;
@@ -15,7 +9,7 @@ namespace Unit.Tests
 
   public class Automapper_test_mappings
   {
-    private IMapper _mapper;
+    private readonly IMapper _mapper;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:System.Object"/> class.
@@ -38,9 +32,9 @@ namespace Unit.Tests
     public void Test_Name()
     {
       //Arrange
-      var client = new Client {ContraIndicationsIsPregnant = true};
+      var client = new ClientModel {ContraIndicationsIsPregnant = true};
 
-      var domainClient = _mapper.Map<Client, Domain.Client>(client);
+      var domainClient = _mapper.Map<ClientModel, Domain.Client>(client);
 
       // Assert
       domainClient.ContraIndications.ShouldNotBeNull();

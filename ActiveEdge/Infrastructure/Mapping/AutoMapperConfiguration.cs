@@ -16,7 +16,7 @@ namespace ActiveEdge.Infrastructure.Mapping
         cfg.CreateMap<SessionModel, Session>();
         cfg.CreateMap<Session, SessionModel>();
 
-        cfg.CreateMap<Client, Models.Client>();
+        cfg.CreateMap<Client, Models.ClientModel>();
 
         cfg.CreateMap<RegisterNewClient, ContraIndications>();
         cfg.CreateMap<RegisterNewClient, TermsAndConditions>();
