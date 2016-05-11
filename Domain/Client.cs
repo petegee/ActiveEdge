@@ -1,6 +1,7 @@
 ﻿using System;
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DelegateDecompiler;
 
@@ -32,7 +33,9 @@ namespace Domain
     public bool HasHadPreviousTherapy { get; set; }
     public TouchPreference TouchPreference { get; set; }
     public ContraIndications ContraIndications { get; set; }
+    [Range(0, 10)]
     public int CurrentStressLevels { get; set; }
+    [Range(0, 10)]
     public int CurrentPainOrTensionLevels { get; set; }
     public string Difficuties { get; set; }
     public string AreasNotToBeMassaged { get; set; }

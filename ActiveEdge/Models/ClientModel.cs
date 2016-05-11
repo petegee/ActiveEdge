@@ -182,11 +182,11 @@ namespace ActiveEdge.Models
     public bool ContraIndicationsHeartDisease { get; set; }
 
     [DisplayName("Current Stress Levels")]
-    [Range(0, 100)]
+    [Range(0, 10)]
     public int CurrentStressLevels { get; set; }
 
     [DisplayName("Current Pain/Tension Levels")]
-    [Range(0, 100)]
+    [Range(0, 10)]
     public int CurrentPainOrTensionLevels { get; set; }
 
     [DisplayName("Do you have any difficulty laying on your front / back / side? How can we make you comfortable")]

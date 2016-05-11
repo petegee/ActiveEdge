@@ -75,31 +75,23 @@
       }
     });
 
-
-    $("#currentStressLevelsSlider").noUiSlider({
-      start: 40,
+    var sliderOptions = {
+      start: 4,
       behaviour: 'tap',
       connect: 'lower',
       step: 1,
       range: {
         'min': 0,
-        'max': 100
+        'max': 10
       }
-    }).change(function (event, value) {
-      $("#CurrentStressLevels").val(value);
+    };
+
+    $("#currentStressLevelsSlider").noUiSlider(sliderOptions).change(function (event, value) {
+      $("#CurrentStressLevels").val(Math.round(value));
     });
 
-    $("#currentPainOrTensionLevelsSlider").noUiSlider({
-      start: 40,
-      behaviour: 'tap',
-      connect: 'lower',
-      step: 1,
-      range: {
-        'min': 0,
-        'max': 100
-      }
-    }).change(function (event, value) {
-      $("#CurrentPainOrTensionLevels").val(value);
+    $("#currentPainOrTensionLevelsSlider").noUiSlider(sliderOptions).change(function (event, value) {
+      $("#CurrentPainOrTensionLevels").val(Math.round(value));
     });
 
     $('.date').datepicker({
