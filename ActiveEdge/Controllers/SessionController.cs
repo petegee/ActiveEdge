@@ -7,6 +7,7 @@ using ActiveEdge.Database;
 using ActiveEdge.Models;
 using AutoMapper;
 using Domain;
+using Domain.Model;
 
 namespace ActiveEdge.Controllers
 {

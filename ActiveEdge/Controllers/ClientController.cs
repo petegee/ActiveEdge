@@ -8,6 +8,7 @@ using ActiveEdge.Models;
 using ActiveEdge.Models.Clients.Command;
 using AutoMapper;
 using Domain;
+using Domain.Model;
 using MediatR;
 
 namespace ActiveEdge.Controllers
@@ -101,7 +102,7 @@ namespace ActiveEdge.Controllers
     {
       if (ModelState.IsValid)
       {
-        var customerDomain = _mapper.Map<ClientModel, Domain.Client>(clientModel);
+        var customerDomain = _mapper.Map<ClientModel, Client>(clientModel);
         _database.Entry(customerDomain).State = EntityState.Modified;
         _database.SaveChanges();
         return RedirectToAction("Index");

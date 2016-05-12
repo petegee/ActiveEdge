@@ -1,11 +1,10 @@
 ﻿using System;
-
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DelegateDecompiler;
 
-namespace Domain
+namespace Domain.Model
 {
   public class Client
   {

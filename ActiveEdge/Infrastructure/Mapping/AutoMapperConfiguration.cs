@@ -3,7 +3,8 @@ using ActiveEdge.Models.Clients.Command;
 using ActiveEdge.Models.WebApi.Search;
 using AutoMapper;
 using Domain;
-using Client = Domain.Client;
+using Domain.Model;
+using Client = Domain.Model.Client;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {

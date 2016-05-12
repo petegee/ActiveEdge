@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Domain;
+using Domain.Model;
 using MediatR;
 
 namespace ActiveEdge.Models.Clients.Command

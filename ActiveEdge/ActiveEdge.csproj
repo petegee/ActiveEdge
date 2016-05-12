@@ -253,6 +253,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommandHandlers\RegisterNewClientHandler.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
@@ -282,6 +283,8 @@
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\Clients\Command\RegisterNewClient.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Organization\AddressModel.cs" />
+    <Compile Include="Models\Organization\OrganizationModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\WebApi\Search\SearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -480,6 +483,9 @@
     <Content Include="Scripts\plugins\taggle-js\scss\taggle.scss" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Shared\_TopNavbar2.cshtml" />
+    <Content Include="Views\Organization\Index.cshtml" />
+    <Content Include="Views\Organization\Details.cshtml" />
+    <Content Include="Views\Organization\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

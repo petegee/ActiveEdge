@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using ActiveEdge.Models;
 using Domain;
+using Domain.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.Entity;
 
@@ -10,7 +11,7 @@ namespace ActiveEdge.Database
 {
   public interface IApplicationDbContext: IDisposable
   {
-    DbSet<Domain.Client> Clients { get; set; }
+    DbSet<Client> Clients { get; set; }
     System.Data.Entity.DbSet<Session> Sessions { get; set; }
 
     int SaveChanges();
@@ -27,7 +28,7 @@ namespace ActiveEdge.Database
     {
     }
 
-    public DbSet<Domain.Client> Clients { get; set; }
+    public DbSet<Client> Clients { get; set; }
 
     /// <summary>
     /// Maps table names, and sets up relationships between the various user entities

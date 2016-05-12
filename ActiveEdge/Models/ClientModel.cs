@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Domain;
+using Domain.Model;
 
 namespace ActiveEdge.Models
 {

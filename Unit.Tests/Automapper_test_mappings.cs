@@ -1,6 +1,7 @@
 ﻿using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Models;
 using AutoMapper;
+using Domain.Model;
 using Shouldly;
 using Xunit;
 
@@ -34,7 +35,7 @@ namespace Unit.Tests
       //Arrange
       var client = new ClientModel {ContraIndicationsIsPregnant = true};
 
-      var domainClient = _mapper.Map<ClientModel, Domain.Client>(client);
+      var domainClient = _mapper.Map<ClientModel, Client>(client);
 
       // Assert
       domainClient.ContraIndications.ShouldNotBeNull();

@@ -1,6 +1,7 @@
 ﻿using ActiveEdge.Database;
 using ActiveEdge.Models.Clients.Command;
 using AutoMapper;
+using Domain.Model;
 using MediatR;
 
 namespace ActiveEdge.CommandHandlers
@@ -22,7 +23,7 @@ namespace ActiveEdge.CommandHandlers
     /// <param name="notification">The notification message</param>
     public void Handle(RegisterNewClient notification)
     {
-      var customerDomain = _mapper.Map<RegisterNewClient, Domain.Client>(notification);
+      var customerDomain = _mapper.Map<RegisterNewClient, Client>(notification);
 
       _database.Clients.Add(customerDomain);
 

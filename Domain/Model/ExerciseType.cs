@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Domain
+namespace Domain.Model
 {
   public class ExerciseType
   {
