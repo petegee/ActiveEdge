@@ -64,8 +64,8 @@
 <div class="form-group">
   @Html.LabelFor(model => model.Hypothesis, new { @class = "control-label col-md-2" })
   <div class="col-md-6">
-    <div id="Hypothesis" class="input textarea"></div>
-    @*@Html.EditorFor(model => model.Hypothesis)*@
+    @*<div id="Hypothesis" class="input textarea"></div>*@
+    @Html.EditorFor(model => model.Hypothesis)
     @Html.ValidationMessageFor(model => model.Hypothesis)
   </div>
 </div>
