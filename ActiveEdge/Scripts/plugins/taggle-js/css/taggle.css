@@ -1,5 +1,5 @@
 html {
-  background: url(/assets/images/projects/taggle/bg.png) repeat;
+  background: url(../images/bg.png)  repeat;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -120,8 +120,8 @@ p a:hover {
 .taggle_input {
   border: none;
   outline: none;
-  font-size: 16px;
-  font-weight: 300;
+  /*font-size: 16px;*/
+  /*font-weight: 300;*/
 }
 
 .taggle_list li {
