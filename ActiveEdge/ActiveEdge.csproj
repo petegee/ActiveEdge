@@ -478,6 +478,8 @@
     <Content Include="Views\Shared\EditorTemplates\StandardFormTextBox.cshtml" />
     <Content Include="Views\Session\Plan.cshtml" />
     <Content Include="Scripts\plugins\taggle-js\scss\taggle.scss" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_TopNavbar2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

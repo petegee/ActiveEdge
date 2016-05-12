@@ -1,0 +1,39 @@
+﻿@using ActiveEdge.Helpers
+<div class="row border-bottom white-bg">
+  <nav class="navbar navbar-static-top" role="navigation">
+    <div class="navbar-header">
+      <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+        <i class="fa fa-reorder"></i>
+      </button>
+      <a href="#" class="navbar-brand">Active Edge</a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a aria-expanded="false" role="button" href="@Url.Action("Index", "Home")">Home</a>
+        </li>
+        <li class="dropdown">
+          <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Clients <span class="caret"></span></a>
+          <ul role="menu" class="dropdown-menu">
+            <li><a href="@Url.Action("Index", "Client")">All Clients</a></li>
+            <li><a href="@Url.Action("Create", "Client")">Intake Form</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Sessions <span class="caret"></span></a>
+          <ul role="menu" class="dropdown-menu">
+            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Session")">All Sessions</a></li>
+            <li class="@Html.IsSelected(action: "Create")"><a href="@Url.Action("Create", "Session")">Create</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-top-links navbar-right">
+        <li>
+          <a href="#">
+            <i class="fa fa-sign-out"></i> Log out
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
