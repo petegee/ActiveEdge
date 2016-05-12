@@ -11,6 +11,7 @@ namespace ActiveEdge
       public const string ICheck = "~/bundles/styles/icheck";
       public const string WizardSteps = "~/bundles/styles/wizardSteps";
       public const string NoUiSlider = "~/bundles/styles/nouislider";
+      public const string Taggle = "~/bundles/styles/taggle";
 
     }
 
@@ -28,6 +29,8 @@ namespace ActiveEdge
       public const string ICheck = "~/bundles/scripts/icheck";
       public const string WizardSteps = "~/bundles/scripts/wizardSteps";
       public const string NoUiSlider = "~/bundles/scripts/nouislider";
+      public const string Taggle = "~/bundles/scripts/taggle";
+
       public static class Session
       {
         public const string CreateOrEdit = "~/bundles/scripts/session/createoredit";
@@ -68,7 +71,7 @@ namespace ActiveEdge
       RegisterScripts(Bundles.Scripts.ICheck, "~/Scripts/plugins/iCheck/icheck.min.js", "~/Scripts/site/icheckwireup.js");
       RegisterScripts(Bundles.Scripts.WizardSteps, "~/Scripts/plugins/steps/jquery.steps.min.js");
       RegisterScripts(Bundles.Scripts.NoUiSlider, "~/Scripts/plugins/nouslider/jquery.nouislider.min.js");
-
+      RegisterScripts(Bundles.Scripts.Taggle, "~/Scripts/plugins/taggle-js/js/taggle.min.js");
 
 
 
@@ -80,7 +83,7 @@ namespace ActiveEdge
       RegisterCss(Bundles.Css.ICheck, "~/Content/plugins/iCheck/custom.css");
       RegisterCss(Bundles.Css.WizardSteps, "~/Content/plugins/steps/jquery.steps.css");
       RegisterCss(Bundles.Css.NoUiSlider, "~/Content/plugins/nouslider/jquery.nouislider.css");
-
+      RegisterCss(Bundles.Css.Taggle, "~/Scripts/plugins/taggle-js/css/taggle.css");
       // CSS style (bootstrap/inspinia)
       bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",

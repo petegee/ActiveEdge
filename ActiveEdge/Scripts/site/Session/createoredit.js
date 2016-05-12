@@ -8,6 +8,6 @@
       $("#ClientId").val(suggestion.Id);
     });
   
-
+  new Taggle('Hypothesis');
 });
 

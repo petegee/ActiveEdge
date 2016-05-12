@@ -3,10 +3,12 @@
 @Html.ValidationSummary(true)
 
 <div class="form-group">
-  @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
+  
+
+  @Html.LabelFor(model => model.Date, new {@class = "control-label col-md-2"})
   <div class="col-md-6">
     <div class="input-group date">
-      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model.Date, new Dictionary<string, object> { { "class", "form-control date" } })
+      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model.Date, new Dictionary<string, object> {{"class", "form-control date"}})
     </div>
 
     @Html.ValidationMessageFor(model => model.Date)
@@ -62,7 +64,8 @@
 <div class="form-group">
   @Html.LabelFor(model => model.Hypothesis, new { @class = "control-label col-md-2" })
   <div class="col-md-6">
-    @Html.EditorFor(model => model.Hypothesis)
+    <div id="Hypothesis" class="input textarea"></div>
+    @*@Html.EditorFor(model => model.Hypothesis)*@
     @Html.ValidationMessageFor(model => model.Hypothesis)
   </div>
 </div>

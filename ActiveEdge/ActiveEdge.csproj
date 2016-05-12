@@ -383,6 +383,15 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\plugins\taggle-js\css\projects.min.css" />
+    <Content Include="Scripts\plugins\taggle-js\css\taggle.css" />
+    <Content Include="Scripts\plugins\taggle-js\css\twilight.css" />
+    <Content Include="Scripts\plugins\taggle-js\images\bg.png" />
+    <Content Include="Scripts\plugins\taggle-js\js\jquery-1.10.1.js" />
+    <Content Include="Scripts\plugins\taggle-js\js\jquery-ui.js" />
+    <Content Include="Scripts\plugins\taggle-js\js\rainbow-custom.min.js" />
+    <Content Include="Scripts\plugins\taggle-js\js\scripts.js" />
+    <Content Include="Scripts\plugins\taggle-js\js\taggle.min.js" />
     <Content Include="Scripts\site\Client\Create.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -468,6 +477,7 @@
     <Content Include="Views\Session\Drawing.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StandardFormTextBox.cshtml" />
     <Content Include="Views\Session\Plan.cshtml" />
+    <Content Include="Scripts\plugins\taggle-js\scss\taggle.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
