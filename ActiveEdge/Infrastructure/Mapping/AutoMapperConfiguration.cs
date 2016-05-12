@@ -2,9 +2,7 @@ using ActiveEdge.Models;
 using ActiveEdge.Models.Clients.Command;
 using ActiveEdge.Models.WebApi.Search;
 using AutoMapper;
-using Domain;
 using Domain.Model;
-using Client = Domain.Model.Client;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
@@ -17,7 +15,7 @@ namespace ActiveEdge.Infrastructure.Mapping
         cfg.CreateMap<SessionModel, Session>();
         cfg.CreateMap<Session, SessionModel>();
 
-        cfg.CreateMap<Client, Models.ClientModel>();
+        cfg.CreateMap<Client, ClientModel>();
 
         cfg.CreateMap<RegisterNewClient, ContraIndications>();
         cfg.CreateMap<RegisterNewClient, TermsAndConditions>();

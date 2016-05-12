@@ -255,6 +255,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Database\ApplicationDbContext.cs" />
     <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
@@ -263,9 +264,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Database\MySqlConfiguration.cs" />
-    <Compile Include="Database\MySqlHistoryContext.cs" />
-    <Compile Include="Database\MySqlInitializer.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
@@ -279,7 +277,6 @@
     <Compile Include="Infrastructure\MVC\MetadataProvider.cs" />
     <Compile Include="Infrastructure\PlaceHolderAttribute.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Database\ApplicationDbContext.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\Clients\Command\RegisterNewClient.cs" />
     <Compile Include="Models\IdentityModels.cs" />

@@ -2,7 +2,6 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using ActiveEdge.Models;
-using Domain;
 using Domain.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.Entity;
