@@ -1,5 +1,4 @@
 using ActiveEdge.Models;
-using ActiveEdge.Models.Clients.Command;
 using ActiveEdge.Models.WebApi.Search;
 using AutoMapper;
 using Domain.Model;
