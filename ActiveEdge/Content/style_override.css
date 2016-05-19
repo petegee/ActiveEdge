@@ -7,6 +7,12 @@
   width: 70px;
   height: 70px;
 }
+
+.form-group.required .control-label:after { 
+   content:" *";
+   color:#18a689;
+}
+
 .no-top-margin {
   margin-top: 0 !important;
 }

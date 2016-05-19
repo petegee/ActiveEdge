@@ -1,0 +1,12 @@
+﻿@model bool
+
+
+<div class="form-group">
+  @Html.LabelFor(model => model, new {@class = "control-label col-md-2"})
+  <div class="col-md-6">
+    <label>
+      @Html.CheckBoxFor(model => model, new {@class = "i-checks"})&nbsp;
+    </label>
+    @Html.ValidationMessageFor(model => model)
+  </div>
+</div>

@@ -392,7 +392,8 @@
     <Content Include="Scripts\plugins\taggle-js\js\rainbow-custom.min.js" />
     <Content Include="Scripts\plugins\taggle-js\js\scripts.js" />
     <Content Include="Scripts\plugins\taggle-js\js\taggle.min.js" />
-    <Content Include="Scripts\site\Client\Create.js" />
+    <Content Include="Scripts\site\Client\edit.js" />
+    <Content Include="Scripts\site\Client\create.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -457,7 +458,7 @@
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\iCheck.cshtml" />
-    <Content Include="Views\Client\EditorTemplates\Client.cshtml" />
+    <Content Include="Views\Client\EditorTemplates\ClientModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\iCheck.cshtml" />
     <Content Include="Views\Client\Intake.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FormGroupTextBox.cshtml" />
@@ -483,6 +484,10 @@
     <Content Include="Views\Organization\Index.cshtml" />
     <Content Include="Views\Organization\Details.cshtml" />
     <Content Include="Views\Organization\Create.cshtml" />
+    <Content Include="Views\Organization\EditorTemplates\OrganizationModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StandardFormDateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StandardFormEnumDropDownList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StandardFormCheckBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

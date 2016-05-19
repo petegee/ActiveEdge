@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ActiveEdge.Models.Organization;
 
 namespace ActiveEdge.Controllers
 {
@@ -23,7 +24,7 @@ namespace ActiveEdge.Controllers
         // GET: Organization/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new OrganizationModel());
         }
 
         // POST: Organization/Create

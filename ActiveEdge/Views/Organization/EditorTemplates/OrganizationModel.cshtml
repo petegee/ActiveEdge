@@ -1,0 +1,74 @@
+﻿@model ActiveEdge.Models.Organization.OrganizationModel
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+
+
+@Html.EditorFor(model => model.OrganizationName, "StandardFormTextBox")
+@Html.EditorFor(model => model.ContactPerson, "StandardFormTextBox")
+@Html.EditorFor(model => model.ContactPhoneNumber, "StandardFormTextBox")
+@Html.EditorFor(model => model.ContactEmailAddress, "StandardFormTextBox")
+@*<div class="form-group">
+  @Html.LabelFor(model => model.Date, new {@class = "control-label col-md-2"})
+  <div class="col-md-6">
+    <div class="input-group date">
+      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model.Date, new Dictionary<string, object> {{"class", "form-control date"}})
+    </div>
+
+    @Html.ValidationMessageFor(model => model.Date)
+  </div>
+</div>*@
+@*<div class="form-group">
+  @Html.HiddenFor(m => m.ClientId)
+  @Html.LabelFor(model => model.ClientFullName, new { @class = "control-label col-md-2" })
+  <div class="col-md-6">
+    @Html.EditorFor(model => model.ClientFullName)
+    @Html.ValidationMessageFor(model => model.ClientFullName)
+  </div>
+</div>
+
+<div class="form-group">
+
+  @Html.LabelFor(model => model.Feedback, new { @class = "control-label col-md-2" })
+  <div class="col-md-6">
+    @Html.EditorFor(model => model.Feedback)
+    @Html.ValidationMessageFor(model => model.Feedback)
+  </div>
+</div>
+
+<div class="form-group">
+  @Html.LabelFor(model => model.GoalOrExpectations, new { @class = "control-label col-md-2" })
+  <div class="col-md-6">
+    @Html.EditorFor(model => model.GoalOrExpectations)
+    @Html.ValidationMessageFor(model => model.GoalOrExpectations)
+  </div>
+</div>
+<div class="form-group">
+  @Html.LabelFor(model => model.AreasOfDiscomfort, new { @class = "control-label col-md-2" })
+  <div class="col-md-6">
+    <div id="canvasDiv" class="areas-of-discomfort"></div>
+    @Html.HiddenFor(model => model.AreasOfDiscomfort)
+  </div>
+</div>
+<div class="form-group">
+  @Html.LabelFor(model => model.ContributingFactorsToCondition, new { @class = "control-label col-md-2" })
+  <div class="col-md-6">
+    @Html.EditorFor(model => model.ContributingFactorsToCondition)
+    @Html.ValidationMessageFor(model => model.ContributingFactorsToCondition)
+  </div>
+</div>
+
+<div class="form-group">
+  @Html.LabelFor(model => model.PreMassagePalpation, new { @class = "control-label col-md-2" })
+  <div class="col-md-6">
+    @Html.EditorFor(model => model.PreMassagePalpation)
+    @Html.ValidationMessageFor(model => model.PreMassagePalpation)
+  </div>
+</div>
+
+</div>*@
+@*<div class="form-group">
+  <div class="col-md-offset-2 col-md-10">
+    <input type="submit" value="Create" class="btn btn-primary" />
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white" })
+  </div>
+</div>*@
