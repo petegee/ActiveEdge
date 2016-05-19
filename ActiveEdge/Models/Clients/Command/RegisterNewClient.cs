@@ -10,6 +10,7 @@ using MediatR;
 
 namespace ActiveEdge.Models.Clients.Command
 {
+    [Obsolete]
   public class RegisterNewClient : INotification
   {
     [DisplayName("First Name")]

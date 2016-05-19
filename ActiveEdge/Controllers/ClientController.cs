@@ -1,13 +1,10 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Database;
 using ActiveEdge.Models;
-using ActiveEdge.Models.Clients.Command;
 using AutoMapper;
-using Domain;
 using Domain.Model;
 using MediatR;
 
@@ -59,7 +56,7 @@ namespace ActiveEdge.Controllers
     // GET: /Client/Create
     public ActionResult Create()
     {
-      return View("Intake", new RegisterNewClient());
+      return View("Intake", new ClientModel());
     }
 
     // POST: /Client/Create
@@ -67,7 +64,7 @@ namespace ActiveEdge.Controllers
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create([Bind(Exclude = "Id")] RegisterNewClient client)
+    public ActionResult Create([Bind(Exclude = "Id")] ClientModel client)
     {
       if (!ModelState.IsValid) return View("Intake", client);
 

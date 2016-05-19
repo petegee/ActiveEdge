@@ -6,31 +6,32 @@ using Domain.Model;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
-  public static class AutoMapperConfiguration
-  {
-    public static MapperConfiguration Create()
+    public static class AutoMapperConfiguration
     {
-      var configuration = new MapperConfiguration(cfg =>
-      {
-        cfg.CreateMap<SessionModel, Session>();
-        cfg.CreateMap<Session, SessionModel>();
+        public static MapperConfiguration Create()
+        {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SessionModel, Session>();
+                cfg.CreateMap<Session, SessionModel>();
 
-        cfg.CreateMap<Client, ClientModel>();
 
-        cfg.CreateMap<RegisterNewClient, ContraIndications>();
-        cfg.CreateMap<RegisterNewClient, TermsAndConditions>();
+                cfg.CreateMap<Client, ClientModel>();
 
-        cfg.CreateMap<RegisterNewClient, Client>()
-          .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
+                cfg.CreateMap<ClientModel, ContraIndications>();
+                cfg.CreateMap<ClientModel, TermsAndConditions>();
 
-        cfg.CreateMap<RegisterNewClient, Client>()
-          .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
+                cfg.CreateMap<ClientModel, Client>()
+                    .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
 
-        cfg.CreateMap<Client, SearchResult>()
-          .ForMember(result => result.DisplayValue, options => options.MapFrom(client => client.FullName));
-      });
+                cfg.CreateMap<ClientModel, Client>()
+                    .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
 
-      return configuration;
+                cfg.CreateMap<Client, SearchResult>()
+                    .ForMember(result => result.DisplayValue, options => options.MapFrom(client => client.FullName));
+            });
+
+            return configuration;
+        }
     }
-  }
 }

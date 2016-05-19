@@ -3,10 +3,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Domain;
 using Domain.Model;
+using MediatR;
 
 namespace ActiveEdge.Models
 {
-  public class ClientModel
+  public class ClientModel: INotification
   {
     public int Id { get; set; }
 
