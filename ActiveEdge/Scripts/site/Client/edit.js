@@ -14,17 +14,17 @@ $(document)
       }
     };
 
-    //$("#currentStressLevelsSlider")
-    //  .noUiSlider(sliderOptions)
-    //  .change(function(event, value) {
-    //    $("#CurrentStressLevels").val(Math.round(value));
-    //  });
+    $("#currentStressLevelsSlider")
+      .noUiSlider(sliderOptions)
+      .change(function(event, value) {
+        $("#CurrentStressLevels").val(Math.round(value));
+      });
 
-    //$("#currentPainOrTensionLevelsSlider")
-    //  .noUiSlider(sliderOptions)
-    //  .change(function(event, value) {
-    //    $("#CurrentPainOrTensionLevels").val(Math.round(value));
-    //  });
+    $("#currentPainOrTensionLevelsSlider")
+      .noUiSlider(sliderOptions)
+      .change(function(event, value) {
+        $("#CurrentPainOrTensionLevels").val(Math.round(value));
+      });
 
     $(".date")
       .datepicker({
