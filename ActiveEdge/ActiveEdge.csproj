@@ -260,6 +260,10 @@
     <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
+    <Compile Include="Infrastructure\Caching\CacheHelper.cs" />
+    <Compile Include="Infrastructure\Caching\ICacheableItem.cs" />
+    <Compile Include="Infrastructure\Caching\SoftwareVersion.cs" />
+    <Compile Include="Infrastructure\Caching\SoftwareVersionCacheItem.cs" />
     <Compile Include="Infrastructure\Contstants.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
