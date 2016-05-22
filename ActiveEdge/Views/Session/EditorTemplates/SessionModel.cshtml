@@ -9,43 +9,6 @@
 @Html.EditorFor(m => m.Feedback, "StandardFormTextBox")
 @Html.EditorFor(m => m.GoalOrExpectations, "StandardFormTextBox")
 
-
-@*<div class="form-group">
-  
-
-  @Html.LabelFor(model => model.Date, new {@class = "control-label col-md-2"})
-  <div class="col-md-6">
-    <div class="input-group date">
-      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model.Date, new Dictionary<string, object> {{"class", "form-control date"}})
-    </div>
-
-    @Html.ValidationMessageFor(model => model.Date)
-  </div>
-</div>
-<div class="form-group">
-  @Html.HiddenFor(m => m.ClientId)
-  @Html.LabelFor(model => model.ClientFullName, new { @class = "control-label col-md-2" })
-  <div class="col-md-6">
-    @Html.EditorFor(model => model.ClientFullName)
-    @Html.ValidationMessageFor(model => model.ClientFullName)
-  </div>
-</div>
-
-<div class="form-group">
-  @Html.LabelFor(model => model.Feedback, new { @class = "control-label col-md-2" })
-  <div class="col-md-6">
-    @Html.EditorFor(model => model.Feedback)
-    @Html.ValidationMessageFor(model => model.Feedback)
-  </div>
-</div>
-
-<div class="form-group">
-  @Html.LabelFor(model => model.GoalOrExpectations, new { @class = "control-label col-md-2" })
-  <div class="col-md-6">
-    @Html.EditorFor(model => model.GoalOrExpectations)
-    @Html.ValidationMessageFor(model => model.GoalOrExpectations)
-  </div>
-</div>*@
 <div class="form-group">
   @Html.LabelFor(model => model.AreasOfDiscomfort, new {@class = "control-label col-md-2"})
   <div class="col-md-6">

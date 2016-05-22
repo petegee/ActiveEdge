@@ -32,7 +32,9 @@ namespace ActiveEdge
 
             public static class Session
             {
-                public const string CreateOrEdit = "~/bundles/scripts/session/createoredit";
+                public const string Create = "~/bundles/scripts/session/create";
+                public const string Edit = "~/bundles/scripts/session/edit";
+                public const string Plan = "~/bundles/scripts/session/plan";
                 public const string Details = "~/bundles/scripts/session/details";
             }
 
@@ -58,9 +60,9 @@ namespace ActiveEdge
             RegisterScripts(Bundles.Scripts.Client.Create, "~/Scripts/site/client/Create.js");
             RegisterScripts(Bundles.Scripts.Client.Edit, "~/Scripts/site/client/edit.js");
 
-
-            RegisterScripts(Bundles.Scripts.Session.CreateOrEdit, "~/Scripts/site/session/createoredit.js",
-                "~/Scripts/site/session/drawing.js");
+            RegisterScripts(Bundles.Scripts.Session.Create, "~/Scripts/site/session/create.js", "~/Scripts/site/session/drawing.js");
+            RegisterScripts(Bundles.Scripts.Session.Edit, "~/Scripts/site/session/edit.js", "~/Scripts/site/session/drawing.js");
+            RegisterScripts(Bundles.Scripts.Session.Plan, "~/Scripts/site/session/plan.js");
             RegisterScripts(Bundles.Scripts.Session.Details, "~/Scripts/site/session/details.js",
                 "~/Scripts/site/session/drawing.js");
 

@@ -88,3 +88,6 @@ dd {
   background-repeat: no-repeat; 
   background-size: contain;
 }
+.areas-of-discomfort :hover {
+  cursor: crosshair;
+}

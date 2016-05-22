@@ -25,6 +25,7 @@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
+  @Html.Partial("_AlertsPartial")
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
@@ -47,7 +48,7 @@
 
 
               <div class="form-group">
-                @Html.LabelFor(model => model.ContributingFactorsToCondition, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ContributingFactorsToCondition, new {@class = "control-label col-md-2"})
                 <div class="col-md-6">
                   @Html.EditorFor(model => model.ContributingFactorsToCondition)
                   @Html.ValidationMessageFor(model => model.ContributingFactorsToCondition)
@@ -55,7 +56,7 @@
               </div>
 
               <div class="form-group">
-                @Html.LabelFor(model => model.PreMassagePalpation, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.PreMassagePalpation, new {@class = "control-label col-md-2"})
                 <div class="col-md-6">
                   @Html.EditorFor(model => model.PreMassagePalpation)
                   @Html.ValidationMessageFor(model => model.PreMassagePalpation)
@@ -63,7 +64,7 @@
               </div>
 
               <div class="form-group">
-                @Html.LabelFor(model => model.Hypothesis, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Hypothesis, new {@class = "control-label col-md-2"})
                 <div class="col-md-6">
                   @Html.EditorFor(model => model.Hypothesis)
                   @Html.ValidationMessageFor(model => model.Hypothesis)
@@ -71,7 +72,7 @@
               </div>
               <div class="hr-line-dashed"></div>
               <div class="form-group">
-                @Html.LabelFor(model => model.SessionPlan, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.SessionPlan, new {@class = "control-label col-md-2"})
                 <div class="col-md-6">
                   @Html.EditorFor(model => model.SessionPlan)
                   @Html.ValidationMessageFor(model => model.SessionPlan)
@@ -79,7 +80,7 @@
               </div>
               <div class="hr-line-dashed"></div>
               <div class="form-group">
-                @Html.LabelFor(model => model.SessionNotesPosition, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.SessionNotesPosition, new {@class = "control-label col-md-2"})
                 <div class="col-md-6">
                   @Html.EditorFor(model => model.SessionNotesPosition)
                   @Html.ValidationMessageFor(model => model.SessionNotesPosition)
@@ -103,8 +104,8 @@
               </div>*@
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                  <input type="submit" value="Create" class="btn btn-primary" />
-                  @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white" })
+                  <input type="submit" value="Create" class="btn btn-primary"/>
+                  @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
                 </div>
               </div>
 
@@ -121,7 +122,7 @@
 @section scripts {
   @Scripts.Render(Bundles.Scripts.JqueryValidation)
   @Scripts.Render(Bundles.Scripts.ActiveEdge)
-  @Scripts.Render(Bundles.Scripts.Session.CreateOrEdit)
+  @Scripts.Render(Bundles.Scripts.Session.Plan)
   @Scripts.Render(Bundles.Scripts.DatePicker)
 }
 

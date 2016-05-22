@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Database;
 using ActiveEdge.Models;
+using ActiveEdge.Models.Shared;
 using AutoMapper;
 using Domain.Model;
 using MediatR;
@@ -11,7 +12,7 @@ using MediatR;
 namespace ActiveEdge.Controllers
 {
   [Authorize]
-  public class ClientController : Controller
+  public class ClientController : ControllerBase
   {
     private readonly IApplicationDbContext _database;
     private readonly IMapper _mapper;
@@ -69,6 +70,8 @@ namespace ActiveEdge.Controllers
       if (!ModelState.IsValid) return View("Intake", client);
 
       _mediator.Publish(client);
+      
+      Notify(new SuccessMessage("Client successfully registered."));
 
       return RedirectToAction("Index");
     }

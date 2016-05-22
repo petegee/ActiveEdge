@@ -1,0 +1,13 @@
+﻿@if (ViewBag.Alert != null)
+{
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="@ViewBag.Alert.Css alert-dismissable animated fadeIn">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+          @ViewBag.Alert.Text
+        </div>
+      </div>
+
+    </div>
+}
+

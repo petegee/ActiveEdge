@@ -39,37 +39,19 @@
               @Html.AntiForgeryToken()
               @Html.ValidationSummary(true)
 
-              <div class="form-group">
-                @Html.LabelFor(model => model.Date, new {@class = "control-label col-md-2"})
-                <div class="col-md-6">
-                  <div class="input-group date">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.TextBoxFor(model => model.Date, "{0:dd/MM/yyyy}", new Dictionary<string, object> {{"class", "form-control date"}})
-                  </div>
-
-                  @Html.ValidationMessageFor(model => model.Date)
-                </div>
-              </div>
-
+              @Html.EditorFor(model => model.Date, "StandardFormDateTime")
               @Html.HiddenFor(model => model.ClientId)
               @Html.EditorFor(model => model.ClientFullName, "StandardFormTextBox")
               @Html.EditorFor(model => model.Feedback, "StandardFormTextBox")
-
+              @Html.EditorFor(model => model.GoalOrExpectations, "StandardFormTextBox")
               <div class="form-group">
-                @Html.LabelFor(model => model.GoalOrExpectations, new {@class = "control-label col-md-2"})
-                <div class="col-md-6">
-                  @Html.EditorFor(model => model.GoalOrExpectations)
-                  @Html.ValidationMessageFor(model => model.GoalOrExpectations)
-                </div>
-              </div>
-
-              <div class="form-group">
-                @Html.LabelFor(model => model.AreasOfDiscomfort, new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.AreasOfDiscomfort, new { @class = "control-label col-md-2" })
                 <div class="col-md-6">
                   <div id="canvasDiv" class="areas-of-discomfort"></div>
                   @Html.HiddenFor(model => model.AreasOfDiscomfort)
                 </div>
               </div>
-
+              
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                   <input type="submit" value="Create" class="btn btn-primary"/>
@@ -90,7 +72,7 @@
 @section scripts {
   @Scripts.Render(Bundles.Scripts.JqueryValidation)
   @Scripts.Render(Bundles.Scripts.ActiveEdge)
-  @Scripts.Render(Bundles.Scripts.Session.CreateOrEdit)
+  @Scripts.Render(Bundles.Scripts.Session.Create)
   @Scripts.Render(Bundles.Scripts.DatePicker)
   
 }
