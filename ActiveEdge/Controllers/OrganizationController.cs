@@ -7,7 +7,7 @@ using ActiveEdge.Models.Organization;
 
 namespace ActiveEdge.Controllers
 {
-    public class OrganizationController : Controller
+    public class OrganizationController : ControllerBase
     {
         // GET: Organization
         public ActionResult Index()
@@ -24,7 +24,10 @@ namespace ActiveEdge.Controllers
         // GET: Organization/Create
         public ActionResult Create()
         {
-            return View(new OrganizationModel());
+            var model = new OrganizationModel();
+            
+            model.Address = new AddressModel();
+            return View(model);
         }
 
         // POST: Organization/Create

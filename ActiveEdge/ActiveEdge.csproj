@@ -289,7 +289,7 @@
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\Shared\DangerMessage.cs" />
     <Compile Include="Models\Shared\InfoMessage.cs" />
-    <Compile Include="Models\Shared\MessageBase.cs" />
+    <Compile Include="Models\Shared\Message.cs" />
     <Compile Include="Models\Shared\SuccessMessage.cs" />
     <Compile Include="Models\Shared\WarningMessage.cs" />
     <Compile Include="Models\WebApi\Search\SearchResult.cs" />
@@ -392,6 +392,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\plugins\taggle-js\css\projects.min.css" />
     <Content Include="Scripts\plugins\taggle-js\css\taggle.css" />
     <Content Include="Scripts\plugins\taggle-js\css\twilight.css" />
@@ -421,6 +423,7 @@
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\site\activeedge.js" />
     <Content Include="Scripts\site\icheckwireup.js" />
+    <Content Include="Scripts\site\Organization\create.js" />
     <Content Include="Scripts\site\Session\edit.js" />
     <Content Include="Scripts\site\Session\plan.js" />
     <Content Include="Scripts\site\Session\create.js" />
@@ -501,10 +504,10 @@
     <Content Include="Views\Shared\EditorTemplates\StandardFormCheckBox.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\enum.cshtml" />
     <Content Include="Views\Shared\_AlertsPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AddressModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="QueryHandlers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

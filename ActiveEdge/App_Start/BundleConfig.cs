@@ -43,6 +43,11 @@ namespace ActiveEdge
                 public const string Create = "~/bundles/scripts/client/create";
                 public const string Edit = "~/bundles/scripts/client/edit";
             }
+
+            public static class Organization
+            {
+                public const string Create = "~/bundles/scripts/organizaton/create";
+            }
         }
     }
 
@@ -65,6 +70,8 @@ namespace ActiveEdge
             RegisterScripts(Bundles.Scripts.Session.Plan, "~/Scripts/site/session/plan.js");
             RegisterScripts(Bundles.Scripts.Session.Details, "~/Scripts/site/session/details.js",
                 "~/Scripts/site/session/drawing.js");
+
+            RegisterScripts(Bundles.Scripts.Organization.Create, "~/Scripts/site/organization/create.js");
 
             // Vendor scripts
             RegisterScripts(Bundles.Scripts.Jquery, "~/Scripts/jquery-2.1.1.min.js");
