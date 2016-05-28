@@ -6,10 +6,12 @@ function ClinicModel() {
   // ********************************************************************************************************
   //  Knockout Observables                                                                                  *                                       
   // ********************************************************************************************************
-  self.clinicName = ko.observable('clinic name');
+  self.clinicName = ko.observable();
   self.addressLine1 = ko.observable();
   self.addressLine2 = ko.observable();
   self.suburb = ko.observable();
+  self.postCode = ko.observable();
+  self.contactPhoneNumber = ko.observable();
   self.city = ko.observable();
 }
 
@@ -72,10 +74,10 @@ $(document)
     ko.applyBindings(new OrganizationModel());
 
 
-    $("#Address_Suburb")
-      .activeEdgeTypeahead("../api/search/suburbs/");
+    //$("[name='Suburb']")
+    //  .activeEdgeTypeahead("../api/search/suburbs/");
 
 
-    $("#Address_City")
-      .activeEdgeTypeahead("../api/search/cities/");
+    //$("[name='City']")
+    //  .activeEdgeTypeahead("../api/search/cities/");
   });

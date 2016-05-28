@@ -256,8 +256,6 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
-    <Compile Include="Database\ApplicationDbContext.cs" />
-    <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
     <Compile Include="Infrastructure\Caching\CacheHelper.cs" />
@@ -284,7 +282,6 @@
     <Compile Include="Infrastructure\PlaceHolderAttribute.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ClientModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Organization\AddressModel.cs" />
     <Compile Include="Models\Organization\ClinicModel.cs" />
     <Compile Include="Models\Organization\OrganizationModel.cs" />
@@ -510,6 +507,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

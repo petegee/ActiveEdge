@@ -5,6 +5,7 @@ namespace ActiveEdge.Models.Organization
 {
     public class ClinicModel
     {
+        [DisplayName("Clinic Name")]
         [Required]
         public string ClinicName { get; set; }
 

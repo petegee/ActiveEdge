@@ -17,6 +17,7 @@
 
 using ActiveEdge.Infrastructure.Mapping;
 using AutoMapper;
+using Domain.Context;
 using MediatR;
 using StructureMap;
 
@@ -34,6 +35,7 @@ namespace ActiveEdge.DependencyResolution
           scan =>
           {
             scan.TheCallingAssembly();
+            scan.AssemblyContainingType<IApplicationDbContext>();
             scan.WithDefaultConventions();
             scan.With(new ControllerConvention());
             scan.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));

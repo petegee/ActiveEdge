@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Web.Mvc;
-using ActiveEdge.Database;
 using ActiveEdge.Models.Organization;
 using AutoMapper;
+using Domain.Context;
 using Domain.Model;
+using Domain.Query;
+using MediatR;
 using Microsoft.Ajax.Utilities;
 
 namespace ActiveEdge.Controllers
@@ -13,17 +15,24 @@ namespace ActiveEdge.Controllers
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
+        private readonly MapperConfiguration _mapperConfiguration;
 
-        public OrganizationController(IApplicationDbContext dbContext, IMapper mapper)
+        public OrganizationController(IApplicationDbContext dbContext, IMapper mapper, IMediator mediator, MapperConfiguration mapperConfiguration)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _mediator = mediator;
+            _mapperConfiguration = mapperConfiguration;
         }
 
         // GET: Organization
         public ActionResult Index()
         {
-            return View();
+            var organizations =
+                _mediator.Send(new FindAllOrganizations()).ProjectToList<OrganizationModel>(_mapperConfiguration);
+
+            return View(organizations);
         }
 
         // GET: Organization/Details/5
@@ -53,7 +62,7 @@ namespace ActiveEdge.Controllers
 
             return Json(new
             {
-                redirectUrl = Url.Action("Index", "Home"),
+                redirectUrl = Url.Action("Index", "Organization"),
                 isRedirect = true
             });
             

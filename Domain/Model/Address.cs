@@ -5,8 +5,6 @@ namespace Domain.Model
   public class Address:Entity
   {
 
-    [StringLength(50)]
-    public string PhoneNumber { get; set; }
 
     [StringLength(50)]
     public string Address1 { get; set; }

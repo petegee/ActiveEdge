@@ -35,8 +35,7 @@ namespace ActiveEdge.Infrastructure.Mapping
                         Address2 = model.AddressLine2,
                         Suburb = model.Suburb,
                         City = model.City,
-                        PostCode = model.PostCode,
-                        PhoneNumber = model.PhoneNumber
+                        PostCode = model.PostCode
                     }))
                 .ForMember(dest => dest.OrganizationId, options => options.Ignore())
                 .ForMember(dest => dest.Organization, options => options.Ignore())
@@ -60,6 +59,15 @@ namespace ActiveEdge.Infrastructure.Mapping
         /// </summary>
         protected override void Configure()
         {
+            CreateMap<Clinic, ClinicModel>()
+                .ForMember(dest => dest.AddressLine1, options => options.MapFrom(src => src.Address.Address1))
+                .ForMember(dest => dest.AddressLine2, options => options.MapFrom(src => src.Address.Address2))
+                .ForMember(dest => dest.Suburb, options => options.MapFrom(src => src.Address.Suburb))
+                .ForMember(dest => dest.City, options => options.MapFrom(src => src.Address.City))
+                .ForMember(dest => dest.PostCode, options => options.MapFrom(src => src.Address.PostCode))
+                ;
+            CreateMap<Organization, OrganizationModel>()
+                .ForMember(dest => dest.Clinics, options => options.MapFrom(organization => organization.Clinics));
 
             CreateMap<Session, SessionModel>();
 

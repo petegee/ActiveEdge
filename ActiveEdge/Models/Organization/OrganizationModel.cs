@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using System.Web.UI.WebControls;
 
 namespace ActiveEdge.Models.Organization
 {
-   
-
     public class OrganizationModel
     {
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Organization Name")]
         public string OrganizationName { get; set; }
 
         [DisplayName("Contact Name")]
@@ -29,6 +26,5 @@ namespace ActiveEdge.Models.Organization
         public string ContactEmailAddress { get; set; }
 
         public List<ClinicModel> Clinics { get; set; }
-
     }
 }

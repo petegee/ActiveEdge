@@ -50,6 +50,7 @@ namespace ActiveEdge.App_Start
     public static void Start()
     {
       IContainer container = IoC.Initialize();
+      container.AssertConfigurationIsValid();
       StructureMapDependencyScope = new StructureMapDependencyScope(container);
       DependencyResolver.SetResolver(StructureMapDependencyScope);
       DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));

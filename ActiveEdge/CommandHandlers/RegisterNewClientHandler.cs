@@ -1,6 +1,6 @@
-﻿using ActiveEdge.Database;
-using ActiveEdge.Models;
+﻿using ActiveEdge.Models;
 using AutoMapper;
+using Domain.Context;
 using Domain.Model;
 using MediatR;
 

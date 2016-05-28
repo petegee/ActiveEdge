@@ -2,7 +2,7 @@ using System;
 using System.Data.Entity;
 using Domain.Model;
 
-namespace ActiveEdge.Database
+namespace Domain.Context
 {
   public class DatabaseInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
   {

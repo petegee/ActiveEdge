@@ -1,17 +1,84 @@
-﻿
+﻿@model IEnumerable<ActiveEdge.Models.Organization.OrganizationModel>
+
 @{
-    Layout = null;
+    ViewBag.Title = "Organizations";
 }
 
-<!DOCTYPE html>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-sm-4">
+    <h2>Organizations</h2>
+    <ol class="breadcrumb">
+      <li class="active">
+        <strong>Organizations</strong>
+      </li>
+    </ol>
+  </div>
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  @Html.Partial("_AlertsPartial")
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>List of Organizations</h5>
+          <div class="ibox-tools">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-xs" })
+          </div>
+        </div>
+        <div class="ibox-content">
+
+          <table class="table table-striped">
+            <tr>
+              <th>
+                @Html.DisplayNameFor(model => model.OrganizationName)
+              </th>
+              <th>
+                @Html.DisplayNameFor(model => model.ContactPerson)
+              </th>
+              <th>
+                @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+              </th>
+              <th>
+                @Html.DisplayNameFor(model => model.ContactEmailAddress)
+              </th>
+              <th>
+                Number of clinics
+              </th>
+
+              <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                  <td>
+                    @Html.DisplayFor(modelItem => item.OrganizationName)
+                  </td>
+                  <td>
+                    @Html.DisplayFor(modelItem => item.ContactPerson)
+                  </td>
+                  <td>
+                    @Html.DisplayFor(modelItem => item.ContactPhoneNumber)
+                  </td>
+                  <td>
+                    @item.Clinics.Count
+                  </td>
+                  <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-white btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-white btn-sm" })
+                  </td>
+                </tr>
+            }
+
+          </table>
+
+        </div>
+      </div>
     </div>
-</body>
-</html>
+  </div>
+</div>

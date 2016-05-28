@@ -6,7 +6,7 @@ using Domain.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.Entity;
 
-namespace ActiveEdge.Database
+namespace Domain.Context
 {
     public interface IApplicationDbContext : IDisposable
     {
