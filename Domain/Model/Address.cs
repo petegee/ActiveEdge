@@ -2,8 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Model
 {
-  public class Address
+  public class Address:Entity
   {
+
     [StringLength(50)]
     public string PhoneNumber { get; set; }
 
@@ -12,6 +13,8 @@ namespace Domain.Model
 
     [StringLength(50)]
     public string Address2 { get; set; }
+
+    public string Suburb { get; set; }
 
     public string City { get; set; }
 

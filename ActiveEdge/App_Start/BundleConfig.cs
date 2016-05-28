@@ -29,6 +29,7 @@ namespace ActiveEdge
             public const string WizardSteps = "~/bundles/scripts/wizardSteps";
             public const string NoUiSlider = "~/bundles/scripts/nouislider";
             public const string Taggle = "~/bundles/scripts/taggle";
+            public const string KnockoutJs = "~/bundles/scripts/knockoutjs";
 
             public static class Session
             {
@@ -74,6 +75,7 @@ namespace ActiveEdge
             RegisterScripts(Bundles.Scripts.Organization.Create, "~/Scripts/site/organization/create.js");
 
             // Vendor scripts
+            RegisterScripts(Bundles.Scripts.KnockoutJs, "~/Scripts/knockout-{version}.js");
             RegisterScripts(Bundles.Scripts.Jquery, "~/Scripts/jquery-2.1.1.min.js");
             RegisterScripts(Bundles.Scripts.JqueryValidation, "~/Scripts/jquery.validate.min.js");
             RegisterScripts(Bundles.Scripts.Bootstrap, "~/Scripts/bootstrap.min.js");

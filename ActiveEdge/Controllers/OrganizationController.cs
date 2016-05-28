@@ -1,14 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Web.Mvc;
+using ActiveEdge.Database;
 using ActiveEdge.Models.Organization;
+using AutoMapper;
+using Domain.Model;
+using Microsoft.Ajax.Utilities;
 
 namespace ActiveEdge.Controllers
 {
     public class OrganizationController : ControllerBase
     {
+        private readonly IApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public OrganizationController(IApplicationDbContext dbContext, IMapper mapper)
+        {
+            _dbContext = dbContext;
+            _mapper = mapper;
+        }
+
         // GET: Organization
         public ActionResult Index()
         {
@@ -26,24 +37,26 @@ namespace ActiveEdge.Controllers
         {
             var model = new OrganizationModel();
             
-            model.Address = new AddressModel();
+            model.Clinics = new List<ClinicModel>() {new ClinicModel () };
             return View(model);
         }
 
         // POST: Organization/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public JsonResult Create(OrganizationModel organizationModel)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            var organization = _mapper.Map<Organization>(organizationModel);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            _dbContext.Organizations.Add(organization);
+
+            _dbContext.SaveChanges();
+
+            return Json(new
             {
-                return View();
-            }
+                redirectUrl = Url.Action("Index", "Home"),
+                isRedirect = true
+            });
+            
         }
 
         // GET: Organization/Edit/5

@@ -265,6 +265,7 @@
     <Compile Include="Infrastructure\Caching\SoftwareVersion.cs" />
     <Compile Include="Infrastructure\Caching\SoftwareVersionCacheItem.cs" />
     <Compile Include="Infrastructure\Contstants.cs" />
+    <Compile Include="Infrastructure\Extensions\ViewDataExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Organization\AddressModel.cs" />
+    <Compile Include="Models\Organization\ClinicModel.cs" />
     <Compile Include="Models\Organization\OrganizationModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\Shared\DangerMessage.cs" />

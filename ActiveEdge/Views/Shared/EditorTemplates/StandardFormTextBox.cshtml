@@ -1,4 +1,5 @@
-﻿@using ActiveEdge.Infrastructure.MVC
+﻿@using ActiveEdge.Infrastructure.Extensions
+@using ActiveEdge.Infrastructure.MVC
 @model string
 
 @{ var isFieldRequired = ViewData.ModelMetadata.IsRequired; }
@@ -8,7 +9,7 @@
 
 
   <div class="col-md-6">
-    @Html.TextBoxFor(model => model, ViewData.OptionalAttributes(new Dictionary<string, object> {{"class", "form-control required"}}))
+    @Html.TextBoxFor(model => model, ViewData.GetDefaultEditorAttributes())
     @Html.ValidationMessageFor(m => m)
   </div>
 

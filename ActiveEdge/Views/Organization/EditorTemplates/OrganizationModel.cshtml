@@ -1,10 +1,53 @@
-﻿@model ActiveEdge.Models.Organization.OrganizationModel
+﻿@using ActiveEdge.Models.Organization
+@model ActiveEdge.Models.Organization.OrganizationModel
 @Html.AntiForgeryToken()
 @Html.ValidationSummary(true)
 
 
-@Html.EditorFor(model => model.ClinicName, "StandardFormTextBox")
-@Html.EditorFor(model => model.ContactPerson, "StandardFormTextBox")
-@Html.EditorFor(model => model.ContactPhoneNumber, "StandardFormTextBox")
-@Html.EditorFor(model => model.ContactEmailAddress, "StandardFormTextBox")
-@Html.EditorFor(model => model.Address)
+@Html.EditorFor(model => model.OrganizationName, "StandardFormTextBox", new {htmlAttributes = new {databindKO = "textInput: organizationName"}})
+@Html.EditorFor(model => model.ContactPerson, "StandardFormTextBox", new {htmlAttributes = new {databindKO = "textInput: contactPerson"}})
+@Html.EditorFor(model => model.ContactPhoneNumber, "StandardFormTextBox", new {htmlAttributes = new {databindKO = "textInput: contactPhoneNumber"}})
+@Html.EditorFor(model => model.ContactEmailAddress, "StandardFormTextBox", new {htmlAttributes = new {databindKO = "textInput: contactEmailAddress"}})
+
+@*@for (var index = 0; index < Model.Clinics.Count; index++)
+{
+  var clinic = Model.Clinics[index];
+  @Html.EditorFor(model => model.Clinics[index].ClinicName, "StandardFormTextBox")
+}*@
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox">
+      <!-- ko foreach: clinics -->
+      <div class="ibox-title">
+        <h5>Clinic</h5>
+        <a href="#" class="btn btn-default pull-right" data-bind="visible: $root.clinics().length > 1, click: $root.removeClinic">Remove</a>
+      </div>
+      <div class="ibox-content" >
+
+        <div class="row">
+          @Html.EditorFor(model => new ClinicModel().ClinicName, "StandardFormTextBox", new { htmlAttributes = new { databindKO = "textInput: clinicName" } })
+          @Html.EditorFor(model => new ClinicModel().AddressLine1, "StandardFormTextBox", new { htmlAttributes = new { databindKO = "textInput: addressLine1" } })
+          @Html.EditorFor(model => new ClinicModel().AddressLine2, "StandardFormTextBox", new { htmlAttributes = new { databindKO = "textInput: addressLine2" } })
+          @Html.EditorFor(model => new ClinicModel().Suburb, "StandardFormTextBox", new { htmlAttributes = new { databindKO = "textInput: suburb" } })
+          @Html.EditorFor(model => new ClinicModel().City, "StandardFormTextBox", new { htmlAttributes = new { databindKO = "textInput: city" } })
+          
+
+        </div>
+
+        
+      </div>
+    
+      <!-- /ko -->
+
+      <div class="row">
+        <div class="col-md-8">
+          <a href="#" class="btn btn-primary pull-right" data-bind="click: $root.addClinic">Add</a>
+        </div>  
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script ></script>

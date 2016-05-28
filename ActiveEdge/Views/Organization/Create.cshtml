@@ -18,7 +18,7 @@
   </div>
   <div class="col-sm-8">
     <div class="title-action">
-      @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+      @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
     </div>
   </div>
 </div>
@@ -28,8 +28,9 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
-        @using (Html.BeginForm())
-        {
+        
+        <form action="/Organization/Create" method="post" data-bind="submit: submitForm">
+          
           <div class="ibox-title">
             <h5>Register New Organization</h5>
           </div>
@@ -42,8 +43,8 @@
 
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                  <input type="submit" value="Create" class="btn btn-primary" />
-                  @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white" })
+                  <input type="submit" value="Create" class="btn btn-primary"/>
+                  @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
                 </div>
               </div>
 
@@ -51,7 +52,7 @@
 
 
           </div>
-        }
+        </form>
       </div>
     </div>
   </div>
@@ -64,6 +65,7 @@
   @Scripts.Render(Bundles.Scripts.ActiveEdge)
   @Scripts.Render(Bundles.Scripts.ICheck)
   @Scripts.Render(Bundles.Scripts.Organization.Create)
+  @Scripts.Render(Bundles.Scripts.KnockoutJs)
 }
 
 @section styles

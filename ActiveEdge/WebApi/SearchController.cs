@@ -33,7 +33,7 @@ namespace ActiveEdge.WebApi
     [Route("suburbs/{name}")]
     public IEnumerable<SearchResult> Suburbs(string name)
     {
-      return _dbContext.Clients.Where(client => client.Suburb.ToLower().StartsWith(name.ToLower()))
+      return _dbContext.Addresses.Where(address => address.Suburb.ToLower().StartsWith(name.ToLower()))
         .Select(client => new SearchResult {DisplayValue = client.Suburb})
         .Distinct();
     }
@@ -42,7 +42,7 @@ namespace ActiveEdge.WebApi
     [Route("cities/{name}")]
     public IEnumerable<SearchResult> Cities(string name)
     {
-      return _dbContext.Clients.Where(client => client.City.ToLower().StartsWith(name.ToLower()))
+      return _dbContext.Addresses.Where(address => address.City.ToLower().StartsWith(name.ToLower()))
         .Select(client => new SearchResult { DisplayValue = client.City })
         .Distinct();
     }
