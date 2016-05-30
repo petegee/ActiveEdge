@@ -1,6 +1,9 @@
 using System;
 using System.Data.Entity;
+using System.Linq;
 using Domain.Model;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Domain.Context
 {
@@ -13,7 +16,14 @@ namespace Domain.Context
     /// <param name="context">The context to seed. </param>
     protected override void Seed(ApplicationDbContext context)
     {
-      AddClients(context);
+            if (!(context.Users.Any(u => u.UserName == "sjclark76@gmail.com")))
+            {
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                var userToInsert = new ApplicationUser { UserName = "sjclark76@gmail.com", PhoneNumber = "021509357" };
+                userManager.Create(userToInsert, "ridgeback");
+            }
+            AddClients(context);
       AddSessions(context);
     }
 
