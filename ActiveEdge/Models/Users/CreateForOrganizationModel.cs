@@ -6,5 +6,7 @@ namespace ActiveEdge.Models.Users
     {
         [EmailAddress]
         public string EmailAddress { get; set; }
+
+        public int OrganizationId { get; set; }
     }
 }

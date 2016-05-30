@@ -38,7 +38,7 @@ namespace ActiveEdge.Controllers
         [HttpGet]
         public ActionResult CreateForOrganization(int id)
         {
-            return View(new CreateForOrganizationModel());
+            return View(new CreateForOrganizationModel {OrganizationId = id});
         }
 
         [HttpPost]
@@ -48,6 +48,7 @@ namespace ActiveEdge.Controllers
 
             user.UserName = model.EmailAddress;
             user.Email = model.EmailAddress;
+            user.OrganizationId = model.OrganizationId;
 
             var result = _userManager.Create(user, Guid.NewGuid().ToString());
             if (result.Succeeded)

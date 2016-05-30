@@ -38,7 +38,7 @@
             <div class="form-horizontal">
               @Html.AntiForgeryToken()
               @Html.ValidationSummary(true)
-
+              @Html.HiddenFor(model => model.OrganizationId)
               @Html.EditorFor(model => model.EmailAddress, "StandardFormTextBox")
 
 
