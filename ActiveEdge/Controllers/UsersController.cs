@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure;
+using ActiveEdge.Models.Shared;
 using ActiveEdge.Models.Users;
 using AutoMapper;
+using Domain.Context;
 using Domain.Model;
 using Domain.Query.User;
 using MediatR;
@@ -50,6 +52,8 @@ namespace ActiveEdge.Controllers
             var result = _userManager.Create(user, Guid.NewGuid().ToString());
             if (result.Succeeded)
             {
+                _userManager.AddToRole(user.Id, Roles.OrganizationAdministrator);
+
                 var code = _userManager.GenerateEmailConfirmationToken(user.Id);
                 var callbackUrl = Url.Action(
                     "ConfirmEmail", "Account",
@@ -60,11 +64,13 @@ namespace ActiveEdge.Controllers
                     "Confirm your account",
                     "Please confirm your account by clicking this link: <a href=\""
                     + callbackUrl + "\">link</a>");
-                // ViewBag.Link = callbackUrl;   // Used only for initial demo.
-                return View("DisplayEmail");
+                
+                Notify(new SuccessMessage("Organization Administrator sucessfully created."));
+
+                return RedirectToAction("Index", "Organization");
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Organization");
         }
 
         // GET: User
