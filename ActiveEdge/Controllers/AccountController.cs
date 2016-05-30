@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using ActiveEdge.Models;
 using Domain.Context;
+using Domain.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -10,7 +11,7 @@ using Microsoft.Owin.Security;
 namespace ActiveEdge.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
@@ -304,6 +305,22 @@ namespace ActiveEdge.Controllers
             var linkedAccounts = UserManager.GetLogins(User.Identity.GetUserId());
             ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
             return (ActionResult) PartialView("_RemoveAccountPartial", linkedAccounts);
+        }
+        [HttpGet]
+        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            if (result.Succeeded)
+            {
+                
+                return RedirectToAction("Index", "Home");
+            }
+            AddErrors(result);
+            return View();
         }
 
         protected override void Dispose(bool disposing)

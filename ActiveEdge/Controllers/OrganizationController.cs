@@ -62,7 +62,7 @@ namespace ActiveEdge.Controllers
 
             return Json(new
             {
-                redirectUrl = Url.Action("Index", "Organization"),
+                redirectUrl = Url.Action("CreateForOrganization", "Users", new {id = organization.Id}),
                 isRedirect = true
             });
             

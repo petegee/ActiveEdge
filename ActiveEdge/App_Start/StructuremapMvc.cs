@@ -15,8 +15,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Web.Mvc;
 using ActiveEdge.App_Start;
-
+using ActiveEdge.DependencyResolution;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using WebActivatorEx;
 
 [assembly: PreApplicationStartMethod(typeof(StructuremapMvc), "Start")]
@@ -24,38 +26,31 @@ using WebActivatorEx;
 
 namespace ActiveEdge.App_Start
 {
-  using System.Web.Mvc;
-
-  using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-  using ActiveEdge.DependencyResolution;
-
-  using StructureMap;
-
-  public static class StructuremapMvc
-  {
-    #region Public Properties
-
-    public static StructureMapDependencyScope StructureMapDependencyScope { get; set; }
-
-    #endregion
-
-    #region Public Methods and Operators
-
-    public static void End()
+    public static class StructuremapMvc
     {
-      StructureMapDependencyScope.Dispose();
-    }
+        #region Public Properties
 
-    public static void Start()
-    {
-      IContainer container = IoC.Initialize();
-      container.AssertConfigurationIsValid();
-      StructureMapDependencyScope = new StructureMapDependencyScope(container);
-      DependencyResolver.SetResolver(StructureMapDependencyScope);
-      DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
-    }
+        public static StructureMapDependencyScope StructureMapDependencyScope { get; set; }
 
-    #endregion
-  }
+        #endregion
+
+        #region Public Methods and Operators
+
+        public static void End()
+        {
+            StructureMapDependencyScope.Dispose();
+        }
+
+        public static void Start()
+        {
+            // add this assignment
+            var container = IoC.Initialize();
+            container.AssertConfigurationIsValid();
+            StructureMapDependencyScope = new StructureMapDependencyScope(container);
+            DependencyResolver.SetResolver(StructureMapDependencyScope);
+            DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
+        }
+
+        #endregion
+    }
 }

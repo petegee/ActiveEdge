@@ -36,9 +36,13 @@
       </ul>
       <ul class="nav navbar-top-links navbar-right">
         <li>
-          <a href="#">
-            <i class="fa fa-sign-out"></i> Log out
-          </a>
+          @using (Html.BeginForm("LogOff", "Account"))
+          {
+            @Html.AntiForgeryToken()
+              <button type="submit" class="btn">
+                <i class="fa fa-sign-out"></i> Log out
+              </button>
+          }
         </li>
       </ul>
     </div>

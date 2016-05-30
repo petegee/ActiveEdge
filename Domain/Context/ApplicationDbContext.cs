@@ -1,7 +1,6 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using ActiveEdge.Models;
 using Domain.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.Entity;
@@ -14,6 +13,7 @@ namespace Domain.Context
         DbSet<Session> Sessions { get; set; }
         DbSet<Organization> Organizations { get; set; }
         DbSet<Address> Addresses { get; set; }
+        IDbSet<ApplicationUser> Users { get; set; }
         int SaveChanges();
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
@@ -32,6 +32,7 @@ namespace Domain.Context
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Address> Addresses { get; set; }
+
         /// <summary>
         ///     Maps table names, and sets up relationships between the various user entities
         /// </summary>

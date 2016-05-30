@@ -88,6 +88,8 @@
     <Compile Include="Model\TermsAndConditions.cs" />
     <Compile Include="Model\TouchPreference.cs" />
     <Compile Include="Query\FindAllOrganizations.cs" />
+    <Compile Include="Query\User\FindAllUsersForOrganization.cs" />
+    <Compile Include="Query\User\UserQueryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
