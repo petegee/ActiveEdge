@@ -280,6 +280,11 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutomapperExtensions.cs" />
+    <Compile Include="Infrastructure\Mapping\CommandToDomainModel.cs" />
+    <Compile Include="Infrastructure\Mapping\DomainModelToDomainEvent.cs" />
+    <Compile Include="Infrastructure\Mapping\DomainModelToViewModel.cs" />
+    <Compile Include="Infrastructure\Mapping\ViewModelToCommand.cs" />
+    <Compile Include="Infrastructure\Mapping\ViewModelToDomainModel.cs" />
     <Compile Include="Infrastructure\MVC\MetadataProvider.cs" />
     <Compile Include="Infrastructure\PlaceHolderAttribute.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -511,6 +516,7 @@
     <Content Include="Views\Users\ForOrganization.cshtml" />
     <Content Include="Views\Users\CreateForOrganization.cshtml" />
     <Content Include="Views\Organization\DisplayTemplates\OrganizationModel.cshtml" />
+    <Content Include="Views\Organization\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

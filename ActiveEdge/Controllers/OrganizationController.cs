@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using ActiveEdge.Models.Organization;
 using AutoMapper;
 using Domain;
+using Domain.Command;
 using Domain.Context;
 using Domain.Model;
 using Domain.Query;
@@ -31,7 +32,6 @@ namespace ActiveEdge.Controllers
         // GET: Organization
         public ActionResult Index()
         {
-
             var organizations = _bus.ExecuteQuery(new FindAllOrganizations()).ProjectToList<OrganizationModel>(_mapperConfiguration);
             
             return View(organizations);
@@ -40,19 +40,18 @@ namespace ActiveEdge.Controllers
         // GET: Organization/Details/5
         public ActionResult Details(int id)
         {
-            var organizationModel = _bus
+            var model = _bus
                 .ExecuteQuery(new GetOrganization(id))
                 .ProjectToSingle<OrganizationModel>(_mapperConfiguration);
 
-            return View(organizationModel);
+            return View(model);
         }
 
         // GET: Organization/Create
         public ActionResult Create()
         {
-            var model = new OrganizationModel();
-            
-            model.Clinics = new List<ClinicModel>() {new ClinicModel () };
+            var model = new OrganizationModel {Clinics = new List<ClinicModel> {new ClinicModel()}};
+
             return View(model);
         }
 
@@ -60,15 +59,13 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         public JsonResult Create(OrganizationModel organizationModel)
         {
-            var organization = _mapper.Map<Organization>(organizationModel);
+            var command = _mapper.Map<CreateNewOrganizationCommand>(organizationModel);
 
-            _dbContext.Organizations.Add(organization);
-
-            _dbContext.SaveChanges();
-
+            var organizationId =_bus.ExecuteCommand(command);
+            
             return Json(new
             {
-                redirectUrl = Url.Action("CreateForOrganization", "Users", new {id = organization.Id}),
+                redirectUrl = Url.Action("CreateForOrganization", "Users", new {id = organizationId}),
                 isRedirect = true
             });
             
@@ -77,7 +74,11 @@ namespace ActiveEdge.Controllers
         // GET: Organization/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = _bus
+                .ExecuteQuery(new GetOrganization(id))
+                .ProjectToSingle<OrganizationModel>(_mapperConfiguration);
+
+            return View(model);
         }
 
         // POST: Organization/Edit/5
@@ -106,8 +107,12 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+
+            _bus.ExecuteCommand(new DeleteOrganizationCommand(id));
+
             try
             {
+
                 // TODO: Add delete logic here
 
                 return RedirectToAction("Index");

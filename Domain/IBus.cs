@@ -1,47 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Domain.Model;
+﻿using System.Linq;
 using MediatR;
 
 namespace Domain
 {
-    public interface IQueryHandler<in TQuery, out TDomain> : IRequestHandler<TQuery, IQueryable<TDomain>> where TQuery : IRequest<IQueryable<TDomain>>
-    {
-
-    }
-
-    
-    public interface ICommand : IRequest
+    public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, int> where TCommand : IRequest<int>
     {
         
     }
-    public interface ICommand<out TResponse> : IRequest<TResponse>
-    {
+    
 
+    public interface IQueryHandler<in TQuery, out TDomain> : IRequestHandler<TQuery, IQueryable<TDomain>>
+        where TQuery : IRequest<IQueryable<TDomain>>
+    {
+    }
+
+
+    public interface ICommand : IRequest<int>
+    {
     }
 
     public interface IQuery<out TResponse> : IRequest<IQueryable<TResponse>>
     {
-        
     }
 
     public interface IDomainEvent : INotification
     {
-        
     }
 
     public interface IBus
     {
-        void ExecuteCommand(ICommand command);
-        void ExecuteCommand(ICommand<int> command);
+        int ExecuteCommand(ICommand command);
         IQueryable<TResponse> ExecuteQuery<TResponse>(IQuery<TResponse> query);
         void PublishDomainEvent(IDomainEvent domainEvent);
     }
-    public class Bus :IBus
+
+    public class Bus : IBus
     {
         private readonly IMediator _mediator;
 
@@ -51,16 +44,12 @@ namespace Domain
             _mediator = mediator;
         }
 
-        public void ExecuteCommand(ICommand command)
+        public int ExecuteCommand(ICommand command)
         {
-            _mediator.Send(command);
+           return  _mediator.Send(command);
         }
 
-        public void ExecuteCommand(ICommand<int> command)
-        {
-            _mediator.Send(command);
-        }
-        
+
         public IQueryable<TResponse> ExecuteQuery<TResponse>(IQuery<TResponse> query)
         {
             return _mediator.Send(query);

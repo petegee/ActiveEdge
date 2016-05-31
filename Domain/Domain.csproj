@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DelegateDecompiler">
       <HintPath>..\packages\DelegateDecompiler.0.17.0\lib\net40-Client\DelegateDecompiler.dll</HintPath>
     </Reference>
@@ -68,11 +72,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregate\OrganizationAggregate.cs" />
+    <Compile Include="BusinessRuleException.cs" />
+    <Compile Include="Command\CreateNewOrganizationCommand.cs" />
+    <Compile Include="Command\DeleteOrganizationCommand.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Context\DatabaseInitializer.cs" />
     <Compile Include="Context\MySqlConfiguration.cs" />
     <Compile Include="Context\MySqlHistoryContext.cs" />
     <Compile Include="Context\MySqlInitializer.cs" />
+    <Compile Include="Event\NewOrganizationCreated.cs" />
     <Compile Include="IBus.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Client.cs" />
@@ -98,9 +107,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Command\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
