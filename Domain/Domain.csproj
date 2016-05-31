@@ -73,6 +73,7 @@
     <Compile Include="Context\MySqlConfiguration.cs" />
     <Compile Include="Context\MySqlHistoryContext.cs" />
     <Compile Include="Context\MySqlInitializer.cs" />
+    <Compile Include="IBus.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Clinic.cs" />
@@ -87,7 +88,9 @@
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\TermsAndConditions.cs" />
     <Compile Include="Model\TouchPreference.cs" />
-    <Compile Include="Query\FindAllOrganizations.cs" />
+    <Compile Include="Query\Organization\FindAllOrganizations.cs" />
+    <Compile Include="Query\Organization\GetOrganization.cs" />
+    <Compile Include="Query\Organization\OrganizationQueryRepository.cs" />
     <Compile Include="Query\User\FindAllUsersForOrganization.cs" />
     <Compile Include="Query\User\UserQueryRepository.cs" />
   </ItemGroup>

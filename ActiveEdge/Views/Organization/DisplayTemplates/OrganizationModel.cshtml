@@ -1,0 +1,66 @@
+﻿@model ActiveEdge.Models.Organization.OrganizationModel
+<dl class="dl-horizontal">
+  <dt>
+    @Html.DisplayNameFor(model => model.OrganizationName)
+  </dt>
+  <dd>
+    @Html.DisplayFor(model => model.OrganizationName)
+  </dd>
+
+  <dt>
+    @Html.DisplayNameFor(model => model.ContactPerson)
+  </dt>
+  <dd>
+    @Html.DisplayFor(model => model.ContactPerson)
+  </dd>
+
+  <dt>
+    @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+  </dt>
+  <dd>
+    @Html.DisplayFor(model => model.ContactPhoneNumber)
+  </dd>
+
+  <dt>
+    @Html.DisplayNameFor(model => model.ContactEmailAddress)
+  </dt>
+  <dd>
+    @Html.DisplayFor(model => model.ContactEmailAddress)
+  </dd>
+</dl>
+  @foreach (var clinic in Model.Clinics)
+  {
+    <div class="panel panel-default">
+      <div class="panel-heading">Clinic</div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt>@Html.DisplayNameFor(model => clinic.ClinicName)</dt>
+          <dd>@Html.DisplayFor(model => clinic.ClinicName)</dd>
+
+          <dt>@Html.DisplayNameFor(model => clinic.PhoneNumber)</dt>
+          <dd>@Html.DisplayFor(model => clinic.PhoneNumber)</dd>
+
+          <dt>@Html.DisplayNameFor(model => clinic.AddressLine1)</dt>
+          <dd>@Html.DisplayFor(model => clinic.AddressLine1)</dd>
+
+          <dt>@Html.DisplayNameFor(model => clinic.AddressLine2)</dt>
+          <dd>@Html.DisplayFor(model => clinic.AddressLine2)</dd>
+
+          <dt>@Html.DisplayNameFor(model => clinic.Suburb)</dt>
+          <dd>@Html.DisplayFor(model => clinic.Suburb)</dd>
+
+          <dt>@Html.DisplayNameFor(model => clinic.City)</dt>
+          <dd>@Html.DisplayFor(model => clinic.City)</dd>
+
+          <dt>@Html.DisplayNameFor(model => clinic.PostCode)</dt>
+          <dd>@Html.DisplayFor(model => clinic.PostCode)</dd>
+        </dl>
+      </div>
+    </div>
+
+
+    
+   
+    
+    
+  }

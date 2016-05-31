@@ -510,6 +510,7 @@
     <Content Include="Views\Shared\EditorTemplates\AddressModel.cshtml" />
     <Content Include="Views\Users\ForOrganization.cshtml" />
     <Content Include="Views\Users\CreateForOrganization.cshtml" />
+    <Content Include="Views\Organization\DisplayTemplates\OrganizationModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

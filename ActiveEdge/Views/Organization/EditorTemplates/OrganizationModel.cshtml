@@ -1,5 +1,5 @@
 ﻿@using ActiveEdge.Models.Organization
-@model ActiveEdge.Models.Organization.OrganizationModel
+@model OrganizationModel
 @Html.AntiForgeryToken()
 @Html.ValidationSummary(true)
 
@@ -8,13 +8,6 @@
 @Html.EditorFor(model => model.ContactPerson, "StandardFormTextBox", new {htmlAttributes = new {databindKO = "textInput: contactPerson"}})
 @Html.EditorFor(model => model.ContactPhoneNumber, "StandardFormTextBox", new {htmlAttributes = new {databindKO = "textInput: contactPhoneNumber"}})
 @Html.EditorFor(model => model.ContactEmailAddress, "StandardFormTextBox", new {htmlAttributes = new {databindKO = "textInput: contactEmailAddress"}})
-
-@*@for (var index = 0; index < Model.Clinics.Count; index++)
-{
-  var clinic = Model.Clinics[index];
-  @Html.EditorFor(model => model.Clinics[index].ClinicName, "StandardFormTextBox")
-}*@
-
 
 <div class="row">
   <div class="col-lg-12">
@@ -33,11 +26,7 @@
           @Html.EditorFor(model => new ClinicModel().Suburb, "StandardFormTextBox", new { htmlAttributes = new { databindKO = "textInput: suburb" } })
           @Html.EditorFor(model => new ClinicModel().City, "StandardFormTextBox", new { htmlAttributes = new { databindKO = "textInput: city" } })
           @Html.EditorFor(model => new ClinicModel().PostCode, "StandardFormTextBox", new { htmlAttributes = new { databindKO = "textInput: postCode" } })
-          
-
         </div>
-
-        
       </div>
     
       <!-- /ko -->
