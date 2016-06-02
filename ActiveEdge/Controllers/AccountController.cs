@@ -43,6 +43,7 @@ namespace ActiveEdge.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
@@ -306,7 +307,9 @@ namespace ActiveEdge.Controllers
             ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
             return (ActionResult) PartialView("_RemoveAccountPartial", linkedAccounts);
         }
+
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -316,7 +319,6 @@ namespace ActiveEdge.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
             {
-                
                 return RedirectToAction("Index", "Home");
             }
             AddErrors(result);
@@ -348,7 +350,7 @@ namespace ActiveEdge.Controllers
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            var identity = await user.GenerateUserIdentityAsync(UserManager);// UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
 

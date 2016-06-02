@@ -263,7 +263,6 @@
     <Compile Include="Infrastructure\Caching\ICacheableItem.cs" />
     <Compile Include="Infrastructure\Caching\SoftwareVersion.cs" />
     <Compile Include="Infrastructure\Caching\SoftwareVersionCacheItem.cs" />
-    <Compile Include="Infrastructure\Contstants.cs" />
     <Compile Include="Infrastructure\Extensions\ViewDataExtensions.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
@@ -285,6 +284,7 @@
     <Compile Include="Infrastructure\Mapping\DomainModelToViewModel.cs" />
     <Compile Include="Infrastructure\Mapping\ViewModelToCommand.cs" />
     <Compile Include="Infrastructure\Mapping\ViewModelToDomainModel.cs" />
+    <Compile Include="Infrastructure\MVC\Attributes\AuthorizeRolesAttribute.cs" />
     <Compile Include="Infrastructure\MVC\MetadataProvider.cs" />
     <Compile Include="Infrastructure\PlaceHolderAttribute.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

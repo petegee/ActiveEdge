@@ -1,13 +1,27 @@
+using System.Linq;
+using System.Security.Claims;
 using System.Web.Mvc;
 using ActiveEdge.Models.Shared;
+using Domain.Model;
 
 namespace ActiveEdge.Controllers
 {
-
-
     public abstract class ControllerBase : Controller
     {
         private const string UiNotificationKey = "UINotificationKey";
+
+        public int? OrganizationId
+        {
+            get
+            {
+                var identity = (ClaimsIdentity) User.Identity;
+                var claims = identity.Claims;
+
+                var organizationClaim = claims.FirstOrDefault(claim => claim.Type == ActiveEdgeClaims.OrganizationId);
+
+                return organizationClaim == null ? (int?) null : int.Parse(organizationClaim.Value);
+            }
+        }
 
         public void Notify(Message message)
         {

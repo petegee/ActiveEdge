@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Domain.Model;
@@ -38,9 +39,24 @@ namespace Domain.Context
                 userManager.AddToRole(userToInsert.Id, Roles.SystemAdministrator);
             }
 
-            
+            AddOrganization(context);
             AddClients(context);
             AddSessions(context);
+        }
+
+        private void AddOrganization(ApplicationDbContext context)
+        {
+
+            context.Organizations.Add(new Organization
+            {
+                OrganizationName = "Capital Sports",
+                ContactPerson = "Dr Zeuss",
+                ContactEmailAddress = "Dr@capitalsports.com",
+                ContactPhoneNumber = "01702 712202",
+                Clinics = new List<Clinic> { new Clinic { ClinicName = "Lambton Quay"} }
+            });
+
+            context.SaveChanges();
         }
 
         private static void AddSessions(ApplicationDbContext context)
@@ -62,6 +78,8 @@ namespace Domain.Context
 
         private static void AddClients(ApplicationDbContext context)
         {
+            var organization = context.Organizations.First();
+
             context.Clients.Add(new Client
             {
                 FirstName = "Stuart",
@@ -75,7 +93,8 @@ namespace Domain.Context
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
                 Gender = Gender.Male,
                 ContraIndications = new ContraIndications(),
-                TermsAndConditions = new TermsAndConditions()
+                TermsAndConditions = new TermsAndConditions(),
+                OrganizationId = organization.Id
             });
 
             context.Clients.Add(new Client
@@ -91,7 +110,8 @@ namespace Domain.Context
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
                 Gender = Gender.Female,
                 ContraIndications = new ContraIndications(),
-                TermsAndConditions = new TermsAndConditions()
+                TermsAndConditions = new TermsAndConditions(),
+                OrganizationId = organization.Id
             });
 
             context.Clients.Add(new Client
@@ -107,7 +127,8 @@ namespace Domain.Context
                 ExcerciseFrequency = ExcerciseFrequency.Never,
                 Gender = Gender.Female,
                 ContraIndications = new ContraIndications(),
-                TermsAndConditions = new TermsAndConditions()
+                TermsAndConditions = new TermsAndConditions(),
+                OrganizationId = organization.Id
             });
 
             context.Clients.Add(new Client
@@ -123,7 +144,8 @@ namespace Domain.Context
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
                 Gender = Gender.Female,
                 ContraIndications = new ContraIndications(),
-                TermsAndConditions = new TermsAndConditions()
+                TermsAndConditions = new TermsAndConditions(),
+                OrganizationId = organization.Id
             });
         }
     }

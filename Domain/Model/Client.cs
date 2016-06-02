@@ -9,6 +9,11 @@ namespace Domain.Model
   public class Client
   {
     public int Id { get; set; }
+
+    public int OrganizationId { get; set; }
+
+    public virtual Organization Organization { get; set; }
+
     public string FirstName { get; set; }
     public string LastName { get; set; }
     [Computed, NotMapped]

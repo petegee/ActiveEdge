@@ -97,6 +97,8 @@
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\TermsAndConditions.cs" />
     <Compile Include="Model\TouchPreference.cs" />
+    <Compile Include="Query\Clients\GetAllClientsForOrganization.cs" />
+    <Compile Include="Query\Clients\ClientQueryRepository.cs" />
     <Compile Include="Query\Organization\FindAllOrganizations.cs" />
     <Compile Include="Query\Organization\GetOrganization.cs" />
     <Compile Include="Query\Organization\OrganizationQueryRepository.cs" />
