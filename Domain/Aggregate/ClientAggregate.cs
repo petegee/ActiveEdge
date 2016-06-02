@@ -1,11 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Data.Entity;
+using AutoMapper;
 using Domain.Command;
+using Domain.Command.Client;
 using Domain.Context;
 using Domain.Model;
 
 namespace Domain.Aggregate
 {
-    public class ClientAggregate : ICommandHandler<RegisterNewClientCommand>
+    public class ClientAggregate : ICommandHandler<RegisterNewClientCommand>, ICommandHandler<UpdateClientCommand>, ICommandHandler<DeleteClientCommand>
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -33,6 +35,30 @@ namespace Domain.Aggregate
             _dbContext.SaveChanges();
 
             return customerDomain.Id;
+        }
+
+        /// <summary>Handles a request</summary>
+        /// <param name="message">The request message</param>
+        /// <returns>Response from the request</returns>
+        public int Handle(UpdateClientCommand message)
+        {
+            var customerDomain = _mapper.Map<UpdateClientCommand, Client>(message);
+            _dbContext.Entry(customerDomain).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+
+            return customerDomain.Id;
+        }
+
+        /// <summary>Handles a request</summary>
+        /// <param name="message">The request message</param>
+        /// <returns>Response from the request</returns>
+        public int Handle(DeleteClientCommand message)
+        {
+            var customer = _dbContext.Clients.Find(message.ClientId);
+            _dbContext.Clients.Remove(customer);
+            _dbContext.SaveChanges();
+
+            return customer.Id;
         }
     }
 }

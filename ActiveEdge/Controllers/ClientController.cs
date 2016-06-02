@@ -7,6 +7,7 @@ using ActiveEdge.Models.Shared;
 using AutoMapper;
 using Domain;
 using Domain.Command;
+using Domain.Command.Client;
 using Domain.Context;
 using Domain.Model;
 using Domain.Query.Clients;
@@ -89,7 +90,7 @@ namespace ActiveEdge.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: /Client/Edit/5
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -97,31 +98,31 @@ namespace ActiveEdge.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var customer =
-                _database.Clients.Where(c => c.Id == id.Value)
-                    .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
+            var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
+              .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
 
             if (customer == null)
             {
                 return HttpNotFound();
             }
+
             return View(customer);
         }
 
-        // POST: /Client/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ClientModel clientModel)
         {
             if (ModelState.IsValid)
             {
-                var customerDomain = _mapper.Map<ClientModel, Client>(clientModel);
-                _database.Entry(customerDomain).State = EntityState.Modified;
-                _database.SaveChanges();
+                var cmd = _mapper.Map<UpdateClientCommand>(clientModel);
+
+                _bus.ExecuteCommand(cmd);
+                
                 return RedirectToAction("Index");
             }
+
             return View(clientModel);
         }
 
@@ -132,8 +133,10 @@ namespace ActiveEdge.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var customer =
-                _database.Clients.Where(c => c.Id == id.Value).ProjectToSingle<ClientModel>(_mapperConfiguration);
+
+            var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
+              .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
+            
             if (customer == null)
             {
                 return HttpNotFound();
@@ -146,9 +149,8 @@ namespace ActiveEdge.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var customer = _database.Clients.Find(id);
-            _database.Clients.Remove(customer);
-            _database.SaveChanges();
+            _bus.ExecuteCommand(new DeleteClientCommand(id));
+           
             return RedirectToAction("Index");
         }
 

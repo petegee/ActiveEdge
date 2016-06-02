@@ -17,6 +17,7 @@ namespace ActiveEdge.Infrastructure.Mapping
             CreateMap<OrganizationModel, CreateNewOrganizationCommand>();
 
             CreateMap<ClientModel, RegisterNewClientCommand>();
+            CreateMap<ClientModel, UpdateClientCommand>();
         }
     }
 }

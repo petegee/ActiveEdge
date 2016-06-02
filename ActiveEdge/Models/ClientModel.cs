@@ -8,8 +8,7 @@ namespace ActiveEdge.Models
     public class ClientModel
     {
         public int Id { get; set; }
-
-
+        
         [DisplayName("First Name")]
         [Required]
         public string FirstName { get; set; }

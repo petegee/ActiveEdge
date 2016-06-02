@@ -75,9 +75,11 @@
     <Compile Include="Aggregate\ClientAggregate.cs" />
     <Compile Include="Aggregate\OrganizationAggregate.cs" />
     <Compile Include="BusinessRuleException.cs" />
+    <Compile Include="Command\Client\DeleteClientCommand.cs" />
     <Compile Include="Command\CreateNewOrganizationCommand.cs" />
     <Compile Include="Command\DeleteOrganizationCommand.cs" />
-    <Compile Include="Command\RegisterNewClientCommand.cs" />
+    <Compile Include="Command\Client\RegisterNewClientCommand.cs" />
+    <Compile Include="Command\Client\UpdateClientCommand.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Context\DatabaseInitializer.cs" />
     <Compile Include="Context\MySqlConfiguration.cs" />

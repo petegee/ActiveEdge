@@ -12,6 +12,8 @@ namespace ActiveEdge.Infrastructure.Mapping
         /// </summary>
         protected override void Configure()
         {
+            CreateMap<RegisterNewClientCommand, Client>();
+            CreateMap<UpdateClientCommand, Client>();
             CreateMap<CreateNewOrganizationCommand.Clinic, Clinic>()
                 .ForMember(dest => dest.Address, options => options.ResolveUsing(
                     model => new Address
