@@ -1,3 +1,4 @@
+using ActiveEdge.Models;
 using ActiveEdge.Models.Organization;
 using AutoMapper;
 using Domain.Command;
@@ -14,6 +15,8 @@ namespace ActiveEdge.Infrastructure.Mapping
         {
             CreateMap<ClinicModel, CreateNewOrganizationCommand.Clinic>();
             CreateMap<OrganizationModel, CreateNewOrganizationCommand>();
+
+            CreateMap<ClientModel, RegisterNewClientCommand>();
         }
     }
 }

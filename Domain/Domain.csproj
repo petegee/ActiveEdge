@@ -72,10 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregate\ClientAggregate.cs" />
     <Compile Include="Aggregate\OrganizationAggregate.cs" />
     <Compile Include="BusinessRuleException.cs" />
     <Compile Include="Command\CreateNewOrganizationCommand.cs" />
     <Compile Include="Command\DeleteOrganizationCommand.cs" />
+    <Compile Include="Command\RegisterNewClientCommand.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Context\DatabaseInitializer.cs" />
     <Compile Include="Context\MySqlConfiguration.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Model\TouchPreference.cs" />
     <Compile Include="Query\Clients\GetAllClientsForOrganization.cs" />
     <Compile Include="Query\Clients\ClientQueryRepository.cs" />
+    <Compile Include="Query\Clients\GetClientForOrganization.cs" />
     <Compile Include="Query\Organization\FindAllOrganizations.cs" />
     <Compile Include="Query\Organization\GetOrganization.cs" />
     <Compile Include="Query\Organization\OrganizationQueryRepository.cs" />

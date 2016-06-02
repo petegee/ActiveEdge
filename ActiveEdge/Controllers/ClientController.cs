@@ -6,10 +6,10 @@ using ActiveEdge.Models;
 using ActiveEdge.Models.Shared;
 using AutoMapper;
 using Domain;
+using Domain.Command;
 using Domain.Context;
 using Domain.Model;
 using Domain.Query.Clients;
-using MediatR;
 
 namespace ActiveEdge.Controllers
 {
@@ -20,24 +20,23 @@ namespace ActiveEdge.Controllers
         private readonly IApplicationDbContext _database;
         private readonly IMapper _mapper;
         private readonly MapperConfiguration _mapperConfiguration;
-        private readonly IMediator _mediator;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
         /// 
         public ClientController(IApplicationDbContext database, IBus bus, IMapper mapper,
-            MapperConfiguration mapperConfiguration, IMediator mediator)
+            MapperConfiguration mapperConfiguration)
         {
             _database = database;
             _bus = bus;
             _mapper = mapper;
             _mapperConfiguration = mapperConfiguration;
-            _mediator = mediator;
         }
 
 
         // GET: /Client/
+        [HttpGet]
         public ActionResult Index()
         {
             var clients = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId)).ProjectToList<ClientModel>(_mapperConfiguration);
@@ -46,16 +45,16 @@ namespace ActiveEdge.Controllers
         }
 
         // GET: /Client/Details/5
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var customer =
-                _database.Clients.Where(c => c.Id == id.Value)
-                    .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
-
+            var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
+                .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
+            
             if (customer == null)
             {
                 return HttpNotFound();
@@ -64,7 +63,7 @@ namespace ActiveEdge.Controllers
             return View(customer);
         }
 
-        // GET: /Client/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View("Intake", new ClientModel());
@@ -79,7 +78,11 @@ namespace ActiveEdge.Controllers
         {
             if (!ModelState.IsValid) return View("Intake", client);
 
-            _mediator.Publish(client);
+            var cmd = _mapper.Map<RegisterNewClientCommand>(client);
+
+            cmd.OrganizationId = OrganizationId;
+
+            _bus.ExecuteCommand(cmd);
 
             Notify(new SuccessMessage("Client successfully registered."));
 
