@@ -12,6 +12,7 @@ namespace Domain.Query.Clients
         public ClientQueryRepository(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            _dbContext.EnableOrganizationTenant();
         }
 
         /// <summary>Handles a request</summary>

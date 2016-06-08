@@ -2,6 +2,6 @@ namespace Shared
 {
     public interface ILoggedOnUser
     {
-        int? OrganizationId { get; }
+        int OrganizationId { get; }
     }
 }

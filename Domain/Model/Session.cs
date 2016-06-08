@@ -2,10 +2,8 @@
 
 namespace Domain.Model
 {
-    public class Session
+    public class Session : Entity , IAmLinkedToAnOrganization
     {
-        public int Id { get; set; }
-
         public int OrganizationId { get; set; }
 
         public virtual Organization Organization { get; set; }
