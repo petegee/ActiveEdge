@@ -24,6 +24,7 @@ using MediatR;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.DataProtection;
+using Shared;
 using StructureMap;
 using StructureMap.Graph;
 
@@ -40,6 +41,7 @@ namespace ActiveEdge.DependencyResolution
                 {
                     scan.TheCallingAssembly();
                     scan.AssemblyContainingType<IApplicationDbContext>();
+                    scan.AssemblyContainingType<ILoggedOnUser>();
                     scan.WithDefaultConventions();
                     scan.With(new ControllerConvention());
                     scan.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
@@ -57,6 +59,7 @@ namespace ActiveEdge.DependencyResolution
 .Use<UserStore<ApplicationUser>>();
 
            For<DbContext>().Use(() => new ApplicationDbContext());
+            
             //For<IUserStore<ApplicationUser>>().Use(new UserStore<ApplicationUser>(new ApplicationDbContext())).Singleton();
 
            // For<IUserStore<IdentityUser>>()

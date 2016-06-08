@@ -2,6 +2,7 @@ using ActiveEdge.Models;
 using ActiveEdge.Models.Organization;
 using AutoMapper;
 using Domain.Command;
+using Domain.Command.Client;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {

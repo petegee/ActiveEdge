@@ -1,6 +1,4 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Models;
 using ActiveEdge.Models.Shared;
@@ -9,7 +7,6 @@ using Domain;
 using Domain.Command;
 using Domain.Command.Client;
 using Domain.Context;
-using Domain.Model;
 using Domain.Query.Clients;
 
 namespace ActiveEdge.Controllers
@@ -25,7 +22,6 @@ namespace ActiveEdge.Controllers
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
-        /// 
         public ClientController(IApplicationDbContext database, IBus bus, IMapper mapper,
             MapperConfiguration mapperConfiguration)
         {
@@ -40,7 +36,9 @@ namespace ActiveEdge.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var clients = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId)).ProjectToList<ClientModel>(_mapperConfiguration);
+            var clients =
+                _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
+                    .ProjectToList<ClientModel>(_mapperConfiguration);
 
             return View(clients);
         }
@@ -55,7 +53,7 @@ namespace ActiveEdge.Controllers
             }
             var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
                 .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
-            
+
             if (customer == null)
             {
                 return HttpNotFound();
@@ -99,7 +97,7 @@ namespace ActiveEdge.Controllers
             }
 
             var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
-              .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
+                .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
 
             if (customer == null)
             {
@@ -109,7 +107,7 @@ namespace ActiveEdge.Controllers
             return View(customer);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ClientModel clientModel)
@@ -119,7 +117,7 @@ namespace ActiveEdge.Controllers
                 var cmd = _mapper.Map<UpdateClientCommand>(clientModel);
 
                 _bus.ExecuteCommand(cmd);
-                
+
                 return RedirectToAction("Index");
             }
 
@@ -135,8 +133,8 @@ namespace ActiveEdge.Controllers
             }
 
             var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
-              .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
-            
+                .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
+
             if (customer == null)
             {
                 return HttpNotFound();
@@ -150,7 +148,7 @@ namespace ActiveEdge.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             _bus.ExecuteCommand(new DeleteClientCommand(id));
-           
+
             return RedirectToAction("Index");
         }
 

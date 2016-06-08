@@ -72,8 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregate\ClientAggregate.cs" />
-    <Compile Include="Aggregate\OrganizationAggregate.cs" />
+    <Compile Include="Bus.cs" />
+    <Compile Include="Sagas\ClientSaga.cs" />
+    <Compile Include="Sagas\OrganizationAggregate.cs" />
     <Compile Include="BusinessRuleException.cs" />
     <Compile Include="Command\Client\DeleteClientCommand.cs" />
     <Compile Include="Command\CreateNewOrganizationCommand.cs" />
@@ -114,7 +115,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{717EF0BC-1F6A-4363-893C-02CFED26AD45}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

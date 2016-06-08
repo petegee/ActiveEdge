@@ -1,22 +1,37 @@
-﻿using System.Data.Entity;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Command;
 using Domain.Command.Client;
 using Domain.Context;
 using Domain.Model;
+using Domain.Query.Clients;
 
-namespace Domain.Aggregate
+namespace Domain.Sagas
 {
-    public class ClientAggregate : ICommandHandler<RegisterNewClientCommand>, ICommandHandler<UpdateClientCommand>, ICommandHandler<DeleteClientCommand>
+    public class ClientSaga : ICommandHandler<RegisterNewClientCommand>, ICommandHandler<UpdateClientCommand>,
+        ICommandHandler<DeleteClientCommand>
     {
+        private readonly IBus _bus;
         private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public ClientAggregate(IApplicationDbContext dbContext, IMapper mapper)
+        public ClientSaga(IApplicationDbContext dbContext, IMapper mapper, IBus bus)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _bus = bus;
+        }
+
+        /// <summary>Handles a request</summary>
+        /// <param name="message">The request message</param>
+        /// <returns>Response from the request</returns>
+        public int Handle(DeleteClientCommand message)
+        {
+            var customer = _dbContext.Clients.Find(message.ClientId);
+            _dbContext.Clients.Remove(customer);
+            _dbContext.SaveChanges();
+
+            return customer.Id;
         }
 
         /// <summary>Handles a request</summary>
@@ -42,23 +57,12 @@ namespace Domain.Aggregate
         /// <returns>Response from the request</returns>
         public int Handle(UpdateClientCommand message)
         {
-            var customerDomain = _mapper.Map<UpdateClientCommand, Client>(message);
-            _dbContext.Entry(customerDomain).State = EntityState.Modified;
+            var client = _bus.ExecuteQuery(new GetClientForOrganization(message.Id));
+
+            _mapper.Map(message, client);
             _dbContext.SaveChanges();
 
-            return customerDomain.Id;
-        }
-
-        /// <summary>Handles a request</summary>
-        /// <param name="message">The request message</param>
-        /// <returns>Response from the request</returns>
-        public int Handle(DeleteClientCommand message)
-        {
-            var customer = _dbContext.Clients.Find(message.ClientId);
-            _dbContext.Clients.Remove(customer);
-            _dbContext.SaveChanges();
-
-            return customer.Id;
+            return client.Id;
         }
     }
 }

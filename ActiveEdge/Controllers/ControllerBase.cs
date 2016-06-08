@@ -2,7 +2,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Mvc;
 using ActiveEdge.Models.Shared;
-using Domain.Model;
+using Shared;
 
 namespace ActiveEdge.Controllers
 {
@@ -10,10 +10,11 @@ namespace ActiveEdge.Controllers
     {
         private const string UiNotificationKey = "UINotificationKey";
 
-        public int? OrganizationId
+        protected int? OrganizationId
         {
             get
             {
+                
                 var identity = (ClaimsIdentity) User.Identity;
                 var claims = identity.Claims;
 

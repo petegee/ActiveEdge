@@ -1,5 +1,6 @@
 using AutoMapper;
 using Domain.Command;
+using Domain.Command.Client;
 using Domain.Model;
 
 namespace ActiveEdge.Infrastructure.Mapping

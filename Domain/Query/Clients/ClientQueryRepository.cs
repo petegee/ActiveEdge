@@ -4,7 +4,7 @@ using Domain.Model;
 
 namespace Domain.Query.Clients
 {
-    public class ClientQueryRepository : IQueryHandler<GetAllClientsForOrganization, Client>, IQueryHandler<GetClientForOrganization, Client>
+    public class ClientQueryRepository : IQueryHandler<GetAllClientsForOrganization, Client>, IQueryForSingleHandler<GetClientForOrganization, Client>
     {
         private readonly IApplicationDbContext _dbContext;
 
@@ -19,21 +19,15 @@ namespace Domain.Query.Clients
         /// <returns>Response from the request</returns>
         public IQueryable<Client> Handle(GetAllClientsForOrganization message)
         {
-            return message.OrganizationId == null
-                ? _dbContext.Clients
-                : _dbContext.Clients.Where(client => client.OrganizationId == message.OrganizationId.Value);
+            return _dbContext.Clients;
         }
-
+        
         /// <summary>Handles a request</summary>
         /// <param name="message">The request message</param>
         /// <returns>Response from the request</returns>
-        public IQueryable<Client> Handle(GetClientForOrganization message)
+        public Client Handle(GetClientForOrganization message)
         {
-            var clients = message.OrganizationId == null
-                ? _dbContext.Clients
-                : _dbContext.Clients.Where(client => client.OrganizationId == message.OrganizationId);
-
-            return clients.Where(client => client.Id == message.ClientId);
+            return _dbContext.Clients.SingleOrDefault(client => client.Id == message.ClientId);
         }
     }
 }

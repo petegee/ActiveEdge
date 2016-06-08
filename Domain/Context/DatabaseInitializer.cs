@@ -61,6 +61,9 @@ namespace Domain.Context
 
         private static void AddSessions(ApplicationDbContext context)
         {
+            var organization = context.Organizations.First();
+
+
             context.Sessions.Add(new Session
             {
                 Date = DateTime.Today.Date,
@@ -72,7 +75,8 @@ namespace Domain.Context
                 SessionNotesFindings = "this guy is beast",
                 SessionNotesPosition = "&lt;p&gt;everything&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/p&gt;",
                 SessionNotesTechniques = "everywhere",
-                PreMassagePalpatation = "nope"
+                PreMassagePalpatation = "nope",
+                OrganizationId = organization.Id
             });
         }
 
