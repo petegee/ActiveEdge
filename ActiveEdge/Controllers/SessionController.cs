@@ -1,32 +1,31 @@
 ﻿using System;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Models;
 using ActiveEdge.Models.Shared;
 using AutoMapper;
-using Domain.Context;
-using Domain.Model;
+using Domain;
+using Domain.Command.Session;
+using Domain.Query.Sessions;
 
 namespace ActiveEdge.Controllers
 {
     [Authorize]
     public class SessionController : ControllerBase
     {
-        private readonly IApplicationDbContext _db;
+        private readonly IBus _bus;
         private readonly IMapper _mapper;
         private readonly MapperConfiguration _mapperConfiguration;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
-        public SessionController(IApplicationDbContext applicationDbContext, IMapper mapper,
-            MapperConfiguration mapperConfiguration)
+        public SessionController(IMapper mapper,
+            MapperConfiguration mapperConfiguration, IBus bus)
         {
-            _db = applicationDbContext;
             _mapper = mapper;
             _mapperConfiguration = mapperConfiguration;
+            _bus = bus;
         }
 
         public ActionResult Drawing()
@@ -37,7 +36,9 @@ namespace ActiveEdge.Controllers
         // GET: /Sessions/
         public ActionResult Index()
         {
-            return View(_db.Sessions.ProjectToList<SessionModel>(_mapperConfiguration));
+            var sessions = _bus.ExecuteQuery(new GetAllSessions());
+
+            return View(sessions.ProjectToList<SessionModel>(_mapperConfiguration));
         }
 
         // GET: /Sessions/Details/5
@@ -47,13 +48,17 @@ namespace ActiveEdge.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var sessionModel =
-                _db.Sessions.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
-            if (sessionModel == null)
+
+            var session = _bus.ExecuteQuery(new GetSessionById(id.Value));
+
+            if (session == null)
             {
                 return HttpNotFound();
             }
-            return View(sessionModel);
+
+            var model = _mapper.Map<SessionModel>(session);
+
+            return View(model);
         }
 
         // GET: /Sessions/Create
@@ -73,27 +78,20 @@ namespace ActiveEdge.Controllers
         {
             if (!ModelState.IsValid) return View(sessionModel);
 
-            var domainModel = _mapper.Map<SessionModel, Session>(sessionModel);
-            _db.Sessions.Add(domainModel);
-            _db.SaveChanges();
+            var command = _mapper.Map<CreateNewSessionCommand>(sessionModel);
+
+            var sessionId = _bus.ExecuteCommand(command);
 
             Notify(new SuccessMessage("Session created succesfully."));
 
-            return RedirectToAction("Plan", new {id = domainModel.Id});
+            return RedirectToAction("Plan", new {id = sessionId});
         }
 
         // GET: /Session/Plan
         [HttpGet]
-        public ActionResult Plan(int id)
+        public ActionResult Plan(int? id)
         {
-            var sessionModel =
-                _db.Sessions.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
-
-            if (sessionModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sessionModel);
+            return Edit(id);
         }
 
         // GET: /Sessions/Edit/5
@@ -103,12 +101,16 @@ namespace ActiveEdge.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var sessionModel =
-                _db.Sessions.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
-            if (sessionModel == null)
+
+            var session = _bus.ExecuteQuery(new GetSessionById(id.Value));
+
+            if (session == null)
             {
                 return HttpNotFound();
             }
+
+            var sessionModel = _mapper.Map<SessionModel>(session);
+
             return View(sessionModel);
         }
 
@@ -121,15 +123,15 @@ namespace ActiveEdge.Controllers
         {
             if (ModelState.IsValid)
             {
-                var domainModel = _mapper.Map<SessionModel, Session>(sessionModel);
+                var command = _mapper.Map<UpdateSessionCommand>(sessionModel);
 
-                _db.Entry(domainModel).State = EntityState.Modified;
-                _db.SaveChanges();
+                _bus.ExecuteCommand(command);
 
                 Notify(new SuccessMessage("Session successfully updated."));
 
                 return RedirectToAction("Index");
             }
+
             return View(sessionModel);
         }
 
@@ -140,14 +142,16 @@ namespace ActiveEdge.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var sessionModel =
-                _db.Sessions.Where(note => note.Id == id).ProjectToSingleOrDefault<SessionModel>(_mapperConfiguration);
 
+            var session = _bus.ExecuteQuery(new GetSessionById(id.Value));
 
-            if (sessionModel == null)
+            if (session == null)
             {
                 return HttpNotFound();
             }
+
+            var sessionModel = _mapper.Map<SessionModel>(session);
+
             return View(sessionModel);
         }
 
@@ -156,9 +160,10 @@ namespace ActiveEdge.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var sessionModel = _db.Sessions.Find(id);
-            _db.Sessions.Remove(sessionModel);
-            _db.SaveChanges();
+            _bus.ExecuteCommand(new DeleteSessionCommand {Id = id});
+
+            Notify(new SuccessMessage("Session successfuly deleted."));
+
             return RedirectToAction("Index");
         }
     }

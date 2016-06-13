@@ -77,7 +77,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bus.cs" />
+    <Compile Include="Command\Session\CreateNewSessionCommand.cs" />
+    <Compile Include="Command\Session\DeleteSessionCommand.cs" />
+    <Compile Include="Command\Session\UpdateSessionCommand.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
+    <Compile Include="Query\Sessions\GetAllSessions.cs" />
+    <Compile Include="Query\Sessions\GetSessionById.cs" />
+    <Compile Include="Query\Sessions\SessionQueries.cs" />
     <Compile Include="Sagas\ClientSaga.cs" />
     <Compile Include="Sagas\OrganizationAggregate.cs" />
     <Compile Include="BusinessRuleException.cs" />
@@ -115,6 +121,7 @@
     <Compile Include="Query\Organization\OrganizationQueryRepository.cs" />
     <Compile Include="Query\User\FindAllUsersForOrganization.cs" />
     <Compile Include="Query\User\UserQueryRepository.cs" />
+    <Compile Include="Sagas\SessionSaga.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -126,6 +133,7 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,6 +3,7 @@ using ActiveEdge.Models.Organization;
 using AutoMapper;
 using Domain.Command;
 using Domain.Command.Client;
+using Domain.Command.Session;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
@@ -17,8 +18,12 @@ namespace ActiveEdge.Infrastructure.Mapping
             CreateMap<ClinicModel, CreateNewOrganizationCommand.Clinic>();
             CreateMap<OrganizationModel, CreateNewOrganizationCommand>();
 
+            // Clients
             CreateMap<ClientModel, RegisterNewClientCommand>();
             CreateMap<ClientModel, UpdateClientCommand>();
+
+            // Sessions
+            CreateMap<SessionModel, CreateNewSessionCommand>();
         }
     }
 }
