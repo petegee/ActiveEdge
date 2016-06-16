@@ -1,9 +1,11 @@
+using System.Web.Mvc;
+
 namespace ActiveEdge.Models.Shared
 {
     public class WarningMessage : Message
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public WarningMessage(string text) : base(text)
+        public WarningMessage(MvcHtmlString text) : base(text)
         {
         }
 

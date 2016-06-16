@@ -12,7 +12,7 @@ namespace Domain.Model
 
         public int ClientId { get; set; }
 
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
 
         public string Feedback { get; set; }
 

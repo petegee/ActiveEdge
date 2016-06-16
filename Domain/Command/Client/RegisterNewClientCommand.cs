@@ -1,66 +1,65 @@
 using System;
 using Domain.Model;
 
-namespace Domain.Command
+namespace Domain.Command.Client
 {
     public class RegisterNewClientCommand : ICommand
     {
-        public int? OrganizationId { get; set; }
-        string FirstName { get; set; }
-        string LastName { get; set; }
-        DateTime? DateOfBirth { get; set; }
-        string Email { get; set; }
-        string ContactNumber { get; set; }
-        string AddressLine1 { get; set; }
-        string AddressLine2 { get; set; }
-        string Suburb { get; set; }
-        string City { get; set; }
-        Gender? Gender { get; set; }
-        ExcerciseFrequency? ExcerciseFrequency { get; set; }
-        bool IsSmoker { get; set; }
-        string CurrentMedications { get; set; }
-        string PreviousAilments { get; set; }
-        string GeneralPractionerName { get; set; }
-        bool MedicalClearance { get; set; }
-        bool HasHadPreviousTherapy { get; set; }
-        TouchPreference? TouchPreference { get; set; }
-        bool ContraIndicationsSunburn { get; set; }
-        bool ContraIndicationsHeadache { get; set; }
-        bool ContraIndicationsAsthma { get; set; }
-        bool ContraIndicationsDiabetes { get; set; }
-        bool ContraIndicationsEpilepsy { get; set; }
-        bool ContraIndicationsDepression { get; set; }
-        bool ContraIndicationsHemophilia { get; set; }
-        bool ContraIndicationsCutsBurnsBruises { get; set; }
-        bool ContraIndicationsSeverePain { get; set; }
-        bool ContraIndicationsArteriosclerosis { get; set; }
-        bool ContraIndicationsVaricoseVeins { get; set; }
-        bool ContraIndicationsDizziness { get; set; }
-        bool ContraIndicationsHighBloodPressure { get; set; }
-        bool ContraIndicationsLowBloodPressure { get; set; }
-        bool ContraIndicationsImflammation { get; set; }
-        bool ContraIndicationsSleepDisturbance { get; set; }
-        bool ContraIndicationsIsPregnant { get; set; }
-        bool ContraIndicationsHernia { get; set; }
-        bool ContraIndicationsCancer { get; set; }
-        bool ContraIndicationsContactLenses { get; set; }
-        bool ContraIndicationsMusculoskletalProblems { get; set; }
-        bool ContraIndicationsIrritatedSkinRash { get; set; }
-        bool ContraIndicationsColdOrFlu { get; set; }
-        bool ContraIndicationsStomachUlcers { get; set; }
-        bool ContraIndicationsPinsPacemaker { get; set; }
-        bool ContraIndicationsHeartDisease { get; set; }
-        int CurrentStressLevels { get; set; }
-        int CurrentPainOrTensionLevels { get; set; }
-        string Difficulties { get; set; }
-        string AreasNotToBeMassaged { get; set; }
-        bool TermsAndConditionsConditions1 { get; set; }
-        bool TermsAndConditionsConditions2 { get; set; }
-        bool TermsAndConditionsConditions3 { get; set; }
-        bool TermsAndConditionsConditions4 { get; set; }
-        bool TermsAndConditionsConditions5 { get; set; }
-        bool TermsAndConditionsConditions6 { get; set; }
-        bool TermsAndConditionsConditions7 { get; set; }
-        bool TermsAndConditionsConditions8 { get; set; }
+         public string FirstName { get; set; }
+         public string LastName { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+         public string Email { get; set; }
+         public string ContactNumber { get; set; }
+         public string AddressLine1 { get; set; }
+         public string AddressLine2 { get; set; }
+         public string Suburb { get; set; }
+         public string City { get; set; }
+        public Gender? Gender { get; set; }
+        public ExcerciseFrequency? ExcerciseFrequency { get; set; }
+        public  bool IsSmoker { get; set; }
+        public string CurrentMedications { get; set; }
+        public string PreviousAilments { get; set; }
+        public string GeneralPractionerName { get; set; }
+        public bool MedicalClearance { get; set; }
+        public bool HasHadPreviousTherapy { get; set; }
+        public TouchPreference? TouchPreference { get; set; }
+        public bool ContraIndicationsSunburn { get; set; }
+        public bool ContraIndicationsHeadache { get; set; }
+        public bool ContraIndicationsAsthma { get; set; }
+        public bool ContraIndicationsDiabetes { get; set; }
+        public bool ContraIndicationsEpilepsy { get; set; }
+        public bool ContraIndicationsDepression { get; set; }
+        public bool ContraIndicationsHemophilia { get; set; }
+        public bool ContraIndicationsCutsBurnsBruises { get; set; }
+        public bool ContraIndicationsSeverePain { get; set; }
+        public bool ContraIndicationsArteriosclerosis { get; set; }
+        public bool ContraIndicationsVaricoseVeins { get; set; }
+        public bool ContraIndicationsDizziness { get; set; }
+        public bool ContraIndicationsHighBloodPressure { get; set; }
+        public bool ContraIndicationsLowBloodPressure { get; set; }
+        public bool ContraIndicationsImflammation { get; set; }
+        public bool ContraIndicationsSleepDisturbance { get; set; }
+        public bool ContraIndicationsIsPregnant { get; set; }
+        public bool ContraIndicationsHernia { get; set; }
+        public bool ContraIndicationsCancer { get; set; }
+        public bool ContraIndicationsContactLenses { get; set; }
+        public bool ContraIndicationsMusculoskletalProblems { get; set; }
+        public bool ContraIndicationsIrritatedSkinRash { get; set; }
+        public bool ContraIndicationsColdOrFlu { get; set; }
+        public bool ContraIndicationsStomachUlcers { get; set; }
+        public bool ContraIndicationsPinsPacemaker { get; set; }
+        public bool ContraIndicationsHeartDisease { get; set; }
+        public int CurrentStressLevels { get; set; }
+        public int CurrentPainOrTensionLevels { get; set; }
+        public string Difficulties { get; set; }
+        public string AreasNotToBeMassaged { get; set; }
+        public bool TermsAndConditionsConditions1 { get; set; }
+        public bool TermsAndConditionsConditions2 { get; set; }
+        public bool TermsAndConditionsConditions3 { get; set; }
+        public bool TermsAndConditionsConditions4 { get; set; }
+        public bool TermsAndConditionsConditions5 { get; set; }
+        public bool TermsAndConditionsConditions6 { get; set; }
+        public bool TermsAndConditionsConditions7 { get; set; }
+        public bool TermsAndConditionsConditions8 { get; set; }
     }
 }

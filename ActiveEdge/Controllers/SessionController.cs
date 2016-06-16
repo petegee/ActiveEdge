@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Web.Mvc;
+using ActiveEdge.Infrastructure.Extensions;
 using ActiveEdge.Models;
 using ActiveEdge.Models.Shared;
 using AutoMapper;
@@ -109,6 +110,10 @@ namespace ActiveEdge.Controllers
                 return HttpNotFound();
             }
 
+            if (session.Client.ContraIndications.HasAny)
+            {
+                Notify(new DangerMessage($"<b>Warning</b> the user has the following conditions:<b> {session.Client.ContraIndications.Conditions.ToCommaDelimited()}</b>"));
+            }
             var sessionModel = _mapper.Map<SessionModel>(session);
 
             return View(sessionModel);

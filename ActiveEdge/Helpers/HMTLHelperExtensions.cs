@@ -8,25 +8,25 @@ namespace ActiveEdge.Helpers
         public static string IsSelected(this HtmlHelper html, string controller = null, string action = null, string cssClass = null)
         {
 
-            if (String.IsNullOrEmpty(cssClass))
+            if (string.IsNullOrEmpty(cssClass))
                 cssClass = "active";
 
-            string currentAction = (string)html.ViewContext.RouteData.Values["action"];
-            string currentController = (string)html.ViewContext.RouteData.Values["controller"];
+            var currentAction = (string)html.ViewContext.RouteData.Values["action"];
+            var currentController = (string)html.ViewContext.RouteData.Values["controller"];
 
-            if (String.IsNullOrEmpty(controller))
+            if (string.IsNullOrEmpty(controller))
                 controller = currentController;
 
-            if (String.IsNullOrEmpty(action))
+            if (string.IsNullOrEmpty(action))
                 action = currentAction;
 
             return controller == currentController && action == currentAction ?
-                cssClass : String.Empty;
+                cssClass : string.Empty;
         }
 
         public static string PageClass(this HtmlHelper html)
         {
-            string currentAction = (string)html.ViewContext.RouteData.Values["action"];
+            var currentAction = (string)html.ViewContext.RouteData.Values["action"];
             return currentAction;
         }
     }

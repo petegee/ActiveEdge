@@ -51,15 +51,17 @@ namespace ActiveEdge.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
-                .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
+            var client = _bus.ExecuteQuery(new GetClientForOrganization(id.Value));
+                
 
-            if (customer == null)
+            if (client == null)
             {
                 return HttpNotFound();
             }
 
-            return View(customer);
+            var model = _mapper.Map<ClientModel>(client);
+
+            return View(model);
         }
 
         [HttpGet]
@@ -78,9 +80,7 @@ namespace ActiveEdge.Controllers
             if (!ModelState.IsValid) return View("Intake", client);
 
             var cmd = _mapper.Map<RegisterNewClientCommand>(client);
-
-            cmd.OrganizationId = OrganizationId;
-
+            
             _bus.ExecuteCommand(cmd);
 
             Notify(new SuccessMessage("Client successfully registered."));
@@ -95,16 +95,17 @@ namespace ActiveEdge.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var client = _bus.ExecuteQuery(new GetClientForOrganization(id.Value));
 
-            var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
-                .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
 
-            if (customer == null)
+            if (client == null)
             {
                 return HttpNotFound();
             }
 
-            return View(customer);
+            var model = _mapper.Map<ClientModel>(client);
+
+            return View(model);
         }
 
 
@@ -131,15 +132,16 @@ namespace ActiveEdge.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var client = _bus.ExecuteQuery(new GetClientForOrganization(id.Value));
 
-            var customer = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
-                .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
-
-            if (customer == null)
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+
+            var model = _mapper.Map<ClientModel>(client);
+
+            return View(model);
         }
 
         // POST: /Client/Delete/5

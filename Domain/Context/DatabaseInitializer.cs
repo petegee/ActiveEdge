@@ -42,9 +42,11 @@ namespace Domain.Context
             AddOrganization(context);
             AddClients(context);
             AddSessions(context);
+
+            AddUsers(context);
         }
 
-        private void AddOrganization(ApplicationDbContext context)
+        private static void AddOrganization(ApplicationDbContext context)
         {
 
             context.Organizations.Add(new Organization
@@ -56,14 +58,22 @@ namespace Domain.Context
                 Clinics = new List<Clinic> { new Clinic { ClinicName = "Lambton Quay"} }
             });
 
+            context.Organizations.Add(new Organization
+            {
+                OrganizationName = "Habit",
+                ContactPerson = "Dr Habit",
+                ContactEmailAddress = "Dr@habit.co.nz",
+                ContactPhoneNumber = "01702 712207",
+                Clinics = new List<Clinic> { new Clinic { ClinicName = "Featherston Street" } }
+            });
+
             context.SaveChanges();
         }
 
         private static void AddSessions(ApplicationDbContext context)
         {
             var organization = context.Organizations.First();
-
-
+            
             context.Sessions.Add(new Session
             {
                 Date = DateTime.Today.Date,
@@ -151,6 +161,28 @@ namespace Domain.Context
                 TermsAndConditions = new TermsAndConditions(),
                 OrganizationId = organization.Id
             });
+        }
+
+        private static void AddUsers(ApplicationDbContext context)
+        {
+            var organiation = context.Organizations.First();
+
+            Action<string, string> createUser = (userName, role) =>
+            {
+                if (!context.Users.Any(u => u.UserName == userName))
+                {
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+                    var userToInsert = new ApplicationUser { UserName = userName, PhoneNumber = "021509317" ,OrganizationId = organiation.Id};
+
+                    userManager.Create(userToInsert, "ridgeback");
+                    userManager.AddToRole(userToInsert.Id, role);
+                }
+            };
+
+            createUser("therapist@capital.co.nz", Roles.Therapist);
+            createUser("orgadmin@capital.co.nz", Roles.OrganizationAdministrator);
+
         }
     }
 }

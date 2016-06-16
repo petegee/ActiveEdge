@@ -1,6 +1,7 @@
 using AutoMapper;
 using Domain.Command;
 using Domain.Command.Client;
+using Domain.Command.Session;
 using Domain.Model;
 
 namespace ActiveEdge.Infrastructure.Mapping
@@ -13,8 +14,21 @@ namespace ActiveEdge.Infrastructure.Mapping
         /// </summary>
         protected override void Configure()
         {
-            CreateMap<RegisterNewClientCommand, Client>();
-            CreateMap<UpdateClientCommand, Client>();
+            CreateMap<RegisterNewClientCommand, ContraIndications>();
+            CreateMap<RegisterNewClientCommand, TermsAndConditions>();
+            CreateMap<RegisterNewClientCommand, Client>()
+                .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
+            CreateMap<RegisterNewClientCommand, Client>()
+                .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
+
+            CreateMap<UpdateClientCommand, ContraIndications>();
+            CreateMap<UpdateClientCommand, TermsAndConditions>();
+            CreateMap<UpdateClientCommand, Client>()
+                .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
+            CreateMap<UpdateClientCommand, Client>()
+                .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
+
+
             CreateMap<CreateNewOrganizationCommand.Clinic, Clinic>()
                 .ForMember(dest => dest.Address, options => options.ResolveUsing(
                     model => new Address
@@ -32,7 +46,7 @@ namespace ActiveEdge.Infrastructure.Mapping
                 .ForMember(dest => dest.Id, options => options.Ignore())
                 .ForMember(dest => dest.Clinics, options => options.MapFrom(model => model.Clinics));
 
-
+            CreateMap<CreateNewSessionCommand, Session>();
         }
     }
 }

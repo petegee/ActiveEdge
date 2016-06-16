@@ -11,7 +11,6 @@ namespace ActiveEdge.Infrastructure.Mapping
             {
                 cfg.AddProfile<CommandToDomainModel>();
                 cfg.AddProfile<DomainModelToDomainEvent>();
-                cfg.AddProfile<ViewModelToDomainModel>();
                 cfg.AddProfile<DomainModelToViewModel>();
                 cfg.AddProfile<ViewModelToCommand>();
 

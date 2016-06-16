@@ -1,6 +1,7 @@
 ﻿using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Models;
 using AutoMapper;
+using Domain.Command.Client;
 using Domain.Model;
 using Shouldly;
 using Xunit;
@@ -33,14 +34,18 @@ namespace Unit.Tests
     public void Test_Name()
     {
       //Arrange
-      var client = new ClientModel {ContraIndicationsIsPregnant = true};
+      var client = new ClientModel
+      {
+          FirstName = "Stuart",
+          ContraIndicationsIsPregnant = true
+      };
 
-      var domainClient = _mapper.Map<ClientModel, Client>(client);
+      var command = _mapper.Map<ClientModel, RegisterNewClientCommand>(client);
 
       // Assert
-      domainClient.ContraIndications.ShouldNotBeNull();
+      //command.FirstName.f.ShouldNotBeNull();
 
-      domainClient.ContraIndications.IsPregnant.ShouldBeTrue();
+      //domainClient.ContraIndications.IsPregnant.ShouldBeTrue();
     }
   }
     

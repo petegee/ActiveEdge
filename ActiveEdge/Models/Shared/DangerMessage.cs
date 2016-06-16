@@ -1,9 +1,15 @@
-﻿namespace ActiveEdge.Models.Shared
+﻿using System.Web.Mvc;
+
+namespace ActiveEdge.Models.Shared
 {
     public class DangerMessage : Message
     {
+        public DangerMessage(MvcHtmlString htmlString) : base(htmlString)
+        {
+            
+        }
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public DangerMessage(string text) : base(text)
+        public DangerMessage(string text) : base(new MvcHtmlString(text))
         {
         }
 

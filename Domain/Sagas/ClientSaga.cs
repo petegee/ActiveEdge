@@ -4,6 +4,7 @@ using Domain.Command.Client;
 using Domain.Context;
 using Domain.Model;
 using Domain.Query.Clients;
+using Shared;
 
 namespace Domain.Sagas
 {
@@ -11,15 +12,17 @@ namespace Domain.Sagas
         ICommandHandler<DeleteClientCommand>
     {
         private readonly IBus _bus;
+        private readonly ILoggedOnUser _loggedOnUser;
         private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public ClientSaga(IApplicationDbContext dbContext, IMapper mapper, IBus bus)
+        public ClientSaga(IApplicationDbContext dbContext, IMapper mapper, IBus bus, ILoggedOnUser loggedOnUser)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _bus = bus;
+            _loggedOnUser = loggedOnUser;
         }
 
         /// <summary>Handles a request</summary>
@@ -39,11 +42,14 @@ namespace Domain.Sagas
         /// <returns>Response from the request</returns>
         public int Handle(RegisterNewClientCommand message)
         {
-            if (message.OrganizationId == null)
+            if (_loggedOnUser.OrganizationId == 0)
             {
                 throw new BusinessRuleException("You cannot register a client if an organization is not specified.");
             }
+
             var customerDomain = _mapper.Map<RegisterNewClientCommand, Client>(message);
+
+            customerDomain.OrganizationId = _loggedOnUser.OrganizationId;
 
             _dbContext.Clients.Add(customerDomain);
 
