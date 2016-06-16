@@ -1,30 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Models.Organization;
 using AutoMapper;
 using Domain;
 using Domain.Command;
 using Domain.Context;
-using Domain.Model;
-using Domain.Query;
 using Domain.Query.Organization;
-using MediatR;
 
 namespace ActiveEdge.Controllers
 {
+    [AuthorizeRoles(Roles.SystemAdministrator)]
     public class OrganizationController : ControllerBase
     {
-        private readonly IApplicationDbContext _dbContext;
-        private readonly IMapper _mapper;
-        private readonly IMediator _mediator;
         private readonly IBus _bus;
+        private readonly IMapper _mapper;
         private readonly MapperConfiguration _mapperConfiguration;
 
-        public OrganizationController(IApplicationDbContext dbContext, IMapper mapper, IMediator mediator, IBus bus, MapperConfiguration mapperConfiguration)
+        public OrganizationController(IMapper mapper, IBus bus, MapperConfiguration mapperConfiguration)
         {
-            _dbContext = dbContext;
             _mapper = mapper;
-            _mediator = mediator;
             _bus = bus;
             _mapperConfiguration = mapperConfiguration;
         }
@@ -32,8 +27,9 @@ namespace ActiveEdge.Controllers
         // GET: Organization
         public ActionResult Index()
         {
-            var organizations = _bus.ExecuteQuery(new FindAllOrganizations()).ProjectToList<OrganizationModel>(_mapperConfiguration);
-            
+            var organizations =
+                _bus.ExecuteQuery(new FindAllOrganizations()).ProjectToList<OrganizationModel>(_mapperConfiguration);
+
             return View(organizations);
         }
 
@@ -61,14 +57,13 @@ namespace ActiveEdge.Controllers
         {
             var command = _mapper.Map<CreateNewOrganizationCommand>(organizationModel);
 
-            var organizationId =_bus.ExecuteCommand(command);
-            
+            var organizationId = _bus.ExecuteCommand(command);
+
             return Json(new
             {
                 redirectUrl = Url.Action("CreateForOrganization", "Users", new {id = organizationId}),
                 isRedirect = true
             });
-            
         }
 
         // GET: Organization/Edit/5
@@ -107,12 +102,10 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-
             _bus.ExecuteCommand(new DeleteOrganizationCommand(id));
 
             try
             {
-
                 // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
