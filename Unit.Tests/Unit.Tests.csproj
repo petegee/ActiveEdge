@@ -91,6 +91,14 @@
       <Project>{e38ff7bd-3792-4e9e-8bf9-2e6d86a730a4}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Read.Model\Read.csproj">
+      <Project>{62BA3F46-A671-4B2D-A7DE-B30905D0F031}</Project>
+      <Name>Read</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{717EF0BC-1F6A-4363-893C-02CFED26AD45}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,6 @@
-﻿namespace Domain.Command.Client
+﻿using Shared;
+
+namespace Domain.Command.Client
 {
     public class DeleteClientCommand : ICommand
     {

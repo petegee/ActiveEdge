@@ -1,4 +1,5 @@
 ﻿using System;
+using Shared;
 
 namespace Domain.Command.Session
 {

@@ -1,38 +1,35 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure;
-using ActiveEdge.Models.Shared;
-using ActiveEdge.Models.Users;
-using AutoMapper;
+using ActiveEdge.Read.Model.Shared;
+using ActiveEdge.Read.Model.Users;
+using ActiveEdge.Read.Query.User;
 using Domain.Context;
 using Domain.Model;
-using Domain.Query.User;
-using MediatR;
 using Microsoft.AspNet.Identity;
+using Shared;
 
 namespace ActiveEdge.Controllers
 {
     public class UsersController : ControllerBase
     {
-        private readonly MapperConfiguration _mapperConfiguration;
-        private readonly IMediator _mediator;
+        private readonly IBus _bus;
         private readonly ApplicationUserManager _userManager;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.</summary>
-        public UsersController(IMediator mediator, MapperConfiguration mapperConfiguration,
+        public UsersController(IBus bus,
             ApplicationUserManager userManager)
         {
-            _mediator = mediator;
-            _mapperConfiguration = mapperConfiguration;
+            _bus = bus;
             _userManager = userManager;
         }
 
         [HttpGet]
         public ActionResult ForOrganization(int id)
         {
-            var users = _mediator.Send(new FindAllUsersForOrganization(id)).ToList();
-            return View();
+            var users = _bus.ExecuteQuery(new FindAllUsersForOrganization(id));
+
+            return View(users);
         }
 
         [HttpGet]
@@ -65,7 +62,7 @@ namespace ActiveEdge.Controllers
                     "Confirm your account",
                     "Please confirm your account by clicking this link: <a href=\""
                     + callbackUrl + "\">link</a>");
-                
+
                 Notify(new SuccessMessage("Organization Administrator sucessfully created."));
 
                 return RedirectToAction("Index", "Organization");

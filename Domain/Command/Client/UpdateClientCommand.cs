@@ -1,5 +1,6 @@
 ﻿using System;
 using Domain.Model;
+using Shared;
 
 namespace Domain.Command.Client
 {

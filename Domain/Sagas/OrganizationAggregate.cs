@@ -4,6 +4,7 @@ using Domain.Command;
 using Domain.Context;
 using Domain.Event;
 using Domain.Model;
+using Shared;
 
 namespace Domain.Aggregate
 {

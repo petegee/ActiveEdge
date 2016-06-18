@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using ActiveEdge.Models.WebApi.Search;
+using ActiveEdge.Read.Model.WebApi.Search;
 using AutoMapper;
 using DelegateDecompiler;
 using Domain.Context;

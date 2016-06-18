@@ -1,5 +1,6 @@
-using System.Linq;
+using System.Collections.Generic;
 using MediatR;
+using Shared;
 
 namespace Domain
 {
@@ -15,11 +16,11 @@ namespace Domain
 
         public int ExecuteCommand(ICommand command)
         {
-            return  _mediator.Send(command);
+            return _mediator.Send(command);
         }
 
 
-        public IQueryable<TResponse> ExecuteQuery<TResponse>(IQuery<TResponse> query)
+        public IList<TResponse> ExecuteQuery<TResponse>(IQuery<TResponse> query)
         {
             return _mediator.Send(query);
         }

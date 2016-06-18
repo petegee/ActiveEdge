@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.MVC.Attributes;
-using ActiveEdge.Models.Organization;
+using ActiveEdge.Read.Model.Organization;
+using ActiveEdge.Read.Query.Organization;
 using AutoMapper;
-using Domain;
 using Domain.Command;
 using Domain.Context;
-using Domain.Query.Organization;
+using Shared;
 
 namespace ActiveEdge.Controllers
 {
@@ -28,8 +28,7 @@ namespace ActiveEdge.Controllers
         [Route("organizations")]
         public ActionResult Index()
         {
-            var organizations =
-                _bus.ExecuteQuery(new FindAllOrganizations()).ProjectToList<OrganizationModel>(_mapperConfiguration);
+            var organizations = _bus.ExecuteQuery(new FindAllOrganizations());
 
             return View(organizations);
         }
@@ -38,9 +37,7 @@ namespace ActiveEdge.Controllers
         [Route("organization/{id}")]
         public ActionResult Details(int id)
         {
-            var model = _bus
-                .ExecuteQuery(new GetOrganization(id))
-                .ProjectToSingle<OrganizationModel>(_mapperConfiguration);
+            var model = _bus.ExecuteQuery(new GetOrganization(id));
 
             return View(model);
         }
@@ -74,9 +71,7 @@ namespace ActiveEdge.Controllers
         [Route("organization/edit/{id}")]
         public ActionResult Edit(int id)
         {
-            var model = _bus
-                .ExecuteQuery(new GetOrganization(id))
-                .ProjectToSingle<OrganizationModel>(_mapperConfiguration);
+            var model = _bus.ExecuteQuery(new GetOrganization(id));
 
             return View(model);
         }

@@ -1,22 +1,23 @@
 using System;
 using Domain.Model;
+using Shared;
 
 namespace Domain.Command.Client
 {
     public class RegisterNewClientCommand : ICommand
     {
-         public string FirstName { get; set; }
-         public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
-         public string Email { get; set; }
-         public string ContactNumber { get; set; }
-         public string AddressLine1 { get; set; }
-         public string AddressLine2 { get; set; }
-         public string Suburb { get; set; }
-         public string City { get; set; }
+        public string Email { get; set; }
+        public string ContactNumber { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string Suburb { get; set; }
+        public string City { get; set; }
         public Gender? Gender { get; set; }
         public ExcerciseFrequency? ExcerciseFrequency { get; set; }
-        public  bool IsSmoker { get; set; }
+        public bool IsSmoker { get; set; }
         public string CurrentMedications { get; set; }
         public string PreviousAilments { get; set; }
         public string GeneralPractionerName { get; set; }

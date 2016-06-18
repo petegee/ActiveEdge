@@ -1,4 +1,6 @@
-﻿namespace Domain.Command.Session
+﻿using Shared;
+
+namespace Domain.Command.Session
 {
     public class DeleteSessionCommand : ICommand
     {

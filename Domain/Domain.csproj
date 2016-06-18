@@ -81,10 +81,6 @@
     <Compile Include="Command\Session\DeleteSessionCommand.cs" />
     <Compile Include="Command\Session\UpdateSessionCommand.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
-    <Compile Include="Query\Sessions\GetAllSessions.cs" />
-    <Compile Include="Query\Sessions\GetAllSessionsForClient.cs" />
-    <Compile Include="Query\Sessions\GetSessionById.cs" />
-    <Compile Include="Query\Sessions\SessionQueries.cs" />
     <Compile Include="Sagas\ClientSaga.cs" />
     <Compile Include="Sagas\OrganizationAggregate.cs" />
     <Compile Include="BusinessRuleException.cs" />
@@ -99,7 +95,6 @@
     <Compile Include="Context\MySqlHistoryContext.cs" />
     <Compile Include="Context\MySqlInitializer.cs" />
     <Compile Include="Event\NewOrganizationCreated.cs" />
-    <Compile Include="IBus.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Clinic.cs" />
@@ -114,14 +109,6 @@
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\TermsAndConditions.cs" />
     <Compile Include="Model\TouchPreference.cs" />
-    <Compile Include="Query\Clients\GetAllClientsForOrganization.cs" />
-    <Compile Include="Query\Clients\ClientQueryRepository.cs" />
-    <Compile Include="Query\Clients\GetClientForOrganization.cs" />
-    <Compile Include="Query\Organization\FindAllOrganizations.cs" />
-    <Compile Include="Query\Organization\GetOrganization.cs" />
-    <Compile Include="Query\Organization\OrganizationQueryRepository.cs" />
-    <Compile Include="Query\User\FindAllUsersForOrganization.cs" />
-    <Compile Include="Query\User\UserQueryRepository.cs" />
     <Compile Include="Sagas\SessionSaga.cs" />
   </ItemGroup>
   <ItemGroup>

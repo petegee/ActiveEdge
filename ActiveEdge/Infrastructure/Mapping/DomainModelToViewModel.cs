@@ -1,6 +1,8 @@
-using ActiveEdge.Models;
-using ActiveEdge.Models.Organization;
-using ActiveEdge.Models.WebApi.Search;
+using System.Collections.Generic;
+using System.Linq;
+using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Organization;
+using ActiveEdge.Read.Model.WebApi.Search;
 using AutoMapper;
 using Domain.Model;
 
@@ -24,8 +26,10 @@ namespace ActiveEdge.Infrastructure.Mapping
             CreateMap<Organization, OrganizationModel>()
                 .ForMember(dest => dest.Clinics, options => options.MapFrom(organization => organization.Clinics));
 
-            CreateMap<Session, SessionModel>();
+            CreateMap<Session, SessionModel>()
+                .ForMember(dest => dest.ContraIndications, options =>options.ResolveUsing(session => session.Client?.ContraIndications?.HasAny == true ? session.Client?.ContraIndications?.Conditions.ToList() : new List<string>() ));
 
+            CreateMap<Session, SessionModelListItem>();
 
             CreateMap<Client, ClientModel>();
 

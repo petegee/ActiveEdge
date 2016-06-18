@@ -1,11 +1,11 @@
 ﻿using System.Net;
 using System.Web.Mvc;
-using ActiveEdge.Models;
-using ActiveEdge.Models.Shared;
+using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Shared;
+using ActiveEdge.Read.Query.Clients;
 using AutoMapper;
-using Domain;
 using Domain.Command.Client;
-using Domain.Query.Clients;
+using Shared;
 
 namespace ActiveEdge.Controllers
 {
@@ -14,16 +14,14 @@ namespace ActiveEdge.Controllers
     {
         private readonly IBus _bus;
         private readonly IMapper _mapper;
-        private readonly MapperConfiguration _mapperConfiguration;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
-        public ClientController(IBus bus, IMapper mapper, MapperConfiguration mapperConfiguration)
+        public ClientController(IBus bus, IMapper mapper)
         {
             _bus = bus;
             _mapper = mapper;
-            _mapperConfiguration = mapperConfiguration;
         }
 
 
@@ -31,9 +29,7 @@ namespace ActiveEdge.Controllers
         [Route("clients")]
         public ActionResult Index()
         {
-            var clients =
-                _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId))
-                    .ProjectToList<ClientModel>(_mapperConfiguration);
+            var clients = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId));
 
             return View(clients);
         }
@@ -54,9 +50,7 @@ namespace ActiveEdge.Controllers
                 return HttpNotFound();
             }
 
-            var model = _mapper.Map<ClientModel>(client);
-
-            return View(model);
+            return View(client);
         }
 
         [HttpGet]
@@ -101,15 +95,14 @@ namespace ActiveEdge.Controllers
                 return HttpNotFound();
             }
 
-            var model = _mapper.Map<ClientModel>(client);
 
-            return View(model);
+            return View(client);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("client/edit")]
+        [Route("client/edit/{id}")]
         public ActionResult Edit(ClientModel clientModel)
         {
             if (ModelState.IsValid)
@@ -139,9 +132,7 @@ namespace ActiveEdge.Controllers
                 return HttpNotFound();
             }
 
-            var model = _mapper.Map<ClientModel>(client);
-
-            return View(model);
+            return View(client);
         }
 
         // POST: /Client/Delete/5
@@ -154,6 +145,5 @@ namespace ActiveEdge.Controllers
 
             return RedirectToAction("Index");
         }
-
     }
 }

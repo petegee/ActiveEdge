@@ -1,42 +1,41 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using ActiveEdge.Helpers;
-using ActiveEdge.Models;
+using ActiveEdge.Read.Model;
 using Xunit;
 
 namespace Unit.Tests.WebSite.Helpers
 {
-  public class HtmlBuilderFacts
-  {
-    [Fact]
-    public void FormGroupCheckBoxForShouldRenderTheCorrectHtml()
+    public class HtmlBuilderFacts
     {
-      var vc = new ViewContext();
-      vc.HttpContext = new FakeHttpContext();
-      vc.HttpContext.Items.Add(Guid.NewGuid(), "foo");
-      HtmlHelper<ActiveEdge.Models.ClientModel> html = new HtmlHelper<ClientModel>(vc, new FakeViewDataContainer());
+        [Fact]
+        public void FormGroupCheckBoxForShouldRenderTheCorrectHtml()
+        {
+            var vc = new ViewContext();
+            vc.HttpContext = new FakeHttpContext();
+            vc.HttpContext.Items.Add(Guid.NewGuid(), "foo");
+            var html = new HtmlHelper<ClientModel>(vc, new FakeViewDataContainer());
 
-      //var htmlString = html.FormGroupCheckBoxFor(client => client.IsSmoker);
+            //var htmlString = html.FormGroupCheckBoxFor(client => client.IsSmoker);
 
-      //Coknsole.WriteLine(htmlString);
+            //Coknsole.WriteLine(htmlString);
+        }
     }
-  }
 
-  class FakeHttpContext : HttpContextBase
-  {
-    private Dictionary<object, object> _items = new Dictionary<object, object>();
-    public override IDictionary Items { get { return _items; } }
-  }
+    internal class FakeHttpContext : HttpContextBase
+    {
+        private readonly Dictionary<object, object> _items = new Dictionary<object, object>();
 
-  class FakeViewDataContainer : IViewDataContainer
-  {
-    private ViewDataDictionary _viewData = new ViewDataDictionary();
-    public ViewDataDictionary ViewData { get { return _viewData; } set { _viewData = value; } }
-  }
+        public override IDictionary Items
+        {
+            get { return _items; }
+        }
+    }
+
+    internal class FakeViewDataContainer : IViewDataContainer
+    {
+        public ViewDataDictionary ViewData { get; set; } = new ViewDataDictionary();
+    }
 }

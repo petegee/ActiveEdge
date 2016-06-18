@@ -17,6 +17,7 @@
 
 using System.Data.Entity;
 using ActiveEdge.Infrastructure.Mapping;
+using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
 using Domain.Context;
 using Domain.Model;
@@ -42,6 +43,7 @@ namespace ActiveEdge.DependencyResolution
                     scan.TheCallingAssembly();
                     scan.AssemblyContainingType<IApplicationDbContext>();
                     scan.AssemblyContainingType<ILoggedOnUser>();
+                    scan.AssemblyContainingType<GetAllSessions>();
                     scan.WithDefaultConventions();
                     scan.With(new ControllerConvention());
                     scan.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));

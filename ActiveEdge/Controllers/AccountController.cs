@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using ActiveEdge.Models;
+using ActiveEdge.Read.Model;
 using Domain.Context;
 using Domain.Model;
 using Microsoft.AspNet.Identity;

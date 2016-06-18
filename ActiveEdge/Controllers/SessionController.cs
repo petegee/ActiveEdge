@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.Extensions;
-using ActiveEdge.Models;
-using ActiveEdge.Models.Shared;
+using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Shared;
+using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
-using Domain;
 using Domain.Command.Session;
-using Domain.Query.Sessions;
+using Shared;
 
 namespace ActiveEdge.Controllers
 {
@@ -33,14 +34,14 @@ namespace ActiveEdge.Controllers
         {
             return View();
         }
-        
+
         [HttpGet]
         [Route("sessions")]
         public ActionResult Index()
         {
             var sessions = _bus.ExecuteQuery(new GetAllSessions());
 
-            return View(sessions.ProjectToList<SessionModel>(_mapperConfiguration));
+            return View(sessions);
         }
 
         [HttpGet]
@@ -49,7 +50,7 @@ namespace ActiveEdge.Controllers
         {
             var sessions = _bus.ExecuteQuery(new GetAllSessionsForClient(id));
 
-            return View("Index", sessions.ProjectToList<SessionModel>(_mapperConfiguration));
+            return View("Index", sessions);
         }
 
         [HttpGet]
@@ -120,9 +121,11 @@ namespace ActiveEdge.Controllers
                 return HttpNotFound();
             }
 
-            if (session.Client.ContraIndications.HasAny)
+            if (session.ContraIndications.Any())
             {
-                Notify(new DangerMessage($"<b>Warning</b> the user has the following conditions:<b> {session.Client.ContraIndications.Conditions.ToCommaDelimited()}</b>"));
+                Notify(
+                    new DangerMessage(
+                        $"<b>Warning</b> the user has the following conditions:<b> {session.ContraIndications.ToCommaDelimited()}</b>"));
             }
             var sessionModel = _mapper.Map<SessionModel>(session);
 

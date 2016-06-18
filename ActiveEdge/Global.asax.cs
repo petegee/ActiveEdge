@@ -5,8 +5,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using ActiveEdge.App_Start;
 using ActiveEdge.DependencyResolution;
-using ActiveEdge.Infrastructure.MVC;
-using HibernatingRhinos.Profiler.Appender.EntityFramework;
+using ActiveEdge.Read;
 
 //using WebApiContrib.IoC.StructureMap;
 
