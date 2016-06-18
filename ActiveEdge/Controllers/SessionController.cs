@@ -33,8 +33,9 @@ namespace ActiveEdge.Controllers
         {
             return View();
         }
-
-        // GET: /Sessions/
+        
+        [HttpGet]
+        [Route("sessions")]
         public ActionResult Index()
         {
             var sessions = _bus.ExecuteQuery(new GetAllSessions());
@@ -42,7 +43,17 @@ namespace ActiveEdge.Controllers
             return View(sessions.ProjectToList<SessionModel>(_mapperConfiguration));
         }
 
-        // GET: /Sessions/Details/5
+        [HttpGet]
+        [Route("sessions/for/client/{id}", Name = "session-forclient")]
+        public ActionResult ForClient(int id)
+        {
+            var sessions = _bus.ExecuteQuery(new GetAllSessionsForClient(id));
+
+            return View("Index", sessions.ProjectToList<SessionModel>(_mapperConfiguration));
+        }
+
+        [HttpGet]
+        [Route("session/{id}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -62,20 +73,18 @@ namespace ActiveEdge.Controllers
             return View(model);
         }
 
-        // GET: /Sessions/Create
+        [HttpGet]
+        [Route("session/new")]
         public ActionResult Create()
         {
             var model = new SessionModel {Date = DateTime.Now.Date};
             return View(model);
         }
 
-        // POST: /Sessions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(
-            [Bind(Exclude = "Id")] SessionModel sessionModel)
+        [Route("session/new")]
+        public ActionResult Create([Bind(Exclude = "Id")] SessionModel sessionModel)
         {
             if (!ModelState.IsValid) return View(sessionModel);
 
@@ -88,14 +97,15 @@ namespace ActiveEdge.Controllers
             return RedirectToAction("Plan", new {id = sessionId});
         }
 
-        // GET: /Session/Plan
         [HttpGet]
+        [Route("session/plan/{id}")]
         public ActionResult Plan(int? id)
         {
             return Edit(id);
         }
 
-        // GET: /Sessions/Edit/5
+        [HttpGet]
+        [Route("session/edit/{id}", Name = "session-edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -119,11 +129,9 @@ namespace ActiveEdge.Controllers
             return View(sessionModel);
         }
 
-        // POST: /Sessions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("session/edit")]
         public ActionResult Edit(SessionModel sessionModel)
         {
             if (ModelState.IsValid)
@@ -140,7 +148,8 @@ namespace ActiveEdge.Controllers
             return View(sessionModel);
         }
 
-        // GET: /Sessions/Delete/5
+        [HttpGet]
+        [Route("session/delete/{id}")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -160,9 +169,9 @@ namespace ActiveEdge.Controllers
             return View(sessionModel);
         }
 
-        // POST: /Sessions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("session/delete/{id}")]
         public ActionResult DeleteConfirmed(int id)
         {
             _bus.ExecuteCommand(new DeleteSessionCommand {Id = id});

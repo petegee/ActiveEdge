@@ -256,7 +256,6 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UsersController.cs" />

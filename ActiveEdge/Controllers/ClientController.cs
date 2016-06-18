@@ -4,9 +4,7 @@ using ActiveEdge.Models;
 using ActiveEdge.Models.Shared;
 using AutoMapper;
 using Domain;
-using Domain.Command;
 using Domain.Command.Client;
-using Domain.Context;
 using Domain.Query.Clients;
 
 namespace ActiveEdge.Controllers
@@ -15,25 +13,22 @@ namespace ActiveEdge.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IBus _bus;
-        private readonly IApplicationDbContext _database;
         private readonly IMapper _mapper;
         private readonly MapperConfiguration _mapperConfiguration;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
-        public ClientController(IApplicationDbContext database, IBus bus, IMapper mapper,
-            MapperConfiguration mapperConfiguration)
+        public ClientController(IBus bus, IMapper mapper, MapperConfiguration mapperConfiguration)
         {
-            _database = database;
             _bus = bus;
             _mapper = mapper;
             _mapperConfiguration = mapperConfiguration;
         }
 
 
-        // GET: /Client/
         [HttpGet]
+        [Route("clients")]
         public ActionResult Index()
         {
             var clients =
@@ -43,8 +38,8 @@ namespace ActiveEdge.Controllers
             return View(clients);
         }
 
-        // GET: /Client/Details/5
         [HttpGet]
+        [Route("client/{id}", Name = "client-details")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -52,7 +47,7 @@ namespace ActiveEdge.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var client = _bus.ExecuteQuery(new GetClientForOrganization(id.Value));
-                
+
 
             if (client == null)
             {
@@ -65,6 +60,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
+        [Route("client/intake")]
         public ActionResult Create()
         {
             return View("Intake", new ClientModel());
@@ -75,12 +71,13 @@ namespace ActiveEdge.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("client/intake")]
         public ActionResult Create([Bind(Exclude = "Id")] ClientModel client)
         {
             if (!ModelState.IsValid) return View("Intake", client);
 
             var cmd = _mapper.Map<RegisterNewClientCommand>(client);
-            
+
             _bus.ExecuteCommand(cmd);
 
             Notify(new SuccessMessage("Client successfully registered."));
@@ -89,6 +86,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
+        [Route("client/edit/{id}", Name = "ClientEdit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -111,6 +109,7 @@ namespace ActiveEdge.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("client/edit")]
         public ActionResult Edit(ClientModel clientModel)
         {
             if (ModelState.IsValid)
@@ -125,7 +124,8 @@ namespace ActiveEdge.Controllers
             return View(clientModel);
         }
 
-        // GET: /Client/Delete/5
+        [HttpGet]
+        [Route("client/delete/{int}")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -145,8 +145,9 @@ namespace ActiveEdge.Controllers
         }
 
         // POST: /Client/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("client/delete/{id}")]
         public ActionResult DeleteConfirmed(int id)
         {
             _bus.ExecuteCommand(new DeleteClientCommand(id));
@@ -154,13 +155,5 @@ namespace ActiveEdge.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _database.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

@@ -4,7 +4,9 @@ using Domain.Model;
 
 namespace Domain.Query.Sessions
 {
-    public class SessionQueries : IQueryHandler<GetAllSessions, Session>, IQueryForSingleHandler<GetSessionById, Session>
+    public class SessionQueries : IQueryHandler<GetAllSessions, Session>, 
+        IQueryHandler<GetAllSessionsForClient, Session>,
+    IQueryForSingleHandler<GetSessionById, Session>
     {
         private readonly IApplicationDbContext _dbContext;
 
@@ -31,6 +33,14 @@ namespace Domain.Query.Sessions
             var session = _dbContext.Sessions.SingleOrDefault(s => s.Id == message.SessionId);
 
             return session;
+        }
+
+        /// <summary>Handles a request</summary>
+        /// <param name="message">The request message</param>
+        /// <returns>Response from the request</returns>
+        public IQueryable<Session> Handle(GetAllSessionsForClient message)
+        {
+            return _dbContext.Sessions.Where(session => session.ClientId == message.ClientId);
         }
     }
 }

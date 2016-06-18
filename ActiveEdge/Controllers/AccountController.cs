@@ -25,20 +25,19 @@ namespace ActiveEdge.Controllers
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
 
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
+        [HttpGet]
+        [Route("account/login")]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("account/login")]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -63,6 +62,8 @@ namespace ActiveEdge.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [HttpGet]
+        [Route("account/register")]
         public ActionResult Register()
         {
             return View();
@@ -73,6 +74,7 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("account/register")]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -98,6 +100,7 @@ namespace ActiveEdge.Controllers
         // POST: /Account/Disassociate
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("account/disassociate")]
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
             ManageMessageId? message = null;
@@ -113,8 +116,8 @@ namespace ActiveEdge.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
-        //
-        // GET: /Account/Manage
+        [HttpGet]
+        [Route("account/manage/{message}")]
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -129,9 +132,9 @@ namespace ActiveEdge.Controllers
         }
 
         //
-        // POST: /Account/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("account/manage/{model}")]
         public async Task<ActionResult> Manage(ManageUserViewModel model)
         {
             bool hasPassword = HasPassword();
@@ -282,10 +285,9 @@ namespace ActiveEdge.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("account/logoff")]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
@@ -310,6 +312,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("account/confirmemail")]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)

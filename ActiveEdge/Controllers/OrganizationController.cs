@@ -24,7 +24,8 @@ namespace ActiveEdge.Controllers
             _mapperConfiguration = mapperConfiguration;
         }
 
-        // GET: Organization
+        [HttpGet]
+        [Route("organizations")]
         public ActionResult Index()
         {
             var organizations =
@@ -33,7 +34,8 @@ namespace ActiveEdge.Controllers
             return View(organizations);
         }
 
-        // GET: Organization/Details/5
+        [HttpGet]
+        [Route("organization/{id}")]
         public ActionResult Details(int id)
         {
             var model = _bus
@@ -43,7 +45,8 @@ namespace ActiveEdge.Controllers
             return View(model);
         }
 
-        // GET: Organization/Create
+        [HttpGet]
+        [Route("organization/new")]
         public ActionResult Create()
         {
             var model = new OrganizationModel {Clinics = new List<ClinicModel> {new ClinicModel()}};
@@ -53,6 +56,7 @@ namespace ActiveEdge.Controllers
 
         // POST: Organization/Create
         [HttpPost]
+        [Route("organization/new")]
         public JsonResult Create(OrganizationModel organizationModel)
         {
             var command = _mapper.Map<CreateNewOrganizationCommand>(organizationModel);
@@ -66,7 +70,8 @@ namespace ActiveEdge.Controllers
             });
         }
 
-        // GET: Organization/Edit/5
+        [HttpGet]
+        [Route("organization/edit/{id}")]
         public ActionResult Edit(int id)
         {
             var model = _bus
@@ -76,8 +81,8 @@ namespace ActiveEdge.Controllers
             return View(model);
         }
 
-        // POST: Organization/Edit/5
         [HttpPost]
+        [Route("organization/edit/")]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -92,14 +97,15 @@ namespace ActiveEdge.Controllers
             }
         }
 
-        // GET: Organization/Delete/5
+        [HttpGet]
+        [Route("organization/delete/{id}")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Organization/Delete/5
         [HttpPost]
+        [Route("organization/delete/")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             _bus.ExecuteCommand(new DeleteOrganizationCommand(id));

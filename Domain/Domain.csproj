@@ -82,6 +82,7 @@
     <Compile Include="Command\Session\UpdateSessionCommand.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
     <Compile Include="Query\Sessions\GetAllSessions.cs" />
+    <Compile Include="Query\Sessions\GetAllSessionsForClient.cs" />
     <Compile Include="Query\Sessions\GetSessionById.cs" />
     <Compile Include="Query\Sessions\SessionQueries.cs" />
     <Compile Include="Sagas\ClientSaga.cs" />

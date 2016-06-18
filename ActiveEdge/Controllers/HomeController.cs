@@ -5,6 +5,8 @@ namespace ActiveEdge.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        [HttpGet]
+        [Route("")]
         public ActionResult Index()
         {
             ViewData["SubTitle"] = "Welcome to the Active Edge Dashboard ";
@@ -13,12 +15,6 @@ namespace ActiveEdge.Controllers
             return View();
         }
 
-        public ActionResult Minor()
-        {
-            ViewData["SubTitle"] = "Simple example of second view";
-            ViewData["Message"] = "Data are passing to view by ViewData from controller";
-
-            return View();
-        }
+      
     }
 }
