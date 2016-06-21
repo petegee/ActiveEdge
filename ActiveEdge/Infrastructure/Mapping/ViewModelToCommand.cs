@@ -24,6 +24,8 @@ namespace ActiveEdge.Infrastructure.Mapping
 
             // Sessions
             CreateMap<SessionModel, CreateNewSessionCommand>();
+
+            CreateMap<SessionModel, UpdateSessionCommand>();
         }
     }
 }

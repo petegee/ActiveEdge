@@ -389,6 +389,7 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\plugins\metisMenu\metisMenu.min.js" />
     <Content Include="Scripts\plugins\taggle-js\css\projects.min.css" />
     <Content Include="Scripts\plugins\taggle-js\css\taggle.css" />
     <Content Include="Scripts\plugins\taggle-js\css\twilight.css" />

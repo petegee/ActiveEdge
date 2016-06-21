@@ -1,13 +1,13 @@
-//using System.Data.Entity;
+using System.Data.Entity;
 
-//namespace ActiveEdge.Database
-//{
-//  public class MySqlConfiguration : DbConfiguration
-//  {
-//    public MySqlConfiguration()
-//    {
-//      SetHistoryContext(
-//        "MySql.Data.MySqlClient", (conn, schema) => new MySqlHistoryContext(conn, schema));
-//    }
-//  }
-//}
+namespace Domain.Context
+{
+    public class MySqlConfiguration : DbConfiguration
+    {
+        public MySqlConfiguration()
+        {
+            SetHistoryContext(
+              "MySql.Data.MySqlClient", (conn, schema) => new MySqlHistoryContext(conn, schema));
+        }
+    }
+}

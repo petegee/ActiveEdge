@@ -24,7 +24,7 @@ namespace Domain.Context
         void DisableOrganizationTenant();
     }
 
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    [DbConfigurationType(typeof(MySqlConfiguration))]
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         private readonly ILoggedOnUser _loggedOnUser;
