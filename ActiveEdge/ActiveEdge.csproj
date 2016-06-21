@@ -379,8 +379,8 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <None Include="Properties\PublishProfiles\ActiveEdge - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\ActiveEdge.Test.pubxml" />
+    <None Include="Properties\PublishProfiles\Active Edge Test.pubxml" />
+    <None Include="Properties\PublishProfiles\ActiveEdge - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\HostDemo.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
