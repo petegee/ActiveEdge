@@ -95,6 +95,7 @@
     <Compile Include="Model\Organization\ClinicModel.cs" />
     <Compile Include="Model\Organization\OrganizationModel.cs" />
     <Compile Include="Model\SessionModel.cs" />
+    <Compile Include="Model\SessionModelListItem.cs" />
     <Compile Include="Model\Shared\DangerMessage.cs" />
     <Compile Include="Model\Shared\InfoMessage.cs" />
     <Compile Include="Model\Shared\Message.cs" />

@@ -91,3 +91,14 @@ dd {
 .areas-of-discomfort :hover {
   cursor: crosshair;
 }
+
+.field-validation-error {
+
+  color: #8a1f11;
+  font-weight: 700;
+}
+.input-validation-error {
+      background: rgb(251, 227, 228);
+    border: 1px solid #fbc2c4;
+    color: #8a1f11;
+}
