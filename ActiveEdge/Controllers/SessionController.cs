@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.Extensions;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Session;
 using ActiveEdge.Read.Model.Shared;
 using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
@@ -17,16 +18,13 @@ namespace ActiveEdge.Controllers
     {
         private readonly IBus _bus;
         private readonly IMapper _mapper;
-        private readonly MapperConfiguration _mapperConfiguration;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
-        public SessionController(IMapper mapper,
-            MapperConfiguration mapperConfiguration, IBus bus)
+        public SessionController(IMapper mapper, IBus bus)
         {
             _mapper = mapper;
-            _mapperConfiguration = mapperConfiguration;
             _bus = bus;
         }
 
@@ -118,7 +116,9 @@ namespace ActiveEdge.Controllers
 
             if (session == null)
             {
-                return HttpNotFound();
+                Notify<WarningMessage>("Unknown Session");
+
+                return RedirectToAction("Index");
             }
 
             if (session.ContraIndications.Any())

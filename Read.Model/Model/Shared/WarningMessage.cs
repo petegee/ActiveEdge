@@ -9,6 +9,12 @@ namespace ActiveEdge.Read.Model.Shared
         {
         }
 
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        public WarningMessage()
+        {
+        }
+
+
         public override string Css => "alert alert-warning";
     }
 }

@@ -1,5 +1,6 @@
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Organization;
+using ActiveEdge.Read.Model.Session;
 using AutoMapper;
 using Domain.Command;
 using Domain.Command.Client;

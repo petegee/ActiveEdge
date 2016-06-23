@@ -24,6 +24,12 @@ namespace ActiveEdge.Controllers
             }
         }
 
+        protected void Notify<TMessage>(string message) where TMessage : Message, new()
+        {
+            var displayMessage = new TMessage {Text = new MvcHtmlString(message)};
+            TempData[UiNotificationKey] = displayMessage;
+        }
+
         public void Notify(Message message)
         {
             TempData[UiNotificationKey] = message;

@@ -1,4 +1,4 @@
-﻿@model ActiveEdge.Read.Model.SessionModel
+﻿@model ActiveEdge.Read.Model.Session.SessionModel
 
 @{
   ViewBag.Title = "New Session";
@@ -80,10 +80,10 @@
               </div>
               <div class="hr-line-dashed"></div>
               <div class="form-group">
-                @Html.LabelFor(model => model.SessionNotesPosition, new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.TreatmentNotes, new {@class = "control-label col-md-2"})
                 <div class="col-md-6">
-                  @Html.EditorFor(model => model.SessionNotesPosition)
-                  @Html.ValidationMessageFor(model => model.SessionNotesPosition)
+                  @Html.EditorFor(model => model.TreatmentNotes)
+                  @Html.ValidationMessageFor(model => model.TreatmentNotes)
                 </div>
               </div>
               @*<div class="hr-line-dashed"></div>

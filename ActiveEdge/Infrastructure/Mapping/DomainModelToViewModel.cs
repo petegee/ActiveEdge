@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Organization;
+using ActiveEdge.Read.Model.Session;
 using ActiveEdge.Read.Model.WebApi.Search;
 using AutoMapper;
 using Domain.Model;

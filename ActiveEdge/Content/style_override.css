@@ -92,7 +92,7 @@ dd {
   cursor: crosshair;
 }
 
-.field-validation-error {
+.field-validation-error, .validation-summary-errors{
 
   color: #8a1f11;
   font-weight: 700;

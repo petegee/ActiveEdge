@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Session;
 using AutoMapper;
 using Domain.Context;
 using Shared;
@@ -29,9 +30,9 @@ namespace ActiveEdge.Read.Query.Sessions
         /// <returns>Response from the request</returns>
         public SessionModel Handle(GetSessionById message)
         {
-            var session = _dbContext.Sessions.Single(s => s.Id == message.SessionId);
-                    
-            return  _mapper.Map<SessionModel>(session);
+            var session = _dbContext.Sessions.SingleOrDefault(s => s.Id == message.SessionId);
+
+            return session == null ? null : _mapper.Map<SessionModel>(session);
         }
 
         /// <summary>Handles a request</summary>

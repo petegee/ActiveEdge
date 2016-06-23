@@ -6,6 +6,7 @@ using System.Web.Routing;
 using ActiveEdge.App_Start;
 using ActiveEdge.DependencyResolution;
 using ActiveEdge.Read;
+using FluentValidation.Mvc;
 
 //using WebApiContrib.IoC.StructureMap;
 
@@ -27,6 +28,8 @@ namespace ActiveEdge
             config.DependencyResolver = new StructureMapDependencyResolver(container);
 
             ModelMetadataProviders.Current = new MetadataProvider();
+
+            FluentValidationModelValidatorProvider.Configure();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Session;
 using Shared;
 
 namespace ActiveEdge.Read.Query.Sessions

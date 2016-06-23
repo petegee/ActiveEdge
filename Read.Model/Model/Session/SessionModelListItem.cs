@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ActiveEdge.Read.Model
+namespace ActiveEdge.Read.Model.Session
 {
-    public class SessionModel
+    public class SessionModelListItem
     {
         public int Id { get; set; }
 
@@ -15,7 +14,6 @@ namespace ActiveEdge.Read.Model
 
         public int ClientId { get; set; }
 
-        [Required]
         [AdditionalHtml(PlaceHolder = "Search")]
         [DisplayName("Client Name")]
         public string ClientFullName { get; set; }
@@ -38,22 +36,8 @@ namespace ActiveEdge.Read.Model
         [DisplayName("Pre-Massage Palpation")]
         public string PreMassagePalpation { get; set; }
 
-        [DisplayName("Session Plan")]
-        [UIHint("Summernote")]
-        public string SessionPlan { get; set; }
+   
+   
 
-        [DisplayName("Treatment")]
-        [UIHint("Summernote")]
-        public string SessionNotesPosition { get; set; }
-
-        [DisplayName("Techniques")]
-        [UIHint("Summernote")]
-        public string SessionNotesTechniques { get; set; }
-
-        [DisplayName("Findings")]
-        [UIHint("Summernote")]
-        public string SessionNotesFindings { get; set; }
-
-        public List<string> ContraIndications { get; set; }
     }
 }
