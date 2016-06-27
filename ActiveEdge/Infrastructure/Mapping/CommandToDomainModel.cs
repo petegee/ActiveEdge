@@ -47,6 +47,8 @@ namespace ActiveEdge.Infrastructure.Mapping
                 .ForMember(dest => dest.Clinics, options => options.MapFrom(model => model.Clinics));
 
             CreateMap<CreateNewSessionCommand, Session>();
+
+            CreateMap<UpdateSessionCommand, Session>();
         }
     }
 }

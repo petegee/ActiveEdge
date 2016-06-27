@@ -101,9 +101,6 @@ namespace Domain.Context
                 GoalOrExpectations = "get fitter & stronger",
                 ContributingFactorsToCondition = "training like a beast",
                 SessionPlan = "Go hard or go home",
-                SessionNotesFindings = "this guy is beast",
-                SessionNotesPosition = "&lt;p&gt;everything&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/p&gt;",
-                SessionNotesTechniques = "everywhere",
                 PreMassagePalpatation = "nope",
                 OrganizationId = organization.Id
             });

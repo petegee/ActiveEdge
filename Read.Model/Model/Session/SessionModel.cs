@@ -48,15 +48,7 @@ namespace ActiveEdge.Read.Model.Session
         [DisplayName("Treatment")]
         [UIHint("Summernote")]
         public string TreatmentNotes { get; set; }
-
-        [DisplayName("Techniques")]
-        [UIHint("Summernote")]
-        public string SessionNotesTechniques { get; set; }
-
-        [DisplayName("Findings")]
-        [UIHint("Summernote")]
-        public string SessionNotesFindings { get; set; }
-
+        
         public List<string> ContraIndications { get; set; }
     }
 }

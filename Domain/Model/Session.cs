@@ -27,11 +27,8 @@ namespace Domain.Model
         public string Hypothesis { get; set; }
 
         public string SessionPlan { get; set; }
+        
+        public string TreatmentNotes { get; set; }
 
-        public string SessionNotesPosition { get; set; }
-
-        public string SessionNotesTechniques { get; set; }
-
-        public string SessionNotesFindings { get; set; }
     }
 }

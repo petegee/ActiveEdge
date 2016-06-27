@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Command.Session;
 using Domain.Event;
 using Domain.Model;
 
@@ -14,6 +15,7 @@ namespace ActiveEdge.Infrastructure.Mapping
         {
             CreateMap<Clinic, NewOrganizationCreated.Clinic>();
             CreateMap<Organization, NewOrganizationCreated>();
+           
         }
     }
 }
