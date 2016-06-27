@@ -2,7 +2,8 @@
 
 namespace Domain.Model
 {
-    public class Session : Entity , IAmLinkedToAnOrganization
+
+    public abstract class SessionBase : Entity, IAmLinkedToAnOrganization
     {
         public int OrganizationId { get; set; }
 
@@ -14,9 +15,27 @@ namespace Domain.Model
 
         public virtual Client Client { get; set; }
 
+        public string GoalOrExpectations { get; set; }
+
+    }
+
+    public class RemedialSession : SessionBase
+    {
+        public string MainConcerns { get; set; }
+
+        public string History { get; set; }
+
+        public string Complications { get; set; }
+
+        public string FunctionalLimitations { get; set; }
+
+    }
+    public class Session : SessionBase
+    {
+        
+
         public string Feedback { get; set; }
 
-        public string GoalOrExpectations { get; set; }
 
         public string AreasOfDiscomfort { get; set; }
 
