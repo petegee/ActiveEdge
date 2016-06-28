@@ -68,7 +68,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("organization/edit/{id}")]
+        [Route("organization/edit/{id}", Name = "OrganizationEdit")]
         public ActionResult Edit(int id)
         {
             var model = _bus.ExecuteQuery(new GetOrganization(id));

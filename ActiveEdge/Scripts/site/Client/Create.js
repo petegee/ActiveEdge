@@ -110,8 +110,8 @@
     //  .activeEdgeTypeahead('../api/search/suburbs/');
 
    
-    //$("#City")
-    //  .activeEdgeTypeahead('../api/search/cities/');
+    $("#City")
+      .activeEdgeTypeahead('../api/search/cities/');
 
   });
 
