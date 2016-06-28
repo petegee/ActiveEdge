@@ -15,13 +15,11 @@ namespace ActiveEdge.Controllers
     {
         private readonly IBus _bus;
         private readonly IMapper _mapper;
-        private readonly MapperConfiguration _mapperConfiguration;
 
-        public OrganizationController(IMapper mapper, IBus bus, MapperConfiguration mapperConfiguration)
+        public OrganizationController(IMapper mapper, IBus bus)
         {
             _mapper = mapper;
             _bus = bus;
-            _mapperConfiguration = mapperConfiguration;
         }
 
         [HttpGet]

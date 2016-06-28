@@ -190,8 +190,8 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.1.0.361, Culture=neutral, processorArchitecture=MSIL">
@@ -327,6 +327,7 @@
     <Compile Include="Infrastructure\PlaceHolderAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebApi\OrganizationApiController.cs" />
     <Compile Include="WebApi\SearchController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -462,6 +463,8 @@
     <Content Include="Scripts\site\activeedge.js" />
     <Content Include="Scripts\site\icheckwireup.js" />
     <Content Include="Scripts\site\Organization\create.js" />
+    <Content Include="Scripts\site\Organization\edit.js" />
+    <Content Include="Scripts\site\Organization\viewModel.js" />
     <Content Include="Scripts\site\Session\edit.js" />
     <Content Include="Scripts\site\Session\plan.js" />
     <Content Include="Scripts\site\Session\create.js" />
@@ -533,10 +536,6 @@
     <Content Include="Scripts\plugins\taggle-js\scss\taggle.scss" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Shared\_TopNavbar2.cshtml" />
-    <Content Include="Views\Organization\Index.cshtml" />
-    <Content Include="Views\Organization\Details.cshtml" />
-    <Content Include="Views\Organization\Create.cshtml" />
-    <Content Include="Views\Organization\EditorTemplates\OrganizationModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StandardFormDateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StandardFormEnumDropDownList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StandardFormCheckBox.cshtml" />
@@ -545,13 +544,19 @@
     <Content Include="Views\Shared\EditorTemplates\AddressModel.cshtml" />
     <Content Include="Views\Users\ForOrganization.cshtml" />
     <Content Include="Views\Users\CreateForOrganization.cshtml" />
-    <Content Include="Views\Organization\DisplayTemplates\OrganizationModel.cshtml" />
-    <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Organization\Index.cshtml" />
+    <Content Include="Views\Organization\EditorTemplates\OrganizationModel.cshtml" />
+    <Content Include="Views\Organization\Edit.cshtml" />
+    <Content Include="Views\Organization\DisplayTemplates\OrganizationModel.cshtml" />
+    <Content Include="Views\Organization\Details.cshtml" />
+    <Content Include="Views\Organization\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
+    <Folder Include="Views\OrganizationApi\DisplayTemplates\" />
+    <Folder Include="Views\OrganizationApi\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

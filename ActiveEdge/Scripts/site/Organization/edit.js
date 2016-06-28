@@ -1,5 +1,5 @@
 ﻿$(document)
-  .ready(function() {
+  .ready(function () {
 
     ko.applyBindings(new OrganizationModel());
 

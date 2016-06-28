@@ -48,6 +48,7 @@ namespace ActiveEdge
             public static class Organization
             {
                 public const string Create = "~/bundles/scripts/organizaton/create";
+                public const string Edit = "~/bundles/scripts/organizaton/edit";
             }
         }
     }
@@ -75,7 +76,8 @@ namespace ActiveEdge
             RegisterScripts(Bundles.Scripts.Session.Details, "~/Scripts/site/session/details.js",
                 "~/Scripts/site/session/drawing.js");
 
-            RegisterScripts(Bundles.Scripts.Organization.Create, "~/Scripts/site/organization/create.js");
+            RegisterScripts(Bundles.Scripts.Organization.Create, "~/Scripts/site/organization/create.js", "~/Scripts/site/organization/viewModel.js");
+            RegisterScripts(Bundles.Scripts.Organization.Edit, "~/Scripts/site/organization/edit.js", "~/Scripts/site/organization/viewModel.js");
 
             // Vendor scripts
             RegisterScripts(Bundles.Scripts.KnockoutJs, "~/Scripts/knockout-{version}.js");
