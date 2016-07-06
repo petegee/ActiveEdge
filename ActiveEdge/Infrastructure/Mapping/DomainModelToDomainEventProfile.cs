@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using Domain.Command.Session;
 using Domain.Event;
 using Domain.Model;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
-    public class DomainModelToDomainEvent : Profile
+    public class DomainModelToDomainEventProfile : Profile
     {
         /// <summary>
         ///     Override this method in a derived class and call the CreateMap method to associate that map with this profile.
@@ -15,7 +14,10 @@ namespace ActiveEdge.Infrastructure.Mapping
         {
             CreateMap<Clinic, NewOrganizationCreated.Clinic>();
             CreateMap<Organization, NewOrganizationCreated>();
-           
+
+            CreateMap<Clinic, OrganizationUpdated.Clinic>();
+            CreateMap<Organization, OrganizationUpdated>();
+
         }
     }
 }

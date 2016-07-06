@@ -9,11 +9,10 @@ namespace ActiveEdge.Infrastructure.Mapping
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<CommandToDomainModel>();
-                cfg.AddProfile<DomainModelToDomainEvent>();
+                cfg.AddProfile<ViewModelToCommandProfile>();
+                cfg.AddProfile<CommandToDomainModelProfile>();
+                cfg.AddProfile<DomainModelToDomainEventProfile>();
                 cfg.AddProfile<DomainModelToViewModel>();
-                cfg.AddProfile<ViewModelToCommand>();
-
             });
 
             return configuration;

@@ -55,7 +55,18 @@ namespace Domain.Context
                 ContactPerson = "Dr Zeuss",
                 ContactEmailAddress = "Dr@capitalsports.com",
                 ContactPhoneNumber = "01702 712202",
-                Clinics = new List<Clinic> { new Clinic { ClinicName = "Lambton Quay"} }
+                Clinics = new List<Clinic> { new Clinic
+                {
+                    ClinicName = "Lambton Quay",
+                    Address = new Address
+                    {
+                        Address1 = "24 Johnston Street",
+                        Address2 = "Address line2",
+                        City = "Wellington",
+                        PostCode = "6011",
+                        Suburb = "Wellington Central"
+                    }
+                } }
             });
 
             context.Organizations.Add(new Organization

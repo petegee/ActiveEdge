@@ -6,7 +6,7 @@ using Domain.Model;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
-    public class CommandToDomainModel : Profile
+    public class CommandToDomainModelProfile : Profile
     {
         /// <summary>
         /// Override this method in a derived class and call the CreateMap method to associate that map with this profile.
@@ -45,6 +45,24 @@ namespace ActiveEdge.Infrastructure.Mapping
             CreateMap<CreateNewOrganizationCommand, Organization>()
                 .ForMember(dest => dest.Id, options => options.Ignore())
                 .ForMember(dest => dest.Clinics, options => options.MapFrom(model => model.Clinics));
+
+            CreateMap<UpdateOrganizationCommand.Clinic, Clinic>()
+                .ForMember(dest => dest.Address, options => options.ResolveUsing(
+                    model => new Address
+                    {
+                        Address1 = model.AddressLine1,
+                        Address2 = model.AddressLine2,
+                        Suburb = model.Suburb,
+                        City = model.City,
+                        PostCode = model.PostCode
+                    }))
+                .ForMember(dest => dest.OrganizationId, options => options.Ignore())
+                .ForMember(dest => dest.Organization, options => options.Ignore());
+
+            CreateMap<UpdateOrganizationCommand, Organization>()
+                .ForMember(dest => dest.Clinics, options => options.MapFrom(model => model.Clinics));
+
+
 
             CreateMap<CreateNewSessionCommand, Session>();
 

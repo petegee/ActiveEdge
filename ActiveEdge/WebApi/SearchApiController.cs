@@ -9,12 +9,12 @@ using Domain.Context;
 namespace ActiveEdge.WebApi
 {
     [RoutePrefix("api/search")]
-    public class SearchController : ApiController
+    public class SearchApiController : ApiController
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly MapperConfiguration _mapperConfiguration;
 
-        public SearchController(IApplicationDbContext dbContext, MapperConfiguration mapperConfiguration)
+        public SearchApiController(IApplicationDbContext dbContext, MapperConfiguration mapperConfiguration)
         {
             _dbContext = dbContext;
             _dbContext.EnableOrganizationTenant();

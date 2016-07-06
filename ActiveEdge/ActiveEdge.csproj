@@ -319,16 +319,16 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutomapperExtensions.cs" />
-    <Compile Include="Infrastructure\Mapping\CommandToDomainModel.cs" />
-    <Compile Include="Infrastructure\Mapping\DomainModelToDomainEvent.cs" />
+    <Compile Include="Infrastructure\Mapping\CommandToDomainModelProfile.cs" />
+    <Compile Include="Infrastructure\Mapping\DomainModelToDomainEventProfile.cs" />
     <Compile Include="Infrastructure\Mapping\DomainModelToViewModel.cs" />
-    <Compile Include="Infrastructure\Mapping\ViewModelToCommand.cs" />
+    <Compile Include="Infrastructure\Mapping\ViewModelToCommandProfile.cs" />
     <Compile Include="Infrastructure\MVC\Attributes\AuthorizeRolesAttribute.cs" />
     <Compile Include="Infrastructure\PlaceHolderAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WebApi\OrganizationApiController.cs" />
-    <Compile Include="WebApi\SearchController.cs" />
+    <Compile Include="WebApi\SearchApiController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -432,6 +432,7 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\plugins\metisMenu\metisMenu.min.js" />
     <Content Include="Scripts\plugins\taggle-js\css\projects.min.css" />
     <Content Include="Scripts\plugins\taggle-js\css\taggle.css" />

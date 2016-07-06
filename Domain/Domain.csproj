@@ -80,9 +80,11 @@
     <Compile Include="Command\Session\CreateNewSessionCommand.cs" />
     <Compile Include="Command\Session\DeleteSessionCommand.cs" />
     <Compile Include="Command\Session\UpdateSessionCommand.cs" />
+    <Compile Include="Command\UpdateOrganizationCommand.cs" />
+    <Compile Include="Event\OrganizationUpdated.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
     <Compile Include="Sagas\ClientSaga.cs" />
-    <Compile Include="Sagas\OrganizationAggregate.cs" />
+    <Compile Include="Sagas\OrganizationSaga.cs" />
     <Compile Include="BusinessRuleException.cs" />
     <Compile Include="Command\Client\DeleteClientCommand.cs" />
     <Compile Include="Command\CreateNewOrganizationCommand.cs" />

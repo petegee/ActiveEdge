@@ -64,6 +64,12 @@ $.fn.activeEdgeTypeahead = function (url) {
       }
     });
 
+  typeahead.bind('typeahead:change',
+    function(ev, suggestion) {
+      var dataBindAttribute = $(this).attr("data-bind");
+      $("[data-bind='" + dataBindAttribute + "'].tt-hint").val(suggestion);
+    });
+
   return typeahead;
 };
 

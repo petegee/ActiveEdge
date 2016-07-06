@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoMapper;
 using Domain.Command;
 using Domain.Context;
@@ -6,17 +7,19 @@ using Domain.Event;
 using Domain.Model;
 using Shared;
 
-namespace Domain.Aggregate
+namespace Domain.Sagas
 {
     // ReSharper disable once UnusedMember.Global
-    public class OrganizationAggregate : ICommandHandler<CreateNewOrganizationCommand>, ICommandHandler<DeleteOrganizationCommand>
+    public class OrganizationSaga : ICommandHandler<CreateNewOrganizationCommand>,
+        ICommandHandler<UpdateOrganizationCommand>,
+        ICommandHandler<DeleteOrganizationCommand>
     {
+        private readonly IBus _bus;
         private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IBus _bus;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public OrganizationAggregate(IApplicationDbContext dbContext, IMapper mapper, IBus bus)
+        public OrganizationSaga(IApplicationDbContext dbContext, IMapper mapper, IBus bus)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -50,13 +53,34 @@ namespace Domain.Aggregate
 
             if (organization == null)
             {
-                throw new BusinessRuleException($"Unable to delete Organization id:'{message.OrganizationId}' could not be found.");
+                throw new BusinessRuleException(
+                    $"Unable to delete Organization id:'{message.OrganizationId}' could not be found.");
             }
 
             _dbContext.Organizations.Remove(organization);
 
             _dbContext.SaveChanges();
 
+            return organization.Id;
+        }
+
+        public int Handle(UpdateOrganizationCommand message)
+        {
+            var organization = _dbContext.Organizations.SingleOrDefault(org => org.Id == message.Id);
+
+            if (organization == null)
+            {
+                throw new BusinessRuleException(
+                    $"Unable to update Organization id:'{message.Id}' could not be found.");
+            }
+
+            _mapper.Map(message, organization);
+
+            _dbContext.SaveChanges();
+
+            var domainEvent = _mapper.Map<OrganizationUpdated>(organization);
+
+            _bus.PublishDomainEvent(domainEvent);
             return organization.Id;
         }
     }

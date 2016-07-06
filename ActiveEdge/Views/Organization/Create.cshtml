@@ -29,8 +29,8 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         
-        <form action="/Organization/Create" method="post" data-bind="submit: submitForm">
-          
+        <form data-bind="submit: saveModel">
+          @Html.Hidden("createOrganizationApi", Url.RouteUrl("CreateOrganizationApi", new { httproute = true}))
           <div class="ibox-title">
             <h5>Register New Organization</h5>
           </div>

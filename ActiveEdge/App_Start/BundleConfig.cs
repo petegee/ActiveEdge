@@ -80,7 +80,7 @@ namespace ActiveEdge
             RegisterScripts(Bundles.Scripts.Organization.Edit, "~/Scripts/site/organization/edit.js", "~/Scripts/site/organization/viewModel.js");
 
             // Vendor scripts
-            RegisterScripts(Bundles.Scripts.KnockoutJs, "~/Scripts/knockout-{version}.js");
+            RegisterScripts(Bundles.Scripts.KnockoutJs, "~/Scripts/knockout-{version}.js", "~/Scripts/knockout.mapping-latest.js");
             RegisterScripts(Bundles.Scripts.Jquery, "~/Scripts/jquery-2.1.1.min.js");
             RegisterScripts(Bundles.Scripts.JqueryValidation, "~/Scripts/jquery.validate.min.js");
             RegisterScripts(Bundles.Scripts.Bootstrap, "~/Scripts/bootstrap.min.js");

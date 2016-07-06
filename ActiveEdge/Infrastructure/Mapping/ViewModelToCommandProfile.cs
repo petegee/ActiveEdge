@@ -8,7 +8,7 @@ using Domain.Command.Session;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
-    public class ViewModelToCommand : Profile
+    public class ViewModelToCommandProfile : Profile
     {
         /// <summary>
         /// Override this method in a derived class and call the CreateMap method to associate that map with this profile.
@@ -19,13 +19,15 @@ namespace ActiveEdge.Infrastructure.Mapping
             CreateMap<ClinicModel, CreateNewOrganizationCommand.Clinic>();
             CreateMap<OrganizationModel, CreateNewOrganizationCommand>();
 
+            CreateMap<ClinicModel, UpdateOrganizationCommand.Clinic>();
+            CreateMap<OrganizationModel, UpdateOrganizationCommand>();
+
             // Clients
             CreateMap<ClientModel, RegisterNewClientCommand>();
             CreateMap<ClientModel, UpdateClientCommand>();
 
             // Sessions
             CreateMap<SessionModel, CreateNewSessionCommand>();
-
             CreateMap<SessionModel, UpdateSessionCommand>();
         }
     }
