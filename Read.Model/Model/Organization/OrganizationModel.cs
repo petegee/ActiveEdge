@@ -7,6 +7,7 @@ namespace ActiveEdge.Read.Model.Organization
 {
     public class OrganizationModel
     {
+        [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
 
         [Required]

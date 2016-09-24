@@ -1,13 +1,18 @@
-﻿@if (ViewBag.Alert != null)
-{
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="@ViewBag.Alert.Css alert-dismissable animated fadeIn">
-          <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-          @ViewBag.Alert.Text
+﻿<div id="notifications" class="top-buffer">
+  @if (ViewBag.Alert != null)
+  {
+      <div id="notification" class="notification row">
+        <div class="col-lg-12">
+          @foreach (var alert in ViewBag.Alert)
+                {
+              <div class="@alert.Css alert-dismissable animated fadeIn">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <b> @alert.Text</b>
+              </div>
+          }
+
         </div>
       </div>
+  }
 
-    </div>
-}
-
+</div>

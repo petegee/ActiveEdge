@@ -25,11 +25,12 @@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
+  @Html.Partial("_AlertsPartial")
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
-        @Html.Hidden("getOrganizationApi", Url.RouteUrl("GetOrganizationApi", new { httproute = true, organizationId = Model.Id}))
-        @Html.Hidden("updateOrganizationApi", Url.RouteUrl("UpdateOrganizationApi", new { httproute = true, organizationId = Model.Id }))
+        @Html.Hidden("getOrganizationApi", Url.RouteUrl("GetOrganizationApi", new {httproute = true, organizationId = Model.Id}))
+        @Html.Hidden("updateOrganizationApi", Url.RouteUrl("UpdateOrganizationApi", new {httproute = true, organizationId = Model.Id}))
 
         <form method="post" data-bind="submit: updateModel">
 

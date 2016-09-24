@@ -83,3 +83,40 @@ function htmlEncode(value) {
 function htmlDecode(value) {
   return $("<div/>").html(value).text();
 }
+
+function displayAlert(alert, message) {
+
+  var rawTemplate = "<div class='notification row'><div class='col-lg-12'><div class='alert {{alert}} alert-dismissable'><button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button><b>{{message}}</b></div></div></div>"; // (step 1)
+  var compiledTemplate = Handlebars.compile(rawTemplate); // (step 2)
+
+  var html = compiledTemplate({ alert: alert, message: message });
+
+  var doesMessageExistAlready = false;
+  $(".alert b")
+      .each(function (index, item) {
+
+        if (item.innerText === message) {
+          doesMessageExistAlready = true;
+        }
+      });
+
+  if (doesMessageExistAlready === false) {
+    $(html).appendTo("#notifications");
+  }
+}
+
+function displaySuccess(message) {
+  displayAlert("alert-success", message);
+}
+
+function displayInfo(message) {
+  displayAlert("alert-info", message);
+}
+
+function displayDanger(message) {
+  displayAlert("alert-danger", message);
+}
+
+function displayWarning(message) {
+  displayAlert("alert-warning", message);
+}

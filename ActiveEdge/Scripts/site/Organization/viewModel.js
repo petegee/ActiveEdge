@@ -80,6 +80,9 @@ function OrganizationModel(data) {
           if (response.isRedirect) {
             window.location.href = response.redirectUrl;
           }
+        })
+      .error(function(message) {
+        displayDanger(message.responseJSON.Message);
         });
 
 
@@ -95,6 +98,7 @@ function ClinicModel(data) {
   // ********************************************************************************************************
   //  Knockout Observables                                                                                  *                                       
   // ********************************************************************************************************
+  self.id = ko.observable();
   self.clinicName = ko.observable();
   self.addressLine1 = ko.observable();
   self.addressLine2 = ko.observable();
@@ -104,6 +108,7 @@ function ClinicModel(data) {
   self.city = ko.observable();
 
   if (data !== null && data !== undefined) {
+    self.id(data.id);
     self.clinicName(data.clinicName);
     self.addressLine1(data.addressLine1);
     self.addressLine2(data.addressLine2);

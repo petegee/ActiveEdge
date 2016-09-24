@@ -56,6 +56,7 @@ namespace ActiveEdge.Infrastructure.Mapping
                         City = model.City,
                         PostCode = model.PostCode
                     }))
+                .ForMember(dest => dest.Id, options => options.Ignore())
                 .ForMember(dest => dest.OrganizationId, options => options.Ignore())
                 .ForMember(dest => dest.Organization, options => options.Ignore());
 

@@ -6,6 +6,9 @@ namespace ActiveEdge.Read.Model.Organization
 {
     public class ClinicModel
     {
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
+
         [DisplayName("Clinic Name")]
         [Required]
         [JsonProperty(PropertyName = "clinicName")]

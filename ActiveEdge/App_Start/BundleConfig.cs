@@ -64,7 +64,8 @@ namespace ActiveEdge
 
             RegisterScripts(Bundles.Scripts.ActiveEdge, "~/Scripts/site/activeedge.js",
                 "~/Scripts/typeahead.bundle.min.js", "~/Scripts/bloodhound.min.js",
-                "~/Scripts/summernote/summernote.min.js");
+                "~/Scripts/summernote/summernote.min.js", "~/Scripts/handlebars.min.js");
+
             RegisterScripts(Bundles.Scripts.Client.Create, "~/Scripts/site/client/Create.js");
             RegisterScripts(Bundles.Scripts.Client.Edit, "~/Scripts/site/client/edit.js");
 
