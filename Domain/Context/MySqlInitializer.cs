@@ -50,7 +50,7 @@ namespace Domain.Context
 
             if (!context.Users.Any(u => u.UserName == "sjclark76@gmail.com"))
             {
-                var userStore = new UserStore<ApplicationUser>(context);
+                var userStore = new Shared.Authorization.UserStore<ApplicationUser>(context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
                 var userToInsert = new ApplicationUser { UserName = "sjclark76@gmail.com", PhoneNumber = "021509357" };
 
@@ -198,7 +198,7 @@ namespace Domain.Context
             {
                 if (!context.Users.Any(u => u.UserName == userName))
                 {
-                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userStore = new Shared.Authorization.UserStore<ApplicationUser>(context);
                     var userManager = new UserManager<ApplicationUser>(userStore);
                     var userToInsert = new ApplicationUser { UserName = userName, PhoneNumber = "021509317", OrganizationId = organiation.Id };
 

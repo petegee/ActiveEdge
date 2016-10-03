@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Command;
-using Domain.Context;
 using Domain.Event;
 using Domain.Model;
+using Marten;
 using Shared;
 
 namespace Domain.Sagas
@@ -15,13 +13,13 @@ namespace Domain.Sagas
         ICommandHandler<DeleteOrganizationCommand>
     {
         private readonly IBus _bus;
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IDocumentSession _session;
         private readonly IMapper _mapper;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public OrganizationSaga(IApplicationDbContext dbContext, IMapper mapper, IBus bus)
+        public OrganizationSaga(IDocumentSession session, IMapper mapper, IBus bus)
         {
-            _dbContext = dbContext;
+            _session = session;
             _mapper = mapper;
             _bus = bus;
         }
@@ -33,9 +31,9 @@ namespace Domain.Sagas
         {
             var organization = _mapper.Map<Organization>(message);
 
-            _dbContext.Organizations.Add(organization);
+            _session.Store(organization);
 
-            _dbContext.SaveChanges();
+            _session.SaveChanges();
 
             var domainEvent = _mapper.Map<NewOrganizationCreated>(organization);
 
@@ -49,24 +47,16 @@ namespace Domain.Sagas
         /// <returns>Response from the request</returns>
         public int Handle(DeleteOrganizationCommand message)
         {
-            var organization = _dbContext.Organizations.SingleOrDefault(org => org.Id == message.OrganizationId);
+            _session.Delete<Organization>(message.OrganizationId);
 
-            if (organization == null)
-            {
-                throw new BusinessRuleException(
-                    $"Unable to delete Organization id:'{message.OrganizationId}' could not be found.");
-            }
+            _session.SaveChanges();
 
-            _dbContext.Organizations.Remove(organization);
-
-            _dbContext.SaveChanges();
-
-            return organization.Id;
+            return message.OrganizationId;
         }
 
         public int Handle(UpdateOrganizationCommand message)
         {
-            var organization = _dbContext.Organizations.SingleOrDefault(org => org.Id == message.Id);
+            var organization = _session.Load<Organization>(message.Id);
 
             if (organization == null)
             {
@@ -76,11 +66,14 @@ namespace Domain.Sagas
 
             _mapper.Map(message, organization);
 
-            _dbContext.SaveChanges();
+            _session.Store(organization);
+
+            _session.SaveChanges();
 
             var domainEvent = _mapper.Map<OrganizationUpdated>(organization);
 
             _bus.PublishDomainEvent(domainEvent);
+
             return organization.Id;
         }
     }

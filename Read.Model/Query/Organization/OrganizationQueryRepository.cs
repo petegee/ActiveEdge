@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ActiveEdge.Read.Model.Organization;
 using AutoMapper;
-using Domain.Context;
+using Marten;
 using Shared;
 
 namespace ActiveEdge.Read.Query.Organization
@@ -10,14 +10,14 @@ namespace ActiveEdge.Read.Query.Organization
     public class OrganizationQueryRepository : IQueryHandler<FindAllOrganizations, OrganizationModel>,
         IQueryForSingleHandler<GetOrganization, OrganizationModel>
     {
-        private readonly IApplicationDbContext _dbContext;
-        private readonly MapperConfiguration _mapperConfiguration;
+        private readonly IDocumentSession _session;
+        private readonly IMapper _mapper;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public OrganizationQueryRepository(IApplicationDbContext dbContext, MapperConfiguration mapperConfiguration)
+        public OrganizationQueryRepository(IDocumentSession session, IMapper mapper)
         {
-            _dbContext = dbContext;
-            _mapperConfiguration = mapperConfiguration;
+            _session = session;
+            _mapper = mapper;
         }
 
         /// <summary>Handles a request</summary>
@@ -25,12 +25,20 @@ namespace ActiveEdge.Read.Query.Organization
         /// <returns>Response from the request</returns>
         public IList<OrganizationModel> Handle(FindAllOrganizations message)
         {
-            return _dbContext.Organizations.ProjectToList<OrganizationModel>(_mapperConfiguration);
+            var organisations = _session.Query<Domain.Model.Organization>().ToList();
+
+            var models = _mapper.Map<List<Domain.Model.Organization>, List<OrganizationModel>>(organisations);
+
+            return models;
         }
 
         public OrganizationModel Handle(GetOrganization message)
         {
-            return _dbContext.Organizations.Where(organization => organization.Id == message.Id).ProjectToSingleOrDefault<OrganizationModel>(_mapperConfiguration);
+            var organisation = _session.Load<Domain.Model.Organization>(message.Id);
+
+            var model = _mapper.Map<Domain.Model.Organization, OrganizationModel>(organisation);
+
+            return model;
         }
     }
 }

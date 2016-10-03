@@ -21,13 +21,14 @@ using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
 using Domain.Context;
 using Domain.Model;
+using Marten;
 using MediatR;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security.DataProtection;
 using Shared;
+using Shared.Authorization;
 using StructureMap;
 using StructureMap.Graph;
+using StructureMap.Pipeline;
 
 namespace ActiveEdge.DependencyResolution
 {
@@ -57,11 +58,23 @@ namespace ActiveEdge.DependencyResolution
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
 
 
-            For<IUserStore<ApplicationUser>>()
-.Use<UserStore<ApplicationUser>>();
+            For<IUserStore<ApplicationUser>>().Use<UserStore<Domain.Model.ApplicationUser>>();
 
            For<DbContext>().Use(() => new ApplicationDbContext());
-            
+
+
+            ForSingletonOf<IDocumentStore>()
+                .Use("Build the DocumentStore", () =>
+                {
+                    return DocumentStore.For(_ =>
+                    {
+                        _.Connection("host=localhost;database=activeedgedb;password=Password1;username=active_edge_web_user");
+                    });
+                });
+
+            For<IDocumentSession>()
+                .LifecycleIs<ContainerLifecycle>()
+                .Use("Lightweight Session", c => c.GetInstance<IDocumentStore>().LightweightSession());
             //For<IUserStore<ApplicationUser>>().Use(new UserStore<ApplicationUser>(new ApplicationDbContext())).Singleton();
 
            // For<IUserStore<IdentityUser>>()

@@ -1,10 +1,19 @@
 ﻿using System.Web.Mvc;
+using Marten;
 
 namespace ActiveEdge.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
+        private readonly IDocumentSession _session;
+
+        /// <summary>Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.</summary>
+        public HomeController(IDocumentSession session)
+        {
+            _session = session;
+        }
+
         [HttpGet]
         [Route("")]
         public ActionResult Index()

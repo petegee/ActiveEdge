@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.Extensions;
-using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Session;
 using ActiveEdge.Read.Model.Shared;
 using ActiveEdge.Read.Query.Sessions;

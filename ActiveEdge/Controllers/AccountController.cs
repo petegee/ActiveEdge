@@ -5,18 +5,18 @@ using ActiveEdge.Read.Model;
 using Domain.Context;
 using Domain.Model;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using Shared.Authorization;
 
 namespace ActiveEdge.Controllers
 {
     [Authorize]
     public class AccountController : ControllerBase
     {
-        public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
-        {
-        }
+        //public AccountController()
+        //    : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        //{
+        //}
 
         public AccountController(UserManager<ApplicationUser> userManager)
         {
