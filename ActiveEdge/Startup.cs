@@ -1,4 +1,12 @@
-﻿using ActiveEdge;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using ActiveEdge;
+using Domain.Context;
+using Domain.Model;
+using Marten;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
 
@@ -11,6 +19,32 @@ namespace ActiveEdge
         {
 
             ConfigureAuth(app);
+
+            AddSystemAdmin();
+        }
+
+        private static void AddSystemAdmin()
+        {
+            var session = DependencyResolver.Current.GetService<IDocumentSession>();
+            
+            if (!session.Query<IdentityRole>().Any() == false)
+            {
+                session.Store(new IdentityRole { Name = Roles.SystemAdministrator });
+                session.Store(new IdentityRole { Name = Roles.OrganizationAdministrator });
+                session.Store(new IdentityRole { Name = Roles.Therapist });
+            }
+
+            if (!session.Query<ApplicationUser>().Any(u => u.UserName == "sjclark76@gmail.com"))
+            {
+                var userStore = new Shared.Authorization.UserStore<ApplicationUser>(session);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                var userToInsert = new ApplicationUser { Id = Guid.NewGuid().ToString(),  UserName = "sjclark76@gmail.com", PhoneNumber = "021509357" };
+
+                userManager.Create(userToInsert, "ridgeback");
+                userManager.AddToRole(userToInsert.Id, Roles.SystemAdministrator);
+            }
+
+            session.SaveChanges();
         }
     }
 }

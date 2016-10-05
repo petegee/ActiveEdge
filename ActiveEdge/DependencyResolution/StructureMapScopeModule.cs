@@ -1,8 +1,5 @@
 namespace ActiveEdge.DependencyResolution {
     using System.Web;
-
-    using ActiveEdge.App_Start;
-
     using StructureMap.Web.Pipeline;
 
     public class StructureMapScopeModule : IHttpModule {

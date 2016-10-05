@@ -16,7 +16,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Web.Mvc;
-using ActiveEdge.App_Start;
+using ActiveEdge;
 using ActiveEdge.DependencyResolution;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using WebActivatorEx;
@@ -24,7 +24,7 @@ using WebActivatorEx;
 [assembly: PreApplicationStartMethod(typeof(StructuremapMvc), "Start")]
 [assembly: ApplicationShutdownMethod(typeof(StructuremapMvc), "End")]
 
-namespace ActiveEdge.App_Start
+namespace ActiveEdge
 {
     public static class StructuremapMvc
     {
@@ -48,6 +48,7 @@ namespace ActiveEdge.App_Start
             container.AssertConfigurationIsValid();
             StructureMapDependencyScope = new StructureMapDependencyScope(container);
             DependencyResolver.SetResolver(StructureMapDependencyScope);
+            
             DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
         }
 

@@ -43,13 +43,9 @@ namespace Shared.Authorization
             {
                 byte[] clearBytes = Encoding.UTF8.GetBytes(login.LoginProvider + "|" + login.ProviderKey);
                 var hashBytes = sha.ComputeHash(clearBytes);
-                return "IdentityUserLogins/" + ToHex(hashBytes);
+                return ToHex(hashBytes);
             }
         }
-
-        internal static string GetIdentityUserByUserNameId(string userName)
-        {
-            return $"IdentityUserByUserNames/{userName}";
-        }
+       
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Marten;
 using Microsoft.AspNet.Identity;
 
@@ -22,19 +21,7 @@ namespace Shared.Authorization
         public virtual string ClaimType { get; set; }
         public virtual string ClaimValue { get; set; }
     }
-
-    public sealed class IdentityUserByUserName
-    {
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-
-        public IdentityUserByUserName(string userId, string userName)
-        {
-            UserId = userId;
-            UserName = userName;
-        }
-    }
-
+    
     public class UserStore<TUser> :
         IUserStore<TUser>,
         IUserLoginStore<TUser>,
@@ -49,33 +36,13 @@ namespace Shared.Authorization
         where TUser : IdentityUser
     {
         private bool _disposed;
-        private IDocumentSession _session;
-        //private readonly Func<IAsyncDocumentSession> getSessionFunc;
-        //private IAsyncDocumentSession _session;
-
-        //public UserStore(Func<IAsyncDocumentSession> getSession)
-        //{
-        //    this.getSessionFunc = getSession;
-        //}
-
+        private readonly IDocumentSession _session;
+    
         public UserStore(IDocumentSession session)
         {
             _session = session;
         }
-
-        //private IAsyncDocumentSession session
-        //{
-        //    get
-        //    {
-        //        if (_session == null)
-        //        {
-        //            _session = getSessionFunc();
-        //            _session.Advanced.DocumentStore.Conventions.RegisterIdConvention<IdentityUser>((dbname, commands, user) => "IdentityUsers/" + user.Id);
-        //        }
-        //        return _session;
-        //    }
-        //}
-
+        
         public async Task CreateAsync(TUser user)
         {
             ThrowIfDisposed();
@@ -89,15 +56,7 @@ namespace Shared.Authorization
             }
 
             _session.Store(user);
-
-            // This model allows us to lookup a user by name in order to get the id
-            var userByName = new IdentityUserByUserName(user.Id, user.UserName);
-
-            var identityByUser = Util.GetIdentityUserByUserNameId(user.UserName);
-
-            _session.Store(userByName);
-            _session.Store(identityByUser);
-
+            
             await _session.SaveChangesAsync();
         }
 
@@ -107,12 +66,6 @@ namespace Shared.Authorization
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
-            }
-
-            var userByName = await _session.LoadAsync<IdentityUserByUserName>(Util.GetIdentityUserByUserNameId(user.UserName));
-            if (userByName != null)
-            {
-                _session.Delete(userByName);
             }
 
             _session.Delete(user);
@@ -127,13 +80,7 @@ namespace Shared.Authorization
 
         public async Task<TUser> FindByNameAsync(string userName)
         {
-            var userByName = await _session.LoadAsync<IdentityUserByUserName>(Util.GetIdentityUserByUserNameId(userName));
-            if (userByName == null)
-            {
-                return null;
-            }
-
-            return await FindByIdAsync(userByName.UserId);
+            return await _session.Query<TUser>().Where(user => user.UserName == userName).SingleOrDefaultAsync();
         }
 
         public Task UpdateAsync(TUser user)
@@ -151,7 +98,7 @@ namespace Shared.Authorization
         {
             if (_disposed)
             {
-                throw new ObjectDisposedException(this.GetType().Name);
+                throw new ObjectDisposedException(GetType().Name);
             }
         }
 

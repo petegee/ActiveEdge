@@ -3,7 +3,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using ActiveEdge.App_Start;
 using ActiveEdge.DependencyResolution;
 using ActiveEdge.Read;
 using FluentValidation.Mvc;
