@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Session;
 using AutoMapper;
-using Domain.Context;
+using Domain.Model;
+using Marten;
 using Shared;
 
 namespace ActiveEdge.Read.Query.Sessions
@@ -12,17 +12,17 @@ namespace ActiveEdge.Read.Query.Sessions
         IQueryHandler<GetAllSessionsForClient, SessionModelListItem>,
         IQueryForSingleHandler<GetSessionById, SessionModel>
     {
-        private readonly IApplicationDbContext _dbContext;
-        private readonly MapperConfiguration _mapperConfiguration;
+        private readonly ILoggedOnUser _loggedOnUser;
         private readonly IMapper _mapper;
+        private readonly IDocumentSession _session;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public SessionQueries(IApplicationDbContext dbContext, MapperConfiguration mapperConfiguration, IMapper mapper)
+        public SessionQueries(IDocumentSession session,  IMapper mapper,
+            ILoggedOnUser loggedOnUser)
         {
-            _dbContext = dbContext;
-            _mapperConfiguration = mapperConfiguration;
+            _session = session;
             _mapper = mapper;
-            _dbContext.EnableOrganizationTenant();
+            _loggedOnUser = loggedOnUser;
         }
 
         /// <summary>Handles a request</summary>
@@ -30,7 +30,7 @@ namespace ActiveEdge.Read.Query.Sessions
         /// <returns>Response from the request</returns>
         public SessionModel Handle(GetSessionById message)
         {
-            var session = _dbContext.Sessions.SingleOrDefault(s => s.Id == message.SessionId);
+            var session = _session.Query<Session>().SingleOrDefault(s => s.Id == message.SessionId);
 
             return session == null ? null : _mapper.Map<SessionModel>(session);
         }
@@ -40,7 +40,13 @@ namespace ActiveEdge.Read.Query.Sessions
         /// <returns>Response from the request</returns>
         public IList<SessionModelListItem> Handle(GetAllSessions message)
         {
-            return _dbContext.Sessions.ProjectToList<SessionModelListItem>(_mapperConfiguration);
+            var sessions =
+                _session.Query<Session>().Where(session => session.Organization.Id == _loggedOnUser.OrganizationId)
+                    .ToList();
+
+            var sessionModels = _mapper.Map<List<Session>, List<SessionModelListItem>>(sessions);
+
+            return sessionModels;
         }
 
         /// <summary>Handles a request</summary>
@@ -48,9 +54,13 @@ namespace ActiveEdge.Read.Query.Sessions
         /// <returns>Response from the request</returns>
         public IList<SessionModelListItem> Handle(GetAllSessionsForClient message)
         {
-            return
-                _dbContext.Sessions.Where(session => session.ClientId == message.ClientId)
-                    .ProjectToList<SessionModelListItem>(_mapperConfiguration);
+            var sessions = _session.Query<Session>()
+                .Where(session => session.Client.Id == message.ClientId)
+                .ToList();
+
+            var sessionModels = _mapper.Map<List<Session>, List<SessionModelListItem>>(sessions);
+
+            return sessionModels;
         }
     }
 }

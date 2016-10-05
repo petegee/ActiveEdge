@@ -198,6 +198,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Npgsql, Version=3.1.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Npgsql.3.1.6\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=4.1.0.361, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.1.0.361\lib\net40\StructureMap.dll</HintPath>
       <Private>True</Private>

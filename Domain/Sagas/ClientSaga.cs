@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Command.Client;
-using Domain.Context;
 using Domain.Model;
+using Marten;
 using Shared;
 
 namespace Domain.Sagas
@@ -11,13 +10,13 @@ namespace Domain.Sagas
         ICommandHandler<DeleteClientCommand>
     {
         private readonly ILoggedOnUser _loggedOnUser;
-        private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IDocumentSession _session;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public ClientSaga(IApplicationDbContext dbContext, IMapper mapper, ILoggedOnUser loggedOnUser)
+        public ClientSaga(IDocumentSession session, IMapper mapper, ILoggedOnUser loggedOnUser)
         {
-            _dbContext = dbContext;
+            _session = session;
             _mapper = mapper;
             _loggedOnUser = loggedOnUser;
         }
@@ -27,9 +26,10 @@ namespace Domain.Sagas
         /// <returns>Response from the request</returns>
         public int Handle(DeleteClientCommand message)
         {
-            var customer = _dbContext.Clients.Find(message.ClientId);
-            _dbContext.Clients.Remove(customer);
-            _dbContext.SaveChanges();
+            var customer = _session.Load<Client>(message.ClientId);
+
+            _session.Delete(customer);
+            _session.SaveChanges();
 
             return customer.Id;
         }
@@ -48,9 +48,9 @@ namespace Domain.Sagas
 
             customerDomain.OrganizationId = _loggedOnUser.OrganizationId;
 
-            _dbContext.Clients.Add(customerDomain);
+            _session.Store(customerDomain);
 
-            _dbContext.SaveChanges();
+            _session.SaveChanges();
 
             return customerDomain.Id;
         }
@@ -60,10 +60,10 @@ namespace Domain.Sagas
         /// <returns>Response from the request</returns>
         public int Handle(UpdateClientCommand message)
         {
-            var client = _dbContext.Clients.Single(c => c.Id == message.Id);
+            var client = _session.Load<Client>(message.Id);
 
             _mapper.Map(message, client);
-            _dbContext.SaveChanges();
+            _session.SaveChanges();
 
             return client.Id;
         }

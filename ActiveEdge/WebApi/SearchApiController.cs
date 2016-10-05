@@ -3,58 +3,62 @@ using System.Linq;
 using System.Web.Http;
 using ActiveEdge.Read.Model.WebApi.Search;
 using AutoMapper;
-using DelegateDecompiler;
-using Domain.Context;
+using Domain.Model;
+using Marten;
 
 namespace ActiveEdge.WebApi
 {
     [RoutePrefix("api/search")]
     public class SearchApiController : ApiController
     {
-        private readonly IApplicationDbContext _dbContext;
-        private readonly MapperConfiguration _mapperConfiguration;
+        private readonly IMapper _mapper;
+        private readonly IDocumentSession _session;
 
-        public SearchApiController(IApplicationDbContext dbContext, MapperConfiguration mapperConfiguration)
+        public SearchApiController(IDocumentSession session, IMapper mapper)
         {
-            _dbContext = dbContext;
-            _dbContext.EnableOrganizationTenant();
-            _mapperConfiguration = mapperConfiguration;
+            _session = session;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [Route("clients/{fullname}")]
         public IEnumerable<SearchResult> Clients(string fullName)
         {
-            return _dbContext
-                .Clients
-                .AsNoTracking()
-                .Where(client => client.FullName.ToLower().StartsWith(fullName.ToLower()))
-                .Decompile()
-                .ProjectToList<SearchResult>(_mapperConfiguration);
+            fullName = fullName.ToLower();
+            var clients = _session.Query<Client>()
+                .Where(client => client.FullName.ToLower().StartsWith(fullName)).ToList();
+
+            var searchResults = _mapper.Map<List<Client>, List<SearchResult>>(clients);
+
+            return searchResults;
         }
 
         [HttpGet]
         [Route("suburbs/{name}")]
         public IEnumerable<SearchResult> Suburbs(string name)
         {
-            return _dbContext
-                .Addresses
-                .AsNoTracking()
-                .Where(address => address.Suburb.ToLower().StartsWith(name.ToLower()))
-                .Select(client => new SearchResult {DisplayValue = client.Suburb})
-                .Distinct();
+            name = name.ToLower();
+            var addresses = _session.Query<Address>()
+                .Where(address => address.Suburb.ToLower().StartsWith(name)).ToList();
+
+            var searchResults = _mapper.Map<List<Address>, List<SearchResult>>(addresses);
+
+            return searchResults;
+
+            
         }
 
         [HttpGet]
         [Route("cities/{name}")]
         public IEnumerable<SearchResult> Cities(string name)
         {
-            return _dbContext
-                .Addresses
-                .AsNoTracking()
-                .Where(address => address.City.ToLower().StartsWith(name.ToLower()))
-                .Select(client => new SearchResult {DisplayValue = client.City})
-                .Distinct();
+            name = name.ToLower();
+            var addresses = _session.Query<Address>()
+                .Where(address => address.City.ToLower().StartsWith(name)).ToList();
+
+            var searchResults = _mapper.Map<List<Address>, List<SearchResult>>(addresses);
+
+            return searchResults;
         }
     }
 }

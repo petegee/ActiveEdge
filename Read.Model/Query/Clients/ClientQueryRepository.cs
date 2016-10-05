@@ -3,6 +3,8 @@ using System.Linq;
 using ActiveEdge.Read.Model;
 using AutoMapper;
 using Domain.Context;
+using Domain.Model;
+using Marten;
 using Shared;
 
 namespace ActiveEdge.Read.Query.Clients
@@ -10,16 +12,15 @@ namespace ActiveEdge.Read.Query.Clients
     public class ClientQueryRepository : IQueryHandler<GetAllClientsForOrganization, ClientModel>,
         IQueryForSingleHandler<GetClientForOrganization, ClientModel>
     {
-        private readonly IApplicationDbContext _dbContext;
-        private readonly MapperConfiguration _mapperConfiguration;
+        private readonly IDocumentSession _session;
+        private readonly IMapper _mapper;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public ClientQueryRepository(IApplicationDbContext dbContext,
-            MapperConfiguration mapperConfiguration)
+        public ClientQueryRepository(IDocumentSession session,
+            IMapper mapper)
         {
-            _dbContext = dbContext;
-            _mapperConfiguration = mapperConfiguration;
-            _dbContext.EnableOrganizationTenant();
+            _session = session;
+            _mapper = mapper;
         }
 
         /// <summary>Handles a request</summary>
@@ -27,9 +28,11 @@ namespace ActiveEdge.Read.Query.Clients
         /// <returns>Response from the request</returns>
         public ClientModel Handle(GetClientForOrganization message)
         {
-            return
-                _dbContext.Clients.Where(client => client.Id == message.ClientId)
-                    .ProjectToSingleOrDefault<ClientModel>(_mapperConfiguration);
+            var client = _session.Query<Client>().SingleOrDefault(c => c.Id == message.ClientId);
+
+            var model = _mapper.Map<Client, ClientModel>(client);
+
+            return model;
         }
 
         /// <summary>Handles a request</summary>
@@ -37,7 +40,12 @@ namespace ActiveEdge.Read.Query.Clients
         /// <returns>Response from the request</returns>
         public IList<ClientModel> Handle(GetAllClientsForOrganization message)
         {
-            return _dbContext.Clients.ProjectToList<ClientModel>(_mapperConfiguration);
+            var clientsForOrganization =
+                _session.Query<Client>().Where(client => client.Organization.Id == message.OrganizationId.Value).ToList();
+
+            var clientModels = _mapper.Map<List<Client>, List<ClientModel>>(clientsForOrganization);
+
+            return clientModels;
         }
     }
 }

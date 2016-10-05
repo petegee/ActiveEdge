@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Domain.Context;
 using Domain.Model;
+using Marten;
 using Shared;
 
 namespace ActiveEdge.Read.Query.User
 {
     public class UserQueryRepository : IQueryHandler<FindAllUsersForOrganization, ApplicationUser>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IDocumentSession _session;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public UserQueryRepository(IApplicationDbContext dbContext)
+        public UserQueryRepository(IDocumentSession session)
         {
-            _dbContext = dbContext;
+            _session = session;
         }
 
         /// <summary>Handles a request</summary>
@@ -21,7 +21,7 @@ namespace ActiveEdge.Read.Query.User
         /// <returns>Response from the request</returns>
         public IList<ApplicationUser> Handle(FindAllUsersForOrganization message)
         {
-            return _dbContext.Users.Where(user => user.OrganizationId == message.OrganizationId).ToList();
+            return _session.Query<ApplicationUser>().Where(user => user.OrganizationId == message.OrganizationId).ToList();
         }
     }
 }

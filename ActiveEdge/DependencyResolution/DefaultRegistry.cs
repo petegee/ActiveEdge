@@ -19,6 +19,7 @@ using System.Data.Entity;
 using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
+using Domain;
 using Domain.Context;
 using Domain.Model;
 using Marten;
@@ -42,7 +43,7 @@ namespace ActiveEdge.DependencyResolution
                 scan =>
                 {
                     scan.TheCallingAssembly();
-                    scan.AssemblyContainingType<IApplicationDbContext>();
+                    scan.AssemblyContainingType<BusinessRuleException>();
                     scan.AssemblyContainingType<ILoggedOnUser>();
                     scan.AssemblyContainingType<GetAllSessions>();
                     scan.WithDefaultConventions();
@@ -58,9 +59,9 @@ namespace ActiveEdge.DependencyResolution
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
 
 
-            For<IUserStore<ApplicationUser>>().Use<UserStore<Domain.Model.ApplicationUser>>();
+            For<IUserStore<ApplicationUser>>().Use<UserStore<ApplicationUser>>();
 
-           For<DbContext>().Use(() => new ApplicationDbContext());
+          
 
 
             ForSingletonOf<IDocumentStore>()

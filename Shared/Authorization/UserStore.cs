@@ -188,15 +188,16 @@ namespace Shared.Authorization
             string loginId = Util.GetLoginId(login);
 
             TUser user = null;
-            var loginDoc = await _session.Include<IdentityUserLogin>(x => x.UserId)
-                .LoadAsync(loginId);
 
-            if (loginDoc != null)
-            {
-                return await session.LoadAsync<TUser>(loginDoc.UserId);
-            }
+            var loginDoc = _session.Query<IdentityUserLogin>()
+                .Include<TUser>(userLogin => userLogin.Id, x => user = x)
+                .Where(userLogin => userLogin.Id == loginId);
 
-            return null;
+
+            return user;
+            //  return await session.LoadAsync<TUser>(loginDoc.UserId);
+
+            //return null;
         }
 
         public Task<IList<UserLoginInfo>> GetLoginsAsync(TUser user)
@@ -217,10 +218,10 @@ namespace Shared.Authorization
                 throw new ArgumentNullException(nameof(user));
 
             string loginId = Util.GetLoginId(login);
-            var loginDoc = await session.LoadAsync<IdentityUserLogin>(loginId);
+            var loginDoc = await _session.LoadAsync<IdentityUserLogin>(loginId);
             if (loginDoc != null)
             {
-                session.Delete(loginDoc);
+                _session.Delete(loginDoc);
             }
 
             user.Logins.RemoveAll(x => x.LoginProvider == login.LoginProvider && x.ProviderKey == login.ProviderKey);
@@ -385,7 +386,7 @@ namespace Shared.Authorization
                 throw new ArgumentNullException(nameof(email));
             }
 
-            return session.Query<TUser>()
+            return _session.Query<TUser>()
                 .Where(u => u.Email == email)
                 .FirstOrDefaultAsync();
         }
