@@ -64,6 +64,8 @@ $.fn.activeEdgeTypeahead = function (url) {
       }
     });
 
+ $(".tt-hint").removeClass("required");
+
   typeahead.bind('typeahead:change',
     function(ev, suggestion) {
       var dataBindAttribute = $(this).attr("data-bind");
