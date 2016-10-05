@@ -75,17 +75,18 @@ namespace ActiveEdge.DependencyResolution
 
             For<IDocumentSession>()
                 .LifecycleIs<ContainerLifecycle>()
-                .Use("Lightweight Session", c => c.GetInstance<IDocumentStore>().LightweightSession());
+                .Use("Lightweight Session", c => c.GetInstance<IDocumentStore>().DirtyTrackedSession());
             //For<IUserStore<ApplicationUser>>().Use(new UserStore<ApplicationUser>(new ApplicationDbContext())).Singleton();
 
-           // For<IUserStore<IdentityUser>>()
-           //.Use(context => new UserStore<ApplicationUser>(context.GetInstance<IApplicationDbContext>()))
-           //.
-           //.Ctor<DbContext>()
-           //.Is<IApplicationDbContext>();
+            // For<IUserStore<IdentityUser>>()
+            //.Use(context => new UserStore<ApplicationUser>(context.GetInstance<IApplicationDbContext>()))
+            //.
+            //.Ctor<DbContext>()
+            //.Is<IApplicationDbContext>();
 
-            //For<UserManager<ApplicationUser>>()
-            //    .Use(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())));
+            For<UserManager<ApplicationUser>>()
+                .Use(c => new UserManager<ApplicationUser>(c.GetInstance<IUserStore<ApplicationUser>>()));
+
             For<IMediator>().Use<Mediator>();
         }
 

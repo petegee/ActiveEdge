@@ -91,7 +91,7 @@ namespace Shared.Authorization
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return Task.FromResult(true);
+            return _session.SaveChangesAsync();
         }
 
         private void ThrowIfDisposed()
