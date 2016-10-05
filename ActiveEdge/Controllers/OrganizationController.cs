@@ -66,7 +66,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("organization/edit/{id}", Name = "OrganizationEdit")]
+        [Route("organization/edit/{id}")]
         public ActionResult Edit(int id)
         {
             var model = _bus.ExecuteQuery(new GetOrganization(id));
@@ -75,8 +75,8 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpPost]
-        [Route("organization/edit/")]
-        public ActionResult Edit(int id, FormCollection collection)
+        [Route("organization/edit/{id}")]
+        public ActionResult Edit(OrganizationModel model)
         {
             try
             {
@@ -98,10 +98,10 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpPost]
-        [Route("organization/delete/")]
-        public ActionResult Delete(int id, FormCollection collection)
+        [Route("organization/delete/{id}")]
+        public ActionResult Delete(OrganizationModel model)
         {
-            _bus.ExecuteCommand(new DeleteOrganizationCommand(id));
+            _bus.ExecuteCommand(new DeleteOrganizationCommand(model.Id));
 
             try
             {

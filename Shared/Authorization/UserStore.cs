@@ -52,8 +52,9 @@ namespace Shared.Authorization
             }
             if (string.IsNullOrEmpty(user.Id))
             {
-                throw new InvalidOperationException("user.Id property must be specified before calling CreateAsync");
+                user.Id = Guid.NewGuid().ToString();
             }
+
 
             _session.Store(user);
             

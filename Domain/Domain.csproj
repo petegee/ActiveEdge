@@ -105,6 +105,7 @@
     <Compile Include="Command\Session\DeleteSessionCommand.cs" />
     <Compile Include="Command\Session\UpdateSessionCommand.cs" />
     <Compile Include="Command\UpdateOrganizationCommand.cs" />
+    <Compile Include="Context\Roles.cs" />
     <Compile Include="Event\OrganizationUpdated.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
     <Compile Include="Sagas\ClientSaga.cs" />
