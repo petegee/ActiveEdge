@@ -35,7 +35,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("client/{id}", Name = "client-details")]
+        [Route("client/{id}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -80,7 +80,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("client/edit/{id}", Name = "ClientEdit")]
+        [Route("client/edit/{id}")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

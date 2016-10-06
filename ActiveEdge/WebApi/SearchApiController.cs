@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using ActiveEdge.Read.Model.WebApi.Search;
@@ -25,10 +26,17 @@ namespace ActiveEdge.WebApi
         public IEnumerable<SearchResult> Clients(string fullName)
         {
             fullName = fullName.ToLower();
-            var clients = _session.Query<Client>()
-                .Where(client => client.FullName.ToLower().StartsWith(fullName)).ToList();
 
-            var searchResults = _mapper.Map<List<Client>, List<SearchResult>>(clients);
+            var searchResults = _session.Query<Client>()
+                .Select(
+                    client => new SearchResult { Id = client.Id, DisplayValue = client.FullName })
+                .Where(result => result.DisplayValue.StartsWith(fullName, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            //var clients = _session.Query<Client>()
+            //    .Where(client => client.FirstName.StartsWith(fullName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            //var searchResults =  _mapper.Map<List<Client>, List<SearchResult>>(clients);
 
             return searchResults;
         }

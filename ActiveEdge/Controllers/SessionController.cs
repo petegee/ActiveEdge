@@ -42,7 +42,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("sessions/for/client/{id}", Name = "session-forclient")]
+        [Route("sessions/for/client/{id}")]
         public ActionResult ForClient(int id)
         {
             var sessions = _bus.ExecuteQuery(new GetAllSessionsForClient(id));
@@ -103,7 +103,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("session/edit/{id}", Name = "session-edit")]
+        [Route("session/edit/{id}")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -133,7 +133,7 @@ namespace ActiveEdge.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("session/edit")]
+        [Route("session/edit/{id}")]
         public ActionResult Edit(SessionModel sessionModel)
         {
             if (ModelState.IsValid)

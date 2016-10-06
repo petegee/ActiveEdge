@@ -91,10 +91,11 @@ namespace Domain.Context
             var organization = _session.Query<Organization>().First();
             var user = _session.Query<Client>().First();
 
-            user.Sessions.Add(new Session
+            _session.Store(new Session
             {
                 Date = DateTime.Today.Date,
-                ClientId = 1,
+                ClientId = user.Id,
+                ClientFullName = user.FullName,
                 Feedback = "It was absolutely fantastic",
                 GoalOrExpectations = "get fitter & stronger",
                 ContributingFactorsToCondition = "training like a beast",

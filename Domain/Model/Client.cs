@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DelegateDecompiler;
+using Marten.Schema;
 
 namespace Domain.Model
 {
@@ -10,7 +11,6 @@ namespace Domain.Model
     {
         public Client()
         {
-            Sessions = new List<Session>();
             ExcerciseTypes = new List<ExerciseType>();
         }
 
@@ -48,7 +48,9 @@ namespace Domain.Model
         public string Difficuties { get; set; }
         public string AreasNotToBeMassaged { get; set; }
         public TermsAndConditions TermsAndConditions { get; set; }
-        public List<Session> Sessions { get; set; }
+       
+
+        [DuplicateField]
         public int OrganizationId { get; set; }
     }
 }

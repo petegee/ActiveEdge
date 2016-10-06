@@ -76,10 +76,10 @@
                   @Html.DisplayFor(modelItem => item.ContactNumber)
                 </td>
                 <td>
-                  @Html.RouteLink("Details", "client-details", new {id = item.Id}, new {@class = "btn btn-primary btn-sm"})
-                  @Html.RouteLink("Edit", "ClientEdit", new {id = item.Id}, new {@class = "btn btn-white btn-sm"})
+                  @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-primary btn-sm"})
+                  @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-white btn-sm"})
                   @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-white btn-sm"})
-                  @Html.RouteLink("Sessions", "session-forclient", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                  @Html.ActionLink("Sessions", "ForClient", new { controller="Session", id = item.Id }, new { @class = "btn btn-primary btn-sm" })
                 </td>
               </tr>
             }

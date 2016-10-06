@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Organization;
 using ActiveEdge.Read.Model.Session;
@@ -12,8 +10,8 @@ namespace ActiveEdge.Infrastructure.Mapping
     public class DomainModelToViewModel : Profile
     {
         /// <summary>
-        /// Override this method in a derived class and call the CreateMap method to associate that map with this profile.
-        /// Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
+        ///     Override this method in a derived class and call the CreateMap method to associate that map with this profile.
+        ///     Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
         /// </summary>
         protected override void Configure()
         {
@@ -28,7 +26,7 @@ namespace ActiveEdge.Infrastructure.Mapping
                 .ForMember(dest => dest.Clinics, options => options.MapFrom(organization => organization.Clinics));
 
             CreateMap<Session, SessionModel>()
-                .ForMember(dest => dest.ContraIndications, options =>options.ResolveUsing(session => session.Client?.ContraIndications?.HasAny == true ? session.Client?.ContraIndications?.Conditions.ToList() : new List<string>() ));
+                .ForMember(dest => dest.ContraIndications, options => options.Ignore());
 
             CreateMap<Session, SessionModelListItem>();
 
@@ -37,7 +35,6 @@ namespace ActiveEdge.Infrastructure.Mapping
 
             CreateMap<Client, SearchResult>()
                 .ForMember(result => result.DisplayValue, options => options.MapFrom(client => client.FullName));
-
         }
     }
 }

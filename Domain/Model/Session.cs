@@ -1,19 +1,20 @@
 ﻿using System;
+using Marten.Schema;
 
 namespace Domain.Model
 {
 
     public abstract class SessionBase : Entity, IAmLinkedToAnOrganization
     {
+        [DuplicateField]
         public int OrganizationId { get; set; }
-
-        public virtual Organization Organization { get; set; }
-
+        
         public DateTime Date { get; set; }
 
+        [DuplicateField]
         public int ClientId { get; set; }
 
-        public virtual Client Client { get; set; }
+        public string ClientFullName { get; set; }
 
         public string GoalOrExpectations { get; set; }
 

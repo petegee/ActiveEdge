@@ -30,9 +30,16 @@ namespace ActiveEdge.Read.Query.Sessions
         /// <returns>Response from the request</returns>
         public SessionModel Handle(GetSessionById message)
         {
-            var session = _session.Query<Session>().SingleOrDefault(s => s.Id == message.SessionId);
 
-            return session == null ? null : _mapper.Map<SessionModel>(session);
+            Client client = null;
+            var session = _session.Query<Session>()
+                .Include<Client>(s => s.ClientId, c => client = c)
+                .Single(s => s.Id == message.SessionId);
+
+            var sessionModel = _mapper.Map<SessionModel>(session);
+
+            sessionModel.ContraIndications = client.ContraIndications.Conditions.ToList();
+            return sessionModel;
         }
 
         /// <summary>Handles a request</summary>
@@ -41,7 +48,7 @@ namespace ActiveEdge.Read.Query.Sessions
         public IList<SessionModelListItem> Handle(GetAllSessions message)
         {
             var sessions =
-                _session.Query<Session>().Where(session => session.Organization.Id == _loggedOnUser.OrganizationId)
+                _session.Query<Session>().Where(session => session.OrganizationId == _loggedOnUser.OrganizationId)
                     .ToList();
 
             var sessionModels = _mapper.Map<List<Session>, List<SessionModelListItem>>(sessions);
@@ -55,7 +62,7 @@ namespace ActiveEdge.Read.Query.Sessions
         public IList<SessionModelListItem> Handle(GetAllSessionsForClient message)
         {
             var sessions = _session.Query<Session>()
-                .Where(session => session.Client.Id == message.ClientId)
+                .Where(session => session.ClientId == message.ClientId)
                 .ToList();
 
             var sessionModels = _mapper.Map<List<Session>, List<SessionModelListItem>>(sessions);

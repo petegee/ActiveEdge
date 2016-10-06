@@ -39,7 +39,8 @@ namespace ActiveEdge.Read.Query.Clients
         /// <returns>Response from the request</returns>
         public IList<ClientModel> Handle(GetAllClientsForOrganization message)
         {
-            var clientsForOrganization =
+            var clientsForOrganization = message.OrganizationId.HasValue == false ?
+                _session.Query<Client>().ToList() : 
                 _session.Query<Client>().Where(client => client.OrganizationId == message.OrganizationId.Value).ToList();
 
             var clientModels = _mapper.Map<List<Client>, List<ClientModel>>(clientsForOrganization);
