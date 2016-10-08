@@ -28,7 +28,7 @@
         <div class="ibox-content">
           @Html.DisplayForModel()
 
-          @Html.RouteLink("Edit", "OrganizationEdit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+          @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
           @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white" })
 
         </div>

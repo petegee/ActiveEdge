@@ -49,7 +49,6 @@ namespace ActiveEdge.Controllers
             return View(model);
         }
 
-        // POST: Organization/Create
         [HttpPost]
         [Route("organization/new")]
         public JsonResult Create(OrganizationModel organizationModel)
