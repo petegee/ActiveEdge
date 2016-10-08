@@ -9,8 +9,15 @@ namespace Domain.Filters
         public static IQueryable<T> FilterForOrganization<T>(this IQueryable<T> domainModels, ILoggedOnUser loggedOnUser)
             where T : IAmLinkedToAnOrganization
         {
-            return loggedOnUser.OrganizationId.HasValue
-                ? domainModels.Where(x => x.OrganizationId == loggedOnUser.OrganizationId)
+            return FilterForOrganization(domainModels, loggedOnUser.OrganizationId);
+
+        }
+
+        public static IQueryable<T> FilterForOrganization<T>(this IQueryable<T> domainModels, int? organizationId)
+            where T : IAmLinkedToAnOrganization
+        {
+            return organizationId.HasValue
+                ? domainModels.Where(x => x.OrganizationId == organizationId)
                 : domainModels;
         }
     }

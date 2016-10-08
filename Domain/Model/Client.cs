@@ -17,7 +17,6 @@ namespace Domain.Model
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        [Computed, NotMapped]
         public string FullName => FirstName + " " + LastName;
 
         public Gender Gender { get; set; }

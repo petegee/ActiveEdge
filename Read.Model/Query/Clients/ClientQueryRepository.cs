@@ -2,6 +2,7 @@
 using System.Linq;
 using ActiveEdge.Read.Model;
 using AutoMapper;
+using Domain.Filters;
 using Domain.Model;
 using Marten;
 using Shared;
@@ -39,10 +40,9 @@ namespace ActiveEdge.Read.Query.Clients
         /// <returns>Response from the request</returns>
         public IList<ClientModel> Handle(GetAllClientsForOrganization message)
         {
-            var clientsForOrganization = message.OrganizationId.HasValue == false ?
-                _session.Query<Client>().ToList() : 
-                _session.Query<Client>().Where(client => client.OrganizationId == message.OrganizationId.Value).ToList();
-
+            var clientsForOrganization = _session.Query<Client>().FilterForOrganization(message.OrganizationId).ToList();
+                
+            
             var clientModels = _mapper.Map<List<Client>, List<ClientModel>>(clientsForOrganization);
 
             return clientModels;

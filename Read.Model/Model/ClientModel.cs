@@ -8,7 +8,10 @@ namespace ActiveEdge.Read.Model
     public class ClientModel
     {
         public int Id { get; set; }
-        
+
+        [DisplayName("Full Name")]
+        public string FullName { get; set; }
+
         [DisplayName("First Name")]
         [Required]
         public string FirstName { get; set; }
