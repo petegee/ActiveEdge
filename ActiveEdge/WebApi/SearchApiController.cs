@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web.Http;
 using ActiveEdge.Read.Model.WebApi.Search;
 using AutoMapper;
+using Domain.Filters;
 using Domain.Model;
 using Marten;
+using Shared;
 
 namespace ActiveEdge.WebApi
 {
@@ -13,12 +15,14 @@ namespace ActiveEdge.WebApi
     public class SearchApiController : ApiController
     {
         private readonly IMapper _mapper;
+        private readonly ILoggedOnUser _loggedOnUser;
         private readonly IDocumentSession _session;
 
-        public SearchApiController(IDocumentSession session, IMapper mapper)
+        public SearchApiController(IDocumentSession session, IMapper mapper, ILoggedOnUser loggedOnUser)
         {
             _session = session;
             _mapper = mapper;
+            _loggedOnUser = loggedOnUser;
         }
 
         [HttpGet]
@@ -26,18 +30,13 @@ namespace ActiveEdge.WebApi
         public IEnumerable<SearchResult> Clients(string fullName)
         {
             fullName = fullName.ToLower();
-
+            
             var searchResults = _session.Query<Client>()
-                .Select(
-                    client => new SearchResult { Id = client.Id, DisplayValue = client.FullName })
+                .FilterForOrganization(_loggedOnUser)
+                .Select(client => new SearchResult { Id = client.Id, DisplayValue = client.FullName })
                 .Where(result => result.DisplayValue.StartsWith(fullName, StringComparison.OrdinalIgnoreCase))
                 .ToList();
-
-            //var clients = _session.Query<Client>()
-            //    .Where(client => client.FirstName.StartsWith(fullName, StringComparison.OrdinalIgnoreCase)).ToList();
-
-            //var searchResults =  _mapper.Map<List<Client>, List<SearchResult>>(clients);
-
+            
             return searchResults;
         }
 

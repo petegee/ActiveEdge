@@ -39,14 +39,15 @@ namespace Domain.Sagas
         /// <returns>Response from the request</returns>
         public int Handle(RegisterNewClientCommand message)
         {
-            if (_loggedOnUser.OrganizationId == 0)
+            if (_loggedOnUser.OrganizationId.HasValue == false)
             {
                 throw new BusinessRuleException("You cannot register a client if an organization is not specified.");
             }
 
+
             var customerDomain = _mapper.Map<RegisterNewClientCommand, Client>(message);
 
-            customerDomain.OrganizationId = _loggedOnUser.OrganizationId;
+            customerDomain.OrganizationId = _loggedOnUser.OrganizationId.Value;
 
             _session.Store(customerDomain);
 

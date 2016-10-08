@@ -107,6 +107,7 @@
     <Compile Include="Command\UpdateOrganizationCommand.cs" />
     <Compile Include="Context\Roles.cs" />
     <Compile Include="Event\OrganizationUpdated.cs" />
+    <Compile Include="Filters\GlobalFilters.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
     <Compile Include="Sagas\ClientSaga.cs" />
     <Compile Include="Sagas\OrganizationSaga.cs" />

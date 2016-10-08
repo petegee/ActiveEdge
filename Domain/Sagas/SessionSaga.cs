@@ -26,9 +26,15 @@ namespace Domain.Sagas
         /// <returns>Response from the request</returns>
         public int Handle(CreateNewSessionCommand message)
         {
+            if (_loggedOnUser.OrganizationId.HasValue == false)
+            {
+                throw new BusinessRuleException("You cannot create a session if an organization is not specified.");
+            }
+
+
             var domain = _mapper.Map<Session>(message);
 
-            domain.OrganizationId = _loggedOnUser.OrganizationId;
+            domain.OrganizationId = _loggedOnUser.OrganizationId.Value;
 
             _session.Store(domain);
             _session.SaveChanges();

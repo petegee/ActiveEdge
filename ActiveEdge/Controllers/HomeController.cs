@@ -1,17 +1,21 @@
 ﻿using System.Web.Mvc;
+using ActiveEdge.Read.Model.Shared;
+using Domain.Context;
 using Marten;
 
 namespace ActiveEdge.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
-        private readonly IDocumentSession _session;
+        private readonly IDocumentStore _store;
+        private readonly DatabaseInitializer _dbInitializer;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.</summary>
-        public HomeController(IDocumentSession session)
+        public HomeController(IDocumentStore store, DatabaseInitializer dbInitializer)
         {
-            _session = session;
+            _store = store;
+            _dbInitializer = dbInitializer;
         }
 
         [HttpGet]
@@ -22,6 +26,19 @@ namespace ActiveEdge.Controllers
             //ViewData["Message"] = "It is an application skeleton for a typical MVC 5 project. You can use it to quickly bootstrap your webapp projects.";
 
             return View();
+        }
+
+        [HttpGet]
+        [Route("clean")]
+        public ActionResult Clean()
+        {
+            _store.Advanced.Clean.CompletelyRemoveAll();
+
+            _dbInitializer.Seed();
+
+           Notify<WarningMessage>("Database Cleansed");
+
+            return RedirectToAction("Index");
         }
 
       

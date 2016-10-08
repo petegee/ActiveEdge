@@ -5,7 +5,7 @@ namespace Shared
 {
     public class LoggedOnUser : ILoggedOnUser
     {
-        public int OrganizationId
+        public int? OrganizationId
         {
             get
             {
@@ -15,7 +15,7 @@ namespace Shared
 
                 var organizationClaim = claims.FirstOrDefault(claim => claim.Type == ActiveEdgeClaims.OrganizationId);
 
-                return organizationClaim == null ? 0 : int.Parse(organizationClaim.Value);
+                return organizationClaim == null ? (int?) null : int.Parse(organizationClaim.Value);
             }
         }
     }
