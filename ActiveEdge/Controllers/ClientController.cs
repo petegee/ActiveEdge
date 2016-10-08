@@ -60,7 +60,6 @@ namespace ActiveEdge.Controllers
             return View("Intake", new ClientModel());
         }
 
-        // POST: /Client/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,7 +116,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("client/delete/{int}")]
+        [Route("client/delete/{id}")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -134,13 +133,14 @@ namespace ActiveEdge.Controllers
             return View(client);
         }
 
-        // POST: /Client/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("client/delete/{id}")]
         public ActionResult DeleteConfirmed(int id)
         {
             _bus.ExecuteCommand(new DeleteClientCommand(id));
+
+            Notify<SuccessMessage>("Client successfully deleted");
 
             return RedirectToAction("Index");
         }
