@@ -14,6 +14,10 @@ namespace ActiveEdge.Read.Model.Shared
         {
         }
 
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        public SuccessMessage()
+        {
+        }
         public override string Css => "alert alert-success";
     }
 }

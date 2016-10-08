@@ -105,16 +105,15 @@ namespace ActiveEdge.Controllers
         [Route("client/edit/{id}")]
         public ActionResult Edit(ClientModel clientModel)
         {
-            if (ModelState.IsValid)
-            {
-                var cmd = _mapper.Map<UpdateClientCommand>(clientModel);
+            if (!ModelState.IsValid) return View(clientModel);
 
-                _bus.ExecuteCommand(cmd);
+            var cmd = _mapper.Map<UpdateClientCommand>(clientModel);
 
-                return RedirectToAction("Index");
-            }
+            _bus.ExecuteCommand(cmd);
 
-            return View(clientModel);
+            Notify<SuccessMessage>($"{cmd.FirstName} {cmd.LastName} successfully updated.");
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
