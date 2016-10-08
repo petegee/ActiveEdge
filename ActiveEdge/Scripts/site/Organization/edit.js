@@ -2,12 +2,12 @@
   .ready(function () {
 
     var url = $("#getOrganizationApi").val();
+    var updateUrl = $("#updateOrganizationApi").val();
     $.getJSON(url,
       function(data) {
         
-        var viewModel = new OrganizationModel(data, "/organization/new");
+        var viewModel = new OrganizationModel(data, updateUrl);
 
-        //ko.mapping.fromJS(data, viewModel);
         ko.applyBindings(viewModel);
         
       });

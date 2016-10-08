@@ -17,6 +17,7 @@
 
 using System.Data.Entity;
 using ActiveEdge.Infrastructure.Mapping;
+using ActiveEdge.Infrastructure.MVC;
 using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
 using Domain;
@@ -58,6 +59,8 @@ namespace ActiveEdge.DependencyResolution
             For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
 
+
+            For<IUrlHelper>().Use<UrlDecoratorHelper>();
 
             For<IUserStore<ApplicationUser>>().Use<UserStore<ApplicationUser>>();
 

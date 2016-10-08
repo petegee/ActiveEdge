@@ -1,7 +1,8 @@
 ﻿
-function OrganizationModel(data) {
+function OrganizationModel(data, url) {
 
   var self = this;
+  
   self.organizationName = ko.observable();
   self.contactPerson = ko.observable();
   self.contactPhoneNumber = ko.observable();
@@ -44,16 +45,16 @@ function OrganizationModel(data) {
       var jsonData = ko.toJSON(self);
 
       $.ajax({
-        url: $("#createOrganizationApi").val(),
+        url: url,
           type: "POST",
           traditional: true,
           dataType: "json",
           contentType: "application/json; charset=utf-8",
           data: jsonData
         })
-        .done(function(response) {
-          if (response.isRedirect) {
-            window.location.href = response.redirectUrl;
+        .done(function(response, textStatus, jqXhr) {
+          if (jqXhr.status === 201) {
+            window.location.href = jqXhr.getResponseHeader("Location");
           }
         });
 
@@ -69,16 +70,16 @@ function OrganizationModel(data) {
       var jsonData = ko.toJSON(self);
 
       $.ajax({
-        url: $("#updateOrganizationApi").val(),
+        url: url,
         type: "PUT",
         traditional: true,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: jsonData
       })
-        .done(function (response) {
-          if (response.isRedirect) {
-            window.location.href = response.redirectUrl;
+        .done(function (response, textStatus, jqXhr) {
+          if (jqXhr.status === 204) {
+            window.location.href = $("#getOrganization").val();
           }
         })
       .error(function(message) {

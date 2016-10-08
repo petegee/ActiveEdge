@@ -45,7 +45,7 @@ namespace ActiveEdge
         {
             // add this assignment
             var container = IoC.Initialize();
-            container.AssertConfigurationIsValid();
+            
             StructureMapDependencyScope = new StructureMapDependencyScope(container);
             DependencyResolver.SetResolver(StructureMapDependencyScope);
             

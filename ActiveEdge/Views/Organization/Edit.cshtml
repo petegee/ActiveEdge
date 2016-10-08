@@ -30,6 +30,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         @Html.Hidden("getOrganizationApi", Url.RouteUrl("GetOrganizationApi", new {httproute = true, organizationId = Model.Id}))
+        @Html.Hidden("getOrganization", Url.Action("Details", new { controller  = "Organization", Model.Id }))
         @Html.Hidden("updateOrganizationApi", Url.RouteUrl("UpdateOrganizationApi", new {httproute = true, organizationId = Model.Id}))
 
         <form method="post" data-bind="submit: updateModel">

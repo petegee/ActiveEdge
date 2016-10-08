@@ -1,7 +1,8 @@
 ﻿$(document)
   .ready(function() {
-
-    ko.applyBindings(new OrganizationModel(null, "/organization/new"));
+    
+    var createUrl = $("#createOrganizationApi").val();
+    ko.applyBindings(new OrganizationModel(null, createUrl));
 
 
     $("[name='Suburb']")

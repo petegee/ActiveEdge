@@ -332,6 +332,8 @@
     <Compile Include="Infrastructure\Mapping\DomainModelToViewModel.cs" />
     <Compile Include="Infrastructure\Mapping\ViewModelToCommandProfile.cs" />
     <Compile Include="Infrastructure\MVC\Attributes\AuthorizeRolesAttribute.cs" />
+    <Compile Include="Infrastructure\MVC\IUrlHelper.cs" />
+    <Compile Include="Infrastructure\MVC\UrlHelperDecorator.cs" />
     <Compile Include="Infrastructure\PlaceHolderAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
