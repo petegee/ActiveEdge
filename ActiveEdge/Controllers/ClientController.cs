@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Shared;
 using ActiveEdge.Read.Query.Clients;
@@ -55,6 +56,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("client/intake")]
+        [HandleValidationErrors]
         public ActionResult Create()
         {
             return View("Intake", new ClientModel());
@@ -65,10 +67,9 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("client/intake")]
+        [HandleValidationErrors(Action = "Create", Controller = "Create")]
         public ActionResult Create([Bind(Exclude = "Id")] ClientModel client)
         {
-            if (!ModelState.IsValid) return View("Intake", client);
-
             var cmd = _mapper.Map<RegisterNewClientCommand>(client);
 
             _bus.ExecuteCommand(cmd);
@@ -80,6 +81,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("client/edit/{id}")]
+        [HandleValidationErrors]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -102,10 +104,9 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("client/edit/{id}")]
+        [HandleValidationErrors]
         public ActionResult Edit(ClientModel clientModel)
         {
-            if (!ModelState.IsValid) return View(clientModel);
-
             var cmd = _mapper.Map<UpdateClientCommand>(clientModel);
 
             _bus.ExecuteCommand(cmd);
