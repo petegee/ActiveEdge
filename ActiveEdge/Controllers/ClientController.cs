@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.MVC.Attributes;
@@ -30,22 +29,21 @@ namespace ActiveEdge.Controllers
             _session = session;
         }
 
-
         [HttpGet]
         [Route("clients")]
-        public ActionResult Index()
+        public async Task<ViewResult> Index()
         {
-            var clients = _session.Query<ClientModel>().FilterForOrganization(OrganizationId).ToList();
+            var clients = await _session.Query<ClientModel>().FilterForOrganization(OrganizationId).ToListAsync();
 
             return View(clients);
         }
 
         [HttpGet]
         [Route("client/{id}")]
-        public ActionResult Details(Guid id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            var client = _session.Query<ClientModel>().SingleOrDefault(c => c.Id == id);
-            
+            var client = await _session.Query<ClientModel>().SingleOrDefaultAsync(c => c.Id == id);
+
             if (client == null)
             {
                 return HttpNotFound();
@@ -61,9 +59,7 @@ namespace ActiveEdge.Controllers
         {
             return View("Intake", new ClientModel());
         }
-
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("client/intake")]
@@ -84,19 +80,17 @@ namespace ActiveEdge.Controllers
         [HttpGet]
         [Route("client/edit/{id}")]
         [HandleValidationErrors]
-        public ActionResult Edit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            var client = _session.Query<ClientModel>().SingleOrDefault(c => c.Id == id);
+            var client = await _session.Query<ClientModel>().SingleOrDefaultAsync(c => c.Id == id);
             
             if (client == null)
             {
                 return HttpNotFound();
             }
 
-
             return View(client);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -115,10 +109,9 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("client/delete/{id}")]
-        public ActionResult Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-
-            var client = _session.Query<ClientModel>().SingleOrDefault(c => c.Id == id);
+            var client = await _session.Query<ClientModel>().SingleOrDefaultAsync(c => c.Id == id);
 
             if (client == null)
             {
@@ -131,9 +124,9 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("client/delete/{id}")]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<RedirectToRouteResult> DeleteConfirmed(int id)
         {
-            _bus.ExecuteCommand(new DeleteClientCommand(id));
+            await _bus.ExecuteAsyncCommand(new DeleteClientCommand(id));
 
             Notify<SuccessMessage>("Client successfully deleted");
 
