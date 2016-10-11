@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Command.Client;
+using Domain.Command.Session;
 using Domain.Event;
 
 namespace Domain.Mapping
@@ -12,8 +13,12 @@ namespace Domain.Mapping
         /// </summary>
         protected override void Configure()
         {
+            // Clients
             CreateMap<RegisterNewClient, ClientRegistered>();
             CreateMap<UpdateClient, ClientUpdated>();
+
+            // Sessions
+            CreateMap<CreateNewSession, SessionCreated>();
         }
     }
 }

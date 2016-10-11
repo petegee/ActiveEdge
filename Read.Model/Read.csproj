@@ -121,7 +121,6 @@
     <Compile Include="Query\Organization\OrganizationQueryRepository.cs" />
     <Compile Include="Query\Sessions\GetAllSessions.cs" />
     <Compile Include="Query\Sessions\GetAllSessionsForClient.cs" />
-    <Compile Include="Query\Sessions\GetSessionById.cs" />
     <Compile Include="Query\Sessions\SessionQueries.cs" />
     <Compile Include="Query\User\FindAllUsersForOrganization.cs" />
     <Compile Include="Query\User\UserQueryRepository.cs" />

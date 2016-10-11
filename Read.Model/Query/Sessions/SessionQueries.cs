@@ -9,8 +9,7 @@ using Shared;
 namespace ActiveEdge.Read.Query.Sessions
 {
     public class SessionQueries : IQueryHandler<GetAllSessions, SessionModelListItem>,
-        IQueryHandler<GetAllSessionsForClient, SessionModelListItem>,
-        IQueryForSingleHandler<GetSessionById, SessionModel>
+        IQueryHandler<GetAllSessionsForClient, SessionModelListItem>
     {
         private readonly ILoggedOnUser _loggedOnUser;
         private readonly IMapper _mapper;
@@ -25,22 +24,6 @@ namespace ActiveEdge.Read.Query.Sessions
             _loggedOnUser = loggedOnUser;
         }
 
-        /// <summary>Handles a request</summary>
-        /// <param name="message">The request message</param>
-        /// <returns>Response from the request</returns>
-        public SessionModel Handle(GetSessionById message)
-        {
-
-            Client client = null;
-            var session = _session.Query<Session>()
-                .Include<Client>(s => s.ClientId, c => client = c)
-                .Single(s => s.Id == message.SessionId);
-
-            var sessionModel = _mapper.Map<SessionModel>(session);
-
-            sessionModel.ContraIndications = client.ContraIndications.Conditions.ToList();
-            return sessionModel;
-        }
 
         /// <summary>Handles a request</summary>
         /// <param name="message">The request message</param>

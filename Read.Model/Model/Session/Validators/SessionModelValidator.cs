@@ -1,4 +1,4 @@
-﻿using System.Threading;
+﻿using System;
 using FluentValidation;
 
 namespace ActiveEdge.Read.Model.Session.Validators
@@ -12,7 +12,7 @@ namespace ActiveEdge.Read.Model.Session.Validators
 
         private static bool HaveAValidClient(SessionModel session, string arg2)
         {
-            return session.ClientId > 0;
+            return session.ClientId != Guid.Empty;
         }
     }
 }

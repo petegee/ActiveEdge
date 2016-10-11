@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using ActiveEdge.Read.Model.Session.Validators;
+using Domain.Event;
+using Domain.Model;
 using FluentValidation.Attributes;
 
 namespace ActiveEdge.Read.Model.Session
 {
     [Validator(typeof(SessionModelValidator))]
-    public class SessionModel
+    public class SessionModel: IAmLinkedToAnOrganization
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
-        public int ClientId { get; set; }
+        public Guid ClientId { get; set; }
 
         [Required]
         [AdditionalHtml(PlaceHolder = "Search")]
@@ -50,5 +52,18 @@ namespace ActiveEdge.Read.Model.Session
         public string TreatmentNotes { get; set; }
         
         public List<string> ContraIndications { get; set; }
+
+        public void Apply(SessionCreated domainEvent)
+        {
+            OrganizationId = domainEvent.OrganizationId;
+            Date = domainEvent.Date;
+            ClientId = domainEvent.ClientId;
+            Feedback = domainEvent.Feedback;
+            GoalOrExpectations = domainEvent.GoalOrExpectations;
+            AreasOfDiscomfort = domainEvent.AreasOfDiscomfort;
+            ContraIndications = domainEvent.ContraIndications;
+        }
+
+        public Guid OrganizationId { get; set; }
     }
 }

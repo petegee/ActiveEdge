@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.Extensions;
+using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model.Session;
 using ActiveEdge.Read.Model.Shared;
 using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
 using Domain.Command.Session;
+using Domain.Filters;
+using Marten;
 using Shared;
 
 namespace ActiveEdge.Controllers
@@ -16,21 +19,23 @@ namespace ActiveEdge.Controllers
     public class SessionController : ControllerBase
     {
         private readonly IBus _bus;
+        private readonly IDocumentSession _session;
         private readonly IMapper _mapper;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
-        public SessionController(IMapper mapper, IBus bus)
+        public SessionController(IMapper mapper, IBus bus, IDocumentSession session)
         {
             _mapper = mapper;
             _bus = bus;
+            _session = session;
         }
 
-        public ActionResult Drawing()
-        {
-            return View();
-        }
+        //public ActionResult Drawing()
+        //{
+        //    return View();
+        //}
 
         [HttpGet]
         [Route("sessions")]
@@ -52,19 +57,25 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("session/{id}")]
-        public ActionResult Details(Guid id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            
-            var session = _bus.ExecuteQuery(new GetSessionById(id));
+            var session = await GetSessionModel(id);
 
             if (session == null)
             {
                 return HttpNotFound();
             }
 
-            var model = _mapper.Map<SessionModel>(session);
+            return View(session);
+        }
 
-            return View(model);
+        private async Task<SessionModel> GetSessionModel(Guid id)
+        {
+            var session = await
+                _session.Query<SessionModel>()
+                    .FilterForOrganization(OrganizationId)
+                    .SingleOrDefaultAsync(sessionModel => sessionModel.Id == id);
+            return session;
         }
 
         [HttpGet]
@@ -78,13 +89,14 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("session/new")]
-        public ActionResult Create([Bind(Exclude = "Id")] SessionModel sessionModel)
+        [HandleValidationErrors]
+        public async Task<ActionResult> Create([Bind(Exclude = "Id")] SessionModel sessionModel)
         {
-            if (!ModelState.IsValid) return View(sessionModel);
+            var command = _mapper.Map<CreateNewSession>(sessionModel);
 
-            var command = _mapper.Map<CreateNewSessionCommand>(sessionModel);
+            command.OrganizationId = OrganizationId;
 
-            var sessionId = _bus.ExecuteCommand(command);
+            var sessionId = await _bus.ExecuteAsyncCommand(command);
 
             Notify(new SuccessMessage("Session created succesfully."));
 
@@ -93,17 +105,16 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("session/plan/{id}")]
-        public ActionResult Plan(Guid id)
+        public async Task<ActionResult> Plan(Guid id)
         {
-            return Edit(id);
+            return await Edit(id);
         }
 
         [HttpGet]
         [Route("session/edit/{id}")]
-        public ActionResult Edit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-           
-            var session = _bus.ExecuteQuery(new GetSessionById(id));
+            var session = await GetSessionModel(id);
 
             if (session == null)
             {
@@ -118,9 +129,8 @@ namespace ActiveEdge.Controllers
                     new DangerMessage(
                         $"<b>Warning</b> the user has the following conditions:<b> {session.ContraIndications.ToCommaDelimited()}</b>"));
             }
-            var sessionModel = _mapper.Map<SessionModel>(session);
 
-            return View(sessionModel);
+            return View(session);
         }
 
         [HttpPost]
@@ -144,18 +154,16 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("session/delete/{id}")]
-        public ActionResult Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            var session = _bus.ExecuteQuery(new GetSessionById(id));
+            var session = await GetSessionModel(id);
 
             if (session == null)
             {
                 return HttpNotFound();
             }
 
-            var sessionModel = _mapper.Map<SessionModel>(session);
-
-            return View(sessionModel);
+            return View(session);
         }
 
         [HttpPost, ActionName("Delete")]

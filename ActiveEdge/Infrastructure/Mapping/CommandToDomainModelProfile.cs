@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Domain.Command;
 using Domain.Command.Client;
@@ -6,6 +7,7 @@ using Domain.Model;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
+    [Obsolete]
     public class CommandToDomainModelProfile : Profile
     {
         /// <summary>
@@ -65,7 +67,7 @@ namespace ActiveEdge.Infrastructure.Mapping
 
 
 
-            CreateMap<CreateNewSessionCommand, Session>();
+            CreateMap<CreateNewSession, Session>();
 
             CreateMap<UpdateSessionCommand, Session>();
         }

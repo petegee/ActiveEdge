@@ -1,43 +1,11 @@
-﻿using System;
-using Marten.Schema;
+﻿using Domain.Event;
 
 namespace Domain.Model
 {
-
-    public abstract class SessionBase : Entity, IAmLinkedToAnOrganization
-    {
-        [DuplicateField]
-        public Guid OrganizationId { get; set; }
-        
-        public DateTime Date { get; set; }
-
-        [DuplicateField]
-        public Guid ClientId { get; set; }
-
-        public string ClientFullName { get; set; }
-
-        public string GoalOrExpectations { get; set; }
-
-    }
-
-    public class RemedialSession : SessionBase
-    {
-        public string MainConcerns { get; set; }
-
-        public string History { get; set; }
-
-        public string Complications { get; set; }
-
-        public string FunctionalLimitations { get; set; }
-
-    }
     public class Session : SessionBase
     {
-        
-
         public string Feedback { get; set; }
-
-
+        
         public string AreasOfDiscomfort { get; set; }
 
         public string ContributingFactorsToCondition { get; set; }
@@ -50,5 +18,14 @@ namespace Domain.Model
         
         public string TreatmentNotes { get; set; }
 
+        public void Apply(SessionCreated domainEvent)
+        {
+            OrganizationId = domainEvent.OrganizationId;
+            Date = domainEvent.Date;
+            ClientId = domainEvent.ClientId;
+            Feedback = domainEvent.Feedback;
+            GoalOrExpectations = domainEvent.GoalOrExpectations;
+            AreasOfDiscomfort = domainEvent.AreasOfDiscomfort;
+        }
     }
 }
