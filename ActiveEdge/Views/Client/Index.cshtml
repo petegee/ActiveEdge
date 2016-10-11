@@ -55,7 +55,7 @@
             {
               <tr>
                 <td>
-                  @Html.ActionLink(Html.DisplayFor(m => item.FullName).ToString(), "Details", new {id = item.Id})
+                  @Html.ActionLink(item.FullName, "Details", new {id = item.Id})
                 </td>
                 <td>
                   @Html.DisplayFor(modelItem => item.Email)

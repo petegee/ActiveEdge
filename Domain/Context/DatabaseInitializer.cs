@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Command.Client;
 using Domain.Model;
 using Marten;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Shared;
 
 namespace Domain.Context
 {
@@ -12,12 +14,14 @@ namespace Domain.Context
     {
         private readonly IDocumentSession _session;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IBus _bus;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public DatabaseInitializer(IDocumentSession session, UserManager<ApplicationUser> userManager)
+        public DatabaseInitializer(IDocumentSession session, UserManager<ApplicationUser> userManager, IBus bus)
         {
             _session = session;
             _userManager = userManager;
+            _bus = bus;
         }
 
 
@@ -111,88 +115,67 @@ namespace Domain.Context
         {
             var organization = _session.Query<Organization>().First();
 
-            _session.Store(new Client
+            _bus.ExecuteAsyncCommand(new RegisterNewClient
             {
+                OrganizationId = organization.Id,
                 FirstName = "Stuart",
                 LastName = "Clark",
                 DateOfBirth = new DateTime(1976, 6, 10),
-                Address = new Address
-                {
-                    Line1 = "12 Wattle Grove",
-                    Suburb = "Maungaraki",
-                    City = "Lower Hutt"
-                } ,
-                
+                AddressLine1 = "12 Wattle Grove",
+                Suburb = "Maungaraki",
+                City = "Lower Hutt",
+
                 ContactNumber = "021509357",
                 Email = "sjclark76@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
                 Gender = Gender.Male,
-                ContraIndications = new ContraIndications(),
-                TermsAndConditions = new TermsAndConditions(),
-                OrganizationId = organization.Id
-            });
+            }).Wait();
 
-            _session.Store(new Client
+            _bus.ExecuteAsyncCommand(new RegisterNewClient
             {
+                OrganizationId = organization.Id,
                 FirstName = "Joanne",
                 LastName = "Clark",
                 DateOfBirth = new DateTime(1979, 5, 23),
-                Address = new Address
-                {
-                    Line1 = "12 Wattle Grove",
-                    Suburb = "Maungaraki",
-                    City = "Lower Hutt"
-                },
-                ContactNumber = "022409357",
+                AddressLine1 = "12 Wattle Grove",
+                Suburb = "Maungaraki",
+                City = "Lower Hutt",
+                ContactNumber = "021509357",
                 Email = "joclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
                 Gender = Gender.Female,
-                ContraIndications = new ContraIndications(),
-                TermsAndConditions = new TermsAndConditions(),
-                OrganizationId = organization.Id
-            });
+            }).Wait();
 
-            _session.Store(new Client
+            _bus.ExecuteAsyncCommand(new RegisterNewClient
             {
+                OrganizationId = organization.Id,
                 FirstName = "Zoe",
                 LastName = "Clark",
-                DateOfBirth = new DateTime(2013, 9, 22),
-                Address = new Address
-                {
-                    Line1 = "12 Wattle Grove",
-                    Suburb = "Maungaraki",
-                    City = "Lower Hutt"
-                },
-                ContactNumber = "022409357",
+                DateOfBirth = new DateTime(2013, 5, 23),
+                AddressLine1 = "12 Wattle Grove",
+                Suburb = "Maungaraki",
+                City = "Lower Hutt",
+                ContactNumber = "021509357",
                 Email = "zclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.Never,
                 Gender = Gender.Female,
-                ContraIndications = new ContraIndications(),
-                TermsAndConditions = new TermsAndConditions(),
-                OrganizationId = organization.Id
-            });
+            }).Wait();
 
-            _session.Store(new Client
+
+            _bus.ExecuteAsyncCommand(new RegisterNewClient
             {
+                OrganizationId = organization.Id,
                 FirstName = "Jessiah",
                 LastName = "Clark",
                 DateOfBirth = new DateTime(2012, 1, 13),
-                Address = new Address
-                {
-                    Line1 = "12 Wattle Grove",
-                    Suburb = "Maungaraki",
-                    City = "Lower Hutt"
-                },
-                ContactNumber = "022409357",
+                AddressLine1 = "12 Wattle Grove",
+                Suburb = "Maungaraki",
+                City = "Lower Hutt",
+                ContactNumber = "021509357",
                 Email = "jesseclark@gmail.com",
-                ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
+                ExcerciseFrequency = ExcerciseFrequency.Never,
                 Gender = Gender.Female,
-                ContraIndications = new ContraIndications(),
-                TermsAndConditions = new TermsAndConditions(),
-                OrganizationId = organization.Id
-            });
-
-            _session.SaveChanges();
+            }).Wait();
         }
 
         private void AddUsers()

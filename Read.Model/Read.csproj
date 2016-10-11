@@ -116,9 +116,6 @@
     <Compile Include="Model\Users\UsersForOrganizationModel.cs" />
     <Compile Include="Model\WebApi\Search\SearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\Clients\ClientQueryRepository.cs" />
-    <Compile Include="Query\Clients\GetAllClientsForOrganization.cs" />
-    <Compile Include="Query\Clients\GetClientForOrganization.cs" />
     <Compile Include="Query\Organization\FindAllOrganizations.cs" />
     <Compile Include="Query\Organization\GetOrganization.cs" />
     <Compile Include="Query\Organization\OrganizationQueryRepository.cs" />

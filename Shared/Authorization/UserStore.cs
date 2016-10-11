@@ -496,6 +496,7 @@ namespace Shared.Authorization
         public void Dispose()
         {
             _disposed = true;
+            _session.Dispose();
         }
 
         public Task<bool> GetTwoFactorEnabledAsync(TUser user)

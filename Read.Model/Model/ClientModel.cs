@@ -6,12 +6,12 @@ using Domain.Model;
 
 namespace ActiveEdge.Read.Model
 {
-    public class ClientModel
+    public class ClientModel: IAmLinkedToAnOrganization
     {
         public Guid Id { get; set; }
 
         [DisplayName("Full Name")]
-        public string FullName { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
 
         [DisplayName("First Name")]
         [Required]
@@ -249,6 +249,7 @@ namespace ActiveEdge.Read.Model
 
         public void Apply(ClientRegistered domainEvent)
         {
+            OrganizationId = domainEvent.OrganizationId;
             FirstName = domainEvent.FirstName;
             LastName = domainEvent.LastName;
             Gender = domainEvent.Gender;
@@ -308,5 +309,7 @@ namespace ActiveEdge.Read.Model
             TermsAndConditionsConditions7 = domainEvent.TermsAndConditionsConditions7;
             TermsAndConditionsConditions8 = domainEvent.TermsAndConditionsConditions8;
         }
+
+        public Guid OrganizationId { get; set; }
     }
 }

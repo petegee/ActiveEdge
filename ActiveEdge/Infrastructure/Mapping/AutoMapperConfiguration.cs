@@ -1,5 +1,6 @@
 using System;
 using AutoMapper;
+using Domain.Mapping;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
@@ -13,6 +14,7 @@ namespace ActiveEdge.Infrastructure.Mapping
                 cfg.AddProfile<CommandToDomainModelProfile>();
                 cfg.AddProfile<DomainModelToDomainEventProfile>();
                 cfg.AddProfile<DomainModelToViewModel>();
+                cfg.AddProfile<CommandToEventProfile>();
             });
 
             return configuration;

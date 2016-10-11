@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Shared;
-using ActiveEdge.Read.Query.Clients;
 using AutoMapper;
 using Domain.Command.Client;
+using Domain.Filters;
+using Marten;
 using Shared;
 
 namespace ActiveEdge.Controllers
@@ -17,14 +18,16 @@ namespace ActiveEdge.Controllers
     {
         private readonly IBus _bus;
         private readonly IMapper _mapper;
+        private readonly IDocumentSession _session;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
-        public ClientController(IBus bus, IMapper mapper)
+        public ClientController(IBus bus, IMapper mapper, IDocumentSession session)
         {
             _bus = bus;
             _mapper = mapper;
+            _session = session;
         }
 
 
@@ -32,7 +35,7 @@ namespace ActiveEdge.Controllers
         [Route("clients")]
         public ActionResult Index()
         {
-            var clients = _bus.ExecuteQuery(new GetAllClientsForOrganization(OrganizationId));
+            var clients = _session.Query<ClientModel>().FilterForOrganization(OrganizationId).ToList();
 
             return View(clients);
         }
@@ -41,10 +44,8 @@ namespace ActiveEdge.Controllers
         [Route("client/{id}")]
         public ActionResult Details(Guid id)
         {
-           
-            var client = _bus.ExecuteQuery(new GetClientForOrganization(id));
-
-
+            var client = _session.Query<ClientModel>().SingleOrDefault(c => c.Id == id);
+            
             if (client == null)
             {
                 return HttpNotFound();
@@ -71,6 +72,8 @@ namespace ActiveEdge.Controllers
         {
             var cmd = _mapper.Map<RegisterNewClient>(client);
 
+            cmd.OrganizationId = OrganizationId;
+
             await _bus.ExecuteAsyncCommand(cmd);
 
             Notify(new SuccessMessage("Client successfully registered."));
@@ -83,10 +86,8 @@ namespace ActiveEdge.Controllers
         [HandleValidationErrors]
         public ActionResult Edit(Guid id)
         {
+            var client = _session.Query<ClientModel>().SingleOrDefault(c => c.Id == id);
             
-            var client = _bus.ExecuteQuery(new GetClientForOrganization(id));
-
-
             if (client == null)
             {
                 return HttpNotFound();
@@ -116,8 +117,8 @@ namespace ActiveEdge.Controllers
         [Route("client/delete/{id}")]
         public ActionResult Delete(Guid id)
         {
-           
-            var client = _bus.ExecuteQuery(new GetClientForOrganization(id));
+
+            var client = _session.Query<ClientModel>().SingleOrDefault(c => c.Id == id);
 
             if (client == null)
             {

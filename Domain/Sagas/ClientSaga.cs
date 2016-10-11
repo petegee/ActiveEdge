@@ -46,15 +46,13 @@ namespace Domain.Sagas
         /// <returns>Response from the request</returns>
         public async Task<Guid> Handle(RegisterNewClient message)
         {
-            if (_loggedOnUser.OrganizationId.HasValue == false)
+            if (message.OrganizationId.HasValue == false)
             {
                 throw new BusinessRuleException("You cannot register a client if an organization is not specified.");
             }
             
             var clientRegisteredEvent = _mapper.Map<RegisterNewClient, ClientRegistered>(message);
-
-            clientRegisteredEvent.OrganizationId = _loggedOnUser.OrganizationId.Value;
-
+            
             var clientId = _session.Events.StartStream<Client>(clientRegisteredEvent);
 
             await _session.SaveChangesAsync();

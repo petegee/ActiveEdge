@@ -76,6 +76,7 @@ namespace ActiveEdge.DependencyResolution
                         _.Connection("host=localhost;database=activeedgedb;password=Password1;username=active_edge_web_user");
 
                         _.Events.InlineProjections.AggregateStreamsWith<ClientModel>();
+                        
                     });
                 });
 
