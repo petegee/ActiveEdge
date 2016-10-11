@@ -2,11 +2,11 @@
 using Domain.Model;
 using Shared;
 
-namespace Domain.Command.Client
+namespace Domain.Event
 {
-    public class UpdateClientCommand : ICommand
+    public class ClientUpdated : IDomainEvent
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
@@ -55,13 +55,6 @@ namespace Domain.Command.Client
         public int CurrentPainOrTensionLevels { get; set; }
         public string Difficulties { get; set; }
         public string AreasNotToBeMassaged { get; set; }
-        public bool TermsAndConditionsConditions1 { get; set; }
-        public bool TermsAndConditionsConditions2 { get; set; }
-        public bool TermsAndConditionsConditions3 { get; set; }
-        public bool TermsAndConditionsConditions4 { get; set; }
-        public bool TermsAndConditionsConditions5 { get; set; }
-        public bool TermsAndConditionsConditions6 { get; set; }
-        public bool TermsAndConditionsConditions7 { get; set; }
-        public bool TermsAndConditionsConditions8 { get; set; }
+        public bool ContraIndicationsArthritis { get; set; }
     }
 }

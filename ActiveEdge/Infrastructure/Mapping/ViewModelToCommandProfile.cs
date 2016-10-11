@@ -24,7 +24,7 @@ namespace ActiveEdge.Infrastructure.Mapping
 
             // Clients
             CreateMap<ClientModel, RegisterNewClient>();
-            CreateMap<ClientModel, UpdateClientCommand>();
+            CreateMap<ClientModel, UpdateClient>();
 
             // Sessions
             CreateMap<SessionModel, CreateNewSessionCommand>();

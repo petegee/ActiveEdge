@@ -5,6 +5,7 @@ using Domain.Command.Client;
 using Domain.Event;
 using Domain.Model;
 using Marten;
+using MediatR;
 using Shared;
 
 namespace Domain.Sagas
@@ -13,7 +14,7 @@ namespace Domain.Sagas
 
     public class ClientSaga : 
         IAsyncCommandHandler<RegisterNewClient>
-        //, ICommandHandler<UpdateClientCommand>,
+        , IAsyncCommandHandler<UpdateClient>
         //ICommandHandler<DeleteClientCommand>
     {
         private readonly ILoggedOnUser _loggedOnUser;
@@ -60,17 +61,19 @@ namespace Domain.Sagas
             return clientId;
         }
 
-        /// <summary>Handles a request</summary>
+
+        /// <summary>Handles an asynchronous request</summary>
         /// <param name="message">The request message</param>
-        /// <returns>Response from the request</returns>
-        //public int Handle(UpdateClientCommand message)
-        //{
-        //    var client = _session.Load<Client>(message.Id);
+        /// <returns>A task representing the response from the request</returns>
+        public async Task<Guid> Handle(UpdateClient message)
+        {
+            var clientUpdated = _mapper.Map<UpdateClient, ClientUpdated>(message);
 
-        //    _mapper.Map(message, client);
-        //    _session.SaveChanges();
+            _session.Events.Append(message.Id, clientUpdated);
 
-        //    return client.Id;
-        //}
+            await _session.SaveChangesAsync();
+
+            return message.Id;
+        }
     }
 }

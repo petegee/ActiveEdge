@@ -102,11 +102,11 @@ namespace ActiveEdge.Controllers
         [ValidateAntiForgeryToken]
         [Route("client/edit/{id}")]
         [HandleValidationErrors]
-        public ActionResult Edit(ClientModel clientModel)
+        public async Task<RedirectToRouteResult> Edit(ClientModel clientModel)
         {
-            var cmd = _mapper.Map<UpdateClientCommand>(clientModel);
+            var cmd = _mapper.Map<UpdateClient>(clientModel);
 
-            _bus.ExecuteCommand(cmd);
+            await _bus.ExecuteAsyncCommand(cmd);
 
             Notify<SuccessMessage>($"{cmd.FirstName} {cmd.LastName} successfully updated.");
 

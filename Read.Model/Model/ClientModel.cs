@@ -310,6 +310,62 @@ namespace ActiveEdge.Read.Model
             TermsAndConditionsConditions8 = domainEvent.TermsAndConditionsConditions8;
         }
 
+        public void Apply(ClientUpdated domainEvent)
+        {
+            //TODO: refactor all this shitty code into one method..
+            FirstName = domainEvent.FirstName;
+            LastName = domainEvent.LastName;
+            Gender = domainEvent.Gender;
+            DateOfBirth = domainEvent.DateOfBirth;
+            Email = domainEvent.Email;
+            ContactNumber = domainEvent.ContactNumber;
+            AddressLine1 = domainEvent.AddressLine1;
+            AddressLine2 = domainEvent.AddressLine2;
+            Suburb = domainEvent.Suburb;
+            City = domainEvent.City;
+            ExcerciseFrequency = domainEvent.ExcerciseFrequency;
+            IsSmoker = domainEvent.IsSmoker;
+            CurrentMedications = domainEvent.CurrentMedications;
+            PreviousAilments = domainEvent.PreviousAilments;
+            GeneralPractionerName = domainEvent.GeneralPractionerName;
+            MedicalClearance = domainEvent.MedicalClearance;
+            HasHadPreviousTherapy = domainEvent.HasHadPreviousTherapy;
+            TouchPreference = domainEvent.TouchPreference;
+            ContraIndicationsArteriosclerosis = domainEvent.ContraIndicationsArteriosclerosis;
+
+            ContraIndicationsArthritis = domainEvent.ContraIndicationsArthritis;
+            ContraIndicationsAsthma = domainEvent.ContraIndicationsAsthma;
+            ContraIndicationsCancer = domainEvent.ContraIndicationsCancer;
+            ContraIndicationsColdOrFlu = domainEvent.ContraIndicationsColdOrFlu;
+            ContraIndicationsContactLenses = domainEvent.ContraIndicationsContactLenses;
+            ContraIndicationsCutsBurnsBruises = domainEvent.ContraIndicationsCutsBurnsBruises;
+            ContraIndicationsDepression = domainEvent.ContraIndicationsDepression;
+            ContraIndicationsDiabetes = domainEvent.ContraIndicationsDiabetes;
+            ContraIndicationsDizziness = domainEvent.ContraIndicationsDizziness;
+            ContraIndicationsEpilepsy = domainEvent.ContraIndicationsEpilepsy;
+            ContraIndicationsHeadache = domainEvent.ContraIndicationsHeadache;
+            ContraIndicationsHeartDisease = domainEvent.ContraIndicationsHeartDisease;
+            ContraIndicationsHemophilia = domainEvent.ContraIndicationsHemophilia;
+            ContraIndicationsHernia = domainEvent.ContraIndicationsHernia;
+            ContraIndicationsHighBloodPressure = domainEvent.ContraIndicationsHighBloodPressure;
+            ContraIndicationsImflammation = domainEvent.ContraIndicationsImflammation;
+            ContraIndicationsIrritatedSkinRash = domainEvent.ContraIndicationsIrritatedSkinRash;
+            ContraIndicationsIsPregnant = domainEvent.ContraIndicationsIsPregnant;
+            ContraIndicationsLowBloodPressure = domainEvent.ContraIndicationsLowBloodPressure;
+            ContraIndicationsMusculoskletalProblems = domainEvent.ContraIndicationsMusculoskletalProblems;
+            ContraIndicationsPinsPacemaker = domainEvent.ContraIndicationsPinsPacemaker;
+            ContraIndicationsSeverePain = domainEvent.ContraIndicationsSeverePain;
+            ContraIndicationsSleepDisturbance = domainEvent.ContraIndicationsSleepDisturbance;
+            ContraIndicationsStomachUlcers = domainEvent.ContraIndicationsStomachUlcers;
+            ContraIndicationsSunburn = domainEvent.ContraIndicationsSunburn;
+            ContraIndicationsVaricoseVeins = domainEvent.ContraIndicationsVaricoseVeins;
+
+            CurrentStressLevels = domainEvent.CurrentStressLevels;
+            CurrentPainOrTensionLevels = domainEvent.CurrentPainOrTensionLevels;
+            AreasNotToBeMassaged = domainEvent.AreasNotToBeMassaged;
+        
+        }
+
         public Guid OrganizationId { get; set; }
     }
 }

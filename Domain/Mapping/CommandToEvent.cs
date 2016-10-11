@@ -13,6 +13,7 @@ namespace Domain.Mapping
         protected override void Configure()
         {
             CreateMap<RegisterNewClient, ClientRegistered>();
+            CreateMap<UpdateClient, ClientUpdated>();
         }
     }
 }

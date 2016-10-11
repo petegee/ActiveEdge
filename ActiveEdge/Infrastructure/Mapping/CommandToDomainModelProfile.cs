@@ -21,11 +21,11 @@ namespace ActiveEdge.Infrastructure.Mapping
             CreateMap<RegisterNewClient, Client>()
                 .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
 
-            CreateMap<UpdateClientCommand, ContraIndications>();
-            CreateMap<UpdateClientCommand, TermsAndConditions>();
-            CreateMap<UpdateClientCommand, Client>()
+            CreateMap<UpdateClient, ContraIndications>();
+            CreateMap<UpdateClient, TermsAndConditions>();
+            CreateMap<UpdateClient, Client>()
                 .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
-            CreateMap<UpdateClientCommand, Client>()
+            CreateMap<UpdateClient, Client>()
                 .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
 
 
