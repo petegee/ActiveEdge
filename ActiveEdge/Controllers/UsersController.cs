@@ -25,7 +25,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        public ActionResult ForOrganization(int id)
+        public ActionResult ForOrganization(Guid id)
         {
             var users = _bus.ExecuteQuery(new FindAllUsersForOrganization(id));
 
@@ -33,7 +33,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreateForOrganization(int id)
+        public ActionResult CreateForOrganization(Guid id)
         {
             return View(new CreateForOrganizationModel {OrganizationId = id});
         }

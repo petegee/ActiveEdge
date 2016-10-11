@@ -1,11 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Claims;
 
 namespace Shared
 {
     public class LoggedOnUser : ILoggedOnUser
     {
-        public int? OrganizationId
+        public Guid? OrganizationId
         {
             get
             {
@@ -15,7 +16,7 @@ namespace Shared
 
                 var organizationClaim = claims.FirstOrDefault(claim => claim.Type == ActiveEdgeClaims.OrganizationId);
 
-                return organizationClaim == null ? (int?) null : int.Parse(organizationClaim.Value);
+                return organizationClaim == null ? (Guid?) null : Guid.Parse(organizationClaim.Value);
             }
         }
     }

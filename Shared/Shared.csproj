@@ -74,8 +74,15 @@
   <ItemGroup>
     <Compile Include="ActiveEdgeClaims.cs" />
     <Compile Include="Authorization\IdentityUser.cs" />
+    <Compile Include="Authorization\IdentityUserClaim.cs" />
+    <Compile Include="Authorization\IdentityUserLogin.cs" />
     <Compile Include="Authorization\UserStore.cs" />
     <Compile Include="Authorization\Util.cs" />
+    <Compile Include="IAsyncCommand.cs" />
+    <Compile Include="IAsyncCommandHandler.cs" />
+    <Compile Include="IAsyncDomainEvent.cs" />
+    <Compile Include="IAsyncQuery.cs" />
+    <Compile Include="IAsyncQueryForSingleOrDefault.cs" />
     <Compile Include="IBus.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandHandler.cs" />

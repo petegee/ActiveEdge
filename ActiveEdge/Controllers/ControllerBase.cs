@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Web.Mvc;
@@ -10,7 +11,7 @@ namespace ActiveEdge.Controllers
     {
         private const string UiNotificationKey = "UINotificationKey";
 
-        protected int? OrganizationId
+        protected Guid? OrganizationId
         {
             get
             {
@@ -20,7 +21,7 @@ namespace ActiveEdge.Controllers
 
                 var organizationClaim = claims.FirstOrDefault(claim => claim.Type == ActiveEdgeClaims.OrganizationId);
 
-                return organizationClaim == null ? (int?) null : int.Parse(organizationClaim.Value);
+                return organizationClaim == null ? (Guid?) null : Guid.Parse(organizationClaim.Value);
             }
         }
 

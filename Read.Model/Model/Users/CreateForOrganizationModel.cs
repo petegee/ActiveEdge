@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ActiveEdge.Read.Model.Users
 {
@@ -7,6 +8,6 @@ namespace ActiveEdge.Read.Model.Users
         [EmailAddress]
         public string EmailAddress { get; set; }
 
-        public int OrganizationId { get; set; }
+        public Guid OrganizationId { get; set; }
     }
 }

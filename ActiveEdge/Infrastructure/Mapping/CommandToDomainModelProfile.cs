@@ -14,11 +14,11 @@ namespace ActiveEdge.Infrastructure.Mapping
         /// </summary>
         protected override void Configure()
         {
-            CreateMap<RegisterNewClientCommand, ContraIndications>();
-            CreateMap<RegisterNewClientCommand, TermsAndConditions>();
-            CreateMap<RegisterNewClientCommand, Client>()
+            CreateMap<RegisterNewClient, ContraIndications>();
+            CreateMap<RegisterNewClient, TermsAndConditions>();
+            CreateMap<RegisterNewClient, Client>()
                 .ForMember(dst => dst.ContraIndications, options => options.Unflatten());
-            CreateMap<RegisterNewClientCommand, Client>()
+            CreateMap<RegisterNewClient, Client>()
                 .ForMember(dst => dst.TermsAndConditions, options => options.Unflatten());
 
             CreateMap<UpdateClientCommand, ContraIndications>();
@@ -33,8 +33,8 @@ namespace ActiveEdge.Infrastructure.Mapping
                 .ForMember(dest => dest.Address, options => options.ResolveUsing(
                     model => new Address
                     {
-                        Address1 = model.AddressLine1,
-                        Address2 = model.AddressLine2,
+                        Line1 = model.AddressLine1,
+                        Line2 = model.AddressLine2,
                         Suburb = model.Suburb,
                         City = model.City,
                         PostCode = model.PostCode
@@ -50,8 +50,8 @@ namespace ActiveEdge.Infrastructure.Mapping
                 .ForMember(dest => dest.Address, options => options.ResolveUsing(
                     model => new Address
                     {
-                        Address1 = model.AddressLine1,
-                        Address2 = model.AddressLine2,
+                        Line1 = model.AddressLine1,
+                        Line2 = model.AddressLine2,
                         Suburb = model.Suburb,
                         City = model.City,
                         PostCode = model.PostCode

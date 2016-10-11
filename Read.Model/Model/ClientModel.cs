@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Domain.Event;
 using Domain.Model;
 
 namespace ActiveEdge.Read.Model
 {
     public class ClientModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("Full Name")]
         public string FullName { get; set; }
@@ -199,7 +200,8 @@ namespace ActiveEdge.Read.Model
         public string AreasNotToBeMassaged { get; set; }
 
         [DisplayName(
-            "I understand that I am booked in for a relaxation / sports massage and I am not here for treatment to injury.")]
+            "I understand that I am booked in for a relaxation / sports massage and I am not here for treatment to injury."
+            )]
         [UIHint("iCheck")]
         public bool TermsAndConditionsConditions1 { get; set; }
 
@@ -220,7 +222,8 @@ namespace ActiveEdge.Read.Model
         public bool TermsAndConditionsConditions4 { get; set; }
 
         [DisplayName(
-            "I understand that massage therapy is designed to be a health aid and does not take place of primary care.")]
+            "I understand that massage therapy is designed to be a health aid and does not take place of primary care.")
+        ]
         [UIHint("iCheck")]
         public bool TermsAndConditionsConditions5 { get; set; }
 
@@ -241,5 +244,69 @@ namespace ActiveEdge.Read.Model
             )]
         [UIHint("iCheck")]
         public bool TermsAndConditionsConditions8 { get; set; }
-  }
+
+        public bool ContraIndicationsArthritis { get; set; }
+
+        public void Apply(ClientRegistered domainEvent)
+        {
+            FirstName = domainEvent.FirstName;
+            LastName = domainEvent.LastName;
+            Gender = domainEvent.Gender;
+            DateOfBirth = domainEvent.DateOfBirth;
+            Email = domainEvent.Email;
+            ContactNumber = domainEvent.ContactNumber;
+            AddressLine1 = domainEvent.AddressLine1;
+            AddressLine2 = domainEvent.AddressLine2;
+            Suburb = domainEvent.Suburb;
+            City = domainEvent.City;
+            ExcerciseFrequency = domainEvent.ExcerciseFrequency;
+            IsSmoker = domainEvent.IsSmoker;
+            CurrentMedications = domainEvent.CurrentMedications;
+            PreviousAilments = domainEvent.PreviousAilments;
+            GeneralPractionerName = domainEvent.GeneralPractionerName;
+            MedicalClearance = domainEvent.MedicalClearance;
+            HasHadPreviousTherapy = domainEvent.HasHadPreviousTherapy;
+            TouchPreference = domainEvent.TouchPreference;
+            ContraIndicationsArteriosclerosis = domainEvent.ContraIndicationsArteriosclerosis;
+
+            ContraIndicationsArthritis = domainEvent.ContraIndicationsArthritis;
+            ContraIndicationsAsthma = domainEvent.ContraIndicationsAsthma;
+            ContraIndicationsCancer = domainEvent.ContraIndicationsCancer;
+            ContraIndicationsColdOrFlu = domainEvent.ContraIndicationsColdOrFlu;
+            ContraIndicationsContactLenses = domainEvent.ContraIndicationsContactLenses;
+            ContraIndicationsCutsBurnsBruises = domainEvent.ContraIndicationsCutsBurnsBruises;
+            ContraIndicationsDepression = domainEvent.ContraIndicationsDepression;
+            ContraIndicationsDiabetes = domainEvent.ContraIndicationsDiabetes;
+            ContraIndicationsDizziness = domainEvent.ContraIndicationsDizziness;
+            ContraIndicationsEpilepsy = domainEvent.ContraIndicationsEpilepsy;
+            ContraIndicationsHeadache = domainEvent.ContraIndicationsHeadache;
+            ContraIndicationsHeartDisease = domainEvent.ContraIndicationsHeartDisease;
+            ContraIndicationsHemophilia = domainEvent.ContraIndicationsHemophilia;
+            ContraIndicationsHernia = domainEvent.ContraIndicationsHernia;
+            ContraIndicationsHighBloodPressure = domainEvent.ContraIndicationsHighBloodPressure;
+            ContraIndicationsImflammation = domainEvent.ContraIndicationsImflammation;
+            ContraIndicationsIrritatedSkinRash = domainEvent.ContraIndicationsIrritatedSkinRash;
+            ContraIndicationsIsPregnant = domainEvent.ContraIndicationsIsPregnant;
+            ContraIndicationsLowBloodPressure = domainEvent.ContraIndicationsLowBloodPressure;
+            ContraIndicationsMusculoskletalProblems = domainEvent.ContraIndicationsMusculoskletalProblems;
+            ContraIndicationsPinsPacemaker = domainEvent.ContraIndicationsPinsPacemaker;
+            ContraIndicationsSeverePain = domainEvent.ContraIndicationsSeverePain;
+            ContraIndicationsSleepDisturbance = domainEvent.ContraIndicationsSleepDisturbance;
+            ContraIndicationsStomachUlcers = domainEvent.ContraIndicationsStomachUlcers;
+            ContraIndicationsSunburn = domainEvent.ContraIndicationsSunburn;
+            ContraIndicationsVaricoseVeins = domainEvent.ContraIndicationsVaricoseVeins;
+
+            CurrentStressLevels = domainEvent.CurrentStressLevels;
+            CurrentPainOrTensionLevels = domainEvent.CurrentPainOrTensionLevels;
+            AreasNotToBeMassaged = domainEvent.AreasNotToBeMassaged;
+            TermsAndConditionsConditions1 = domainEvent.TermsAndConditionsConditions1;
+            TermsAndConditionsConditions2 = domainEvent.TermsAndConditionsConditions2;
+            TermsAndConditionsConditions3 = domainEvent.TermsAndConditionsConditions3;
+            TermsAndConditionsConditions4 = domainEvent.TermsAndConditionsConditions4;
+            TermsAndConditionsConditions5 = domainEvent.TermsAndConditionsConditions5;
+            TermsAndConditionsConditions6 = domainEvent.TermsAndConditionsConditions6;
+            TermsAndConditionsConditions7 = domainEvent.TermsAndConditionsConditions7;
+            TermsAndConditionsConditions8 = domainEvent.TermsAndConditionsConditions8;
+        }
+    }
 }

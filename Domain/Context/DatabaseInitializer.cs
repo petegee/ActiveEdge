@@ -64,8 +64,8 @@ namespace Domain.Context
                         ClinicName = "Lambton Quay",
                         Address = new Address
                         {
-                            Address1 = "24 Johnston Street",
-                            Address2 = "Address line2",
+                            Line1 = "24 Johnston Street",
+                            Line2 = "Address line2",
                             City = "Wellington",
                             PostCode = "6011",
                             Suburb = "Wellington Central"
@@ -116,9 +116,13 @@ namespace Domain.Context
                 FirstName = "Stuart",
                 LastName = "Clark",
                 DateOfBirth = new DateTime(1976, 6, 10),
-                AddressLine1 = "12 Wattle Grove",
-                Suburb = "Maungaraki",
-                City = "Lower Hutt",
+                Address = new Address
+                {
+                    Line1 = "12 Wattle Grove",
+                    Suburb = "Maungaraki",
+                    City = "Lower Hutt"
+                } ,
+                
                 ContactNumber = "021509357",
                 Email = "sjclark76@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
@@ -133,9 +137,12 @@ namespace Domain.Context
                 FirstName = "Joanne",
                 LastName = "Clark",
                 DateOfBirth = new DateTime(1979, 5, 23),
-                AddressLine1 = "12 Wattle Grove",
-                Suburb = "Maungaraki",
-                City = "Lower Hutt",
+                Address = new Address
+                {
+                    Line1 = "12 Wattle Grove",
+                    Suburb = "Maungaraki",
+                    City = "Lower Hutt"
+                },
                 ContactNumber = "022409357",
                 Email = "joclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
@@ -150,9 +157,12 @@ namespace Domain.Context
                 FirstName = "Zoe",
                 LastName = "Clark",
                 DateOfBirth = new DateTime(2013, 9, 22),
-                AddressLine1 = "12 Wattle Grove",
-                Suburb = "Maungaraki",
-                City = "Lower Hutt",
+                Address = new Address
+                {
+                    Line1 = "12 Wattle Grove",
+                    Suburb = "Maungaraki",
+                    City = "Lower Hutt"
+                },
                 ContactNumber = "022409357",
                 Email = "zclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.Never,
@@ -167,9 +177,12 @@ namespace Domain.Context
                 FirstName = "Jessiah",
                 LastName = "Clark",
                 DateOfBirth = new DateTime(2012, 1, 13),
-                AddressLine1 = "12 Wattle Grove",
-                Suburb = "Maungaraki",
-                City = "Lower Hutt",
+                Address = new Address
+                {
+                    Line1 = "12 Wattle Grove",
+                    Suburb = "Maungaraki",
+                    City = "Lower Hutt"
+                },
                 ContactNumber = "022409357",
                 Email = "jesseclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,

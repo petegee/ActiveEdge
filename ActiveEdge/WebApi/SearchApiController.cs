@@ -33,7 +33,7 @@ namespace ActiveEdge.WebApi
             
             var searchResults = _session.Query<Client>()
                 .FilterForOrganization(_loggedOnUser)
-                .Select(client => new SearchResult { Id = client.Id, DisplayValue = client.FullName })
+                .Select(client => new SearchResult { Id = client.Id.ToString(), DisplayValue = client.FullName })
                 .Where(result => result.DisplayValue.StartsWith(fullName, StringComparison.OrdinalIgnoreCase))
                 .ToList();
             

@@ -24,9 +24,8 @@ namespace Domain.Model
             return userIdentity;
         }
 
-        public int? OrganizationId { get; set; }
-
-        public virtual Organization Organization { get; set; }
+        public Guid? OrganizationId { get; set; }
+        
 
     }
 }

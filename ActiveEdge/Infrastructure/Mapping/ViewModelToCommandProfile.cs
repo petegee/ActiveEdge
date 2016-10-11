@@ -23,7 +23,7 @@ namespace ActiveEdge.Infrastructure.Mapping
             CreateMap<OrganizationModel, UpdateOrganizationCommand>();
 
             // Clients
-            CreateMap<ClientModel, RegisterNewClientCommand>();
+            CreateMap<ClientModel, RegisterNewClient>();
             CreateMap<ClientModel, UpdateClientCommand>();
 
             // Sessions

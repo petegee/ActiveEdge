@@ -36,7 +36,7 @@ namespace Unit.Tests
                 ContraIndicationsIsPregnant = true
             };
 
-            var command = _mapper.Map<ClientModel, RegisterNewClientCommand>(client);
+            var command = _mapper.Map<ClientModel, RegisterNewClient>(client);
 
             // Assert
             //command.FirstName.f.ShouldNotBeNull();

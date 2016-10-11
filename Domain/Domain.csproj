@@ -106,8 +106,10 @@
     <Compile Include="Command\Session\UpdateSessionCommand.cs" />
     <Compile Include="Command\UpdateOrganizationCommand.cs" />
     <Compile Include="Context\Roles.cs" />
+    <Compile Include="Event\ClientRegistered.cs" />
     <Compile Include="Event\OrganizationUpdated.cs" />
     <Compile Include="Filters\GlobalFilters.cs" />
+    <Compile Include="Mapping\CommandToEvent.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
     <Compile Include="Sagas\ClientSaga.cs" />
     <Compile Include="Sagas\OrganizationSaga.cs" />
@@ -115,7 +117,7 @@
     <Compile Include="Command\Client\DeleteClientCommand.cs" />
     <Compile Include="Command\CreateNewOrganizationCommand.cs" />
     <Compile Include="Command\DeleteOrganizationCommand.cs" />
-    <Compile Include="Command\Client\RegisterNewClientCommand.cs" />
+    <Compile Include="Command\Client\RegisterNewClient.cs" />
     <Compile Include="Command\Client\UpdateClientCommand.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Context\DatabaseInitializer.cs" />

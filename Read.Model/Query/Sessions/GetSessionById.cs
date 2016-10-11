@@ -1,4 +1,4 @@
-﻿using ActiveEdge.Read.Model;
+﻿using System;
 using ActiveEdge.Read.Model.Session;
 using Shared;
 
@@ -7,11 +7,11 @@ namespace ActiveEdge.Read.Query.Sessions
     public class GetSessionById : IQueryForSingleOrDefault<SessionModel>
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public GetSessionById(int sessionId)
+        public GetSessionById(Guid sessionId)
         {
             SessionId = sessionId;
         }
 
-        public int SessionId { get; set; }
+        public Guid SessionId { get; set; }
     }
 }

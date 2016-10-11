@@ -1,14 +1,15 @@
-﻿using ActiveEdge.Read.Model.Session;
+﻿using System;
+using ActiveEdge.Read.Model.Session;
 using Shared;
 
 namespace ActiveEdge.Read.Query.Sessions
 {
     public class GetAllSessionsForClient : IQuery<SessionModelListItem>
     {
-        public int ClientId { get; }
+        public Guid ClientId { get; }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public GetAllSessionsForClient(int clientId)
+        public GetAllSessionsForClient(Guid clientId)
         {
             ClientId = clientId;
         }

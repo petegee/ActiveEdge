@@ -1,7 +1,9 @@
+using System;
+
 namespace Shared
 {
     public interface ILoggedOnUser
     {
-        int? OrganizationId { get; }
+        Guid? OrganizationId { get; }
     }
 }

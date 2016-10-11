@@ -1,9 +1,11 @@
-﻿namespace ActiveEdge.Read.Model.WebApi.Search
+﻿using System;
+
+namespace ActiveEdge.Read.Model.WebApi.Search
 {
   public class SearchResult
   {
-    public int Id { get; set; }
-    public int OrganizationId { get; set; }
+    public string Id { get; set; }
+    public string OrganizationId { get; set; }
     public string DisplayValue { get; set; }
   }
 }

@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model;
@@ -37,13 +39,10 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("client/{id}")]
-        public ActionResult Details(int? id)
+        public ActionResult Details(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var client = _bus.ExecuteQuery(new GetClientForOrganization(id.Value));
+           
+            var client = _bus.ExecuteQuery(new GetClientForOrganization(id));
 
 
             if (client == null)
@@ -68,11 +67,11 @@ namespace ActiveEdge.Controllers
         [ValidateAntiForgeryToken]
         [Route("client/intake")]
         [HandleValidationErrors(Action = "Create", Controller = "Create")]
-        public ActionResult Create([Bind(Exclude = "Id")] ClientModel client)
+        public async Task<RedirectToRouteResult> Create([Bind(Exclude = "Id")] ClientModel client)
         {
-            var cmd = _mapper.Map<RegisterNewClientCommand>(client);
+            var cmd = _mapper.Map<RegisterNewClient>(client);
 
-            _bus.ExecuteCommand(cmd);
+            await _bus.ExecuteAsyncCommand(cmd);
 
             Notify(new SuccessMessage("Client successfully registered."));
 
@@ -82,13 +81,10 @@ namespace ActiveEdge.Controllers
         [HttpGet]
         [Route("client/edit/{id}")]
         [HandleValidationErrors]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var client = _bus.ExecuteQuery(new GetClientForOrganization(id.Value));
+            
+            var client = _bus.ExecuteQuery(new GetClientForOrganization(id));
 
 
             if (client == null)
@@ -118,13 +114,10 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("client/delete/{id}")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var client = _bus.ExecuteQuery(new GetClientForOrganization(id.Value));
+           
+            var client = _bus.ExecuteQuery(new GetClientForOrganization(id));
 
             if (client == null)
             {

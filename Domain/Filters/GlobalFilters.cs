@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Domain.Model;
 using Shared;
 
@@ -13,7 +14,7 @@ namespace Domain.Filters
 
         }
 
-        public static IQueryable<T> FilterForOrganization<T>(this IQueryable<T> domainModels, int? organizationId)
+        public static IQueryable<T> FilterForOrganization<T>(this IQueryable<T> domainModels, Guid? organizationId)
             where T : IAmLinkedToAnOrganization
         {
             return organizationId.HasValue

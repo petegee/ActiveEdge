@@ -43,7 +43,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("sessions/for/client/{id}")]
-        public ActionResult ForClient(int id)
+        public ActionResult ForClient(Guid id)
         {
             var sessions = _bus.ExecuteQuery(new GetAllSessionsForClient(id));
 
@@ -52,14 +52,10 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("session/{id}")]
-        public ActionResult Details(int? id)
+        public ActionResult Details(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var session = _bus.ExecuteQuery(new GetSessionById(id.Value));
+            
+            var session = _bus.ExecuteQuery(new GetSessionById(id));
 
             if (session == null)
             {
@@ -97,21 +93,17 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("session/plan/{id}")]
-        public ActionResult Plan(int? id)
+        public ActionResult Plan(Guid id)
         {
             return Edit(id);
         }
 
         [HttpGet]
         [Route("session/edit/{id}")]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var session = _bus.ExecuteQuery(new GetSessionById(id.Value));
+           
+            var session = _bus.ExecuteQuery(new GetSessionById(id));
 
             if (session == null)
             {
@@ -152,14 +144,9 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("session/delete/{id}")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var session = _bus.ExecuteQuery(new GetSessionById(id.Value));
+            var session = _bus.ExecuteQuery(new GetSessionById(id));
 
             if (session == null)
             {

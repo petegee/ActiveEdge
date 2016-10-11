@@ -1,13 +1,20 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
 using Domain.Command.Client;
+using Domain.Event;
 using Domain.Model;
 using Marten;
 using Shared;
 
 namespace Domain.Sagas
 {
-    public class ClientSaga : ICommandHandler<RegisterNewClientCommand>, ICommandHandler<UpdateClientCommand>,
-        ICommandHandler<DeleteClientCommand>
+   
+
+    public class ClientSaga : 
+        IAsyncCommandHandler<RegisterNewClient>
+        //, ICommandHandler<UpdateClientCommand>,
+        //ICommandHandler<DeleteClientCommand>
     {
         private readonly ILoggedOnUser _loggedOnUser;
         private readonly IMapper _mapper;
@@ -24,49 +31,48 @@ namespace Domain.Sagas
         /// <summary>Handles a request</summary>
         /// <param name="message">The request message</param>
         /// <returns>Response from the request</returns>
-        public int Handle(DeleteClientCommand message)
-        {
-            var customer = _session.Load<Client>(message.ClientId);
+        //public int Handle(DeleteClientCommand message)
+        //{
+        //    var customer = _session.Load<Client>(message.ClientId);
 
-            _session.Delete(customer);
-            _session.SaveChanges();
+        //    _session.Delete(customer);
+        //    _session.SaveChanges();
 
-            return customer.Id;
-        }
+        //    return customer.Id;
+        //}
 
         /// <summary>Handles a request</summary>
         /// <param name="message">The request message</param>
         /// <returns>Response from the request</returns>
-        public int Handle(RegisterNewClientCommand message)
+        public async Task<Guid> Handle(RegisterNewClient message)
         {
             if (_loggedOnUser.OrganizationId.HasValue == false)
             {
                 throw new BusinessRuleException("You cannot register a client if an organization is not specified.");
             }
+            
+            var clientRegisteredEvent = _mapper.Map<RegisterNewClient, ClientRegistered>(message);
 
+            clientRegisteredEvent.OrganizationId = _loggedOnUser.OrganizationId.Value;
 
-            var customerDomain = _mapper.Map<RegisterNewClientCommand, Client>(message);
+            var clientId = _session.Events.StartStream<Client>(clientRegisteredEvent);
 
-            customerDomain.OrganizationId = _loggedOnUser.OrganizationId.Value;
+            await _session.SaveChangesAsync();
 
-            _session.Store(customerDomain);
-
-            _session.SaveChanges();
-
-            return customerDomain.Id;
+            return clientId;
         }
 
         /// <summary>Handles a request</summary>
         /// <param name="message">The request message</param>
         /// <returns>Response from the request</returns>
-        public int Handle(UpdateClientCommand message)
-        {
-            var client = _session.Load<Client>(message.Id);
+        //public int Handle(UpdateClientCommand message)
+        //{
+        //    var client = _session.Load<Client>(message.Id);
 
-            _mapper.Map(message, client);
-            _session.SaveChanges();
+        //    _mapper.Map(message, client);
+        //    _session.SaveChanges();
 
-            return client.Id;
-        }
+        //    return client.Id;
+        //}
     }
 }

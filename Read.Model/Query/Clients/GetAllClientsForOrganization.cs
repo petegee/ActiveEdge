@@ -1,4 +1,5 @@
-﻿using ActiveEdge.Read.Model;
+﻿using System;
+using ActiveEdge.Read.Model;
 using Shared;
 
 namespace ActiveEdge.Read.Query.Clients
@@ -6,11 +7,11 @@ namespace ActiveEdge.Read.Query.Clients
     public class GetAllClientsForOrganization : IQuery<ClientModel>
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public GetAllClientsForOrganization(int? organizationId)
+        public GetAllClientsForOrganization(Guid? organizationId)
         {
             OrganizationId = organizationId;
         }
 
-        public int? OrganizationId { get; }
+        public Guid? OrganizationId { get; }
     }
 }

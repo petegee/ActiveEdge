@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 
 namespace Shared
 {
-    public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, int> where TCommand : IRequest<int>
+    public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, Guid> where TCommand : IRequest<Guid>
     {
         
     }

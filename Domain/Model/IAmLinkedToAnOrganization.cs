@@ -1,7 +1,9 @@
-﻿namespace Domain.Model
+﻿using System;
+
+namespace Domain.Model
 {
     public interface IAmLinkedToAnOrganization
     {
-        int OrganizationId { get; set; }
+        Guid OrganizationId { get; set; }
     }
 }

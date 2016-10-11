@@ -16,8 +16,8 @@ namespace ActiveEdge.Infrastructure.Mapping
         protected override void Configure()
         {
             CreateMap<Clinic, ClinicModel>()
-                .ForMember(dest => dest.AddressLine1, options => options.MapFrom(src => src.Address.Address1))
-                .ForMember(dest => dest.AddressLine2, options => options.MapFrom(src => src.Address.Address2))
+                .ForMember(dest => dest.AddressLine1, options => options.MapFrom(src => src.Address.Line1))
+                .ForMember(dest => dest.AddressLine2, options => options.MapFrom(src => src.Address.Line2))
                 .ForMember(dest => dest.Suburb, options => options.MapFrom(src => src.Address.Suburb))
                 .ForMember(dest => dest.City, options => options.MapFrom(src => src.Address.City))
                 .ForMember(dest => dest.PostCode, options => options.MapFrom(src => src.Address.PostCode))

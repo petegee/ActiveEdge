@@ -18,6 +18,7 @@
 using System.Data.Entity;
 using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Infrastructure.MVC;
+using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
 using Domain;
@@ -73,6 +74,8 @@ namespace ActiveEdge.DependencyResolution
                     return DocumentStore.For(_ =>
                     {
                         _.Connection("host=localhost;database=activeedgedb;password=Password1;username=active_edge_web_user");
+
+                        _.Events.InlineProjections.AggregateStreamsWith<ClientModel>();
                     });
                 });
 

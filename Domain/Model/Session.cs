@@ -7,12 +7,12 @@ namespace Domain.Model
     public abstract class SessionBase : Entity, IAmLinkedToAnOrganization
     {
         [DuplicateField]
-        public int OrganizationId { get; set; }
+        public Guid OrganizationId { get; set; }
         
         public DateTime Date { get; set; }
 
         [DuplicateField]
-        public int ClientId { get; set; }
+        public Guid ClientId { get; set; }
 
         public string ClientFullName { get; set; }
 

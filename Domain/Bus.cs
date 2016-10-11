@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MediatR;
 using Shared;
 
@@ -14,9 +16,14 @@ namespace Domain
             _mediator = mediator;
         }
 
-        public int ExecuteCommand(ICommand command)
+        public Guid  ExecuteCommand(ICommand command)
         {
             return _mediator.Send(command);
+        }
+
+        public Task<Guid> ExecuteAsyncCommand(IAsyncCommand command)
+        {
+            return _mediator.SendAsync(command);
         }
 
 
@@ -25,14 +32,29 @@ namespace Domain
             return _mediator.Send(query);
         }
 
+        public Task<IList<TResponse>> ExecuteAsyncQuery<TResponse>(IAsyncQuery<TResponse> query)
+        {
+            return _mediator.SendAsync(query);
+        }
+
         public TResponse ExecuteQuery<TResponse>(IQueryForSingleOrDefault<TResponse> query)
         {
             return _mediator.Send(query);
         }
 
+        public Task<TResponse> ExecuteAsyncQuery<TResponse>(IAsyncQueryForSingleOrDefault<TResponse> query)
+        {
+            return _mediator.SendAsync(query);
+        }
+
         public void PublishDomainEvent(IDomainEvent domainEvent)
         {
             _mediator.Publish(domainEvent);
+        }
+
+        public Task PublishAsyncDomainEvent(IAsyncDomainEvent domainEvent)
+        {
+            return _mediator.PublishAsync(domainEvent);
         }
     }
 }
