@@ -5,6 +5,8 @@ namespace Domain.Command.Session
 {
     public class UpdateSessionCommand : ICommand
     {
+        public int Id { get; set; }
+
         public DateTime? Date { get; set; }
 
         public int ClientId { get; set; }
@@ -31,7 +33,9 @@ namespace Domain.Command.Session
 
         public string SessionNotesFindings { get; set; }
 
-        public int Id { get; set; }
+        public string TreatmentNotes { get; set; }
+
+        
         
     }
 }

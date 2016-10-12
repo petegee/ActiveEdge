@@ -15,15 +15,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Data.Entity;
 using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Infrastructure.MVC;
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Session;
-using ActiveEdge.Read.Query.Sessions;
+using ActiveEdge.Read.Query.User;
 using AutoMapper;
 using Domain;
-using Domain.Context;
+using Domain.Event;
 using Domain.Model;
 using Marten;
 using MediatR;
@@ -48,7 +47,7 @@ namespace ActiveEdge.DependencyResolution
                     scan.TheCallingAssembly();
                     scan.AssemblyContainingType<BusinessRuleException>();
                     scan.AssemblyContainingType<ILoggedOnUser>();
-                    scan.AssemblyContainingType<GetAllSessions>();
+                    scan.AssemblyContainingType<FindAllUsersForOrganization>();
                     scan.WithDefaultConventions();
                     scan.With(new ControllerConvention());
                     scan.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
@@ -75,6 +74,17 @@ namespace ActiveEdge.DependencyResolution
                     return DocumentStore.For(_ =>
                     {
                         _.Connection("host=localhost;database=activeedgedb;password=Password1;username=active_edge_web_user");
+
+                        _.AutoCreateSchemaObjects = AutoCreate.All;
+
+                        _.Events.AddEventType(typeof(ClientRegistered));
+                        _.Events.AddEventType(typeof(ClientUpdated));
+
+                        _.Events.AddEventType(typeof(SessionCreated));
+                        _.Events.AddEventType(typeof(PlanAddedToSession));
+                        //_.Events.AddEventType(typeof(SessionUpdated));
+
+
 
                         _.Events.InlineProjections.AggregateStreamsWith<ClientModel>();
                         _.Events.InlineProjections.AggregateStreamsWith<SessionModel>();

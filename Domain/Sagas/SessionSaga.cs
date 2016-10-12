@@ -11,6 +11,7 @@ using Shared;
 namespace Domain.Sagas
 {
     public class SessionSaga : IAsyncCommandHandler<CreateNewSession>
+        ,IAsyncCommandHandler<AddPlanToSession>
         //, ICommandHandler<UpdateSessionCommand>
         //, ICommandHandler<DeleteSessionCommand>
     {
@@ -46,12 +47,34 @@ namespace Domain.Sagas
             var sessionCreatedEvent = _mapper.Map<CreateNewSession, SessionCreated>(message);
 
             sessionCreatedEvent.ContraIndications = client.ContraIndications.Conditions.ToList();
+            sessionCreatedEvent.ClientFullName = client.FullName;
 
             var sessionId = _session.Events.StartStream<Session>(sessionCreatedEvent);
             
             await _session.SaveChangesAsync();
 
             return sessionId;
+        }
+
+        /// <summary>Handles an asynchronous request</summary>
+        /// <param name="message">The request message</param>
+        /// <returns>A task representing the response from the request</returns>
+        public async Task<Guid> Handle(AddPlanToSession message)
+        {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
+            var session = await _session.Events.AggregateStreamAsync<Session>(message.Id);
+
+            var domainEvent = _mapper.Map<PlanAddedToSession>(message);
+
+            domainEvent.UserId = _loggedOnUser.Id;
+
+            _session.Events.Append(message.Id, domainEvent);
+
+            await _session.SaveChangesAsync();
+
+            return session.Id;
+
         }
 
         ///// <summary>Handles a request</summary>
@@ -91,6 +114,7 @@ namespace Domain.Sagas
 
         //    return session.Id;
         //}
-        
+
+
     }
 }

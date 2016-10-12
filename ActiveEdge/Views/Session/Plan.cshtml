@@ -1,4 +1,4 @@
-﻿@model ActiveEdge.Read.Model.Session.SessionModel
+﻿@model ActiveEdge.Read.Model.Session.SessionPlanModel
 
 @{
   ViewBag.Title = "New Session";
@@ -34,18 +34,13 @@
         </div>
         <div class="ibox-content">
 
-          @using (Html.BeginForm("Edit", "Session"))
+          @using (Html.BeginForm("Plan", "Session"))
           {
             <div class="form-horizontal">
               @Html.AntiForgeryToken()
               @Html.ValidationSummary(true)
               @Html.HiddenFor(m => m.Id)
-              @Html.HiddenFor(m => m.Date)
-              @Html.HiddenFor(model => model.ClientId)
-              @Html.HiddenFor(model => model.ClientFullName)
-              @Html.HiddenFor(model => model.Feedback)
-              @Html.HiddenFor(model => model.GoalOrExpectations)
-              @Html.HiddenFor(model => model.AreasOfDiscomfort)
+             
 
 
               <div class="form-group">

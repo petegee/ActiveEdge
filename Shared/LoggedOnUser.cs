@@ -19,5 +19,18 @@ namespace Shared
                 return organizationClaim == null ? (Guid?) null : Guid.Parse(organizationClaim.Value);
             }
         }
+
+        public string Id
+        {
+            get
+            {
+                var identity = (ClaimsIdentity)ClaimsPrincipal.Current.Identity;
+                var claims = identity.Claims;
+                
+                var nameIdentifier = claims.First(claim => claim.Type == ClaimTypes.NameIdentifier);
+
+                return nameIdentifier.Value;
+            }
+        }
     }
 }

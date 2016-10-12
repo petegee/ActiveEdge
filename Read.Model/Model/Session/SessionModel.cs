@@ -10,10 +10,8 @@ using FluentValidation.Attributes;
 namespace ActiveEdge.Read.Model.Session
 {
     [Validator(typeof(SessionModelValidator))]
-    public class SessionModel: IAmLinkedToAnOrganization
+    public class SessionModel: SessionPlanModel, IAmLinkedToAnOrganization
     {
-        public Guid Id { get; set; }
-
         [Required]
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
@@ -33,23 +31,6 @@ namespace ActiveEdge.Read.Model.Session
 
         [DisplayName("Areas of Discomfort")]
         public string AreasOfDiscomfort { get; set; }
-
-        [DisplayName("Contributing Factors To Condition")]
-        public string ContributingFactorsToCondition { get; set; }
-
-        [DisplayName("Hypothesis")]
-        public string Hypothesis { get; set; }
-
-        [DisplayName("Pre-Massage Palpation")]
-        public string PreMassagePalpation { get; set; }
-
-        [DisplayName("Session Plan")]
-        [UIHint("Summernote")]
-        public string SessionPlan { get; set; }
-
-        [DisplayName("Treatment")]
-        [UIHint("Summernote")]
-        public string TreatmentNotes { get; set; }
         
         public List<string> ContraIndications { get; set; }
 
@@ -58,6 +39,7 @@ namespace ActiveEdge.Read.Model.Session
             OrganizationId = domainEvent.OrganizationId;
             Date = domainEvent.Date;
             ClientId = domainEvent.ClientId;
+            ClientFullName = domainEvent.ClientFullName;
             Feedback = domainEvent.Feedback;
             GoalOrExpectations = domainEvent.GoalOrExpectations;
             AreasOfDiscomfort = domainEvent.AreasOfDiscomfort;

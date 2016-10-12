@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.WebApi.Search;
 using AutoMapper;
 using Domain.Filters;
@@ -31,7 +32,7 @@ namespace ActiveEdge.WebApi
         {
             fullName = fullName.ToLower();
             
-            var searchResults = _session.Query<Client>()
+            var searchResults = _session.Query<ClientModel>()
                 .FilterForOrganization(_loggedOnUser)
                 .Select(client => new SearchResult { Id = client.Id.ToString(), DisplayValue = client.FullName })
                 .Where(result => result.DisplayValue.StartsWith(fullName, StringComparison.OrdinalIgnoreCase))

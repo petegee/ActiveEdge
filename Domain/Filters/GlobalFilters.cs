@@ -10,11 +10,11 @@ namespace Domain.Filters
         public static IQueryable<T> FilterForOrganization<T>(this IQueryable<T> domainModels, ILoggedOnUser loggedOnUser)
             where T : IAmLinkedToAnOrganization
         {
-            return FilterForOrganization(domainModels, loggedOnUser.OrganizationId);
+            return FilterFor(domainModels, loggedOnUser.OrganizationId);
 
         }
 
-        public static IQueryable<T> FilterForOrganization<T>(this IQueryable<T> domainModels, Guid? organizationId)
+        public static IQueryable<T> FilterFor<T>(this IQueryable<T> domainModels, Guid? organizationId)
             where T : IAmLinkedToAnOrganization
         {
             return organizationId.HasValue

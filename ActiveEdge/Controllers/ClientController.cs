@@ -33,7 +33,7 @@ namespace ActiveEdge.Controllers
         [Route("clients")]
         public async Task<ViewResult> Index()
         {
-            var clients = await _session.Query<ClientModel>().FilterForOrganization(OrganizationId).ToListAsync();
+            var clients = await _session.Query<ClientModel>().FilterFor(OrganizationId).ToListAsync();
 
             return View(clients);
         }

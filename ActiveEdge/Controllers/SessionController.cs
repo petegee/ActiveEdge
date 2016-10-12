@@ -6,7 +6,6 @@ using ActiveEdge.Infrastructure.Extensions;
 using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model.Session;
 using ActiveEdge.Read.Model.Shared;
-using ActiveEdge.Read.Query.Sessions;
 using AutoMapper;
 using Domain.Command.Session;
 using Domain.Filters;
@@ -19,8 +18,8 @@ namespace ActiveEdge.Controllers
     public class SessionController : ControllerBase
     {
         private readonly IBus _bus;
-        private readonly IDocumentSession _session;
         private readonly IMapper _mapper;
+        private readonly IDocumentSession _session;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
@@ -31,26 +30,25 @@ namespace ActiveEdge.Controllers
             _bus = bus;
             _session = session;
         }
-
-        //public ActionResult Drawing()
-        //{
-        //    return View();
-        //}
-
+        
         [HttpGet]
         [Route("sessions")]
-        public ActionResult Index()
+        public async Task<ViewResult> Index()
         {
-            var sessions = _bus.ExecuteQuery(new GetAllSessions());
+            var sessions = await _session.Query<SessionModel>()
+                .FilterFor(OrganizationId)
+                .ToListAsync();
 
             return View(sessions);
         }
 
         [HttpGet]
         [Route("sessions/for/client/{id}")]
-        public ActionResult ForClient(Guid id)
+        public async Task<ActionResult> ForClient(Guid id)
         {
-            var sessions = _bus.ExecuteQuery(new GetAllSessionsForClient(id));
+            var sessions = await _session.Query<SessionModel>()
+                .Where(model => model.ClientId == id)
+                .ToListAsync();
 
             return View("Index", sessions);
         }
@@ -73,7 +71,7 @@ namespace ActiveEdge.Controllers
         {
             var session = await
                 _session.Query<SessionModel>()
-                    .FilterForOrganization(OrganizationId)
+                    .FilterFor(OrganizationId)
                     .SingleOrDefaultAsync(sessionModel => sessionModel.Id == id);
             return session;
         }
@@ -105,9 +103,25 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("session/plan/{id}")]
+        [HandleValidationErrors]
         public async Task<ActionResult> Plan(Guid id)
         {
             return await Edit(id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("session/plan/{id}")]
+        [HandleValidationErrors]
+        public async Task<RedirectToRouteResult> Plan(SessionPlanModel sessionModel)
+        {
+            var command = _mapper.Map<AddPlanToSession>(sessionModel);
+
+            await _bus.ExecuteAsyncCommand(command);
+
+            Notify(new SuccessMessage("Session successfully updated."));
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

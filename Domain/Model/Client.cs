@@ -10,6 +10,7 @@ namespace Domain.Model
         {
             Address = new Address();
             ContraIndications = new ContraIndications();
+            TermsAndConditions = new TermsAndConditions();
         }
 
         public string FirstName { get; set; }

@@ -19,6 +19,7 @@ namespace Domain.Mapping
 
             // Sessions
             CreateMap<CreateNewSession, SessionCreated>();
+            CreateMap<AddPlanToSession, PlanAddedToSession>();
         }
     }
 }
