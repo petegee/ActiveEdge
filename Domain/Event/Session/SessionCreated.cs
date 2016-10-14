@@ -6,6 +6,11 @@ namespace Domain.Event.Session
 {
     public class SessionCreated : IDomainEvent, IAmAuditable
     {
+        public SessionCreated()
+        {
+            ContraIndications = new List<string>();
+        }
+
         public DateTime Date { get; set; }
 
         public Guid ClientId { get; set; }
@@ -20,7 +25,7 @@ namespace Domain.Event.Session
 
         public Guid OrganizationId { get; set; }
 
-        public List<string> ContraIndications { get; set; }
+        public List<string> ContraIndications { get; private set; }
 
         public DateTime CommandDate { get; set; }
 

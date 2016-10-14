@@ -9,7 +9,7 @@ namespace Domain.Command.Session
 
         public DateTime? Date { get; set; }
 
-        public int ClientId { get; set; }
+        public Guid ClientId { get; set; }
 
         public string ClientFullName { get; set; }
 

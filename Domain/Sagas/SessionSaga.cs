@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Domain.Command.Session;
-using Domain.Event;
 using Domain.Event.Session;
 using Domain.Model;
 using Marten;
@@ -47,7 +46,7 @@ namespace Domain.Sagas
 
             var sessionCreatedEvent = _mapper.Map<CreateNewSession, SessionCreated>(message);
 
-            sessionCreatedEvent.ContraIndications = client.ContraIndications.Conditions.ToList();
+            sessionCreatedEvent.ContraIndications.AddRange(client.ContraIndications.Conditions.ToList());
             sessionCreatedEvent.ClientFullName = client.FullName;
             //_loggedOnUser.Id
             var sessionId = _session.Events.StartStream<Session>(sessionCreatedEvent);
@@ -85,7 +84,7 @@ namespace Domain.Sagas
 
             var session = await _session.Events.AggregateStreamAsync<Session>(message.Id);
             
-            var domainEvent = _mapper.Map(message, session);
+            var domainEvent = _mapper.Map<SessionUpdated>(message);
 
             _session.Events.Append(message.Id, domainEvent);
 

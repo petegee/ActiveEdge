@@ -20,6 +20,19 @@ namespace Shared
             }
         }
 
+        public string UserName
+        {
+            get
+            {
+                var identity = (ClaimsIdentity)ClaimsPrincipal.Current.Identity;
+                var claims = identity.Claims;
+
+                var nameIdentifier = claims.First(claim => claim.Type == ClaimTypes.Name);
+
+                return nameIdentifier.Value;
+            }
+        }
+
         public string Id
         {
             get

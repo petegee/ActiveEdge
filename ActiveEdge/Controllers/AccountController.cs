@@ -2,11 +2,10 @@
 using System.Web;
 using System.Web.Mvc;
 using ActiveEdge.Read.Model;
-using Domain.Context;
 using Domain.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using Shared.Authorization;
+using Shared;
 
 namespace ActiveEdge.Controllers
 {
@@ -18,7 +17,7 @@ namespace ActiveEdge.Controllers
         //{
         //}
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager, ILoggedOnUser loggedOnUser) : base(loggedOnUser)
         {
             UserManager = userManager;
         }

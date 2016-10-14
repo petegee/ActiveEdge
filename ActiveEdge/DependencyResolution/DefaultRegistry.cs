@@ -83,7 +83,7 @@ namespace ActiveEdge.DependencyResolution
 
                         _.Events.AddEventType(typeof(SessionCreated));
                         _.Events.AddEventType(typeof(PlanAddedToSession));
-                        //_.Events.AddEventType(typeof(SessionUpdated));
+                        _.Events.AddEventType(typeof(SessionUpdated));
 
 
 

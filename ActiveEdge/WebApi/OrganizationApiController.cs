@@ -30,7 +30,7 @@ namespace ActiveEdge.WebApi
 
         [HttpGet]
         [Route("{organizationId}", Name = "getOrganizationApi")]
-        public OrganizationModel GetOrganization(int organizationId)
+        public OrganizationModel GetOrganization(Guid organizationId)
         {
             return _bus.ExecuteQuery(new GetOrganization(organizationId));
         }

@@ -1,15 +1,16 @@
-﻿using Shared;
+﻿using System;
+using Shared;
 
 namespace Domain.Command
 {
     public class DeleteOrganizationCommand : ICommand
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public DeleteOrganizationCommand(int organizationId)
+        public DeleteOrganizationCommand(Guid organizationId)
         {
             OrganizationId = organizationId;
         }
 
-        public int OrganizationId { get; }
+        public Guid OrganizationId { get; }
     }
 }

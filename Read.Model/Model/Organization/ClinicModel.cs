@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
@@ -7,7 +8,7 @@ namespace ActiveEdge.Read.Model.Organization
     public class ClinicModel
     {
         [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("Clinic Name")]
         [Required]

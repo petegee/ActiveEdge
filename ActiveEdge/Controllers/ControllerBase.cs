@@ -3,13 +3,28 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Mvc;
 using ActiveEdge.Read.Model.Shared;
+using Domain;
 using Shared;
 
 namespace ActiveEdge.Controllers
 {
     public abstract class ControllerBase : Controller
     {
+        private readonly ILoggedOnUser _loggedOnUser;
         private const string UiNotificationKey = "UINotificationKey";
+
+        protected ControllerBase(ILoggedOnUser loggedOnUser)
+        {
+            _loggedOnUser = loggedOnUser;
+            
+        }
+
+        protected void AppendAuditableInformation(IAmAuditable auditableCommand)
+        {
+            auditableCommand.UserName = _loggedOnUser.UserName;
+            auditableCommand.UserId = _loggedOnUser.Id;
+            auditableCommand.CommandDate = DateTime.Now;
+        }
 
         protected Guid? OrganizationId
         {

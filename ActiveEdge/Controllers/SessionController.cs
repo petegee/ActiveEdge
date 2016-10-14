@@ -24,7 +24,7 @@ namespace ActiveEdge.Controllers
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.
         /// </summary>
-        public SessionController(IMapper mapper, IBus bus, IDocumentSession session)
+        public SessionController(IMapper mapper, IBus bus, IDocumentSession session, ILoggedOnUser loggedOnUser) : base(loggedOnUser)
         {
             _mapper = mapper;
             _bus = bus;
@@ -84,7 +84,7 @@ namespace ActiveEdge.Controllers
             var command = _mapper.Map<CreateNewSession>(sessionModel);
 
             command.OrganizationId = OrganizationId;
-
+            AppendAuditableInformation(command);
             var sessionId = await _bus.ExecuteAsyncCommand(command);
 
             Notify(new SuccessMessage("Session created succesfully."));
@@ -107,7 +107,7 @@ namespace ActiveEdge.Controllers
         public async Task<RedirectToRouteResult> Plan(SessionPlanModel sessionModel)
         {
             var command = _mapper.Map<AddPlanToSession>(sessionModel);
-
+            AppendAuditableInformation(command);
             await _bus.ExecuteAsyncCommand(command);
 
             Notify(new SuccessMessage("Session successfully updated."));
@@ -146,7 +146,7 @@ namespace ActiveEdge.Controllers
         public async Task<RedirectToRouteResult> Edit(SessionModel sessionModel)
         {
             var command = _mapper.Map<UpdateSession>(sessionModel);
-
+            AppendAuditableInformation(command);
             await _bus.ExecuteAsyncCommand(command);
 
             Notify(new SuccessMessage("Session successfully updated."));

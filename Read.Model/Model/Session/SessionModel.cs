@@ -13,6 +13,11 @@ namespace ActiveEdge.Read.Model.Session
     [Validator(typeof(SessionModelValidator))]
     public class SessionModel : SessionPlanModel, IAmLinkedToAnOrganization
     {
+        public SessionModel()
+        {
+            ContraIndications = new List<string>();
+        }
+
         [Required]
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }

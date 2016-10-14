@@ -18,7 +18,7 @@ namespace ActiveEdge.Controllers
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.</summary>
         public UsersController(IBus bus,
-            ApplicationUserManager userManager)
+            ApplicationUserManager userManager, ILoggedOnUser loggedOnUser) : base(loggedOnUser)
         {
             _bus = bus;
             _userManager = userManager;

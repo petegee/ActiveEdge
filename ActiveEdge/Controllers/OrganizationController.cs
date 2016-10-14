@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model.Organization;
@@ -16,7 +17,7 @@ namespace ActiveEdge.Controllers
         private readonly IBus _bus;
         private readonly IMapper _mapper;
 
-        public OrganizationController(IMapper mapper, IBus bus)
+        public OrganizationController(IMapper mapper, IBus bus, ILoggedOnUser loggedOnUser) : base(loggedOnUser)
         {
             _mapper = mapper;
             _bus = bus;
@@ -33,7 +34,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("organization/{id}")]
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
             var model = _bus.ExecuteQuery(new GetOrganization(id));
 
@@ -66,7 +67,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("organization/edit/{id}")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
             var model = _bus.ExecuteQuery(new GetOrganization(id));
 
@@ -91,7 +92,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("organization/delete/{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             return View();
         }

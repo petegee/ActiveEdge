@@ -2,6 +2,7 @@
 using ActiveEdge.Read.Model.Shared;
 using Domain.Context;
 using Marten;
+using Shared;
 using DatabaseInitializer = ActiveEdge.Infrastructure.DatabaseInitializer;
 
 namespace ActiveEdge.Controllers
@@ -13,7 +14,7 @@ namespace ActiveEdge.Controllers
         private readonly DatabaseInitializer _dbInitializer;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.</summary>
-        public HomeController(IDocumentStore store, DatabaseInitializer dbInitializer)
+        public HomeController(IDocumentStore store, DatabaseInitializer dbInitializer, ILoggedOnUser loggedOnUser) : base(loggedOnUser)
         {
             _store = store;
             _dbInitializer = dbInitializer;
@@ -33,8 +34,8 @@ namespace ActiveEdge.Controllers
         [Route("clean")]
         public ActionResult Clean()
         {
-            _store.Advanced.Clean.DeleteAllDocuments();
-            _store.Advanced.Clean.DeleteAllEventData();
+            //_store.Advanced.Clean.DeleteAllDocuments();
+            //_store.Advanced.Clean.DeleteAllEventData();
             //CompletelyRemoveAll();
 
             _dbInitializer.Seed();
