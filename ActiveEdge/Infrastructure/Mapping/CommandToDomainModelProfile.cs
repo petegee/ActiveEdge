@@ -69,7 +69,7 @@ namespace ActiveEdge.Infrastructure.Mapping
 
             CreateMap<CreateNewSession, Session>();
 
-            CreateMap<UpdateSessionCommand, Session>();
+            CreateMap<UpdateSession, Session>();
         }
     }
 }

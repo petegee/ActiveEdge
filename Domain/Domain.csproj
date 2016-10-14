@@ -104,7 +104,7 @@
     <Compile Include="Command\Session\AddPlanToSession.cs" />
     <Compile Include="Command\Session\CreateNewSession.cs" />
     <Compile Include="Command\Session\DeleteSessionCommand.cs" />
-    <Compile Include="Command\Session\UpdateSessionCommand.cs" />
+    <Compile Include="Command\Session\UpdateSession.cs" />
     <Compile Include="Command\UpdateOrganizationCommand.cs" />
     <Compile Include="Context\Roles.cs" />
     <Compile Include="Event\ClientRegistered.cs" />
@@ -112,6 +112,7 @@
     <Compile Include="Event\OrganizationUpdated.cs" />
     <Compile Include="Event\PlanAddedToSession.cs" />
     <Compile Include="Event\SessionCreated.cs" />
+    <Compile Include="Event\SessionUpdated.cs" />
     <Compile Include="Filters\GlobalFilters.cs" />
     <Compile Include="Mapping\CommandToEvent.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />

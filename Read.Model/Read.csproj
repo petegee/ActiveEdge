@@ -105,7 +105,6 @@
     <Compile Include="Model\Organization\ClinicModel.cs" />
     <Compile Include="Model\Organization\OrganizationModel.cs" />
     <Compile Include="Model\Session\SessionModel.cs" />
-    <Compile Include="Model\Session\SessionModelListItem.cs" />
     <Compile Include="Model\Session\SessionPlanModel.cs" />
     <Compile Include="Model\Session\Validators\SessionModelValidator.cs" />
     <Compile Include="Model\Shared\DangerMessage.cs" />

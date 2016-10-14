@@ -12,7 +12,7 @@ namespace Domain.Sagas
 {
     public class SessionSaga : IAsyncCommandHandler<CreateNewSession>
         ,IAsyncCommandHandler<AddPlanToSession>
-        //, ICommandHandler<UpdateSessionCommand>
+        , IAsyncCommandHandler<UpdateSession>
         //, ICommandHandler<DeleteSessionCommand>
     {
         private readonly IDocumentSession _session;
@@ -77,24 +77,23 @@ namespace Domain.Sagas
 
         }
 
-        ///// <summary>Handles a request</summary>
-        ///// <param name="message">The request message</param>
-        ///// <returns>Response from the request</returns>
-        //public int Handle(UpdateSessionCommand message)
-        //{
-        //    var session = _session.Query<Session>().SingleOrDefault(s => s.Id == message.Id);
+        /// <summary>Handles an asynchronous request</summary>
+        /// <param name="message">The request message</param>
+        /// <returns>A task representing the response from the request</returns>
+        public async Task<Guid> Handle(UpdateSession message)
+        {
+            if (message == null) throw new ArgumentNullException(nameof(message));
 
-        //    if (session == null)
-        //    {
-        //        throw new BusinessRuleException($"The session with id: '{message.Id}' either does not exist or you are not authorised to view it.");
-        //    }
+            var session = await _session.Events.AggregateStreamAsync<Session>(message.Id);
+            
+            var domainEvent = _mapper.Map(message, session);
 
-        //    _mapper.Map(message, session);
+            _session.Events.Append(message.Id, domainEvent);
 
-        //    _session.SaveChanges();
+            await _session.SaveChangesAsync();
 
-        //    return session.Id;
-        //}
+            return session.Id; 
+        }
 
         ///// <summary>Handles a request</summary>
         ///// <param name="message">The request message</param>
@@ -114,6 +113,7 @@ namespace Domain.Sagas
 
         //    return session.Id;
         //}
+
 
 
     }

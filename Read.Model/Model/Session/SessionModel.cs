@@ -10,7 +10,7 @@ using FluentValidation.Attributes;
 namespace ActiveEdge.Read.Model.Session
 {
     [Validator(typeof(SessionModelValidator))]
-    public class SessionModel: SessionPlanModel, IAmLinkedToAnOrganization
+    public class SessionModel : SessionPlanModel, IAmLinkedToAnOrganization
     {
         [Required]
         [DataType(DataType.Date)]
@@ -31,8 +31,10 @@ namespace ActiveEdge.Read.Model.Session
 
         [DisplayName("Areas of Discomfort")]
         public string AreasOfDiscomfort { get; set; }
-        
+
         public List<string> ContraIndications { get; set; }
+
+        public Guid OrganizationId { get; set; }
 
         public void Apply(SessionCreated domainEvent)
         {
@@ -46,6 +48,30 @@ namespace ActiveEdge.Read.Model.Session
             ContraIndications = domainEvent.ContraIndications;
         }
 
-        public Guid OrganizationId { get; set; }
+        public void Apply(PlanAddedToSession domainEvent)
+        {
+            ContributingFactorsToCondition = domainEvent.ContributingFactorsToCondition;
+            Hypothesis = domainEvent.Hypothesis;
+            PreMassagePalpation = domainEvent.PreMassagePalpation;
+            SessionPlan = domainEvent.PreMassagePalpation;
+            TreatmentNotes = domainEvent.TreatmentNotes;
+        }
+
+        public void Apply(SessionUpdated domainEvent)
+        {
+
+            Date = domainEvent.Date;
+            ClientId = domainEvent.ClientId;
+            ClientFullName = domainEvent.ClientFullName;
+            Feedback = domainEvent.Feedback;
+            GoalOrExpectations = domainEvent.GoalOrExpectations;
+            AreasOfDiscomfort = domainEvent.AreasOfDiscomfort;
+            ContraIndications = domainEvent.ContraIndications;
+            ContributingFactorsToCondition = domainEvent.ContributingFactorsToCondition;
+            Hypothesis = domainEvent.Hypothesis;
+            PreMassagePalpation = domainEvent.PreMassagePalpation;
+            SessionPlan = domainEvent.PreMassagePalpation;
+            TreatmentNotes = domainEvent.TreatmentNotes;
+        }
     }
 }

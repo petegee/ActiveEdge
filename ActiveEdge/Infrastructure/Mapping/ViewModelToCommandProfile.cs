@@ -29,7 +29,7 @@ namespace ActiveEdge.Infrastructure.Mapping
             // Sessions
             CreateMap<SessionModel, CreateNewSession>();
             CreateMap<SessionPlanModel, AddPlanToSession>();
-            CreateMap<SessionModel, UpdateSessionCommand>();
+            CreateMap<SessionModel, UpdateSession>();
         }
     }
 }

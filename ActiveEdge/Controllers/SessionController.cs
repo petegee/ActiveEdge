@@ -30,7 +30,7 @@ namespace ActiveEdge.Controllers
             _bus = bus;
             _session = session;
         }
-        
+
         [HttpGet]
         [Route("sessions")]
         public async Task<ViewResult> Index()
@@ -65,15 +65,6 @@ namespace ActiveEdge.Controllers
             }
 
             return View(session);
-        }
-
-        private async Task<SessionModel> GetSessionModel(Guid id)
-        {
-            var session = await
-                _session.Query<SessionModel>()
-                    .FilterFor(OrganizationId)
-                    .SingleOrDefaultAsync(sessionModel => sessionModel.Id == id);
-            return session;
         }
 
         [HttpGet]
@@ -126,6 +117,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("session/edit/{id}")]
+        [HandleValidationErrors]
         public async Task<ActionResult> Edit(Guid id)
         {
             var session = await GetSessionModel(id);
@@ -150,20 +142,16 @@ namespace ActiveEdge.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("session/edit/{id}")]
-        public ActionResult Edit(SessionModel sessionModel)
+        [HandleValidationErrors]
+        public async Task<RedirectToRouteResult> Edit(SessionModel sessionModel)
         {
-            if (ModelState.IsValid)
-            {
-                var command = _mapper.Map<UpdateSessionCommand>(sessionModel);
+            var command = _mapper.Map<UpdateSession>(sessionModel);
 
-                _bus.ExecuteCommand(command);
+            await _bus.ExecuteAsyncCommand(command);
 
-                Notify(new SuccessMessage("Session successfully updated."));
+            Notify(new SuccessMessage("Session successfully updated."));
 
-                return RedirectToAction("Index");
-            }
-
-            return View(sessionModel);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -190,6 +178,15 @@ namespace ActiveEdge.Controllers
             Notify(new SuccessMessage("Session successfuly deleted."));
 
             return RedirectToAction("Index");
+        }
+
+        private async Task<SessionModel> GetSessionModel(Guid id)
+        {
+            var session = await
+                _session.Query<SessionModel>()
+                    .FilterFor(OrganizationId)
+                    .SingleOrDefaultAsync(sessionModel => sessionModel.Id == id);
+            return session;
         }
     }
 }

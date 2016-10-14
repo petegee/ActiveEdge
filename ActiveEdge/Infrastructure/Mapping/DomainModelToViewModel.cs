@@ -27,9 +27,7 @@ namespace ActiveEdge.Infrastructure.Mapping
 
             CreateMap<Session, SessionModel>()
                 .ForMember(dest => dest.ContraIndications, options => options.Ignore());
-
-            CreateMap<Session, SessionModelListItem>();
-
+            
             CreateMap<Client, ClientModel>();
 
 
