@@ -17,11 +17,9 @@
     </ol>
   </div>
 </div>
-
-
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h5>Session Detail</h5>
@@ -34,6 +32,39 @@
 
           @Html.ActionLink("Edit", "Edit", new {id = Model.Id}, new {@class = "btn btn-primary"})
           @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-white"})
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Session History</h5>
+        </div>
+        <div class="ibox-content">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>User</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var history in Model.History.OrderByDescending(history => history.Date))
+              {
+                  <tr>
+                    <td>@Html.DisplayFor(m => history.Date)</td>
+                    <td>@Html.DisplayFor(m => history.UserName)</td>
+                    <td>@Html.DisplayFor(m => history.Description)</td>
+                  </tr>
+              }
+            </tbody>
+          </table>
+
+
+
+
 
         </div>
       </div>
