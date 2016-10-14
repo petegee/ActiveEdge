@@ -1,4 +1,5 @@
 ﻿using Domain.Event;
+using Domain.Event.Session;
 
 namespace Domain.Model
 {

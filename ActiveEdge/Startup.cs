@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Domain.Context;
 using Owin;
+using DatabaseInitializer = ActiveEdge.Infrastructure.DatabaseInitializer;
 
 //[assembly: OwinStartup(typeof(Startup))]
 

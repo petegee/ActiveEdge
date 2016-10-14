@@ -2,6 +2,7 @@
 using Domain.Command.Client;
 using Domain.Command.Session;
 using Domain.Event;
+using Domain.Event.Session;
 
 namespace Domain.Mapping
 {

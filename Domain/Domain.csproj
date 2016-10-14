@@ -104,15 +104,16 @@
     <Compile Include="Command\Session\AddPlanToSession.cs" />
     <Compile Include="Command\Session\CreateNewSession.cs" />
     <Compile Include="Command\Session\DeleteSessionCommand.cs" />
+    <Compile Include="IAmAuditable.cs" />
     <Compile Include="Command\Session\UpdateSession.cs" />
     <Compile Include="Command\UpdateOrganizationCommand.cs" />
     <Compile Include="Context\Roles.cs" />
     <Compile Include="Event\ClientRegistered.cs" />
     <Compile Include="Event\ClientUpdated.cs" />
     <Compile Include="Event\OrganizationUpdated.cs" />
-    <Compile Include="Event\PlanAddedToSession.cs" />
-    <Compile Include="Event\SessionCreated.cs" />
-    <Compile Include="Event\SessionUpdated.cs" />
+    <Compile Include="Event\Session\PlanAddedToSession.cs" />
+    <Compile Include="Event\Session\SessionCreated.cs" />
+    <Compile Include="Event\Session\SessionUpdated.cs" />
     <Compile Include="Filters\GlobalFilters.cs" />
     <Compile Include="Mapping\CommandToEvent.cs" />
     <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
@@ -127,7 +128,6 @@
     <Compile Include="Command\Client\RegisterNewClient.cs" />
     <Compile Include="Command\Client\UpdateClient.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
-    <Compile Include="Context\DatabaseInitializer.cs" />
     <Compile Include="Context\MySqlConfiguration.cs" />
     <Compile Include="Context\MySqlHistoryContext.cs" />
     <Compile Include="Context\MySqlInitializer.cs" />

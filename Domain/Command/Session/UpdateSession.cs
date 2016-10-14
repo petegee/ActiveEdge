@@ -3,7 +3,7 @@ using Shared;
 
 namespace Domain.Command.Session
 {
-    public class UpdateSession : IAsyncCommand
+    public class UpdateSession : IAmAuditable, IAsyncCommand
     {
         public Guid Id { get; set; }
 
@@ -35,7 +35,10 @@ namespace Domain.Command.Session
 
         public string TreatmentNotes { get; set; }
 
-        
-        
+        public DateTime CommandDate { get; set; }
+
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
     }
 }

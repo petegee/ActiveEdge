@@ -310,6 +310,7 @@
     <Compile Include="Infrastructure\Caching\ICacheableItem.cs" />
     <Compile Include="Infrastructure\Caching\SoftwareVersion.cs" />
     <Compile Include="Infrastructure\Caching\SoftwareVersionCacheItem.cs" />
+    <Compile Include="Infrastructure\DatabaseInitializer.cs" />
     <Compile Include="Infrastructure\Extensions\stringExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\ViewDataExtensions.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />

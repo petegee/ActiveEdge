@@ -2,6 +2,7 @@
 using ActiveEdge.Read.Model.Shared;
 using Domain.Context;
 using Marten;
+using DatabaseInitializer = ActiveEdge.Infrastructure.DatabaseInitializer;
 
 namespace ActiveEdge.Controllers
 {

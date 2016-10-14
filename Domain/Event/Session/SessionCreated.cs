@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Shared;
 
-namespace Domain.Event
+namespace Domain.Event.Session
 {
-    public class SessionCreated : IDomainEvent
+    public class SessionCreated : IDomainEvent, IAmAuditable
     {
         public DateTime Date { get; set; }
 
@@ -21,5 +21,11 @@ namespace Domain.Event
         public Guid OrganizationId { get; set; }
 
         public List<string> ContraIndications { get; set; }
+
+        public DateTime CommandDate { get; set; }
+
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
     }
 }

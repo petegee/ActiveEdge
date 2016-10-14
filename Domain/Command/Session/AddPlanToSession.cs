@@ -4,7 +4,7 @@ using Shared;
 namespace Domain.Command.Session
 {
     
-    public class AddPlanToSession : IAsyncCommand
+    public class AddPlanToSession : IAmAuditable, IAsyncCommand
     {
         public Guid Id { get; set; }
 
@@ -17,5 +17,11 @@ namespace Domain.Command.Session
         public string SessionPlan { get; set; }
 
         public string TreatmentNotes { get; set; }
+
+        public DateTime CommandDate { get; set; }
+
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
     }
 }

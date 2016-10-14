@@ -1,20 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ActiveEdge.Read.Model;
 using Domain.Command.Client;
+using Domain.Command.Session;
+using Domain.Context;
 using Domain.Model;
 using Marten;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Shared;
 
-namespace Domain.Context
+namespace ActiveEdge.Infrastructure
 {
     public class DatabaseInitializer
     {
         private readonly IDocumentSession _session;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IBus _bus;
+        private ApplicationUser _adminUser;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
         public DatabaseInitializer(IDocumentSession session, UserManager<ApplicationUser> userManager, IBus bus)
@@ -27,6 +31,7 @@ namespace Domain.Context
 
         public void Seed()
         {
+
             if (_session.Query<ApplicationUser>().Any(u => u.UserName == "sjclark76@gmail.com"))
                 return;
 
@@ -34,15 +39,17 @@ namespace Domain.Context
             _session.Store(new IdentityRole {Name = Roles.OrganizationAdministrator});
             _session.Store(new IdentityRole {Name = Roles.Therapist});
 
-            var userToInsert = new ApplicationUser
+            _adminUser = new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = "sjclark76@gmail.com",
+                FirstName = "Stuart",
+                LastName = "Clark",
                 PhoneNumber = "021509357"
             };
 
-            _userManager.Create(userToInsert, "ridgeback");
-            _userManager.AddToRole(userToInsert.Id, Roles.SystemAdministrator);
+            _userManager.Create(_adminUser, "ridgeback");
+            _userManager.AddToRole(_adminUser.Id, Roles.SystemAdministrator);
 
             AddOrganization();
             AddClients();
@@ -93,20 +100,34 @@ namespace Domain.Context
         private void AddSessions()
         {
             var organization = _session.Query<Organization>().First();
-            var user = _session.Query<Client>().First();
+            var client = _session.Query<ClientModel>().First();
 
-            _session.Store(new Session
+           var id =   _bus.ExecuteAsyncCommand(new CreateNewSession
             {
                 Date = DateTime.Today.Date,
-                ClientId = user.Id,
-                ClientFullName = user.FullName,
+                ClientId = client.Id,
+                ClientFullName = client.FullName,
                 Feedback = "It was absolutely fantastic",
                 GoalOrExpectations = "get fitter & stronger",
-                ContributingFactorsToCondition = "training like a beast",
-                SessionPlan = "Go hard or go home",
-                PreMassagePalpatation = "nope",
-                OrganizationId = organization.Id
-            });
+                OrganizationId = organization.Id,
+                CommandDate = DateTime.Now,
+                UserId = _adminUser.Id,
+                UserName = _adminUser.UserName
+                
+            }).Result;
+
+            _bus.ExecuteAsyncCommand(new AddPlanToSession
+            {
+                Id = id,
+                ContributingFactorsToCondition = "Fell Off a roof",
+                Hypothesis = "broken leg",
+                PreMassagePalpation = "bone sticking out",
+                SessionPlan = "don nothing",
+                TreatmentNotes = "I think i made it worse",
+                CommandDate = DateTime.Now,
+                UserId = _adminUser.Id,
+                UserName = _adminUser.UserName
+            }).Wait();
 
             _session.SaveChanges();
         }

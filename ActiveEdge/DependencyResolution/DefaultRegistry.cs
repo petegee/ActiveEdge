@@ -23,6 +23,7 @@ using ActiveEdge.Read.Query.User;
 using AutoMapper;
 using Domain;
 using Domain.Event;
+using Domain.Event.Session;
 using Domain.Model;
 using Marten;
 using MediatR;

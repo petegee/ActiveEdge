@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using ActiveEdge.Read.Model.Session.Validators;
-using Domain.Event;
+using Domain;
+using Domain.Event.Session;
 using Domain.Model;
 using FluentValidation.Attributes;
 
@@ -32,7 +33,7 @@ namespace ActiveEdge.Read.Model.Session
         [DisplayName("Areas of Discomfort")]
         public string AreasOfDiscomfort { get; set; }
 
-        public List<string> ContraIndications { get; set; }
+        public List<string> ContraIndications { get; private set; }
 
         public Guid OrganizationId { get; set; }
 
@@ -46,6 +47,19 @@ namespace ActiveEdge.Read.Model.Session
             GoalOrExpectations = domainEvent.GoalOrExpectations;
             AreasOfDiscomfort = domainEvent.AreasOfDiscomfort;
             ContraIndications = domainEvent.ContraIndications;
+
+            AddHistory(domainEvent, "Session Created");
+        }
+
+        private void AddHistory(IAmAuditable domainEvent, string description)
+        {
+            History.Add(new SessionHistory
+            {
+                Date = domainEvent.CommandDate,
+                UserId = domainEvent.UserId,
+                UserName = domainEvent.UserName,
+                Description = description
+            });
         }
 
         public void Apply(PlanAddedToSession domainEvent)
@@ -53,13 +67,14 @@ namespace ActiveEdge.Read.Model.Session
             ContributingFactorsToCondition = domainEvent.ContributingFactorsToCondition;
             Hypothesis = domainEvent.Hypothesis;
             PreMassagePalpation = domainEvent.PreMassagePalpation;
-            SessionPlan = domainEvent.PreMassagePalpation;
+            SessionPlan = domainEvent.SessionPlan;
             TreatmentNotes = domainEvent.TreatmentNotes;
+
+            AddHistory(domainEvent, "Session Plan Added");
         }
 
         public void Apply(SessionUpdated domainEvent)
         {
-
             Date = domainEvent.Date;
             ClientId = domainEvent.ClientId;
             ClientFullName = domainEvent.ClientFullName;
@@ -72,6 +87,8 @@ namespace ActiveEdge.Read.Model.Session
             PreMassagePalpation = domainEvent.PreMassagePalpation;
             SessionPlan = domainEvent.PreMassagePalpation;
             TreatmentNotes = domainEvent.TreatmentNotes;
+
+            AddHistory(domainEvent, "Session Updated");
         }
     }
 }

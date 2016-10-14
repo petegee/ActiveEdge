@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Shared;
 
-namespace Domain.Event
+namespace Domain.Event.Session
 {
-    public class SessionUpdated
+    public class SessionUpdated: IDomainEvent, IAmAuditable
     {
         public Guid Id { get; set; }
 
@@ -18,9 +19,7 @@ namespace Domain.Event
         public string GoalOrExpectations { get; set; }
 
         public string AreasOfDiscomfort { get; set; }
-
-        public Guid? OrganizationId { get; set; }
-
+        
         public string ContributingFactorsToCondition { get; set; }
 
         public string Hypothesis { get; set; }
@@ -31,6 +30,10 @@ namespace Domain.Event
 
         public List<string> ContraIndications { get; set; }
 
+        public DateTime CommandDate { get; set; }
+
         public string UserId { get; set; }
+
+        public string UserName { get; set; }
     }
 }

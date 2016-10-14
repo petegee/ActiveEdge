@@ -24,6 +24,8 @@ namespace Domain.Model
             return userIdentity;
         }
 
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public Guid? OrganizationId { get; set; }
         
 

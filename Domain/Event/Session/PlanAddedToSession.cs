@@ -1,8 +1,9 @@
 ﻿using System;
+using Shared;
 
-namespace Domain.Event
+namespace Domain.Event.Session
 {
-    public class PlanAddedToSession
+    public class PlanAddedToSession: IAmAuditable, IDomainEvent
     {
         public Guid Id { get; set; }
 
@@ -16,6 +17,10 @@ namespace Domain.Event
 
         public string TreatmentNotes { get; set; }
 
+        public DateTime CommandDate { get; set; }
+
         public string UserId { get; set; }
+
+        public string UserName { get; set; }
     }
 }
