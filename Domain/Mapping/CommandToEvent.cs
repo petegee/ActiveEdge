@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using Domain.Command.Client;
+using Domain.Command.Organization;
 using Domain.Command.Session;
 using Domain.Event;
+using Domain.Event.Organization;
 using Domain.Event.Session;
+using Clinic = Domain.Command.Organization.Clinic;
 
 namespace Domain.Mapping
 {
@@ -22,6 +25,11 @@ namespace Domain.Mapping
             CreateMap<CreateNewSession, SessionCreated>();
             CreateMap<AddPlanToSession, PlanAddedToSession>();
             CreateMap<UpdateSession, SessionUpdated>();
+
+            // Organization
+            CreateMap<CreateNewOrganization, OrganizationCreated>();
+            CreateMap<Clinic, Event.Organization.Clinic>();
+            CreateMap<UpdateOrganization, OrganizationUpdated>();
         }
     }
 }

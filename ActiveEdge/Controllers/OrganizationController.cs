@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model.Organization;
-using ActiveEdge.Read.Query.Organization;
 using AutoMapper;
-using Domain.Command;
 using Domain.Context;
+using Marten;
 using Shared;
 
 namespace ActiveEdge.Controllers
@@ -16,27 +15,30 @@ namespace ActiveEdge.Controllers
     {
         private readonly IBus _bus;
         private readonly IMapper _mapper;
+        private readonly IDocumentSession _session;
 
-        public OrganizationController(IMapper mapper, IBus bus, ILoggedOnUser loggedOnUser) : base(loggedOnUser)
+        public OrganizationController(IMapper mapper, IDocumentSession session, IBus bus, ILoggedOnUser loggedOnUser)
+            : base(loggedOnUser)
         {
             _mapper = mapper;
+            _session = session;
             _bus = bus;
         }
 
         [HttpGet]
         [Route("organizations")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var organizations = _bus.ExecuteQuery(new FindAllOrganizations());
+            var organizations = await _session.Query<OrganizationModel>().ToListAsync();
 
             return View(organizations);
         }
 
         [HttpGet]
         [Route("organization/{id}")]
-        public ActionResult Details(Guid id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            var model = _bus.ExecuteQuery(new GetOrganization(id));
+            var model = await _session.LoadAsync<OrganizationModel>(id);
 
             return View(model);
         }
@@ -45,50 +47,52 @@ namespace ActiveEdge.Controllers
         [Route("organization/new")]
         public ActionResult Create()
         {
-            var model = new OrganizationModel {Clinics = new List<ClinicModel> {new ClinicModel()}};
+            var model = new OrganizationModel();
 
+            model.Clinics.Add(new ClinicModel());
+            
             return View(model);
         }
 
-        [HttpPost]
-        [Route("organization/new")]
-        public JsonResult Create(OrganizationModel organizationModel)
-        {
-            var command = _mapper.Map<CreateNewOrganizationCommand>(organizationModel);
+        //[HttpPost]
+        //[Route("organization/new")]
+        //public JsonResult Create(OrganizationModel organizationModel)
+        //{
+        //    var command = _mapper.Map<CreateNewOrganization>(organizationModel);
 
-            var organizationId = _bus.ExecuteCommand(command);
+        //    var organizationId = _bus.ExecuteCommand(command);
 
-            return Json(new
-            {
-                redirectUrl = Url.Action("CreateForOrganization", "Users", new {id = organizationId}),
-                isRedirect = true
-            });
-        }
+        //    return Json(new
+        //    {
+        //        redirectUrl = Url.Action("CreateForOrganization", "Users", new {id = organizationId}),
+        //        isRedirect = true
+        //    });
+        //}
 
         [HttpGet]
         [Route("organization/edit/{id}")]
-        public ActionResult Edit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            var model = _bus.ExecuteQuery(new GetOrganization(id));
+            var model = await _session.LoadAsync<OrganizationModel>(id);
 
             return View(model);
         }
 
-        [HttpPost]
-        [Route("organization/edit/{id}")]
-        public ActionResult Edit(OrganizationModel model)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //[HttpPost]
+        //[Route("organization/edit/{id}")]
+        //public ActionResult Edit(OrganizationModel model)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         [HttpGet]
         [Route("organization/delete/{id}")]
@@ -97,22 +101,22 @@ namespace ActiveEdge.Controllers
             return View();
         }
 
-        [HttpPost]
-        [Route("organization/delete/{id}")]
-        public ActionResult Delete(OrganizationModel model)
-        {
-            _bus.ExecuteCommand(new DeleteOrganizationCommand(model.Id));
+        //        return RedirectToAction("Index");
+        //        // TODO: Add delete logic here
+        //    {
 
-            try
-            {
-                // TODO: Add delete logic here
+        //    try
+        //    _bus.ExecuteCommand(new DeleteOrganizationCommand(model.Id));
+        //{
+        //public ActionResult Delete(OrganizationModel model)
+        //[Route("organization/delete/{id}")]
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

@@ -1,38 +1,38 @@
-using ActiveEdge.Read.Model;
-using ActiveEdge.Read.Model.Organization;
-using ActiveEdge.Read.Model.Session;
-using ActiveEdge.Read.Model.WebApi.Search;
-using AutoMapper;
-using Domain.Model;
+//using ActiveEdge.Read.Model;
+//using ActiveEdge.Read.Model.Organization;
+//using ActiveEdge.Read.Model.Session;
+//using ActiveEdge.Read.Model.WebApi.Search;
+//using AutoMapper;
+//using Domain.Model;
 
-namespace ActiveEdge.Infrastructure.Mapping
-{
-    public class DomainModelToViewModel : Profile
-    {
-        /// <summary>
-        ///     Override this method in a derived class and call the CreateMap method to associate that map with this profile.
-        ///     Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
-        /// </summary>
-        protected override void Configure()
-        {
-            CreateMap<Clinic, ClinicModel>()
-                .ForMember(dest => dest.AddressLine1, options => options.MapFrom(src => src.Address.Line1))
-                .ForMember(dest => dest.AddressLine2, options => options.MapFrom(src => src.Address.Line2))
-                .ForMember(dest => dest.Suburb, options => options.MapFrom(src => src.Address.Suburb))
-                .ForMember(dest => dest.City, options => options.MapFrom(src => src.Address.City))
-                .ForMember(dest => dest.PostCode, options => options.MapFrom(src => src.Address.PostCode))
-                ;
-            CreateMap<Organization, OrganizationModel>()
-                .ForMember(dest => dest.Clinics, options => options.MapFrom(organization => organization.Clinics));
+//namespace ActiveEdge.Infrastructure.Mapping
+//{
+//    public class DomainModelToViewModel : Profile
+//    {
+//        /// <summary>
+//        ///     Override this method in a derived class and call the CreateMap method to associate that map with this profile.
+//        ///     Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
+//        /// </summary>
+//        protected override void Configure()
+//        {
+//            CreateMap<Clinic, ClinicModel>()
+//                .ForMember(dest => dest.AddressLine1, options => options.MapFrom(src => src.Address.Line1))
+//                .ForMember(dest => dest.AddressLine2, options => options.MapFrom(src => src.Address.Line2))
+//                .ForMember(dest => dest.Suburb, options => options.MapFrom(src => src.Address.Suburb))
+//                .ForMember(dest => dest.City, options => options.MapFrom(src => src.Address.City))
+//                .ForMember(dest => dest.PostCode, options => options.MapFrom(src => src.Address.PostCode))
+//                ;
+//            CreateMap<Organization, OrganizationModel>()
+//                .ForMember(dest => dest.Clinics, options => options.MapFrom(organization => organization.Clinics));
 
-            CreateMap<Session, SessionModel>()
-                .ForMember(dest => dest.ContraIndications, options => options.Ignore());
+//            CreateMap<Session, SessionModel>()
+//                .ForMember(dest => dest.ContraIndications, options => options.Ignore());
             
-            CreateMap<Client, ClientModel>();
+//            CreateMap<Client, ClientModel>();
 
 
-            CreateMap<Client, SearchResult>()
-                .ForMember(result => result.DisplayValue, options => options.MapFrom(client => client.FullName));
-        }
-    }
-}
+//            CreateMap<Client, SearchResult>()
+//                .ForMember(result => result.DisplayValue, options => options.MapFrom(client => client.FullName));
+//        }
+//    }
+//}

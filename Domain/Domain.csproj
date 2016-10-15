@@ -100,15 +100,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\Organization\Clinic.cs" />
     <Compile Include="Command\Session\AddPlanToSession.cs" />
     <Compile Include="Command\Session\CreateNewSession.cs" />
     <Compile Include="Command\Session\DeleteSessionCommand.cs" />
     <Compile Include="Command\Session\UpdateSession.cs" />
-    <Compile Include="Command\UpdateOrganizationCommand.cs" />
+    <Compile Include="Command\Organization\UpdateOrganization.cs" />
     <Compile Include="Context\Roles.cs" />
     <Compile Include="Event\ClientRegistered.cs" />
     <Compile Include="Event\ClientUpdated.cs" />
-    <Compile Include="Event\OrganizationUpdated.cs" />
+    <Compile Include="Event\Organization\Clinic.cs" />
+    <Compile Include="Event\Organization\OrganizationUpdated.cs" />
     <Compile Include="Event\Session\PlanAddedToSession.cs" />
     <Compile Include="Event\Session\SessionCreated.cs" />
     <Compile Include="Event\Session\SessionUpdated.cs" />
@@ -121,15 +123,15 @@
     <Compile Include="Sagas\OrganizationSaga.cs" />
     <Compile Include="BusinessRuleException.cs" />
     <Compile Include="Command\Client\DeleteClientCommand.cs" />
-    <Compile Include="Command\CreateNewOrganizationCommand.cs" />
-    <Compile Include="Command\DeleteOrganizationCommand.cs" />
+    <Compile Include="Command\Organization\CreateNewOrganization.cs" />
+    <Compile Include="Command\Organization\DeleteOrganizationCommand.cs" />
     <Compile Include="Command\Client\RegisterNewClient.cs" />
     <Compile Include="Command\Client\UpdateClient.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Context\MySqlConfiguration.cs" />
     <Compile Include="Context\MySqlHistoryContext.cs" />
     <Compile Include="Context\MySqlInitializer.cs" />
-    <Compile Include="Event\NewOrganizationCreated.cs" />
+    <Compile Include="Event\Organization\OrganizationCreated.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Clinic.cs" />

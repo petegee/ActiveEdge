@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ActiveEdge.Read.Model.Organization.OrganizationModel>
+﻿@model IList<ActiveEdge.Read.Model.Organization.OrganizationModel>
 
 @{
     ViewBag.Title = "Organizations";
@@ -34,16 +34,16 @@
           <table class="table table-striped">
             <tr>
               <th>
-                @Html.DisplayNameFor(model => model.OrganizationName)
+                @Html.DisplayNameFor(model => model[0].OrganizationName)
               </th>
               <th>
-                @Html.DisplayNameFor(model => model.ContactPerson)
+                @Html.DisplayNameFor(model => model[0].ContactPerson)
               </th>
               <th>
-                @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+                @Html.DisplayNameFor(model => model[0].ContactPhoneNumber)
               </th>
               <th>
-                @Html.DisplayNameFor(model => model.ContactEmailAddress)
+                @Html.DisplayNameFor(model => model[0].ContactEmailAddress)
               </th>
               <th>
                 Number of clinics

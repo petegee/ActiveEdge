@@ -18,12 +18,14 @@
 using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Infrastructure.MVC;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Organization;
 using ActiveEdge.Read.Model.Session;
 using ActiveEdge.Read.Projections;
 using ActiveEdge.Read.Query.User;
 using AutoMapper;
 using Domain;
 using Domain.Event;
+using Domain.Event.Organization;
 using Domain.Event.Session;
 using Domain.Model;
 using Marten;
@@ -95,10 +97,14 @@ namespace ActiveEdge.DependencyResolution
                         _.Events.AddEventType(typeof(PlanAddedToSession));
                         _.Events.AddEventType(typeof(SessionUpdated));
 
+                        _.Events.AddEventType(typeof(OrganizationCreated));
+                        _.Events.AddEventType(typeof(OrganizationUpdated));
+
                         _.Events.InlineProjections.Add(new SessionCountProjection());
 
                         _.Events.InlineProjections.AggregateStreamsWith<ClientModel>();
                         _.Events.InlineProjections.AggregateStreamsWith<SessionModel>();
+                        _.Events.InlineProjections.AggregateStreamsWith<OrganizationModel>();
                     });
                 });
 

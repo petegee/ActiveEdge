@@ -1,7 +1,7 @@
 ﻿using System;
 using Shared;
 
-namespace Domain.Command
+namespace Domain.Command.Organization
 {
     public class DeleteOrganizationCommand : ICommand
     {

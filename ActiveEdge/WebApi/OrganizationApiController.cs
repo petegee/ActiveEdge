@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using ActiveEdge.Infrastructure.MVC;
 using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model.Organization;
-using ActiveEdge.Read.Query.Organization;
 using AutoMapper;
-using Domain.Command;
+using Domain.Command.Organization;
 using Domain.Context;
+using Marten;
 using Shared;
 
 namespace ActiveEdge.WebApi
@@ -19,34 +20,38 @@ namespace ActiveEdge.WebApi
     {
         private readonly IBus _bus;
         private readonly IMapper _mapper;
+        private readonly IDocumentSession _session;
         private readonly IUrlHelper _urlHelper;
 
-        public OrganizationApiController(IBus bus, IMapper mapper, IUrlHelper urlHelper)
+        public OrganizationApiController(IBus bus, IDocumentSession session, IMapper mapper, IUrlHelper urlHelper)
         {
             _bus = bus;
+            _session = session;
             _mapper = mapper;
             _urlHelper = urlHelper;
         }
 
         [HttpGet]
         [Route("{organizationId}", Name = "getOrganizationApi")]
-        public OrganizationModel GetOrganization(Guid organizationId)
+        public async Task<OrganizationModel> GetOrganization(Guid organizationId)
         {
-            return _bus.ExecuteQuery(new GetOrganization(organizationId));
+            var model = await _session.LoadAsync<OrganizationModel>(organizationId);
+
+            return model;
         }
 
         [HttpPost]
         [Route("", Name = "createOrganizationApi")]
-        public HttpResponseMessage Create(OrganizationModel model)
+        public async Task<HttpResponseMessage> Create(OrganizationModel model)
         {
-            var command = _mapper.Map<CreateNewOrganizationCommand>(model);
+            var command = _mapper.Map<CreateNewOrganization>(model);
 
-            var organizationId = _bus.ExecuteCommand(command);
+            var organizationId = await _bus.ExecuteAsyncCommand(command);
 
             var response = Request.CreateResponse(HttpStatusCode.Created, model);
 
             var uri = _urlHelper.Action("Details", new {controller = "Organization", id = organizationId});
-            
+
             response.Headers.Location = new Uri(Request.RequestUri, uri);
 
             return response;
@@ -54,14 +59,13 @@ namespace ActiveEdge.WebApi
 
         [HttpPut]
         [Route("{organizationId}", Name = "updateOrganizationApi")]
-        public HttpResponseMessage Update(int organizationId, OrganizationModel model)
+        public async Task<HttpResponseMessage> Update(Guid organizationId, OrganizationModel model)
         {
-            var command = _mapper.Map<UpdateOrganizationCommand>(model);
-            command.Id = organizationId;
-            _bus.ExecuteCommand(command);
+            var command = _mapper.Map<UpdateOrganization>(model);
+
+            await _bus.ExecuteAsyncCommand(command);
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
-
         }
     }
 }

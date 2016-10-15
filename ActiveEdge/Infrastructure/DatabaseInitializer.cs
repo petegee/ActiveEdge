@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ActiveEdge.Read.Model;
 using Domain.Command.Client;
+using Domain.Command.Organization;
 using Domain.Command.Session;
 using Domain.Context;
 using Domain.Model;
@@ -10,14 +11,15 @@ using Marten;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Shared;
+using Clinic = Domain.Command.Organization.Clinic;
 
 namespace ActiveEdge.Infrastructure
 {
     public class DatabaseInitializer
     {
+        private readonly IBus _bus;
         private readonly IDocumentSession _session;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IBus _bus;
         private ApplicationUser _adminUser;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
@@ -31,7 +33,6 @@ namespace ActiveEdge.Infrastructure
 
         public void Seed()
         {
-
             if (_session.Query<ApplicationUser>().Any(u => u.UserName == "sjclark76@gmail.com"))
                 return;
 
@@ -62,37 +63,42 @@ namespace ActiveEdge.Infrastructure
 
         private void AddOrganization()
         {
-            _session.Store(new Organization
-            {
-                OrganizationName = "Capital Sports",
-                ContactPerson = "Dr Zeuss",
-                ContactEmailAddress = "Dr@capitalsports.com",
-                ContactPhoneNumber = "01702 712202",
-                Clinics = new List<Clinic>
+            _bus.ExecuteAsyncCommand(new CreateNewOrganization
                 {
-                    new Clinic
+                    OrganizationName = "Capital Sports",
+                    ContactPerson = "Dr Zeuss",
+                    ContactEmailAddress = "Dr@capitalsports.com",
+                    ContactPhoneNumber = "01702 712202",
+                    Clinics = new List<Clinic>
                     {
-                        ClinicName = "Lambton Quay",
-                        Address = new Address
+                        new Clinic
                         {
-                            Line1 = "24 Johnston Street",
-                            Line2 = "Address line2",
+                            ClinicName = "Lambton Quay",
+                            AddressLine1 = "24 Johnston Street",
+                            AddressLine2 = "Address line2",
                             City = "Wellington",
                             PostCode = "6011",
                             Suburb = "Wellington Central"
                         }
                     }
-                }
-            });
+                })
+                .Wait();
 
-            _session.Store(new Organization
-            {
-                OrganizationName = "Habit",
-                ContactPerson = "Dr Habit",
-                ContactEmailAddress = "Dr@habit.co.nz",
-                ContactPhoneNumber = "01702 712207",
-                Clinics = new List<Clinic> {new Clinic {ClinicName = "Featherston Street"}}
-            });
+            _bus.ExecuteAsyncCommand(new CreateNewOrganization
+                {
+                    OrganizationName = "Habit",
+                    ContactPerson = "Dr Habit",
+                    ContactEmailAddress = "Dr@habit.co.nz",
+                    ContactPhoneNumber = "01702 712202",
+                    Clinics = new List<Clinic>
+                    {
+                        new Clinic
+                        {
+                            ClinicName = "Featherston Street"
+                        }
+                    }
+                })
+                .Wait();
 
             _session.SaveChanges();
         }
@@ -102,7 +108,7 @@ namespace ActiveEdge.Infrastructure
             var organization = _session.Query<Organization>().First();
             var client = _session.Query<ClientModel>().First();
 
-           var id =   _bus.ExecuteAsyncCommand(new CreateNewSession
+            var id = _bus.ExecuteAsyncCommand(new CreateNewSession
             {
                 Date = DateTime.Today.Date,
                 ClientId = client.Id,
@@ -113,7 +119,6 @@ namespace ActiveEdge.Infrastructure
                 CommandDate = DateTime.Now,
                 UserId = _adminUser.Id,
                 UserName = _adminUser.UserName
-                
             }).Result;
 
             _bus.ExecuteAsyncCommand(new AddPlanToSession
@@ -145,11 +150,10 @@ namespace ActiveEdge.Infrastructure
                 AddressLine1 = "12 Wattle Grove",
                 Suburb = "Maungaraki",
                 City = "Lower Hutt",
-
                 ContactNumber = "021509357",
                 Email = "sjclark76@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
-                Gender = Gender.Male,
+                Gender = Gender.Male
             }).Wait();
 
             _bus.ExecuteAsyncCommand(new RegisterNewClient
@@ -164,7 +168,7 @@ namespace ActiveEdge.Infrastructure
                 ContactNumber = "021509357",
                 Email = "joclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
-                Gender = Gender.Female,
+                Gender = Gender.Female
             }).Wait();
 
             _bus.ExecuteAsyncCommand(new RegisterNewClient
@@ -179,7 +183,7 @@ namespace ActiveEdge.Infrastructure
                 ContactNumber = "021509357",
                 Email = "zclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.Never,
-                Gender = Gender.Female,
+                Gender = Gender.Female
             }).Wait();
 
 
@@ -195,7 +199,7 @@ namespace ActiveEdge.Infrastructure
                 ContactNumber = "021509357",
                 Email = "jesseclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.Never,
-                Gender = Gender.Female,
+                Gender = Gender.Female
             }).Wait();
         }
 

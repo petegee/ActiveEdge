@@ -328,7 +328,6 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutomapperExtensions.cs" />
-    <Compile Include="Infrastructure\Mapping\CommandToDomainModelProfile.cs" />
     <Compile Include="Infrastructure\Mapping\DomainModelToDomainEventProfile.cs" />
     <Compile Include="Infrastructure\Mapping\DomainModelToViewModel.cs" />
     <Compile Include="Infrastructure\Mapping\ViewModelToCommandProfile.cs" />

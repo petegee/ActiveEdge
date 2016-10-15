@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using Domain.Event;
+using Domain.Event.Organization;
 using Domain.Model;
+using Clinic = Domain.Model.Clinic;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
@@ -12,12 +13,10 @@ namespace ActiveEdge.Infrastructure.Mapping
         /// </summary>
         protected override void Configure()
         {
-            CreateMap<Clinic, NewOrganizationCreated.Clinic>();
-            CreateMap<Organization, NewOrganizationCreated>();
+            CreateMap<Clinic, Domain.Event.Organization.Clinic>();
+            CreateMap<Organization, OrganizationCreated>();
 
-            CreateMap<Clinic, OrganizationUpdated.Clinic>();
             CreateMap<Organization, OrganizationUpdated>();
-
         }
     }
 }
