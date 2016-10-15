@@ -104,6 +104,7 @@
     <Compile Include="Model\Organization\AddressModel.cs" />
     <Compile Include="Model\Organization\ClinicModel.cs" />
     <Compile Include="Model\Organization\OrganizationModel.cs" />
+    <Compile Include="Model\Search\Suburb.cs" />
     <Compile Include="Model\Session\SessionModel.cs" />
     <Compile Include="Model\Session\SessionPlanModel.cs" />
     <Compile Include="Model\Session\Validators\SessionModelValidator.cs" />

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Client;
+using ActiveEdge.Read.Model.Search;
 using ActiveEdge.Read.Model.WebApi.Search;
 using AutoMapper;
 using Domain.Filters;
@@ -44,13 +46,12 @@ namespace ActiveEdge.WebApi
 
         [HttpGet]
         [Route("suburbs/{name}")]
-        public IEnumerable<SearchResult> Suburbs(string name)
+        public async Task<IList<SearchResult>> Suburbs(string name)
         {
-            name = name.ToLower();
-            var addresses = _session.Query<Address>()
-                .Where(address => address.Suburb.ToLower().StartsWith(name)).ToList();
-
-            var searchResults = _mapper.Map<List<Address>, List<SearchResult>>(addresses);
+            var searchResults = await _session.Query<Suburb>()
+                .Where(suburb => suburb.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase))
+                .Select(suburb => new SearchResult { DisplayValue = suburb.Name, Id = suburb.Id.ToString() })
+                .ToListAsync();
 
             return searchResults;
         }

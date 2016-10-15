@@ -102,6 +102,7 @@ namespace ActiveEdge.DependencyResolution
                         _.Events.AddEventType(typeof(OrganizationUpdated));
 
                         _.Events.InlineProjections.Add(new SessionCountProjection());
+                        _.Events.InlineProjections.Add(new SuburbProjection());
 
                         _.Events.InlineProjections.AggregateStreamsWith<ClientModel>();
                         _.Events.InlineProjections.AggregateStreamsWith<SessionModel>();
