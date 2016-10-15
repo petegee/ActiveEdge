@@ -2,12 +2,22 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Domain.Event;
+using Domain.Event.Session;
 using Domain.Model;
+using Domain.Sagas;
 
 namespace ActiveEdge.Read.Model
 {
     public class ClientModel: IAmLinkedToAnOrganization
     {
+
+        public ClientModel()
+        {
+            SessionCount = 0;
+        }
+
+        public int SessionCount { get; set; }
+
         public Guid Id { get; set; }
 
         [DisplayName("Full Name")]
@@ -363,9 +373,16 @@ namespace ActiveEdge.Read.Model
             CurrentStressLevels = domainEvent.CurrentStressLevels;
             CurrentPainOrTensionLevels = domainEvent.CurrentPainOrTensionLevels;
             AreasNotToBeMassaged = domainEvent.AreasNotToBeMassaged;
+
+           
         
         }
 
         public Guid OrganizationId { get; set; }
+
+        public void Apply(SessionCreated sessionCreated)
+        {
+            SessionCount++;
+        }
     }
 }

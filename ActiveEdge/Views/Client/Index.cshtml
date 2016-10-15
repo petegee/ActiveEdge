@@ -48,6 +48,9 @@
               <th>
                 @Html.DisplayNameFor(model => model.ContactNumber)
               </th>
+              <th>
+                @Html.DisplayNameFor(model => model.SessionCount)
+              </th>
               <th></th>
             </tr>
 
@@ -70,9 +73,11 @@
                   @Html.DisplayFor(modelItem => item.ContactNumber)
                 </td>
                 <td>
+                  @Html.ActionLink(item.SessionCount.ToString(), "ForClient", new { controller = "Session", id = item.Id })
+                </td>
+                <td>
                   @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-white btn-sm"})
                   @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-white btn-sm"})
-                  @Html.ActionLink("Sessions", "ForClient", new { controller="Session", id = item.Id }, new { @class = "btn btn-primary btn-sm" })
                 </td>
               </tr>
             }

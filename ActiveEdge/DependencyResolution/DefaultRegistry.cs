@@ -19,6 +19,7 @@ using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Infrastructure.MVC;
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Session;
+using ActiveEdge.Read.Projections;
 using ActiveEdge.Read.Query.User;
 using AutoMapper;
 using Domain;
@@ -85,6 +86,7 @@ namespace ActiveEdge.DependencyResolution
 
                         _.AutoCreateSchemaObjects = AutoCreate.All;
 
+                        
                         _.Events.AddEventType(typeof(ClientRegistered));
                         _.Events.AddEventType(typeof(ClientUpdated));
 
@@ -92,7 +94,7 @@ namespace ActiveEdge.DependencyResolution
                         _.Events.AddEventType(typeof(PlanAddedToSession));
                         _.Events.AddEventType(typeof(SessionUpdated));
 
-
+                        _.Events.InlineProjections.Add(new SessionCountProjection());
 
                         _.Events.InlineProjections.AggregateStreamsWith<ClientModel>();
                         _.Events.InlineProjections.AggregateStreamsWith<SessionModel>();

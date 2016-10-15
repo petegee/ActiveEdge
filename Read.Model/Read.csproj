@@ -115,6 +115,7 @@
     <Compile Include="Model\Users\CreateForOrganizationModel.cs" />
     <Compile Include="Model\Users\UsersForOrganizationModel.cs" />
     <Compile Include="Model\WebApi\Search\SearchResult.cs" />
+    <Compile Include="Projections\SessionCountProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\Organization\FindAllOrganizations.cs" />
     <Compile Include="Query\Organization\GetOrganization.cs" />
