@@ -15,7 +15,7 @@ namespace ActiveEdge.Read.Projections
     {
         //private readonly ITransform<TEvent, TView> _transform;
 
-        public SessionCountProjection(/*ITransform<TEvent, TView> transform*/)
+        public SessionCountProjection( /*ITransform<TEvent, TView> transform*/)
         {
             //_transform = transform;
 
@@ -30,7 +30,6 @@ namespace ActiveEdge.Read.Projections
         public void Apply(IDocumentSession session, EventStream[] streams)
         {
             foreach (var stream in streams)
-            {
                 foreach (var @event in stream.Events.OfType<Event<SessionCreated>>())
                 {
                     var sessionCreated = @event.Data;
@@ -38,9 +37,7 @@ namespace ActiveEdge.Read.Projections
                     var clientModel = session.Load<ClientModel>(sessionCreated.ClientId);
 
                     clientModel.Apply(sessionCreated);
-                    //session.Store(_transform.Transform(stream, @event));
                 }
-            }
         }
 
         public Task ApplyAsync(IDocumentSession session, EventStream[] streams, CancellationToken token)

@@ -27,6 +27,7 @@ using Domain.Event;
 using Domain.Event.Session;
 using Domain.Model;
 using Marten;
+using Marten.Events.Projections;
 using MediatR;
 using Microsoft.AspNet.Identity;
 using Shared;
