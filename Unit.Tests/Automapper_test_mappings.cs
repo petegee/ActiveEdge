@@ -1,5 +1,6 @@
 ﻿using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Client;
 using AutoMapper;
 using Domain.Command.Client;
 using Xunit;

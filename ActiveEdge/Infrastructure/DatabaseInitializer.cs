@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Client;
 using Domain.Command.Client;
 using Domain.Command.Organization;
 using Domain.Command.Session;

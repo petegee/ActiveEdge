@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using Domain.Event;
 using Domain.Event.Session;
 using Domain.Model;
-using Domain.Sagas;
 
-namespace ActiveEdge.Read.Model
+namespace ActiveEdge.Read.Model.Client
 {
     public class ClientModel: IAmLinkedToAnOrganization
     {

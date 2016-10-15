@@ -100,7 +100,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="MetadataProvider.cs" />
     <Compile Include="Model\AccountViewModels.cs" />
-    <Compile Include="Model\ClientModel.cs" />
+    <Compile Include="Model\Client\ClientModel.cs" />
     <Compile Include="Model\Organization\AddressModel.cs" />
     <Compile Include="Model\Organization\ClinicModel.cs" />
     <Compile Include="Model\Organization\OrganizationModel.cs" />

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Client;
 using Xunit;
 
 namespace Unit.Tests.WebSite.Helpers

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Client;
 using ActiveEdge.Read.Model.Shared;
 using AutoMapper;
 using Domain.Command.Client;

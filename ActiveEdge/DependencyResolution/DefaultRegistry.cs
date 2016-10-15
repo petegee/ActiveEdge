@@ -18,6 +18,7 @@
 using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Infrastructure.MVC;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Client;
 using ActiveEdge.Read.Model.Organization;
 using ActiveEdge.Read.Model.Session;
 using ActiveEdge.Read.Projections;

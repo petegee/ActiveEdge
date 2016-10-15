@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Client;
 using Domain.Event.Session;
 using Marten;
 using Marten.Events;

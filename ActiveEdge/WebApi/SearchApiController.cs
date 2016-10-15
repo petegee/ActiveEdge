@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using ActiveEdge.Read.Model;
+using ActiveEdge.Read.Model.Client;
 using ActiveEdge.Read.Model.WebApi.Search;
 using AutoMapper;
 using Domain.Filters;
@@ -52,8 +53,6 @@ namespace ActiveEdge.WebApi
             var searchResults = _mapper.Map<List<Address>, List<SearchResult>>(addresses);
 
             return searchResults;
-
-            
         }
 
         [HttpGet]
