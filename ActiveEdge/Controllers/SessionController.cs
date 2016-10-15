@@ -84,7 +84,6 @@ namespace ActiveEdge.Controllers
             var command = _mapper.Map<CreateNewSession>(sessionModel);
 
             command.OrganizationId = OrganizationId;
-            AppendAuditableInformation(command);
             var sessionId = await _bus.ExecuteAsyncCommand(command);
 
             Notify(new SuccessMessage("Session created succesfully."));
@@ -107,7 +106,7 @@ namespace ActiveEdge.Controllers
         public async Task<RedirectToRouteResult> Plan(SessionPlanModel sessionModel)
         {
             var command = _mapper.Map<AddPlanToSession>(sessionModel);
-            AppendAuditableInformation(command);
+
             await _bus.ExecuteAsyncCommand(command);
 
             Notify(new SuccessMessage("Session successfully updated."));
@@ -146,7 +145,7 @@ namespace ActiveEdge.Controllers
         public async Task<RedirectToRouteResult> Edit(SessionModel sessionModel)
         {
             var command = _mapper.Map<UpdateSession>(sessionModel);
-            AppendAuditableInformation(command);
+
             await _bus.ExecuteAsyncCommand(command);
 
             Notify(new SuccessMessage("Session successfully updated."));

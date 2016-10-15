@@ -7,6 +7,7 @@ using Domain;
 using Domain.Event.Session;
 using Domain.Model;
 using FluentValidation.Attributes;
+using Shared;
 
 namespace ActiveEdge.Read.Model.Session
 {

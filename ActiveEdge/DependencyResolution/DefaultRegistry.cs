@@ -42,9 +42,13 @@ namespace ActiveEdge.DependencyResolution
 
         public DefaultRegistry()
         {
+            //Policies.Interceptors(new MeidatorPipelineDecoration());
+
             Scan(
+
                 scan =>
                 {
+                    
                     scan.TheCallingAssembly();
                     scan.AssemblyContainingType<BusinessRuleException>();
                     scan.AssemblyContainingType<ILoggedOnUser>();
@@ -56,6 +60,9 @@ namespace ActiveEdge.DependencyResolution
                     scan.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
                     scan.ConnectImplementationsToTypesClosing(typeof(IAsyncNotificationHandler<>));
                 });
+
+            For(typeof(IAsyncRequestHandler<,>)).DecorateAllWith(typeof(MediatorPipeline<,>));
+
             For<MapperConfiguration>().Use(AutoMapperConfiguration.Create());
             For<IMapper>().Use(ctx => ctx.GetInstance<MapperConfiguration>().CreateMapper(ctx.GetInstance));
             For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));

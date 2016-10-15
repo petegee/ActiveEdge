@@ -100,11 +100,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bus.cs" />
     <Compile Include="Command\Session\AddPlanToSession.cs" />
     <Compile Include="Command\Session\CreateNewSession.cs" />
     <Compile Include="Command\Session\DeleteSessionCommand.cs" />
-    <Compile Include="IAmAuditable.cs" />
     <Compile Include="Command\Session\UpdateSession.cs" />
     <Compile Include="Command\UpdateOrganizationCommand.cs" />
     <Compile Include="Context\Roles.cs" />

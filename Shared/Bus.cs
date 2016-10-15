@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
-using Shared;
 
-namespace Domain
+namespace Shared
 {
     public class Bus : IBus
     {
