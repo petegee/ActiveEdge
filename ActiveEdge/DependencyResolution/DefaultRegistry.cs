@@ -17,7 +17,6 @@
 
 using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Infrastructure.MVC;
-using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Client;
 using ActiveEdge.Read.Model.Organization;
 using ActiveEdge.Read.Model.Session;
@@ -30,7 +29,6 @@ using Domain.Event.Organization;
 using Domain.Event.Session;
 using Domain.Model;
 using Marten;
-using Marten.Events.Projections;
 using MediatR;
 using Microsoft.AspNet.Identity;
 using Shared;
@@ -103,6 +101,7 @@ namespace ActiveEdge.DependencyResolution
 
                         _.Events.InlineProjections.Add(new SessionCountProjection());
                         _.Events.InlineProjections.Add(new SuburbProjection());
+                        _.Events.InlineProjections.Add(new CityProjection());
 
                         _.Events.InlineProjections.AggregateStreamsWith<ClientModel>();
                         _.Events.InlineProjections.AggregateStreamsWith<SessionModel>();

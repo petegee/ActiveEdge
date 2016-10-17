@@ -109,6 +109,8 @@
     <Compile Include="Context\Roles.cs" />
     <Compile Include="Event\ClientRegistered.cs" />
     <Compile Include="Event\ClientUpdated.cs" />
+    <Compile Include="Event\IHaveCities.cs" />
+    <Compile Include="Event\IHaveSuburbs.cs" />
     <Compile Include="Event\Organization\Clinic.cs" />
     <Compile Include="Event\Organization\IOrganization.cs" />
     <Compile Include="Event\Organization\OrganizationUpdated.cs" />

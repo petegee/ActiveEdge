@@ -4,7 +4,7 @@ using Shared;
 
 namespace Domain.Event
 {
-    public class ClientRegistered : IDomainEvent
+    public class ClientRegistered : IDomainEvent, IHaveCities, IHaveSuburbs
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -64,5 +64,7 @@ namespace Domain.Event
         public bool TermsAndConditionsConditions8 { get; set; }
         public Guid OrganizationId { get; set; }
         public bool ContraIndicationsArthritis { get; set; }
+        public string[] Cities => new[] {City};
+        public string[] Suburbs => new[] {Suburb};
     }
 }

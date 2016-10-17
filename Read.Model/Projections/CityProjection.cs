@@ -12,9 +12,9 @@ using Marten.Events.Projections.Async;
 
 namespace ActiveEdge.Read.Projections
 {
-    public class SuburbProjection : IProjection
+    public class CityProjection : IProjection
     {
-        public SuburbProjection()
+        public CityProjection()
         {
             Consumes = new[]
             {
@@ -22,28 +22,28 @@ namespace ActiveEdge.Read.Projections
                 typeof(OrganizationUpdated)
             };
 
-            Produces = typeof(Suburb);
+            Produces = typeof(City);
         }
 
         public void Apply(IDocumentSession session, EventStream[] streams)
         {
             foreach (var stream in streams)
-                foreach (var @event in stream.Events.Where(x => x.Data is IHaveSuburbs))
+                foreach (var @event in stream.Events.Where(x => x.Data is IHaveCities))
                 {
 
-                    IHaveSuburbs data = (IHaveSuburbs)@event.Data;
+                    var organizationCreated = (IHaveCities)@event.Data;
 
-                        foreach (var suburbName in data.Suburbs)
+                    foreach (var city in organizationCreated.Cities)
+                    {
+                        if (
+                            !session.Query<City>()
+                                .Any(c => c.Name.Equals(city, StringComparison.OrdinalIgnoreCase)))
                         {
-                            if (
-                                !session.Query<Suburb>()
-                                    .Any(suburb => suburb.Name.Equals(suburbName, StringComparison.OrdinalIgnoreCase)))
-                            {
-                                session.Store(new Suburb { Id = Guid.NewGuid(), Name = suburbName });
-                            }
+                            session.Store(new City { Id = Guid.NewGuid(), Name = city });
                         }
-                    
-                   
+                    }
+
+
                 }
         }
 

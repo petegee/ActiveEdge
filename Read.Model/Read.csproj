@@ -104,6 +104,7 @@
     <Compile Include="Model\Organization\AddressModel.cs" />
     <Compile Include="Model\Organization\ClinicModel.cs" />
     <Compile Include="Model\Organization\OrganizationModel.cs" />
+    <Compile Include="Model\Search\City.cs" />
     <Compile Include="Model\Search\Suburb.cs" />
     <Compile Include="Model\Session\SessionModel.cs" />
     <Compile Include="Model\Session\SessionPlanModel.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Model\Users\CreateForOrganizationModel.cs" />
     <Compile Include="Model\Users\UsersForOrganizationModel.cs" />
     <Compile Include="Model\WebApi\Search\SearchResult.cs" />
+    <Compile Include="Projections\CityProjection.cs" />
     <Compile Include="Projections\SessionCountProjection.cs" />
     <Compile Include="Projections\SuburbProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
