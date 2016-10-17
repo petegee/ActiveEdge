@@ -107,20 +107,15 @@ namespace ActiveEdge.DependencyResolution
                         _.Events.InlineProjections.AggregateStreamsWith<ClientModel>();
                         _.Events.InlineProjections.AggregateStreamsWith<SessionModel>();
                         _.Events.InlineProjections.AggregateStreamsWith<OrganizationModel>();
+
+                        _.Logger(new ConsoleMartenLogger());
                     });
                 });
 
             For<IDocumentSession>()
                 .LifecycleIs<ContainerLifecycle>()
                 .Use("Lightweight Session", c => c.GetInstance<IDocumentStore>().DirtyTrackedSession());
-            //For<IUserStore<ApplicationUser>>().Use(new UserStore<ApplicationUser>(new ApplicationDbContext())).Singleton();
-
-            // For<IUserStore<IdentityUser>>()
-            //.Use(context => new UserStore<ApplicationUser>(context.GetInstance<IApplicationDbContext>()))
-            //.
-            //.Ctor<DbContext>()
-            //.Is<IApplicationDbContext>();
-
+           
             For<UserManager<ApplicationUser>>()
                 .Use(c => new UserManager<ApplicationUser>(c.GetInstance<IUserStore<ApplicationUser>>()));
 

@@ -3,10 +3,9 @@ using Shared;
 
 namespace Domain.Event.Organization
 {
-    public class OrganizationCreated : IDomainEvent
+    public class OrganizationCreated : IDomainEvent, IOrganization
     {
-        public int Id { get; set; }
-
+        
         public string OrganizationName { get; set; }
 
         public string ContactPerson { get; set; }

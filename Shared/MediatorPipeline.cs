@@ -28,7 +28,9 @@ namespace Shared
                 auditableCommand.UserName = _loggedOnUser.UserName;
             }
 
-            return _inner.Handle(message);
+           var result = _inner.Handle(message);
+
+            return result;
         }
     }
 }

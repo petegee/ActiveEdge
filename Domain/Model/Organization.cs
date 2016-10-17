@@ -60,6 +60,7 @@ namespace Domain.Model
             ContactPhoneNumber = domainEvent.ContactPhoneNumber;
             ContactEmailAddress = domainEvent.ContactEmailAddress;
 
+            Clinics.Clear();
             foreach (var clinic in domainEvent.Clinics)
             {
                 Clinics.Add(new Clinic

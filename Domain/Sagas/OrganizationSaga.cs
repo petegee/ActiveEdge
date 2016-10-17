@@ -57,13 +57,11 @@ namespace Domain.Sagas
         public async Task<Guid> Handle(UpdateOrganization message)
         {
             var domainEvent = _mapper.Map<OrganizationUpdated>(message);
-
-            //_session.Events.AggregateStreamAsync<Organization>(message.Id);
-
+            
             _session.Events.Append(message.Id, domainEvent);
 
             await _session.SaveChangesAsync();
-
+            
             return message.Id;
         }
     }

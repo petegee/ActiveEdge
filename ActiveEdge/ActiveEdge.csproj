@@ -304,6 +304,7 @@
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Database\ConsoleMartenLogger.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="Helpers\FluentTagBuilder.cs" />
     <Compile Include="Infrastructure\Caching\CacheHelper.cs" />
@@ -576,7 +577,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Database\" />
     <Folder Include="Views\OrganizationApi\DisplayTemplates\" />
     <Folder Include="Views\OrganizationApi\EditorTemplates\" />
   </ItemGroup>

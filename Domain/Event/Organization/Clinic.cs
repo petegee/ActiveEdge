@@ -1,8 +1,10 @@
+using System;
+
 namespace Domain.Event.Organization
 {
     public class Clinic
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string ClinicName { get; set; }
 

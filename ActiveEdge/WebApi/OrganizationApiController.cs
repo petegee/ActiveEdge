@@ -63,6 +63,8 @@ namespace ActiveEdge.WebApi
         {
             var command = _mapper.Map<UpdateOrganization>(model);
 
+            command.Id = organizationId;
+
             await _bus.ExecuteAsyncCommand(command);
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);

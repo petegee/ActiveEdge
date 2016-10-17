@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Shared;
 
 namespace Domain.Event.Organization
 {
-    public class OrganizationUpdated : IDomainEvent
+
+    public class OrganizationUpdated : IDomainEvent, IOrganization
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string OrganizationName { get; set; }
 

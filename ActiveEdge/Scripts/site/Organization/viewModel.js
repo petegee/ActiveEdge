@@ -1,4 +1,35 @@
-﻿
+﻿//ko.bindingHandlers.typeaheadJS = {
+//  init: function (element, valueAccessor, allBindingsAccessor) {
+//    var el = $(element);
+//    var options = ko.utils.unwrapObservable(valueAccessor());
+//    var allBindings = allBindingsAccessor();
+
+//    //var data = new Bloodhound({
+//    //  datumTokenizer: Bloodhound.tokenizers.obj.whitespace(options.displayKey),
+//    //  queryTokenizer: Bloodhound.tokenizers.whitespace,
+//    //  limit: options.limit,
+//    //  prefetch: options.prefetch, // pass the options from the model to typeahead
+//    //  remote: options.remote // pass the options from the model to typeahead
+//    //});
+
+//    //// kicks off the loading/processing of 'local' and 'prefetch'
+//    //initialize();
+
+//    el.activeEdgeTypeahead("../../api/search/suburbs/")
+//    //el.attr("autocomplete", "off").typeahead(null, {
+//    //  name: options.name,
+//    //  displayKey: options.displayKey,
+//    //  // `ttAdapter` wraps the suggestion engine in an adapter that
+//    //  // is compatible with the typeahead jQuery plugin
+//    //  source: data.ttAdapter()
+
+//    //})
+//      .on('typeahead:selected', function (obj, datum) {
+//      id(datum.id); // set the id observable when a user selects an option from the typeahead list
+//    });
+//  }
+//};
+
 function OrganizationModel(data, url) {
 
   var self = this;
@@ -60,7 +91,6 @@ function OrganizationModel(data, url) {
 
 
     }
-
   };
   self.updateModel = function (formElement) {
 

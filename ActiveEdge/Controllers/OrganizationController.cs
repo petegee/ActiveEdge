@@ -75,6 +75,7 @@ namespace ActiveEdge.Controllers
         {
             var model = await _session.LoadAsync<OrganizationModel>(id);
 
+            ViewBag.url = Url.RouteUrl("UpdateOrganizationApi", new {httproute = true, organizationId = id});
             return View(model);
         }
 

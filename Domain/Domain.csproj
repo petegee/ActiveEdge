@@ -110,6 +110,7 @@
     <Compile Include="Event\ClientRegistered.cs" />
     <Compile Include="Event\ClientUpdated.cs" />
     <Compile Include="Event\Organization\Clinic.cs" />
+    <Compile Include="Event\Organization\IOrganization.cs" />
     <Compile Include="Event\Organization\OrganizationUpdated.cs" />
     <Compile Include="Event\Session\PlanAddedToSession.cs" />
     <Compile Include="Event\Session\SessionCreated.cs" />

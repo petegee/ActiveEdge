@@ -1,7 +1,11 @@
-﻿namespace Domain.Command.Organization
+﻿using System;
+
+namespace Domain.Command.Organization
 {
     public class Clinic
     {
+        public Guid Id { get; set; }
+
         public string ClinicName { get; set; }
 
         public string AddressLine1 { get; set; }

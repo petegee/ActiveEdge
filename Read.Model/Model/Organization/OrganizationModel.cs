@@ -39,7 +39,7 @@ namespace ActiveEdge.Read.Model.Organization
         public string ContactEmailAddress { get; set; }
 
         [JsonProperty(PropertyName = "clinics")]
-        public List<ClinicModel> Clinics { get; }
+        public List<ClinicModel> Clinics { get; set; }
 
         public void Apply(OrganizationCreated domainEvent)
         {
@@ -51,6 +51,7 @@ namespace ActiveEdge.Read.Model.Organization
             foreach (var clinic in domainEvent.Clinics)
                 Clinics.Add(new ClinicModel
                 {
+                    Id = clinic.Id,
                     ClinicName = clinic.ClinicName,
                     AddressLine1 = clinic.AddressLine1,
                     AddressLine2 = clinic.AddressLine2,
@@ -68,6 +69,7 @@ namespace ActiveEdge.Read.Model.Organization
             ContactPhoneNumber = domainEvent.ContactPhoneNumber;
             ContactEmailAddress = domainEvent.ContactEmailAddress;
 
+            Clinics.Clear();
             foreach (var clinic in domainEvent.Clinics)
                 Clinics.Add(new ClinicModel
                 {
@@ -80,5 +82,7 @@ namespace ActiveEdge.Read.Model.Organization
                     PhoneNumber = clinic.PhoneNumber
                 });
         }
+
+        
     }
 }
