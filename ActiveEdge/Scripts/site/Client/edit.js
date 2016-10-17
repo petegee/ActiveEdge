@@ -40,10 +40,10 @@ $(document)
 
 
     $("#Suburb")
-      .activeEdgeTypeahead('../api/search/suburbs/');
+      .activeEdgeTypeahead('../../api/search/suburbs/');
 
 
     $("#City")
-      .activeEdgeTypeahead('../api/search/cities/');
+      .activeEdgeTypeahead('..//../api/search/cities/');
 
   });
