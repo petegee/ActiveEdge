@@ -45,7 +45,8 @@ $.fn.activeEdgeTypeahead = function (url) {
   });
 
 
- var typeahead = $(this)
+  var typeahead = $(this)
+    .attr("autocomplete", "off")
     .typeahead({
       hint: true,
       highlight: true,
