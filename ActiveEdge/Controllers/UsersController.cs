@@ -25,6 +25,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
+        [Route("organization/users{id}")]
         public ActionResult ForOrganization(Guid id)
         {
             var users = _bus.ExecuteQuery(new FindAllUsersForOrganization(id));
@@ -33,12 +34,14 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
+        [Route("create/user/for/organization/{id}")]
         public ActionResult CreateForOrganization(Guid id)
         {
             return View(new CreateForOrganizationModel {OrganizationId = id});
         }
 
         [HttpPost]
+        [Route("create/user/for/organization/{id}")]
         public ActionResult CreateForOrganization(CreateForOrganizationModel model)
         {
             var user = new ApplicationUser();
@@ -71,7 +74,8 @@ namespace ActiveEdge.Controllers
             return RedirectToAction("Index", "Organization");
         }
 
-        // GET: User
+        [Route("users")]
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
