@@ -15,6 +15,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Configuration;
 using ActiveEdge.Infrastructure.Mapping;
 using ActiveEdge.Infrastructure.MVC;
 using ActiveEdge.Read.Model.Client;
@@ -84,7 +85,7 @@ namespace ActiveEdge.DependencyResolution
                 {
                     return DocumentStore.For(_ =>
                     {
-                        _.Connection("host=localhost;database=activeedgedb;password=Password1;username=active_edge_web_user");
+                        _.Connection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
                         _.AutoCreateSchemaObjects = AutoCreate.All;
 
