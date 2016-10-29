@@ -36,9 +36,6 @@ namespace ActiveEdge.Controllers
         public async Task<ActionResult> Clean()
         {
             _store.Advanced.Clean.CompletelyRemoveAll();
-            //_store.Advanced.Clean.DeleteAllEventData();
-            //CompletelyRemoveAll();
-
             await _dbInitializer.Seed();
 
            Notify<WarningMessage>("Database Cleansed");

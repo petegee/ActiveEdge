@@ -18,12 +18,12 @@ namespace ActiveEdge
 
         private static void SeedDatabase()
         {
-            //using (var databaseInitializer = DependencyResolver.Current.GetService<DatabaseInitializer>())
-            //{
-            //    databaseInitializer.Seed().Wait();
-            //}
+            using (var databaseInitializer = DependencyResolver.Current.GetService<DatabaseInitializer>())
+            {
+                databaseInitializer.Seed().Wait();
+            }
 
-                
+
         }
     }
 }
