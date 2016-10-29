@@ -1,6 +1,7 @@
 ﻿using System;
 using Domain.Event;
 using Marten.Schema;
+using Shared;
 
 namespace Domain.Model
 {

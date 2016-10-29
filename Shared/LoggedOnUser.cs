@@ -10,11 +10,7 @@ namespace Shared
         {
             get
             {
-
-                var identity = (ClaimsIdentity)ClaimsPrincipal.Current.Identity;
-                var claims = identity.Claims;
-
-                var organizationClaim = claims.FirstOrDefault(claim => claim.Type == ActiveEdgeClaims.OrganizationId);
+                var organizationClaim = Identity.Claims.FirstOrDefault(claim => claim.Type == ActiveEdgeClaims.OrganizationId);
 
                 return organizationClaim == null ? (Guid?) null : Guid.Parse(organizationClaim.Value);
             }
@@ -24,10 +20,7 @@ namespace Shared
         {
             get
             {
-                var identity = (ClaimsIdentity)ClaimsPrincipal.Current.Identity;
-                var claims = identity.Claims;
-
-                var nameIdentifier = claims.First(claim => claim.Type == ClaimTypes.Name);
+                var nameIdentifier = Identity.Claims.First(claim => claim.Type == ClaimTypes.Name);
 
                 return nameIdentifier.Value;
             }
@@ -37,13 +30,14 @@ namespace Shared
         {
             get
             {
-                var identity = (ClaimsIdentity)ClaimsPrincipal.Current.Identity;
-                var claims = identity.Claims;
-                
-                var nameIdentifier = claims.First(claim => claim.Type == ClaimTypes.NameIdentifier);
+                var nameIdentifier = Identity.Claims.First(claim => claim.Type == ClaimTypes.NameIdentifier);
 
                 return nameIdentifier.Value;
             }
         }
+
+        public ClaimsIdentity Identity => (ClaimsIdentity) ClaimsPrincipal.Current.Identity;
+
+        public bool IsAuthenticated => Identity.IsAuthenticated;
     }
 }

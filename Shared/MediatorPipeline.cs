@@ -24,8 +24,11 @@ namespace Shared
             if (auditableCommand != null)
             {
                 auditableCommand.CommandDate = DateTime.Now;
-                auditableCommand.UserId = _loggedOnUser.Id;
-                auditableCommand.UserName = _loggedOnUser.UserName;
+                if (_loggedOnUser.IsAuthenticated)
+                {
+                    auditableCommand.UserId = _loggedOnUser.Id;
+                    auditableCommand.UserName = _loggedOnUser.UserName;
+                }
             }
 
            var result = _inner.Handle(message);

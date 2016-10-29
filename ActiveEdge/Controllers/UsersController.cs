@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using ActiveEdge.Infrastructure;
+using ActiveEdge.Infrastructure.MVC.Attributes;
 using ActiveEdge.Read.Model.Shared;
 using ActiveEdge.Read.Model.Users;
 using ActiveEdge.Read.Query.User;
+using AutoMapper;
+using Domain.Command.User;
 using Domain.Context;
 using Domain.Model;
 using Microsoft.AspNet.Identity;
@@ -15,17 +19,19 @@ namespace ActiveEdge.Controllers
     {
         private readonly IBus _bus;
         private readonly ApplicationUserManager _userManager;
+        private readonly IMapper _mapper;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.</summary>
         public UsersController(IBus bus,
-            ApplicationUserManager userManager, ILoggedOnUser loggedOnUser) : base(loggedOnUser)
+            ApplicationUserManager userManager, ILoggedOnUser loggedOnUser, IMapper mapper) : base(loggedOnUser)
         {
             _bus = bus;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        [Route("organization/users{id}")]
+        [Route("organization/users/{id}")]
         public ActionResult ForOrganization(Guid id)
         {
             var users = _bus.ExecuteQuery(new FindAllUsersForOrganization(id));
@@ -34,44 +40,24 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("create/user/for/organization/{id}")]
-        public ActionResult CreateForOrganization(Guid id)
+        [Route("create/user")]
+        public ActionResult Create()
         {
-            return View(new CreateForOrganizationModel {OrganizationId = id});
+            return View(new UserModel());
         }
 
         [HttpPost]
-        [Route("create/user/for/organization/{id}")]
-        public ActionResult CreateForOrganization(CreateForOrganizationModel model)
+        [Route("create/user")]
+        [HandleValidationErrors]
+        public async Task<ActionResult> Create(UserModel model)
         {
-            var user = new ApplicationUser();
+            var command = _mapper.Map<CreateNewUser>(model);
 
-            user.UserName = model.EmailAddress;
-            user.Email = model.EmailAddress;
-            user.OrganizationId = model.OrganizationId;
+            await _bus.ExecuteAsyncCommand(command);
 
-            var result = _userManager.Create(user, Guid.NewGuid().ToString());
-            if (result.Succeeded)
-            {
-                _userManager.AddToRole(user.Id, Roles.OrganizationAdministrator);
+            Notify<SuccessMessage>("user successfully created.");
 
-                var code = _userManager.GenerateEmailConfirmationToken(user.Id);
-                var callbackUrl = Url.Action(
-                    "ConfirmEmail", "Account",
-                    new {userId = user.Id, code},
-                    protocol: Request.Url.Scheme);
-
-                _userManager.SendEmail(user.Id,
-                    "Confirm your account",
-                    "Please confirm your account by clicking this link: <a href=\""
-                    + callbackUrl + "\">link</a>");
-
-                Notify(new SuccessMessage("Organization Administrator sucessfully created."));
-
-                return RedirectToAction("Index", "Organization");
-            }
-
-            return RedirectToAction("Index", "Organization");
+            return RedirectToAction("Index");
         }
 
         [Route("users")]

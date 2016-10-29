@@ -1,5 +1,6 @@
 ﻿using System;
 using Marten.Schema;
+using Shared;
 
 namespace Domain.Model
 {

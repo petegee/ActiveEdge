@@ -1,11 +1,12 @@
-using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Client;
 using ActiveEdge.Read.Model.Organization;
 using ActiveEdge.Read.Model.Session;
+using ActiveEdge.Read.Model.Users;
 using AutoMapper;
 using Domain.Command.Client;
 using Domain.Command.Organization;
 using Domain.Command.Session;
+using Domain.Command.User;
 
 namespace ActiveEdge.Infrastructure.Mapping
 {
@@ -17,9 +18,12 @@ namespace ActiveEdge.Infrastructure.Mapping
         /// </summary>
         protected override void Configure()
         {
+            // User
+            CreateMap<UserModel, CreateNewUser>();
+
+            // Organizations
             CreateMap<ClinicModel, Clinic>();
             CreateMap<OrganizationModel, CreateNewOrganization>();
-
             CreateMap<OrganizationModel, UpdateOrganization>();
 
             // Clients

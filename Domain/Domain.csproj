@@ -49,8 +49,8 @@
       <HintPath>..\packages\EntityFramework.Filters.0.3.0.0\lib\net40\EntityFramework.Filters.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Marten, Version=1.1.0.762, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Marten.1.1.0\lib\net46\Marten.dll</HintPath>
+    <Reference Include="Marten, Version=1.1.2.797, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Marten.1.1.2\lib\net46\Marten.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MediatR, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -86,6 +86,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -106,6 +107,7 @@
     <Compile Include="Command\Session\DeleteSessionCommand.cs" />
     <Compile Include="Command\Session\UpdateSession.cs" />
     <Compile Include="Command\Organization\UpdateOrganization.cs" />
+    <Compile Include="Command\User\CreateNewUser.cs" />
     <Compile Include="Context\Roles.cs" />
     <Compile Include="Event\ClientRegistered.cs" />
     <Compile Include="Event\ClientUpdated.cs" />
@@ -117,9 +119,10 @@
     <Compile Include="Event\Session\PlanAddedToSession.cs" />
     <Compile Include="Event\Session\SessionCreated.cs" />
     <Compile Include="Event\Session\SessionUpdated.cs" />
+    <Compile Include="Event\User\UserCreated.cs" />
     <Compile Include="Filters\GlobalFilters.cs" />
-    <Compile Include="Mapping\CommandToEvent.cs" />
-    <Compile Include="Model\IAmLinkedToAnOrganization.cs" />
+    <Compile Include="IApplicationUserManager.cs" />
+    <Compile Include="Mapping\CommandToEventProfile.cs" />
     <Compile Include="Model\RemedialSession.cs" />
     <Compile Include="Model\SessionBase.cs" />
     <Compile Include="Sagas\ClientSaga.cs" />
@@ -150,6 +153,7 @@
     <Compile Include="Model\TermsAndConditions.cs" />
     <Compile Include="Model\TouchPreference.cs" />
     <Compile Include="Sagas\SessionSaga.cs" />
+    <Compile Include="Sagas\UserSaga.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

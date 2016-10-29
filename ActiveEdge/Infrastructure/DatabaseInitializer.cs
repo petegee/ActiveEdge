@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Client;
+using ActiveEdge.Read.Model.Organization;
 using Domain.Command.Client;
 using Domain.Command.Organization;
 using Domain.Command.Session;
@@ -16,7 +18,7 @@ using Clinic = Domain.Command.Organization.Clinic;
 
 namespace ActiveEdge.Infrastructure
 {
-    public class DatabaseInitializer
+    public class DatabaseInitializer : IDisposable
     {
         private readonly IBus _bus;
         private readonly IDocumentSession _session;
@@ -32,14 +34,14 @@ namespace ActiveEdge.Infrastructure
         }
 
 
-        public void Seed()
+        public async Task Seed()
         {
-            if (_session.Query<ApplicationUser>().Any(u => u.UserName == "sjclark76@gmail.com"))
+            if (await _session.Query<ApplicationUser>().AnyAsync(u => u.UserName == "sjclark76@gmail.com"))
                 return;
 
-            _session.Store(new IdentityRole {Name = Roles.SystemAdministrator});
-            _session.Store(new IdentityRole {Name = Roles.OrganizationAdministrator});
-            _session.Store(new IdentityRole {Name = Roles.Therapist});
+            _session.Store(new IdentityRole { Name = Roles.SystemAdministrator });
+            _session.Store(new IdentityRole { Name = Roles.OrganizationAdministrator });
+            _session.Store(new IdentityRole { Name = Roles.Therapist });
 
             _adminUser = new ApplicationUser
             {
@@ -50,21 +52,21 @@ namespace ActiveEdge.Infrastructure
                 PhoneNumber = "021509357"
             };
 
-            _userManager.Create(_adminUser, "ridgeback");
-            _userManager.AddToRole(_adminUser.Id, Roles.SystemAdministrator);
+            await _userManager.CreateAsync(_adminUser, "ridgeback");
+            await _userManager.AddToRoleAsync(_adminUser.Id, Roles.SystemAdministrator);
 
-            AddOrganization();
-            AddClients();
-            AddSessions();
+            await AddOrganization();
+            await AddClients();
+            await AddSessions();
+            await AddUsers();
 
-            AddUsers();
-
-            _session.SaveChanges();
+            await _session.SaveChangesAsync();
+                        
         }
 
-        private void AddOrganization()
+        private async Task AddOrganization()
         {
-            _bus.ExecuteAsyncCommand(new CreateNewOrganization
+           await _bus.ExecuteAsyncCommand(new CreateNewOrganization
                 {
                     OrganizationName = "Capital Sports",
                     ContactPerson = "Dr Zeuss",
@@ -82,10 +84,11 @@ namespace ActiveEdge.Infrastructure
                             Suburb = "Wellington Central"
                         }
                     }
-                })
-                .Wait();
+                });
 
-            _bus.ExecuteAsyncCommand(new CreateNewOrganization
+           
+
+           await _bus.ExecuteAsyncCommand(new CreateNewOrganization
                 {
                     OrganizationName = "Habit",
                     ContactPerson = "Dr Habit",
@@ -98,18 +101,16 @@ namespace ActiveEdge.Infrastructure
                             ClinicName = "Featherston Street"
                         }
                     }
-                })
-                .Wait();
+                });
 
-            _session.SaveChanges();
         }
 
-        private void AddSessions()
+        private async Task AddSessions()
         {
-            var organization = _session.Query<Organization>().First();
-            var client = _session.Query<ClientModel>().First();
+            var organization = await _session.Query<OrganizationModel>().FirstAsync();
+            var client = await _session.Query<ClientModel>().FirstAsync();
 
-            var id = _bus.ExecuteAsyncCommand(new CreateNewSession
+            var id = await _bus.ExecuteAsyncCommand(new CreateNewSession
             {
                 Date = DateTime.Today.Date,
                 ClientId = client.Id,
@@ -120,9 +121,9 @@ namespace ActiveEdge.Infrastructure
                 CommandDate = DateTime.Now,
                 UserId = _adminUser.Id,
                 UserName = _adminUser.UserName
-            }).Result;
+            });
 
-            _bus.ExecuteAsyncCommand(new AddPlanToSession
+            await _bus.ExecuteAsyncCommand(new AddPlanToSession
             {
                 Id = id,
                 ContributingFactorsToCondition = "Fell Off a roof",
@@ -133,16 +134,16 @@ namespace ActiveEdge.Infrastructure
                 CommandDate = DateTime.Now,
                 UserId = _adminUser.Id,
                 UserName = _adminUser.UserName
-            }).Wait();
+            });
 
-            _session.SaveChanges();
         }
 
-        private void AddClients()
+        private async Task AddClients()
         {
-            var organization = _session.Query<Organization>().First();
+            var organization =  await _session.Query<OrganizationModel>().FirstAsync();
 
-            _bus.ExecuteAsyncCommand(new RegisterNewClient
+
+           await _bus.ExecuteAsyncCommand(new RegisterNewClient
             {
                 OrganizationId = organization.Id,
                 FirstName = "Stuart",
@@ -155,9 +156,9 @@ namespace ActiveEdge.Infrastructure
                 Email = "sjclark76@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
                 Gender = Gender.Male
-            }).Wait();
+            });
 
-            _bus.ExecuteAsyncCommand(new RegisterNewClient
+            await _bus.ExecuteAsyncCommand(new RegisterNewClient
             {
                 OrganizationId = organization.Id,
                 FirstName = "Joanne",
@@ -170,9 +171,9 @@ namespace ActiveEdge.Infrastructure
                 Email = "joclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.FiveTimesAWeek,
                 Gender = Gender.Female
-            }).Wait();
+            });
 
-            _bus.ExecuteAsyncCommand(new RegisterNewClient
+            await _bus.ExecuteAsyncCommand(new RegisterNewClient
             {
                 OrganizationId = organization.Id,
                 FirstName = "Zoe",
@@ -185,10 +186,10 @@ namespace ActiveEdge.Infrastructure
                 Email = "zclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.Never,
                 Gender = Gender.Female
-            }).Wait();
+            });
 
 
-            _bus.ExecuteAsyncCommand(new RegisterNewClient
+            await _bus.ExecuteAsyncCommand(new RegisterNewClient
             {
                 OrganizationId = organization.Id,
                 FirstName = "Jessiah",
@@ -201,16 +202,16 @@ namespace ActiveEdge.Infrastructure
                 Email = "jesseclark@gmail.com",
                 ExcerciseFrequency = ExcerciseFrequency.Never,
                 Gender = Gender.Female
-            }).Wait();
+            });
         }
 
-        private void AddUsers()
+        private async Task AddUsers()
         {
-            var organiation = _session.Query<Organization>().First();
+            var organiation = await _session.Query<OrganizationModel>().FirstAsync();
 
-            Action<string, string> createUser = (userName, role) =>
+            Func<string, string, Task> createUser = async (userName, role) =>
             {
-                if (!_session.Query<ApplicationUser>().Any(u => u.UserName == userName))
+                if (await  _session.Query<ApplicationUser>().AnyAsync(u => u.UserName == userName) == false)
                 {
                     var userToInsert = new ApplicationUser
                     {
@@ -219,13 +220,18 @@ namespace ActiveEdge.Infrastructure
                         OrganizationId = organiation.Id
                     };
 
-                    _userManager.Create(userToInsert, "ridgeback");
-                    _userManager.AddToRole(userToInsert.Id, role);
+                   await _userManager.CreateAsync(userToInsert, "ridgeback");
+                   await  _userManager.AddToRoleAsync(userToInsert.Id, role);
                 }
             };
 
-            createUser("therapist@capital.co.nz", Roles.Therapist);
-            createUser("orgadmin@capital.co.nz", Roles.OrganizationAdministrator);
+            await createUser("therapist@capital.co.nz", Roles.Therapist);
+            await createUser("orgadmin@capital.co.nz", Roles.OrganizationAdministrator);
+        }
+
+        public void Dispose()
+        {
+            _userManager.Dispose();
         }
     }
 }

@@ -2,9 +2,11 @@
 using Domain.Command.Client;
 using Domain.Command.Organization;
 using Domain.Command.Session;
+using Domain.Command.User;
 using Domain.Event;
 using Domain.Event.Organization;
 using Domain.Event.Session;
+using Domain.Event.User;
 using Clinic = Domain.Command.Organization.Clinic;
 
 namespace Domain.Mapping
@@ -30,6 +32,9 @@ namespace Domain.Mapping
             CreateMap<CreateNewOrganization, OrganizationCreated>();
             CreateMap<Clinic, Event.Organization.Clinic>();
             CreateMap<UpdateOrganization, OrganizationUpdated>();
+
+            // Users
+            CreateMap<CreateNewUser, UserCreated>();
         }
     }
 }

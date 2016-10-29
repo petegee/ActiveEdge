@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Model
+namespace Shared
 {
     public interface IAmLinkedToAnOrganization
     {

@@ -1,18 +1,18 @@
-﻿@model ActiveEdge.Read.Model.Users.CreateForOrganizationModel
+﻿@model ActiveEdge.Read.Model.Users.UserModel
 
 @{
-  ViewBag.Title = "Register The Organization Administrator";
+  ViewBag.Title = "Add New User";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-sm-4">
-    <h2>Register The Organization Administrator</h2>
+    <h2>@ViewBag.Title</h2>
     <ol class="breadcrumb">
       <li>
         @Html.ActionLink("List", "Index")
       </li>
       <li class="active">
-        <strong>Register The Organization Administrator</strong>
+        <strong>@ViewBag.Title</strong>
       </li>
     </ol>
   </div>
@@ -29,18 +29,20 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Register The Organization Administrator</h5>
+          <h5>@ViewBag.Title</h5>
         </div>
         <div class="ibox-content">
 
-          @using (Html.BeginForm("CreateForOrganization", "Users"))
+          @using (Html.BeginForm("Create", "Users"))
           {
             <div class="form-horizontal">
               @Html.AntiForgeryToken()
               @Html.ValidationSummary(true)
-              @Html.HiddenFor(model => model.OrganizationId)
-              @Html.EditorFor(model => model.EmailAddress, "StandardFormTextBox")
-
+              @Html.EditorFor(model => model.FirstName)
+              @Html.EditorFor(model => model.LastName)
+              @Html.EditorFor(model => model.Email)
+              @Html.EditorFor(model => model.PhoneNumber)
+              @Html.EditorFor(model => model.IsAdministrator)
 
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -63,14 +65,12 @@
   @Scripts.Render(Bundles.Scripts.JqueryValidation)
   @Scripts.Render(Bundles.Scripts.DatePicker)
   @Scripts.Render(Bundles.Scripts.ActiveEdge)
+
   @Scripts.Render(Bundles.Scripts.ICheck)
-  @Scripts.Render(Bundles.Scripts.Organization.Create)
-  @Scripts.Render(Bundles.Scripts.KnockoutJs)
 }
 
 @section styles
 {
-  @Styles.Render(Bundles.Css.DatePicker)
   @Styles.Render(Bundles.Css.ICheck)
 
 }

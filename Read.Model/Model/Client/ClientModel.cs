@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Domain.Event;
 using Domain.Event.Session;
 using Domain.Model;
+using Shared;
 
 namespace ActiveEdge.Read.Model.Client
 {

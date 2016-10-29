@@ -35,8 +35,8 @@
       <HintPath>..\packages\Baseline.1.1.0\lib\net451\Baseline.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Marten, Version=1.1.0.762, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Marten.1.1.0\lib\net46\Marten.dll</HintPath>
+    <Reference Include="Marten, Version=1.1.2.797, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Marten.1.1.2\lib\net46\Marten.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MediatR, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -62,6 +62,7 @@
       <HintPath>..\packages\structuremap.4.1.0.361\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.6.0\lib\netstandard1.1\System.Threading.Tasks.Dataflow.dll</HintPath>
@@ -83,6 +84,7 @@
     <Compile Include="Authorization\Util.cs" />
     <Compile Include="Bus.cs" />
     <Compile Include="IAmAuditable.cs" />
+    <Compile Include="IAmLinkedToAnOrganization.cs" />
     <Compile Include="IAsyncCommand.cs" />
     <Compile Include="IAsyncCommandHandler.cs" />
     <Compile Include="IAsyncDomainEvent.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandHandler.cs" />
     <Compile Include="IDomainEvent.cs" />
+    <Compile Include="IDomainEventHandler.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="IQueryForSingleHandler.cs" />
     <Compile Include="IQueryForSingleOrDefault.cs" />

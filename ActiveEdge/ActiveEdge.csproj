@@ -312,6 +312,7 @@
     <Compile Include="Infrastructure\Caching\SoftwareVersion.cs" />
     <Compile Include="Infrastructure\Caching\SoftwareVersionCacheItem.cs" />
     <Compile Include="Infrastructure\DatabaseInitializer.cs" />
+    <Compile Include="Infrastructure\EventHandlers\NewUserHandler.cs" />
     <Compile Include="Infrastructure\Extensions\stringExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\ViewDataExtensions.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
@@ -566,7 +567,7 @@
     <Content Include="Views\Shared\_AlertsPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AddressModel.cshtml" />
     <Content Include="Views\Users\ForOrganization.cshtml" />
-    <Content Include="Views\Users\CreateForOrganization.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Organization\Index.cshtml" />
     <Content Include="Views\Organization\EditorTemplates\OrganizationModel.cshtml" />

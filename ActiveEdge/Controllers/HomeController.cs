@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 using ActiveEdge.Read.Model.Shared;
 using Domain.Context;
 using Marten;
@@ -32,13 +33,13 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("clean")]
-        public ActionResult Clean()
+        public async Task<ActionResult> Clean()
         {
-            //_store.Advanced.Clean.DeleteAllDocuments();
+            _store.Advanced.Clean.CompletelyRemoveAll();
             //_store.Advanced.Clean.DeleteAllEventData();
             //CompletelyRemoveAll();
 
-            _dbInitializer.Seed();
+            await _dbInitializer.Seed();
 
            Notify<WarningMessage>("Database Cleansed");
 
