@@ -10,11 +10,11 @@ namespace ActiveEdge.Controllers
     public abstract class ControllerBase : Controller
     {
         private const string UiNotificationKey = "UINotificationKey";
-        private readonly ILoggedOnUser _loggedOnUser;
+        protected ILoggedOnUser LoggedOnUser { get; }
 
         protected ControllerBase(ILoggedOnUser loggedOnUser)
         {
-            _loggedOnUser = loggedOnUser;
+            LoggedOnUser = loggedOnUser;
         }
 
 

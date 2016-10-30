@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Marten.Schema;
 using Microsoft.AspNet.Identity;
 using Shared;
 using Shared.Authorization;
@@ -26,6 +27,8 @@ namespace Domain.Model
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [DuplicateField]
         public Guid? OrganizationId { get; set; }
         
 

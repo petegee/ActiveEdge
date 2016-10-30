@@ -15,6 +15,7 @@
         </li>
         @if (User.IsInRole(Roles.OrganizationAdministrator) || User.IsInRole(Roles.Therapist))
         {
+            <!-- Clients -->
           <li class="dropdown">
             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Clients <span class="caret"></span></a>
             <ul role="menu" class="dropdown-menu">
@@ -26,6 +27,7 @@
               </li>
             </ul>
           </li>
+            <!-- Sessions -->
           <li class="dropdown">
             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Sessions <span class="caret"></span></a>
             <ul role="menu" class="dropdown-menu">
@@ -38,18 +40,22 @@
             </ul>
           </li>
         }
-        @if (User.IsInRole(Roles.SystemAdministrator))
+        @if (User.IsInRole(Roles.SystemAdministrator) || User.IsInRole(Roles.OrganizationAdministrator))
         {
+            <!-- Administration -->
           <li class="dropdown">
             <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <span class="caret"></span></a>
             <ul role="menu" class="dropdown-menu">
-              <li class="@Html.IsSelected(action: "Index", controller: "Organization")">
-                <a href="@Url.Action("Index", "Organization")">All Organizations</a>
-              </li>
-              <li class="@Html.IsSelected(action: "Create", controller: "Organization")">
-                <a href="@Url.Action("Create", "Organization")">New Organization</a>
-              </li>
-              <li class="hr-line-dashed"></li>
+              @if (User.IsInRole(Roles.SystemAdministrator))
+              {
+                  <li class="@Html.IsSelected(action: "Index", controller: "Organization")">
+                    <a href="@Url.Action("Index", "Organization")">All Organizations</a>
+                  </li>
+                  <li class="@Html.IsSelected(action: "Create", controller: "Organization")">
+                    <a href="@Url.Action("Create", "Organization")">New Organization</a>
+                  </li>
+                  <li class="hr-line-dashed"></li>
+              }
               <li class="@Html.IsSelected(action: "Index", controller: "Users")">
                 <a href="@Url.Action("Index", "Users")">All Users</a>
               </li>

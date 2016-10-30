@@ -9,6 +9,7 @@ using ActiveEdge.Read.Model.Users;
 using ActiveEdge.Read.Query.User;
 using AutoMapper;
 using Domain.Command.User;
+using Domain.Filters;
 using Domain.Model;
 using Marten;
 using Shared;
@@ -67,7 +68,9 @@ namespace ActiveEdge.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var users = await _session.Query<ApplicationUser>().Select(user => new UserModel
+            var users = await _session.Query<ApplicationUser>()
+                .FilterForOrganization(LoggedOnUser)
+                .Select(user => new UserModel
                 {
                     Id = user.Id,
                     FirstName = user.FirstName,

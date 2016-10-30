@@ -16,6 +16,7 @@ namespace ActiveEdge.Read.Model.Client
             SessionCount = 0;
         }
 
+        [DisplayName("Session Count")]
         public int SessionCount { get; set; }
 
         public Guid Id { get; set; }

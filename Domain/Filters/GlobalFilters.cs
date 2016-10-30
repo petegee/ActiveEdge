@@ -7,6 +7,14 @@ namespace Domain.Filters
 {
     public static class GlobalFilters
     {
+        public static IQueryable<ApplicationUser> FilterForOrganization(this IQueryable<ApplicationUser> users, ILoggedOnUser loggedOnUser)
+        {
+            return loggedOnUser.OrganizationId.HasValue
+                 ? users.Where(x => x.OrganizationId == loggedOnUser.OrganizationId)
+                 : users;
+
+        }
+
         public static IQueryable<T> FilterForOrganization<T>(this IQueryable<T> domainModels, ILoggedOnUser loggedOnUser)
             where T : IAmLinkedToAnOrganization
         {
