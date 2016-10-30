@@ -49,6 +49,13 @@
               <li class="@Html.IsSelected(action: "Create", controller: "Organization")">
                 <a href="@Url.Action("Create", "Organization")">New Organization</a>
               </li>
+              <li class="hr-line-dashed"></li>
+              <li class="@Html.IsSelected(action: "Index", controller: "Users")">
+                <a href="@Url.Action("Index", "Users")">All Users</a>
+              </li>
+              <li class="@Html.IsSelected(action: "Create", controller: "Users")">
+                <a href="@Url.Action("Create", "Users")">New User</a>
+              </li>
             </ul>
           </li>
         }

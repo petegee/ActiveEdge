@@ -132,6 +132,7 @@
     <Compile Include="Model\Shared\Message.cs" />
     <Compile Include="Model\Shared\SuccessMessage.cs" />
     <Compile Include="Model\Shared\WarningMessage.cs" />
+    <Compile Include="Model\Users\AllUsers.cs" />
     <Compile Include="Model\Users\CreateForOrganizationModel.cs" />
     <Compile Include="Model\Users\UserModel.cs" />
     <Compile Include="Model\Users\UsersForOrganizationModel.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Projections\SuburbProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\User\FindAllUsersForOrganization.cs" />
+    <Compile Include="Query\User\GetAllUsers.cs" />
     <Compile Include="Query\User\UserQueryRepository.cs" />
   </ItemGroup>
   <ItemGroup />

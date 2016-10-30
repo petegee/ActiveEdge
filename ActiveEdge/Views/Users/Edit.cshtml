@@ -1,0 +1,74 @@
+﻿@model ActiveEdge.Read.Model.Users.UserModel
+
+@{
+  ViewBag.Title = "Edit Organization";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-sm-4">
+    <h2>Create</h2>
+    <ol class="breadcrumb">
+      <li>
+        @Html.ActionLink("List", "Index")
+      </li>
+      <li class="active">
+        <strong>@ViewBag.Title</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-sm-8">
+    <div class="title-action">
+      @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  @Html.Partial("_AlertsPartial")
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        @Html.Hidden("getOrganizationApi", Url.RouteUrl("GetOrganizationApi", new {httproute = true, organizationId = Model.Id}))
+        @Html.Hidden("getOrganization", Url.Action("Details", new { controller  = "Organization", Model.Id }))
+        @Html.Hidden("updateOrganizationApi", Url.RouteUrl("UpdateOrganizationApi", new {httproute = true, organizationId = Model.Id}))
+
+        <form method="post" data-bind="submit: updateModel">
+
+          <div class="ibox-title">
+            <h5>Edit Organization</h5>
+          </div>
+          <div class="ibox-content">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+              @Html.EditorForModel()
+
+              <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                  <input type="submit" value="Save" class="btn btn-primary"/>
+                  @Html.ActionLink("Cancel", "Index", null, new {@class = "btn btn-white"})
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+@section scripts {
+  
+  
+}
+
+@section styles
+{
+  
+}

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using ActiveEdge.Read.Model;
 using ActiveEdge.Read.Model.Client;
 using ActiveEdge.Read.Model.Organization;
 using Domain.Command.Client;
@@ -46,6 +44,7 @@ namespace ActiveEdge.Infrastructure
             _adminUser = new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
+                Email = "sjclark76@gmail.com",
                 UserName = "sjclark76@gmail.com",
                 FirstName = "Stuart",
                 LastName = "Clark",
@@ -209,13 +208,16 @@ namespace ActiveEdge.Infrastructure
         {
             var organiation = await _session.Query<OrganizationModel>().FirstAsync();
 
-            Func<string, string, Task> createUser = async (userName, role) =>
+            Func<string, string, string, string, Task> createUser = async (userName, role, firstname, lastname) =>
             {
                 if (await  _session.Query<ApplicationUser>().AnyAsync(u => u.UserName == userName) == false)
                 {
                     var userToInsert = new ApplicationUser
                     {
                         UserName = userName,
+                        FirstName = firstname,
+                        LastName = lastname,
+                        Email = userName,
                         PhoneNumber = "021509317",
                         OrganizationId = organiation.Id
                     };
@@ -225,8 +227,8 @@ namespace ActiveEdge.Infrastructure
                 }
             };
 
-            await createUser("therapist@capital.co.nz", Roles.Therapist);
-            await createUser("orgadmin@capital.co.nz", Roles.OrganizationAdministrator);
+            await createUser("therapist@capital.co.nz", Roles.Therapist, "Donald", "Trump");
+            await createUser("orgadmin@capital.co.nz", Roles.OrganizationAdministrator, "Hilary", "Clinton");
         }
 
         public void Dispose()

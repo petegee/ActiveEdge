@@ -1,10 +1,10 @@
 ﻿using System;
-using Domain.Model;
+using ActiveEdge.Read.Model.Users;
 using Shared;
 
 namespace ActiveEdge.Read.Query.User
 {
-    public class FindAllUsersForOrganization : IQuery<ApplicationUser>
+    public class FindAllUsersForOrganization : IAsyncQuery<UserModel>
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
         public FindAllUsersForOrganization(Guid organizationId)

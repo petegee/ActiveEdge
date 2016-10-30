@@ -314,10 +314,10 @@ namespace ActiveEdge.Controllers
         [Route("account/confirmemail")]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
+            //if (userId == null || code == null)
+            //{
+            //    return View("Error");
+            //}
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
             {
