@@ -108,6 +108,7 @@
     <Compile Include="Command\Session\UpdateSession.cs" />
     <Compile Include="Command\Organization\UpdateOrganization.cs" />
     <Compile Include="Command\User\CreateNewUser.cs" />
+    <Compile Include="Command\User\UpdateUser.cs" />
     <Compile Include="Context\Roles.cs" />
     <Compile Include="Event\ClientRegistered.cs" />
     <Compile Include="Event\ClientUpdated.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Event\User\UserCreated.cs" />
     <Compile Include="Filters\GlobalFilters.cs" />
     <Compile Include="IApplicationUserManager.cs" />
+    <Compile Include="Mapping\CommandToDomainProfile.cs" />
     <Compile Include="Mapping\CommandToEventProfile.cs" />
     <Compile Include="Model\RemedialSession.cs" />
     <Compile Include="Model\SessionBase.cs" />

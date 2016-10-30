@@ -20,6 +20,7 @@ namespace ActiveEdge.Infrastructure.Mapping
         {
             // User
             CreateMap<UserModel, CreateNewUser>();
+            CreateMap<UserModel, UpdateUser>();
 
             // Organizations
             CreateMap<ClinicModel, Clinic>();

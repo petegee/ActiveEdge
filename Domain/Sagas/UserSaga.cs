@@ -11,7 +11,7 @@ using Shared;
 
 namespace Domain.Sagas
 {
-    public class UserSaga : IAsyncCommandHandler<CreateNewUser>
+    public class UserSaga : IAsyncCommandHandler<CreateNewUser>, IAsyncCommandHandler<UpdateUser>
     {
         private readonly IBus _bus;
         private readonly IMapper _mapper;
@@ -57,6 +57,39 @@ namespace Domain.Sagas
             _bus.PublishDomainEvent(domainEvent);
 
             return userId;
+        }
+
+        public async Task<Guid> Handle(UpdateUser message)
+        {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
+            var user = await _userManager.FindByIdAsync(message.Id);
+
+            user.FirstName = message.FirstName;
+            user.LastName = message.LastName;
+            user.Email = message.Email;
+            user.PhoneNumber = message.PhoneNumber;
+            
+            if (message.IsAdministrator)
+            {
+                if (user.Roles.Contains(Roles.OrganizationAdministrator) == false)
+                {
+                    user.Roles.Add(Roles.OrganizationAdministrator);
+                }
+            }
+            else
+            {
+                if (user.Roles.Contains(Roles.OrganizationAdministrator))
+                {
+                    user.Roles.Remove(Roles.OrganizationAdministrator);
+                }
+            }
+            
+            await _userManager.UpdateAsync(user);
+
+            //await _session.SaveChangesAsync();
+
+            return Guid.Parse(user.Id);
         }
     }
 }

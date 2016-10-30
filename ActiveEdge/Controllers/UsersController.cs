@@ -47,8 +47,7 @@ namespace ActiveEdge.Controllers
         {
             return View(new UserModel());
         }
-
-
+        
         [HttpPost]
         [Route("user/create")]
         [ValidateAntiForgeryToken]
@@ -125,6 +124,21 @@ namespace ActiveEdge.Controllers
                 .SingleOrDefaultAsync();
 
             return View(userModel);
+        }
+
+        [HttpPost]
+        [Route("user/edit/{id}")]
+        [ValidateAntiForgeryToken]
+        [HandleValidationErrors]
+        public async Task<ActionResult> Edit(UserModel model)
+        {
+            var command = _mapper.Map<UpdateUser>(model);
+
+            await _bus.ExecuteAsyncCommand(command);
+
+            Notify<SuccessMessage>("User successfully updated.");
+
+            return RedirectToAction("Index");
         }
     }
 }
