@@ -578,6 +578,8 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\DisplayTemplates\UserModel.cshtml" />
+    <Content Include="Views\Users\EditorTemplates\UserModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

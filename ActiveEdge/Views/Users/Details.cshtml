@@ -1,6 +1,6 @@
 ﻿@model ActiveEdge.Read.Model.Users.UserModel
 @{
-    ViewBag.Title = "User Details";
+  ViewBag.Title = "User Details";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -28,8 +28,8 @@
         <div class="ibox-content">
           @Html.DisplayForModel()
 
-          @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
-          @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white" })
+          @Html.ActionLink("Edit", "Edit", new {id = Model.Id}, new {@class = "btn btn-primary"})
+          @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-white"})
 
         </div>
       </div>
@@ -38,4 +38,9 @@
 </div>
 @section scripts
 {
+  @Scripts.Render(Bundles.Scripts.ICheck)
+}
+@section styles
+{
+  @Styles.Render(Bundles.Css.ICheck)
 }

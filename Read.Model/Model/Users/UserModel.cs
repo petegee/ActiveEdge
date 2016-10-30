@@ -29,7 +29,7 @@ namespace ActiveEdge.Read.Model.Users
 
         [DisplayName("Is Administrator")]
         [UIHint("StandardFormCheckBox")]
-        public bool IsAdministrator => Roles.Contains(roles.OrganizationAdministrator);
+        public bool IsAdministrator => Roles != null && Roles.Contains(roles.OrganizationAdministrator);
 
         public List<string> Roles { get; set; }
     }

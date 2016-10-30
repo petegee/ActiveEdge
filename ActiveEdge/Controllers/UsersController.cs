@@ -20,7 +20,6 @@ namespace ActiveEdge.Controllers
         private readonly IBus _bus;
         private readonly IMapper _mapper;
         private readonly IDocumentSession _session;
-        private readonly ApplicationUserManager _userManager;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Web.Mvc.Controller" /> class.</summary>
         public UsersController(IBus bus,
@@ -28,7 +27,6 @@ namespace ActiveEdge.Controllers
             : base(loggedOnUser)
         {
             _bus = bus;
-            _userManager = userManager;
             _mapper = mapper;
             _session = session;
         }
@@ -43,7 +41,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("create/user")]
+        [Route("user/create")]
         [HandleValidationErrors]
         public ActionResult Create()
         {
@@ -52,7 +50,7 @@ namespace ActiveEdge.Controllers
 
 
         [HttpPost]
-        [Route("create/user")]
+        [Route("user/create")]
         [ValidateAntiForgeryToken]
         [HandleValidationErrors]
         public async Task<ActionResult> Create(UserModel model)
@@ -87,7 +85,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("details/{id}")]
+        [Route("user/details/{id}")]
         [HandleValidationErrors]
         public async Task<ActionResult> Details(string id)
         {
@@ -108,7 +106,7 @@ namespace ActiveEdge.Controllers
         }
 
         [HttpGet]
-        [Route("edit/{id}")]
+        [Route("user/edit/{id}")]
         [HandleValidationErrors]
         public async Task<ActionResult> Edit(string id)
         {
