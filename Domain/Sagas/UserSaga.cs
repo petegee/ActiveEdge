@@ -7,23 +7,20 @@ using Domain.Context;
 using Domain.Event.User;
 using Domain.Model;
 using Marten;
-using Microsoft.AspNet.Identity;
 using Shared;
 
 namespace Domain.Sagas
 {
     public class UserSaga : IAsyncCommandHandler<CreateNewUser>
     {
-        private readonly IApplicationUserManager _userManager;
-        private readonly UserManager<ApplicationUser> _userManager2;
-        private readonly IDocumentSession _session;
         private readonly IBus _bus;
         private readonly IMapper _mapper;
+        private readonly IDocumentSession _session;
+        private readonly IApplicationUserManager _userManager;
 
-        public UserSaga(IApplicationUserManager userManager, UserManager<ApplicationUser> userManager2, IDocumentSession session, IBus bus, IMapper mapper)
+        public UserSaga(IApplicationUserManager userManager, IDocumentSession session, IBus bus, IMapper mapper)
         {
             _userManager = userManager;
-            _userManager2 = userManager2;
             _session = session;
             _bus = bus;
             _mapper = mapper;
@@ -35,27 +32,28 @@ namespace Domain.Sagas
 
             var user = new ApplicationUser
             {
-                UserName = message.UserName,
+                UserName = message.Email,
                 Email = message.Email,
                 OrganizationId = message.OrganizationId
             };
 
             var userId = Guid.NewGuid();
-            var result = _userManager2.Create(user, userId.ToString());
+            var result = await _userManager.CreateAsync(user, userId.ToString());
 
-            if (!result.Succeeded) throw new BusinessRuleException("There was a problem creating the user");
+            if (!result.Succeeded)
+                throw new BusinessRuleException(result.Errors);
 
             var roles = new List<string> {Roles.Therapist};
 
-            if(message.IsAdministrator)
+            if (message.IsAdministrator)
                 roles.Add(Roles.OrganizationAdministrator);
 
-            _userManager2.AddToRoles(user.Id, roles.ToArray());
+            await _userManager.AddToRolesAsync(user.Id, roles.ToArray());
 
-            _session.SaveChanges();
+            await _session.SaveChangesAsync();
 
             var domainEvent = _mapper.Map<UserCreated>(message);
-                
+
             _bus.PublishDomainEvent(domainEvent);
 
             return userId;

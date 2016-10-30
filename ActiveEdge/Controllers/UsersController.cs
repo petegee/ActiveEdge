@@ -41,6 +41,7 @@ namespace ActiveEdge.Controllers
 
         [HttpGet]
         [Route("create/user")]
+        [HandleValidationErrors]
         public ActionResult Create()
         {
             return View(new UserModel());
